@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./chatList.css";
-import AddUser from "./addUser/AddUser";
+//import AddUser from "./addUser/AddUser";
 
 const ChatList = () => {
   const [addMode, setAddMode] = useState(false);
@@ -46,7 +46,7 @@ const ChatList = () => {
           </div>
         </div>
       ))}
-      {addMode && <AddUser />}
+      
     </div>
   );
 };
