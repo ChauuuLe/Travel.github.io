@@ -32,13 +32,13 @@ checkValidPasswordFormat = (req, res, next) => {
   const errors = [];
 
   if (!/\d/.test(userPassword)) {
-    errors.push("Password must contain at least one number");
+    errors.push("Password must contain at least one number\n");
   }
   if (!/[A-Z]/.test(userPassword)) {
-    errors.push("Password must contain at least one uppercase letter");
+    errors.push("Password must contain at least one uppercase letter\n");
   }
   if (!/[!@#$%^&*(),.?":{}|<>]/.test(userPassword)) {
-    errors.push("Password must contain at least one special symbol");
+    errors.push("Password must contain at least one special symbol\n");
   }
   if (userPassword.length < 8) {
     errors.push("Password must be at least 8 characters long");

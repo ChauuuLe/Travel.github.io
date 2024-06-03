@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../assets/style.css"; 
+import { useNavigate } from "react-router-dom";
+
+//import "../assets/style.css"; 
 
 const SignIn = ({ setCurrentUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-
+  const navigate = useNavigate();
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
@@ -16,6 +18,8 @@ const SignIn = ({ setCurrentUser }) => {
       });
       setCurrentUser(response.data);
       setMessage("Sign in successful");
+      navigate("/");
+      alert("Sign in successful"); 
     } catch (err) {
       setMessage("Sign in failed");
     }
