@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/Homepage';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import "./assets/style.css";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
