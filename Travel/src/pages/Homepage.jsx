@@ -1,14 +1,14 @@
 import React from 'react';
+import "../assets/style.css";
 import Navbar from '../navbar';
-//import "../assets/style.css"; 
+
 const HomePage = () => {
   return (
-    <div>
-      <h1>Dit me may</h1>
+    <div className="homepage">
       <Navbar />
-      <main>
-        {/* Main content goes here */}
-      </main>
+      <div className="main-content">
+        <h1>The Liems</h1>
+      </div>
     </div>
   );
 };
