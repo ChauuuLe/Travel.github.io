@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-//import "../app/assets/style.css"; 
+import "../assets/style.css"; 
 
 const SignIn = ({ setCurrentUser }) => {
   const [username, setUsername] = useState("");
@@ -10,7 +10,7 @@ const SignIn = ({ setCurrentUser }) => {
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/auth/signin", {
+      const response = await axios.post("http://localhost:3000/api/auth/signin", {
         username,
         password,
       });
