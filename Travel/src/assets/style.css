@@ -19,7 +19,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: url("/Travel/src/assets/landscape-nature-rice-paddy-terraces-wallpaper-preview.jpg") no-repeat center center/cover;
+    background: url("./image.jpg") no-repeat center center/cover;
     color: #333;
 }
 
