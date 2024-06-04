@@ -14,7 +14,7 @@ const SignUp = ({ setCurrentUser }) => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/api/auth/signup", {
+      const response = await axios.post("http://localhost:8080/api/auth/signup", {
         username,
         email,
         password,
@@ -65,7 +65,7 @@ const SignUp = ({ setCurrentUser }) => {
         <button type="submit">Sign up</button>
         <div className="register">
           <p>
-            Already have an account? <a href="/login">Sign in</a>
+            Already have an account? <a href="/signin">Sign in</a>
           </p>
         </div>
         <div id="signUpMessage">{message}</div>
