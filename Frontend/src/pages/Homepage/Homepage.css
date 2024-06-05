@@ -1,15 +1,66 @@
-.homepage{
+/* Homepage.css */
+
+.homepage {
     width: 100%;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
+    overflow: hidden;
+    /* Ensures content doesn't spill out */
+}
 
-    video{
-        position: relative;
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-    }
+.overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(47, 106, 127, 0.5);
+    /* Adjust opacity for better visibility */
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+video {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    object-fit: cover;
+    z-index: 0;
+    /* Ensure video is behind the overlay and navbar */
+}
+
+.homeContent {
+    width: 100%;
+    height: max-content;
+    padding: 8rem 1.5rem 3rem;
+    display: flex;
+    row-gap: 3rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Center align text */
+    color: #fff;
+    /* White text */
+    z-index: 100;
+    text-align: center;
+    /* Center align text */
+}
+
+.textDiv {
+    padding: 2rem 0;
+}
+
+.smallText {
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.homeTitle {
+    font-size: 2.5rem;
+    /* Adjust font size for better visibility */
+    font-weight: bold;
 }

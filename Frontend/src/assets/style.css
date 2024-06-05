@@ -8,51 +8,11 @@
     font-family: "Open Sans", sans-serif;
 }
 
-/* Body Styling */
-body,
-html {
-    height: 100%;
-    margin: 0;
-}
 
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    color: #333;
-}
-
-/* Homepage Styling */
-.homepage {
-    display: flex;
-    flex-direction: column;
-    height: 50%;
-    background: inherit;
-}
 
 /* Navbar Styling */
-.navbar {
-    background-color: rgba(255, 255, 255, 0.9);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
 
-.navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+
 
 .HomeLogo {
     display: flex;
@@ -116,12 +76,7 @@ body {
     transition: background-color 0.3s, color 0.3s, transform 0.3s;
 }
 
-.nav-actions .signin:hover,
-.nav-actions .signup:hover {
-    background-color: #0073e6;
-    color: #fff;
-    transform: translateY(-2px);
-}
+
 
 /* Main Content Styling */
 .main-content {
@@ -134,11 +89,7 @@ body {
     /* Adjusted to clear the navbar */
 }
 
-.main-content h1 {
-    font-size: 3rem;
-    color: #000;
-    /* Black text color */
-}
+
 
 /* Form Wrapper */
 .wrapper {

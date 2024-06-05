@@ -2,17 +2,27 @@
 
 .navBarSection {
   width: 100%;
-  background-color: #ffffff;
-  /* White background */
+  background-color: rgba(255, 255, 255, 0.9);
+  /* Semi-transparent background */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   /* Subtle shadow for depth */
+  position: fixed;
+  /* Fix the navbar to the top */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  /* Ensure it is above the video */
+  padding: 10px 0;
 }
 
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 20px;
+  padding: 0 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .navbar-container {
@@ -20,21 +30,37 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
 }
 
 .logoDiv {
   flex: 1;
 }
 
+.logo a {
+  text-decoration: none;
+  /* Remove underline from logo text */
+  color: #000;
+  /* Black text */
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.logo a:hover {
+  color: #555;
+  /* Slight color change on hover */
+}
+
 .logo h1 {
   font-size: 24px;
-  color: #000;
+  color: inherit;
+  /* Inherit color from anchor tag */
   margin: 0;
 }
 
 .navBar {
   flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .navLists {
@@ -43,10 +69,12 @@
   margin: 0;
   padding: 0;
   justify-content: center;
+  align-items: center;
 }
 
 .navLists li {
-  margin-right: 20px;
+  margin-right: 15px;
+  /* Adjust as needed */
 }
 
 .navLists li a {
@@ -56,6 +84,13 @@
   font-size: 16px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  /* Ensure text stays on one line */
+  height: 100%;
+  /* Ensure the anchor tag takes full height */
+  padding: 8px 12px;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .navLists li a i {
@@ -65,7 +100,12 @@
 
 .navLists li a:hover {
   color: #555;
-  /* Slight color change on hover */
+  /* Darker text on hover */
+}
+
+.navLists li a:active {
+  color: #000;
+  /* Black text on active */
 }
 
 .nav-actions {
@@ -82,6 +122,14 @@
   margin-left: 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  /* Ensure text stays on one line */
+  height: 100%;
+  /* Ensure the anchor tag takes full height */
+  padding: 8px 16px;
+  /* Adjust padding for better centering */
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .nav-actions .signin i,
@@ -93,11 +141,68 @@
 .nav-actions .signup {
   background-color: #f0f0f0;
   /* Light grey background for Sign Up button */
-  padding: 8px 16px;
   border-radius: 4px;
 }
 
+.nav-actions .signin:hover,
 .nav-actions .signup:hover {
-  background-color: #e0e0e0;
-  /* Darker grey on hover */
+  color: #555;
+  /* Darker text on hover */
+}
+
+.nav-actions .signin:active,
+.nav-actions .signup:active {
+  color: #000;
+  /* Black text on active */
+}
+
+@media screen and (max-width: 768px) {
+  .navBar {
+    position: fixed;
+    background: #ffffff;
+    height: max-content;
+    width: 80%;
+    border-radius: 1rem;
+    top: 4rem;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 2000;
+    box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
+    transition: 0.3s ease-in-out;
+    display: none;
+    /* Hide navbar initially */
+  }
+
+  .navLists {
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    padding: 0.5rem 0;
+  }
+
+  .header.active .navBar {
+    display: flex;
+    /* Show navbar when header has 'active' class */
+  }
+
+  .menu-toggle {
+    display: block;
+    cursor: pointer;
+    font-size: 24px;
+    color: #000;
+  }
+
+  .logoDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .menu-toggle {
+    display: none;
+  }
 }
