@@ -14,20 +14,7 @@
 
 
 
-.HomeLogo {
-    display: flex;
-    align-items: center;
-}
 
-.HomeLogo .logo {
-    height: 40px;
-    width: auto;
-    transition: transform 0.3s;
-}
-
-.HomeLogo .logo:hover {
-    transform: scale(1.1);
-}
 
 /* Navigation Links */
 .nav-links {

@@ -9,7 +9,7 @@ const Navbar = () => {
         <div className="navbar-container">
           <div className='logoDiv'>
             <a href='' className='logo flex'>
-              <h1>The Liems.</h1>
+              <h1>The Travel.</h1>
             </a>
           </div>
           <nav className="navBar">

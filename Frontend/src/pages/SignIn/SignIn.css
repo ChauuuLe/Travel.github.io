@@ -1,20 +1,12 @@
-/* SignIn.css */
-.auth-background {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-image: url(../../a);
-    background-size: cover;
-    background-position: center;
+.register a {
+    font-weight: bold;
+    /* Make the Register link bold */
+    color: #007bff;
+    /* Optional: specify a color for the link */
+    text-decoration: none;
 }
 
-.wrapper {
-    padding: 40px;
-    background: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    border-radius: 8px;
+.register a:hover {
+    text-decoration: underline;
+    /* Underline on hover for better user interaction */
 }
-
-/* Other styles remain the same */
