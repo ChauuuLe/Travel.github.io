@@ -8,7 +8,20 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+body,
+html {
+    height: 100%;
+    margin: 0;
+}
 
+body.sign-in-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('path-to-your-background-image.jpg') no-repeat center center fixed;
+    /* Replace with your background image path */
+    background-size: cover;
+}
 
 .auth-background {
     display: flex;
@@ -102,6 +115,7 @@ p {
 }
 
 .separator::before {
+    content: 'hoặc đăng nhập bằng';
     display: inline-block;
     padding: 0 10px;
     color: #666;
@@ -139,7 +153,8 @@ p {
 }
 
 .google-sign-in-button:hover {
-    background-color: blue;
+    background-color: #f0f0f0;
+    /* Slightly lighter background on hover */
 }
 
 .register p {
@@ -159,10 +174,13 @@ p {
 
 .register a:hover {
     text-decoration: underline;
+    /* Underline on hover for better user interaction */
 }
 
 #signInMessage {
     color: red;
     margin-top: 10px;
     text-align: center;
+    font-size: 14px;
+    font-weight: bold;
 }

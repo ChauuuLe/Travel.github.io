@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./SignIn.css"; // Ensure the path is correct
@@ -9,6 +9,13 @@ const SignIn = ({ setCurrentUser }) => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.classList.add("sign-in-page");
+    return () => {
+      document.body.classList.remove("sign-in-page");
+    };
+  }, []);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -24,6 +31,7 @@ const SignIn = ({ setCurrentUser }) => {
       setMessage("Sign in failed");
     }
   };
+
   return (
     <div className="auth-background">
       <div className="wrapper">
