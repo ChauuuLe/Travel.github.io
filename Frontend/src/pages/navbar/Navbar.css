@@ -1,67 +1,103 @@
 /* Navbar.css */
-.navbar {
-    background-color: #ffffff; /* White background */
-    padding: 10px 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-  
-  .HomeLogo .logo {
-    height: 40px; /* Adjust as needed */
-  }
-  
-  .nav-links ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .nav-links ul li {
-    margin-right: 20px;
-  }
-  
-  .nav-links ul li a {
-    text-decoration: none;
-    color: #000; /* Black text */
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .nav-links ul li a:hover {
-    color: #555; /* Slight color change on hover */
-  }
-  
-  .nav-actions {
-    display: flex;
-    align-items: center;
-  }
-  
-  .nav-actions .signin,
-  .nav-actions .signup {
-    text-decoration: none;
-    color: #000; /* Black text */
-    font-size: 16px;
-    margin-left: 20px;
-  }
-  
-  .nav-actions .signup {
-    background-color: #f0f0f0; /* Light grey background for Sign Up button */
-    padding: 8px 16px;
-    border-radius: 4px;
-  }
-  
-  .nav-actions .signup:hover {
-    background-color: #e0e0e0; /* Darker grey on hover */
-  }
-  
+
+.navBarSection {
+  width: 100%;
+  background-color: #ffffff;
+  /* White background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for depth */
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.logoDiv {
+  flex: 1;
+}
+
+.logo h1 {
+  font-size: 24px;
+  color: #000;
+  margin: 0;
+}
+
+.navBar {
+  flex: 2;
+}
+
+.navLists {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.navLists li {
+  margin-right: 20px;
+}
+
+.navLists li a {
+  text-decoration: none;
+  color: #000;
+  /* Black text */
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.navLists li a i {
+  margin-right: 8px;
+  /* Space between icon and text */
+}
+
+.navLists li a:hover {
+  color: #555;
+  /* Slight color change on hover */
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+}
+
+.nav-actions .signin,
+.nav-actions .signup {
+  text-decoration: none;
+  color: #000;
+  /* Black text */
+  font-size: 16px;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-actions .signin i,
+.nav-actions .signup i {
+  margin-right: 8px;
+  /* Space between icon and text */
+}
+
+.nav-actions .signup {
+  background-color: #f0f0f0;
+  /* Light grey background for Sign Up button */
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.nav-actions .signup:hover {
+  background-color: #e0e0e0;
+  /* Darker grey on hover */
+}

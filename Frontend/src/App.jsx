@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {  Routes, Route, Navigate } from 'react-router-dom';
-import HomePage from './pages/Homepage';
+import HomePage from './pages/Homepage/Homepage';
 import List from './pages/List';
 import Chat from './pages/chat/Chat';
 import Detail from './pages/detail/Detail';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import Navbar from './pages/navbar/navbar';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -19,6 +20,7 @@ const App = () => {
     setCurrentUser(user);
     localStorage.setItem("user", JSON.stringify(user));
   };
+  
 
   return (
 
@@ -28,8 +30,11 @@ const App = () => {
       <Route path="/" element={<HomePage /> }/>
       <Route path="/list" element={<List /> } />
       <Route path="/chat" element={<Chat /> } />
-      <Route path="/detail" element={<Detail /> } />
+      <Route path="/detail" element={<Detail />} />
+
     </Routes>
+
+
 
   );
 };
