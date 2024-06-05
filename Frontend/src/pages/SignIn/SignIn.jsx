@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../assets/style.css";
+import "../SignIn/SignIn.css";
 
 
 const SignIn = ({ setCurrentUser }) => {
@@ -26,6 +26,7 @@ const SignIn = ({ setCurrentUser }) => {
   };
 
   return (
+    <div className="auth-background">
     <div className="wrapper">
       <form id="signInForm" onSubmit={handleSignIn}>
         <h2>Sign in</h2>
@@ -64,6 +65,7 @@ const SignIn = ({ setCurrentUser }) => {
         </div>
         <div id="signInMessage">{message}</div>
       </form>
+      </div>
     </div>
   );
 };

@@ -111,6 +111,8 @@
 .nav-actions {
   display: flex;
   align-items: center;
+  justify-content: center;
+  /* Center the buttons within the container */
 }
 
 .nav-actions .signin,
@@ -127,27 +129,30 @@
   /* Ensure text stays on one line */
   height: 100%;
   /* Ensure the anchor tag takes full height */
-  padding: 8px 16px;
+  padding: 10px 20px;
   /* Adjust padding for better centering */
+  border-radius: 4px;
+  /* Add border radius for rounded corners */
   transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .nav-actions .signin i,
 .nav-actions .signup i {
-  margin-right: 8px;
+  margin-right: 5px;
   /* Space between icon and text */
 }
 
 .nav-actions .signup {
   background-color: #f0f0f0;
   /* Light grey background for Sign Up button */
-  border-radius: 4px;
 }
 
 .nav-actions .signin:hover,
 .nav-actions .signup:hover {
-  color: #555;
-  /* Darker text on hover */
+  color: #fff;
+  /* White text on hover */
+  background-color: #007bff;
+  /* Blue background on hover */
 }
 
 .nav-actions .signin:active,
@@ -157,6 +162,20 @@
 }
 
 @media screen and (max-width: 768px) {
+  .nav-actions {
+    flex-direction: column;
+    /* Stack buttons vertically on small screens */
+    margin-left: 0;
+  }
+
+  .nav-actions .signin,
+  .nav-actions .signup {
+    margin-left: 0;
+    /* Remove left margin for small screens */
+    margin-bottom: 10px;
+    /* Add bottom margin for spacing */
+  }
+
   .navBar {
     position: fixed;
     background: #ffffff;

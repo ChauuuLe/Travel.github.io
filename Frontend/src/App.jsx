@@ -4,7 +4,7 @@ import HomePage from './pages/Homepage/Homepage';
 import List from './pages/List';
 import Chat from './pages/chat/Chat';
 import Detail from './pages/detail/Detail';
-import SignIn from './pages/SignIn';
+import SignIn from './pages/SignIn/SignIn';
 import SignUp from './pages/SignUp';
 import Navbar from './pages/navbar/navbar';
 

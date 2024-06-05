@@ -1,0 +1,20 @@
+/* SignIn.css */
+.auth-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url(../../a);
+    background-size: cover;
+    background-position: center;
+}
+
+.wrapper {
+    padding: 40px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    border-radius: 8px;
+}
+
+/* Other styles remain the same */
