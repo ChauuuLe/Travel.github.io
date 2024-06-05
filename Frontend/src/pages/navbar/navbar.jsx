@@ -1,16 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import './Navbar.css'; // Correct relative path to the CSS file
 
 const Navbar = () => {
   return (
     <header className="navbar">
       <div className="navbar-container">
-        <div className="HomeLogo">
-          <Link to="/">
-            <img src="/path/to/logo.png" alt="HomePage" className="logo" /> {/* Update with your logo path */}
-          </Link>
-        </div>
         <nav className="nav-links">
           <ul>
             <li><Link to="/hotels">Hotels</Link></li>
