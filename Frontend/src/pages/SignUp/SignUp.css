@@ -37,27 +37,32 @@ body.sign-in-page {
     border-radius: 10px;
     width: 400px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
 }
 
 form {
     display: flex;
     flex-direction: column;
+    animation: fadeIn 1s ease-in-out;
 }
 
 h2 {
     margin-bottom: 10px;
     font-size: 24px;
+    animation: slideIn 1s ease-in-out;
 }
 
 p {
     margin-bottom: 20px;
     font-size: 14px;
     color: #666;
+    animation: slideIn 1s ease-in-out;
 }
 
 .input-field {
     position: relative;
     margin-bottom: 15px;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .input-field input {
@@ -74,6 +79,7 @@ p {
     align-items: center;
     margin-bottom: 20px;
     font-size: 12px;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .actions label {
@@ -99,6 +105,7 @@ p {
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .sign-up-button:hover {
@@ -112,6 +119,7 @@ p {
     /* Adds space around the separator */
     text-align: center;
     position: relative;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .separator::before {
@@ -143,6 +151,7 @@ p {
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .google-sign-in-button img.google-icon {
@@ -161,6 +170,7 @@ p {
     text-align: center;
     font-size: 12px;
     color: #666;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .register a {
@@ -183,6 +193,7 @@ p {
     text-align: center;
     font-size: 14px;
     font-weight: bold;
+    animation: fadeIn 1s ease-in-out;
 }
 
 @keyframes fadeIn {
