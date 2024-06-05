@@ -8,7 +8,7 @@ const Navbar = () => {
       <header className="header flex">
         <div className="navbar-container">
           <div className='logoDiv'>
-            <a href='#' className='logo flex'>
+            <a href='' className='logo flex'>
               <h1>The Liems.</h1>
             </a>
           </div>
