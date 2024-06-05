@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
 .navBarSection {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.9);
@@ -11,6 +21,7 @@
   z-index: 1000;
   /* Ensure it is above the video */
   padding: 10px 0;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .header {
@@ -32,6 +43,7 @@
 
 .logoDiv {
   flex: 1;
+  animation: slideIn 1s ease-in-out;
 }
 
 .logo a {
@@ -74,6 +86,7 @@
   margin-right: 15px;
   /* Adjust as needed */
 }
+
 .navLists li a {
   text-decoration: none;
   color: #000;
@@ -93,6 +106,7 @@
   /* Ensures pseudo-elements don't break the border-radius */
   transition: color 0.3s ease;
   /* Smooth transition for text color */
+  animation: slideIn 1s ease-in-out;
 }
 
 .navLists li a i {
@@ -141,26 +155,28 @@
 }
 
 .nav-actions .signin {
-    text-decoration: none;
-    color: #000;
-    /* Black text */
-    font-size: 16px;
-    margin-left: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    /* Ensure text stays on one line */
-    height: 100%;
-    /* Ensure the anchor tag takes full height */
-    padding: 10px 20px;
-    /* Adjust padding for better centering */
-    border-radius: 4px;
-    /* Add border radius for rounded corners */
-    transition: color 0.3s ease, background-color 0.3s ease;
-    border: none;
-    /* Remove any borders */
+  text-decoration: none;
+  color: #000;
+  /* Black text */
+  font-size: 16px;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  /* Ensure text stays on one line */
+  height: 100%;
+  /* Ensure the anchor tag takes full height */
+  padding: 10px 20px;
+  /* Adjust padding for better centering */
+  border-radius: 4px;
+  /* Add border radius for rounded corners */
+  transition: color 0.3s ease, background-color 0.3s ease;
+  border: 2px solid #007bff;
+  /* Add blue border */
+  animation: fadeIn 1s ease-in-out;
 }
+
 .nav-actions .signup {
   text-decoration: none;
   color: #000;
@@ -179,6 +195,9 @@
   border-radius: 4px;
   /* Add border radius for rounded corners */
   transition: color 0.3s ease, background-color 0.3s ease;
+  border: 2px solid #007bff;
+  /* Add blue border */
+  animation: fadeIn 1s ease-in-out;
 }
 
 
@@ -206,7 +225,7 @@
 
 .nav-actions .signup:hover {
   background-color: #007bff;
-  /* Red background on hover */
+  /* Blue background on hover */
 }
 
 .nav-actions .signin:active,
@@ -279,7 +298,6 @@
     display: none;
   }
 }
-
 
 @keyframes fadeIn {
   from {

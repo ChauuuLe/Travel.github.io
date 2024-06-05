@@ -1,4 +1,12 @@
-/* Homepage.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
 
 .homepage {
     width: 100%;
@@ -11,6 +19,7 @@
     margin: auto;
     overflow: hidden;
     /* Ensure content doesn't spill out */
+    animation: fadeIn 1s ease-in-out;
 }
 
 .overlay {
@@ -22,6 +31,7 @@
     top: 0;
     bottom: 0;
     z-index: 1;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
 video {
@@ -55,21 +65,25 @@ video {
     z-index: 100;
     text-align: center;
     /* Center align text */
+    animation: fadeIn 2s ease-in-out;
 }
 
 .textDiv {
     padding: 2rem 0;
+    animation: slideIn 2s ease-in-out;
 }
 
 .smallText {
     font-size: 13px;
     text-transform: uppercase;
+    animation: fadeIn 2.5s ease-in-out;
 }
 
 .homeTitle {
     font-size: 2.5rem;
     /* Adjust font size for better visibility */
     font-weight: bold;
+    animation: slideIn 2.5s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -95,3 +109,4 @@ video {
         transform: translateX(0);
     }
 }
+
