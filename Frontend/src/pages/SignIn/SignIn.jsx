@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../SignIn/SignIn.css";
+import "./SignIn.css"; // Ensure the path is correct
+import googleLogo from "../../assets/google.png"; // Ensure this path is correct
 
 const SignIn = ({ setCurrentUser }) => {
   const [username, setUsername] = useState("");
@@ -23,39 +24,46 @@ const SignIn = ({ setCurrentUser }) => {
       setMessage("Sign in failed");
     }
   };
-
   return (
     <div className="auth-background">
       <div className="wrapper">
         <form id="signInForm" onSubmit={handleSignIn}>
           <h2>Sign in</h2>
+          <p>For security reasons, please log in to access the information</p>
           <div className="input-field">
             <input
               type="text"
               id="username"
+              placeholder="Email"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
             />
-            <label>Enter your username</label>
           </div>
           <div className="input-field">
             <input
               type="password"
               id="password"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <label>Enter your password</label>
+          </div>
+          <div className="actions">
+            <label>
+              <input type="checkbox" /> Remember me
+            </label>
+            <a href="#">Forgot Password?</a>
           </div>
           <button type="submit" className="sign-in-button">Sign in</button>
+          <hr className="separator" />
           <button type="button" className="google-sign-in-button">
-            <img src="google-icon.svg" alt="Google sign-in" />
+            <img src={googleLogo} alt="Google sign-in" className="google-icon" />
             Sign in with Google
           </button>
           <div className="register">
-            <p>Don't have an account? <a href="/signup">Register</a></p>
+            <p>Create Account <a href="/signup">Register</a></p>
           </div>
           <div id="signInMessage">{message}</div>
         </form>
