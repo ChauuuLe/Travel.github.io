@@ -5,7 +5,7 @@ import List from './pages/List';
 import Chat from './pages/chat/Chat';
 import Detail from './pages/detail/Detail';
 import SignIn from './pages/SignIn/SignIn';
-import SignUp from './SignUp';
+import SignUp from './pages/SignUp/SignUp';
 import Navbar from './pages/navbar/navbar';
 
 const App = () => {
