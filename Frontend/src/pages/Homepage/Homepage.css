@@ -10,28 +10,30 @@
 
 .homepage {
     width: 100%;
-    height: 100vh;
-    /* Full viewport height */
     position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin: auto;
+    justify-content: flex-start;
     overflow: hidden;
-    /* Ensure content doesn't spill out */
     animation: fadeIn 1s ease-in-out;
+}
+
+.video-section {
+    width: 100%;
+    height: 80vh; /* Increased height for the video section */
+    position: relative;
+    overflow: hidden;
 }
 
 .overlay {
     position: absolute;
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
-    background: rgba(47, 106, 127, 0.5);
-    /* Adjust opacity for better visibility */
-    top: 0;
-    bottom: 0;
+    background: rgba(47, 106, 127, 0.5); /* Adjust opacity for better visibility */
     z-index: 1;
-    animation: fadeIn 1.5s ease-in-out;
 }
 
 video {
@@ -43,28 +45,20 @@ video {
     width: auto;
     height: auto;
     z-index: 0;
-    /* Ensure video is behind the overlay and navbar */
     transform: translate(-50%, -50%);
-    /* Center the video */
     object-fit: cover;
-    /* Ensure the video covers the entire area */
 }
 
 .homeContent {
     width: 100%;
-    height: max-content;
-    padding: 8rem 1.5rem 3rem;
+    padding: 3rem 1.5rem;
     display: flex;
-    row-gap: 3rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* Center align text */
     color: #fff;
-    /* White text */
     z-index: 100;
     text-align: center;
-    /* Center align text */
     animation: fadeIn 2s ease-in-out;
 }
 
@@ -81,9 +75,219 @@ video {
 
 .homeTitle {
     font-size: 2.5rem;
-    /* Adjust font size for better visibility */
     font-weight: bold;
     animation: slideIn 2.5s ease-in-out;
+}
+
+.searchBar {
+    width: 90%;
+    max-width: 1200px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: -30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+}
+
+.searchBarRow {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.inputField {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.inputField label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+}
+
+.inputField input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+
+.priceRange {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.priceRange label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+}
+
+.priceRange .range-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.priceRange .range-container span {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    margin-right: 10px;
+}
+
+.priceRange input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: #ddd;
+    height: 5px;
+    border-radius: 5px;
+    outline: none;
+    flex: 1;
+}
+
+.priceRange input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.searchBar button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.searchBar button:hover {
+    background-color: #0056b3;
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.icons a {
+    color: #fff;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.icons a:hover {
+    color: #007bff;
+}
+
+.destinations {
+    width: 90%;
+    max-width: 1200px;
+    margin-top: 2rem;
+}
+
+.destinations h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.destination-cards {
+    display: flex;
+    justify-content: space-between;
+}
+
+.destination-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 32%;
+    padding: 20px;
+    text-align: left;
+}
+
+.destination-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.destination-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.destination-card p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.destination-card .price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.destination-card .book-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.destination-card .book-btn:hover {
+    background-color: #0056b3;
+}
+
+.more-content {
+    width: 90%;
+    max-width: 1200px;
+    margin-top: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: left;
+}
+
+.more-content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.more-content p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
 }
 
 @keyframes fadeIn {
@@ -110,3 +314,7 @@ video {
     }
 }
 
+.searchBar input[type="text"]::placeholder,
+.searchBar input[type="date"]::placeholder {
+    color: #888;
+}
