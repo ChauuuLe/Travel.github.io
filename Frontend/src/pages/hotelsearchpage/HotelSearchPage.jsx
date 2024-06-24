@@ -1,110 +1,34 @@
-import React, { useState } from 'react';
-import './HotelSearchPage.css';
+import React from 'react';
 import Navbar from '../navbar/navbar';
+import SearchBar from '../../Components/searchbarhotel/searchbarhotel';
 import Footer from '../footer/Footer';
+import videoBg from '../../../../Backend (server and db)/app/assets/images/video.mp4';
+import './HotelSearchPage.css';
 
-const HotelSearchPage = () => {
-    const [location, setLocation] = useState('');
-    const [checkInDate, setCheckInDate] = useState('');
-    const [checkOutDate, setCheckOutDate] = useState('');
-    const [guests, setGuests] = useState(1);
-    const [hotels, setHotels] = useState([]); // State to hold search results
+const suggestions = [
+    'Ho Chi Minh City',
+    'Hanoi',
+    'Da Nang',
+    'Nha Trang',
+    'Vung Tau',
+    'Singapore',
+    'Seoul',
+    'Bangkok'
+];
 
-    const searchHotels = () => {
-        // Mock search logic (replace with actual API call)
-        const mockHotels = [
-            {
-                id: 1,
-                name: 'Hotel Lux',
-                location: 'Paris',
-                price: 250,
-                rating: 4.5,
-                image: './src/assets/hotel-lux.jpg'
-            },
-            {
-                id: 2,
-                name: 'Ocean View Resort',
-                location: 'Miami',
-                price: 300,
-                rating: 4.8,
-                image: './src/assets/ocean-view.jpg'
-            },
-            {
-                id: 3,
-                name: 'Mountain Retreat',
-                location: 'Aspen',
-                price: 200,
-                rating: 4.3,
-                image: './src/assets/mountain-retreat.jpg'
-            },
-        ];
-        setHotels(mockHotels);
-    };
-
+const HomePage = () => {
     return (
-        <div className="hotel-search-page">
+        <div className="homepage">
             <Navbar />
-            <div className="search-container">
-                <h1>Find the Best Hotels</h1>
-                <div className="search-form">
-                    <div className="input-group">
-                        <label>Location:</label>
-                        <input
-                            type="text"
-                            value={location}
-                            onChange={(e) => setLocation(e.target.value)}
-                            placeholder="Enter location"
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label>Check-in Date:</label>
-                        <input
-                            type="date"
-                            value={checkInDate}
-                            onChange={(e) => setCheckInDate(e.target.value)}
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label>Check-out Date:</label>
-                        <input
-                            type="date"
-                            value={checkOutDate}
-                            onChange={(e) => setCheckOutDate(e.target.value)}
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label>Guests:</label>
-                        <input
-                            type="number"
-                            value={guests}
-                            min="1"
-                            onChange={(e) => setGuests(e.target.value)}
-                        />
-                    </div>
-                    <button onClick={searchHotels}>Search</button>
+            <div className="video-section">
+                <div className="overlay"></div>
+                <div className="search-bar-container">
+                    <SearchBar suggestions={suggestions} />
                 </div>
-            </div>
-            <div className="hotel-results">
-                {hotels.length > 0 ? (
-                    hotels.map(hotel => (
-                        <div key={hotel.id} className="hotel-card">
-                            <img src={hotel.image} alt={hotel.name} />
-                            <div className="hotel-info">
-                                <h2>{hotel.name}</h2>
-                                <p>{hotel.location}</p>
-                                <p>Price: ${hotel.price} per night</p>
-                                <p>Rating: {hotel.rating}</p>
-                                <button className="book-now">Book Now</button>
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <p>No hotels found.</p>
-                )}
             </div>
             <Footer />
         </div>
     );
 };
 
-export default HotelSearchPage;
+export default HomePage;

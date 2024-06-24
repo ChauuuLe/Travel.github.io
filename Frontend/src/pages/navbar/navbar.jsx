@@ -8,7 +8,6 @@ const Navbar = () => {
       <header className="header flex">
         <div className="navbar-container">
           <div className='logoDiv'>
-            {/* Use Link component to navigate to the home page */}
             <Link to='/' className='logo flex'>
               <h1>The Travel.</h1>
             </Link>
