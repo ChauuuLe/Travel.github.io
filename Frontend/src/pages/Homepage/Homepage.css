@@ -22,7 +22,6 @@
 .video-section {
     width: 100%;
     height: 80vh;
-    /* Increased height for the video section */
     position: relative;
     overflow: hidden;
 }
@@ -34,7 +33,6 @@
     height: 100%;
     width: 100%;
     background: rgba(47, 106, 127, 0.5);
-    /* Adjust opacity for better visibility */
     z-index: 1;
 }
 
@@ -60,7 +58,6 @@ video {
     align-items: center;
     color: #fff;
     z-index: 2;
-    /* Ensure homeContent is above the video */
     text-align: center;
     animation: fadeIn 2s ease-in-out;
 }
@@ -103,7 +100,6 @@ video {
     align-items: flex-start;
     margin-bottom: 10px;
     gap: 10px;
-    /* Add gap for better spacing */
 }
 
 .inputField,
@@ -127,12 +123,13 @@ video {
     padding: 10px 15px;
     font-size: 14px;
     background-color: #f9f9f9;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .inputField input:focus {
     border-color: #007bff;
     outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
 .priceRange .range-container {
@@ -185,12 +182,18 @@ video {
     background-color: #007bff;
     color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
     margin-top: 10px;
 }
 
 .searchBar button:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.searchBar button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
 .icons {
@@ -203,11 +206,12 @@ video {
     color: #fff;
     font-size: 24px;
     margin: 0 10px;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .icons a:hover {
     color: #007bff;
+    transform: translateY(-2px);
 }
 
 .destinations {
@@ -227,7 +231,6 @@ video {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 20px;
-    /* Adjusted spacing */
 }
 
 .destination-card {
@@ -240,7 +243,6 @@ video {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* Ensures the book button is at the bottom */
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
@@ -252,7 +254,6 @@ video {
 .destination-card img {
     width: 100%;
     height: 200px;
-    /* Ensure a consistent height for images */
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 15px;
@@ -261,7 +262,6 @@ video {
 
 .destination-card:hover img {
     transform: scale(1.05);
-    /* Slight zoom on hover */
 }
 
 .destination-card h3 {
@@ -275,7 +275,6 @@ video {
     margin-bottom: 10px;
     color: #666;
     line-height: 1.4;
-    /* Better readability */
 }
 
 .destination-card .price {
@@ -287,7 +286,6 @@ video {
 
 .destination-card .book-btn {
     align-self: flex-end;
-    /* Align button to the right */
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
@@ -295,13 +293,11 @@ video {
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.3s ease;
     margin-top: auto;
-    /* Push button to the bottom */
 }
 
 .destination-card .book-btn:hover {
     background-color: #0056b3;
     transform: translateY(-2px);
-    /* Slight lift on hover */
 }
 
 .more-content {

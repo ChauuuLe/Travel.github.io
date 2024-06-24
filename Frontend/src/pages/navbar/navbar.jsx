@@ -8,16 +8,17 @@ const Navbar = () => {
       <header className="header flex">
         <div className="navbar-container">
           <div className='logoDiv'>
-            <a href='' className='logo flex'>
+            {/* Use Link component to navigate to the home page */}
+            <Link to='/' className='logo flex'>
               <h1>The Travel.</h1>
-            </a>
+            </Link>
           </div>
           <nav className="navBar">
             <ul className='navLists flex'>
               <li><Link to="/hotels"><i className="fas fa-hotel"></i> Hotels</Link></li>
               <li><Link to="/transportations"><i className="fas fa-bus"></i> Transportations</Link></li>
               <li><Link to="/destinations"><i className="fas fa-map-marked-alt"></i> Destinations</Link></li>
-              <li><Link to="http://localhost:3000"><i className="fas fa-cloud-sun"></i> Weather</Link></li>
+              <li><a href="http://localhost:3000"><i className="fas fa-cloud-sun"></i> Weather</a></li> {/* External link */}
               <li><Link to="/plan-your-trip"><i className="fas fa-route"></i> Plan Your Trip</Link></li>
             </ul>
           </nav>

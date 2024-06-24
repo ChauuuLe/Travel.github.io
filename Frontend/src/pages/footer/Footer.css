@@ -17,19 +17,23 @@
 
 .footer-section {
     flex: 1;
+    min-width: 250px;
     margin: 20px;
+    text-align: left;
 }
 
 .footer-section h3 {
     font-size: 1.5rem;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     text-transform: uppercase;
+    color: #fff;
 }
 
 .footer-section p,
 .footer-section ul {
     font-size: 0.9rem;
     color: #ddd;
+    line-height: 1.6;
 }
 
 .footer-section ul {
@@ -53,6 +57,21 @@
 
 .footer-section ul li i {
     margin-right: 10px;
+}
+
+.socials {
+    margin-top: 15px;
+}
+
+.socials a {
+    color: #ddd;
+    font-size: 20px;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.socials a:hover {
+    color: #007bff;
 }
 
 .footer-bottom {

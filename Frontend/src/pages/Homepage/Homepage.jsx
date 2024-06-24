@@ -11,7 +11,7 @@ import hagiangImage from '../../assets/Hagiang.jpg';
 
 const HomePage = () => {
   const [price, setPrice] = useState(5000);
-
+  const [query, setQuery] = useState(''); 
   const destinations = [
     {
       image: danangImage,
@@ -33,6 +33,11 @@ const HomePage = () => {
     },
   ];
 
+  const filteredDestinations = destinations.filter(destination =>
+    destination.title.toLowerCase().includes(query.toLowerCase()) ||
+    destination.description.toLowerCase().includes(query.toLowerCase())
+  );
+
   return (
     <div className="homepage">
       <Navbar />
@@ -47,7 +52,12 @@ const HomePage = () => {
         <div className="searchBarRow">
           <div className="inputField">
             <label>Search your destination:</label>
-            <input type="text" placeholder="Enter name here..." />
+            <input
+              type="text"
+              placeholder="Enter name here..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)} // Update search query state
+            />
           </div>
           <div className="inputField">
             <label>Select your date:</label>
@@ -77,15 +87,19 @@ const HomePage = () => {
       <div className="destinations">
         <h2>Most visited destinations</h2>
         <div className="destination-cards">
-          {destinations.map((destination, index) => (
-            <DestinationCard
-              key={index}
-              image={destination.image}
-              title={destination.title}
-              description={destination.description}
-              price={destination.price}
-            />
-          ))}
+          {filteredDestinations.length > 0 ? (
+            filteredDestinations.map((destination, index) => (
+              <DestinationCard
+                key={index}
+                image={destination.image}
+                title={destination.title}
+                description={destination.description}
+                price={destination.price}
+              />
+            ))
+          ) : (
+            <p>No destinations found.</p> 
+          )}
         </div>
       </div>
       <div className="more-content">

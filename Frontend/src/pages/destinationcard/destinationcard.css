@@ -6,7 +6,7 @@
     width: 300px;
     text-align: center;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    margin: 20px;
+    margin: 40px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -51,7 +51,7 @@
 }
 
 .destination-price {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: #007bff;
     margin: 15px 0;
     font-weight: 600;

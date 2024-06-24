@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./SignIn.css"; // Ensure the path is correct
-import googleLogo from "../../assets/google.png"; // Ensure this path is correct
+import "./SignIn.css"; 
+import googleLogo from "../../assets/google.png"; 
 
 const SignIn = ({ setCurrentUser }) => {
   const [username, setUsername] = useState("");
