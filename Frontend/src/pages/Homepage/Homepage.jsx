@@ -1,29 +1,34 @@
 import React, { useState } from 'react';
-import "../Homepage/Homepage.css";
+import "./Homepage.css";
 import Navbar from '../navbar/navbar';
 import DestinationCard from '../destinationcard/destinationcard';
+import Footer from '../footer/Footer';
 import video from '../../../../Backend (server and db)/app/assets/images/video.mp4';
+
+import danangImage from '../../assets/danang.jpg';
+import dalatImage from '../../assets/dalat.jpg';
+import hagiangImage from '../../assets/Hagiang.jpg';
 
 const HomePage = () => {
   const [price, setPrice] = useState(5000);
 
   const destinations = [
     {
-      image: 'https://example.com/bora-bora.jpg',
-      title: 'Bora Bora',
-      description: 'Experience the ultimate tropical paradise.',
+      image: danangImage,
+      title: 'Đà Nẵng',
+      description: "Discover Đà Nẵng: stunning beaches, vibrant nightlife, rich culture, and attractions like Marble Mountains and Dragon Bridge.",
       price: 700,
     },
     {
-      image: 'https://example.com/machu-picchu.jpg',
-      title: 'Machu Picchu',
-      description: 'Explore the ancient Inca ruins.',
+      image: dalatImage,
+      title: 'Đà Lạt',
+      description: "Nestled in the Central Highlands, Đà Lạt offers a cool climate, lush pine forests, and charming colonial architecture.",
       price: 600,
     },
     {
-      image: 'https://example.com/great-barrier-reef.jpg',
-      title: 'Great Barrier Reef',
-      description: 'Dive into the world’s largest coral reef system.',
+      image: hagiangImage,
+      title: 'Hà Giang',
+      description: 'Explore Hà Giang, a stunning highland region in northern Vietnam with limestone mountains, winding rivers, and terraced rice fields.',
       price: 750,
     },
   ];
@@ -35,10 +40,7 @@ const HomePage = () => {
         <div className='overlay'></div>
         <video src={video} muted autoPlay loop type="video/mp4"></video>
         <div className='homeContent'>
-          <div className='textDiv'>
-            <span className='smallText'>Our Packages</span>
-            <h1 className='homeTitle'>Search your Holiday</h1>
-          </div>
+          {/* Additional content can go here */}
         </div>
       </div>
       <div className="searchBar">
@@ -89,8 +91,8 @@ const HomePage = () => {
       <div className="more-content">
         <h2>More Travel Ideas</h2>
         <p>Explore more travel ideas and tips to make your journey unforgettable.</p>
-        {/* Add more content or sections as needed */}
       </div>
+      <Footer />
     </div>
   );
 };
