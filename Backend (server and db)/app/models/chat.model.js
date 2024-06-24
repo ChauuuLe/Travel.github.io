@@ -3,19 +3,16 @@ const mongoose = require("mongoose");
 const Chat = mongoose.model(
   "Chat",
   new mongoose.Schema({
-    sender: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+    createdAt: { 
+      type: Date, 
+      default: Date.now 
     },
-    receiver: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
-    },
-    message: String,
-    timestamp: {
-      type: Date,
-      default: Date.now
-    }
+    messages: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Message"
+      }
+    ],
   })
 );
 
