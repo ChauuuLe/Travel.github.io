@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./chatList.css";
-//import AddUser from "./addUser/AddUser";
+import AddUser from "./addUser/AddUser";
 
-const ChatList = (props) => {
+const ChatList = () => {
   const [addMode, setAddMode] = useState(false);
   const [chats, setChats] = useState([]);
-
-  const {
-    currentUser,
-  } = props;
+  const currentUser = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     const fetchChats = async () => {
@@ -30,11 +27,11 @@ const ChatList = (props) => {
     <div className="chatList">
       <div className="search">
         <div className="searchBar">
-          <img src="../../assets/search.png" alt="" />
+          <img src="/search.png" alt="" />
           <input type="text" placeholder="Search" />
         </div>
         <img 
-          src={addMode ? "../../assets/minus.png" : "../../assets/plus.png"} 
+          src={addMode ? "./minus.png" : "./plus.png"} 
           alt="" 
           className="add" 
           onClick={() => setAddMode((prev) => !prev)} 
@@ -42,14 +39,14 @@ const ChatList = (props) => {
       </div>
       {chats.map((chat) => (
         <div key={chat._id} className="item">
-          <img src="../../assets/avatar.png" alt="" />
+          <img src="./avatar.png" alt="" />
           <div className="texts">
             <span>{chat.sender.username}</span>
             <p>{chat.message}</p>
           </div>
         </div>
       ))}
-      
+      {addMode && <AddUser />}
     </div>
   );
 };

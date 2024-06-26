@@ -1,6 +1,6 @@
-import ChatList from "../Components/searchbarhotel/chatApp/chatList/ChatList"
+import ChatList from "./chatList/ChatList"
 import "./list.css"
-import Userinfo from "./userInfo/Userinfo"
+import Userinfo from "../../../pages/userInfo/Userinfo"
 
 const List = () => {
     return (

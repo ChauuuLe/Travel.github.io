@@ -56,22 +56,22 @@ const Chat = () => {
     <div className="chat">
       <div className="top">
         <div className="user">
-          <img src="../../assets/avatar.png" alt="" />
+          <img src="./avatar.png" alt="" />
           <div className="texts">
             <span>{currentUser.username}</span>
             <p>Online</p>
           </div>
         </div>
         <div className="icons">
-          <img src="../../assets/phone.png" alt="" />
-          <img src="../../assets/video.png" alt="" />
-          <img src="../../assets/info.png" alt="" />
+          <img src="./phone.png" alt="" />
+          <img src="./video.png" alt="" />
+          <img src="./info.png" alt="" />
         </div>
       </div>
       <div className="center">
         {messages.map((msg, index) => (
           <div key={index} className={`message ${msg.sender.username === currentUser.username ? "own" : ""}`}>
-            <img src="../../assets/avatar.png" alt="" />
+            <img src="./avatar.png" alt="" />
             <div className="texts">
               <p>{msg.message}</p>
               <span>{new Date(msg.timestamp).toLocaleTimeString()}</span>
@@ -82,9 +82,9 @@ const Chat = () => {
       </div>
       <div className="bottom">
         <div className="icons">
-          <img src="../../assets/img.png" alt="" />
-          <img src="../../assets/camera.png" alt="" />
-          <img src="../../assets/mic.png" alt="" />
+          <img src="./img.png" alt="" />
+          <img src="./camera.png" alt="" />
+          <img src="./mic.png" alt="" />
         </div>
         <input
           type="text"
