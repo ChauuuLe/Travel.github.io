@@ -28,7 +28,7 @@ const Footer = () => {
                 <div className="footer-section contact">
                     <h3>Contact Us</h3>
                     <ul>
-                        <li><i className="fas fa-map-marker-alt"></i> Hanoi</li>
+                        <li><i className="fas fa-map-marker-alt"></i> National University of Singapore</li>
                         <li><i className="fas fa-phone"></i> +123 456 7890</li>
                         <li><i className="fas fa-envelope"></i> thetravel@gmail.com</li>
                     </ul>
