@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './SearchBarHotel.css';
-import { FaSearch, FaCalendarCheck, FaCalendarDay, FaUser } from 'react-icons/fa';
+import { FaSearch, FaCalendarCheck, FaCalendarDay } from 'react-icons/fa';
 
 const SearchBar = ({ suggestions }) => {
     const [input, setInput] = useState('');
@@ -17,6 +17,14 @@ const SearchBar = ({ suggestions }) => {
             setCheckOutDate(e.target.value);
         } else {
             alert("Check-out date must be after the check-in date.");
+        }
+    };
+
+    const handleCheckInChange = (e) => {
+        if (new Date(e.target.value) >= new Date().setHours(0, 0, 0, 0)) {
+            setCheckInDate(e.target.value);
+        } else {
+            alert("Check-in date cannot be earlier than today.");
         }
     };
 
@@ -44,27 +52,28 @@ const SearchBar = ({ suggestions }) => {
                     </div>
                 )}
             </div>
-            <div className="input-group date">
-                <FaCalendarCheck />
-                <input
-                    type="date"
-                    value={checkInDate}
-                    onChange={(e) => setCheckInDate(e.target.value)}
-                />
-            </div>
-            <div className="input-group date">
-                <FaCalendarDay />
-                <input
-                    type="date"
-                    value={checkOutDate}
-                    onChange={handleCheckOutChange}
-                />
+            <div className="date-group">
+                <div className="input-group date">
+                    <FaCalendarCheck />
+                    <input
+                        type="date"
+                        value={checkInDate}
+                        onChange={handleCheckInChange}
+                    />
+                </div>
+                <div className="input-group date">
+                    <FaCalendarDay />
+                    <input
+                        type="date"
+                        value={checkOutDate}
+                        onChange={handleCheckOutChange}
+                    />
+                </div>
             </div>
             <div
                 className={`dropdown-toggle ${showDropdown ? 'active' : ''}`}
                 onClick={() => setShowDropdown(!showDropdown)}
             >
-                <FaUser />
                 {adults} Adults, {children} Children
                 {showDropdown && (
                     <div className="dropdown-menu">
