@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./Homepage.css";
 import Navbar from '../navbar/navbar';
-import DestinationCard from '../destinationcard/destinationcard';
+import DestinationCard from '../../Components/destinationcard/destinationcard';
 import Footer from '../footer/Footer';
 import video from '../../../../Backend (server and db)/app/assets/images/video.mp4';
 import danangImage from '../../assets/danang.jpg';

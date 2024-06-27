@@ -4,6 +4,7 @@ import HomePage from './pages/Homepage/Homepage';
 import SignIn from './pages/SignIn/SignIn';
 import SignUp from './pages/SignUp/SignUp';
 import HotelSearchPage from './pages/hotelsearchpage/HotelSearchPage';
+import FlightSearchPage from './pages/flightsearchpage/flightSearchPage';
 import Navbar from './pages/navbar/navbar';
 
 const App = () => {
@@ -11,13 +12,13 @@ const App = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem('user'));
     if (user) setCurrentUser(user);
   }, []);
 
   const handleLogin = (user) => {
     setCurrentUser(user);
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem('user', JSON.stringify(user));
   };
 
   const hideNavbarPaths = ['/signin', '/signup'];
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/signin" element={<SignIn setCurrentUser={handleLogin} />} />
         <Route path="/signup" element={<SignUp setCurrentUser={handleLogin} />} />
         <Route path="/" element={<HomePage />} />
+        <Route path="/flight" element={<FlightSearchPage />} />
         <Route path="/hotels" element={<HotelSearchPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

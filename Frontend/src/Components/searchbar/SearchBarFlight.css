@@ -1,0 +1,133 @@
+.flight-search-form {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 900px;
+    margin: 20px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.flight-search-form h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.trip-type {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.trip-type label {
+    margin: 0 15px;
+    font-weight: bold;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.trip-type input {
+    margin-right: 5px;
+}
+
+.search-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.search-fields input[type="text"],
+.search-fields input[type="date"],
+.passenger-class select {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.segment {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.segment-fields {
+    display: flex;
+    flex: 1;
+    gap: 15px;
+}
+
+.exchange-icon {
+    align-self: center;
+    font-size: 20px;
+    color: #007bff;
+}
+
+.add-segment {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.add-segment:hover {
+    text-decoration: underline;
+}
+
+.remove-segment {
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.passenger-class {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.search-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.search-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+.search-button:first-of-type {
+    background-color: #f8f9fa;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+
+.search-button:first-of-type:hover {
+    background-color: #e2e6ea;
+}

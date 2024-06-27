@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './SearchBarHotel.css';
 import { FaSearch, FaCalendarCheck, FaCalendarDay } from 'react-icons/fa';
 import axios from 'axios';
@@ -13,6 +13,7 @@ const SearchBar = ({ suggestions }) => {
     const [children, setChildren] = useState(0);
     const [checkInDate, setCheckInDate] = useState('');
     const [checkOutDate, setCheckOutDate] = useState('');
+    const [debounceTimeout, setDebounceTimeout] = useState(null);
 
     const handleCheckOutChange = (e) => {
         if (new Date(e.target.value) >= new Date(checkInDate)) {
@@ -30,20 +31,27 @@ const SearchBar = ({ suggestions }) => {
         }
     };
 
-    const handleInputChange = async (e) => {
+    const handleInputChange = (e) => {
         setInput(e.target.value);
         if (e.target.value.length > 2) {
-            fetchSuggestions(e.target.value);
+            if (debounceTimeout) {
+                clearTimeout(debounceTimeout);
+            }
+            const timeout = setTimeout(() => {
+                fetchSuggestions(e.target.value);
+            }, 300);
+            setDebounceTimeout(timeout);
         }
     };
 
     const fetchSuggestions = async (query) => {
-        const apiKey = 'YOUR_OPENCAGE_API_KEY';
+        const apiKey = '667d098835020111019757pcua470ba';
         const url = `https://api.opencagedata.com/geocode/v1/json?q=${query}&key=${apiKey}&limit=5`;
 
         try {
             const response = await axios.get(url);
             setFetchedSuggestions(response.data.results.map(result => result.formatted));
+            setShowSuggestions(true);
         } catch (error) {
             console.error(error);
         }
@@ -52,14 +60,23 @@ const SearchBar = ({ suggestions }) => {
     const handleSelectSuggestion = (suggestion) => {
         setInput(suggestion);
         setFetchedSuggestions([]);
+        setShowSuggestions(false);
     };
 
     const handleSearch = () => {
         const bookingUrl = `https://www.booking.com/searchresults.html?ss=${input}&checkin_monthday=${new Date(checkInDate).getDate()}&checkin_month=${new Date(checkInDate).getMonth() + 1}&checkin_year=${new Date(checkInDate).getFullYear()}&checkout_monthday=${new Date(checkOutDate).getDate()}&checkout_month=${new Date(checkOutDate).getMonth() + 1}&checkout_year=${new Date(checkOutDate).getFullYear()}&group_adults=${adults}&group_children=${children}&no_rooms=${rooms}`;
-        window.location.href = bookingUrl;
+        window.open(bookingUrl, '_blank'); // Open in new tab
     };
 
     const todayDate = new Date().toISOString().split('T')[0];
+
+    const handleDoneClick = () => {
+        setShowDropdown(false);
+    };
+
+    const preventDropdownClose = (e) => {
+        e.preventDefault();
+    };
 
     return (
         <div className="search-bar">
@@ -72,16 +89,15 @@ const SearchBar = ({ suggestions }) => {
                     onChange={handleInputChange}
                     onFocus={() => setShowSuggestions(true)}
                     onBlur={() => setShowSuggestions(false)}
+                    aria-label="Search for a destination or property"
                 />
                 {showSuggestions && (
                     <div className="suggestions-box">
-                        {fetchedSuggestions
-                            .filter(suggestion => suggestion.toLowerCase().includes(input.toLowerCase()))
-                            .map((suggestion, index) => (
-                                <div key={index} className="suggestion-item" onMouseDown={() => handleSelectSuggestion(suggestion)}>
-                                    {suggestion}
-                                </div>
-                            ))}
+                        {fetchedSuggestions.map((suggestion, index) => (
+                            <div key={index} className="suggestion-item" onMouseDown={() => handleSelectSuggestion(suggestion)}>
+                                {suggestion}
+                            </div>
+                        ))}
                     </div>
                 )}
             </div>
@@ -93,6 +109,7 @@ const SearchBar = ({ suggestions }) => {
                         value={checkInDate}
                         min={todayDate} // Set the minimum date to today
                         onChange={handleCheckInChange}
+                        aria-label="Check-in date"
                     />
                 </div>
                 <div className="input-group date">
@@ -102,12 +119,15 @@ const SearchBar = ({ suggestions }) => {
                         value={checkOutDate}
                         min={checkInDate || todayDate} // Set the minimum date to check-in date or today
                         onChange={handleCheckOutChange}
+                        aria-label="Check-out date"
                     />
                 </div>
             </div>
             <div
                 className={`dropdown-toggle ${showDropdown ? 'active' : ''}`}
                 onClick={() => setShowDropdown(!showDropdown)}
+                aria-haspopup="true"
+                aria-expanded={showDropdown}
             >
                 {adults} Adults, {children} Children
                 {showDropdown && (
@@ -115,27 +135,28 @@ const SearchBar = ({ suggestions }) => {
                         <div className="dropdown-item">
                             <span>Room</span>
                             <div>
-                                <button onClick={() => setRooms(rooms - 1)} disabled={rooms <= 1}>-</button>
+                                <button onMouseDown={preventDropdownClose} onClick={() => setRooms(rooms - 1)} disabled={rooms <= 1}>-</button>
                                 <span>{rooms}</span>
-                                <button onClick={() => setRooms(rooms + 1)}>+</button>
+                                <button onMouseDown={preventDropdownClose} onClick={() => setRooms(rooms + 1)}>+</button>
                             </div>
                         </div>
                         <div className="dropdown-item">
                             <span>Adults</span>
                             <div>
-                                <button onClick={() => setAdults(adults - 1)} disabled={adults <= 1}>-</button>
+                                <button onMouseDown={preventDropdownClose} onClick={() => setAdults(adults - 1)} disabled={adults <= 1}>-</button>
                                 <span>{adults}</span>
-                                <button onClick={() => setAdults(adults + 1)}>+</button>
+                                <button onMouseDown={preventDropdownClose} onClick={() => setAdults(adults + 1)}>+</button>
                             </div>
                         </div>
                         <div className="dropdown-item">
                             <span>Children</span>
                             <div>
-                                <button onClick={() => setChildren(children - 1)} disabled={children <= 0}>-</button>
+                                <button onMouseDown={preventDropdownClose} onClick={() => setChildren(children - 1)} disabled={children <= 0}>-</button>
                                 <span>{children}</span>
-                                <button onClick={() => setChildren(children + 1)}>+</button>
+                                <button onMouseDown={preventDropdownClose} onClick={() => setChildren(children + 1)}> + </button>
                             </div>
                         </div>
+                        <button className="done-button" onClick={handleDoneClick}>Done</button>
                     </div>
                 )}
             </div>

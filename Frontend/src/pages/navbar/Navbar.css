@@ -11,17 +11,17 @@
 .navBarSection {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.9);
-  /* Semi-transparent background */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow for depth */
   position: fixed;
-  /* Fix the navbar to the top */
   top: 0;
   left: 0;
   z-index: 1000;
-  /* Ensure it is above the video */
   padding: 10px 0;
-  animation: fadeIn 1s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navBarSection.hidden {
+  transform: translateY(-100%);
 }
 
 .header {
@@ -48,21 +48,17 @@
 
 .logo a {
   text-decoration: none;
-  /* Remove underline from logo text */
   color: #000;
-  /* Black text */
   transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .logo a:hover {
   color: #555;
-  /* Slight color change on hover */
 }
 
 .logo h1 {
   font-size: 24px;
   color: inherit;
-  /* Inherit color from anchor tag */
   margin: 0;
 }
 
@@ -84,39 +80,30 @@
 
 .navLists li {
   margin-right: 15px;
-  /* Adjust as needed */
 }
 
 .navLists li a {
   text-decoration: none;
   color: #000;
-  /* Default text color */
   font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  /* Needed for positioning pseudo-elements */
   white-space: nowrap;
-  /* Ensure text stays on one line */
   padding: 8px 12px;
   border-radius: 4px;
-  /* Rounded corners */
   overflow: hidden;
-  /* Ensures pseudo-elements don't break the border-radius */
   transition: color 0.3s ease;
-  /* Smooth transition for text color */
   animation: slideIn 1s ease-in-out;
 }
 
 .navLists li a i {
   margin-right: 8px;
-  /* Space between icon and text */
 }
 
 .navLists li a:hover {
   color: #007bff;
-  /* Text color change on hover */
 }
 
 .navLists li a::after {
@@ -124,129 +111,98 @@
   position: absolute;
   bottom: 0;
   left: 50%;
-  /* Start from the center */
   width: 0;
-  /* Start with no width */
   height: 2px;
-  /* Height of the underline */
   background-color: #007bff;
-  /* Color of the underline */
   transition: width 0.3s ease, left 0.3s ease;
-  /* Smooth transitions for the animation */
 }
 
 .navLists li a:hover::after {
   width: 100%;
-  /* Full width on hover */
   left: 0;
-  /* Align to the left edge */
 }
 
 .navLists li a:active {
   color: #0056b3;
-  /* Darker blue on active for tactile feedback */
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Center the buttons within the container */
 }
 
 .nav-actions .signin {
   text-decoration: none;
   color: #000;
-  /* Black text */
   font-size: 16px;
   margin-left: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  /* Ensure text stays on one line */
   height: 100%;
-  /* Ensure the anchor tag takes full height */
   padding: 10px 20px;
-  /* Adjust padding for better centering */
   border-radius: 4px;
-  /* Add border radius for rounded corners */
   transition: color 0.3s ease, background-color 0.3s ease;
   border: 2px solid #007bff;
-  /* Add blue border */
   animation: fadeIn 1s ease-in-out;
 }
 
 .nav-actions .signup {
   text-decoration: none;
   color: #000;
-  /* Black text */
   font-size: 16px;
   margin-left: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  /* Ensure text stays on one line */
   height: 100%;
-  /* Ensure the anchor tag takes full height */
   padding: 10px 20px;
-  /* Adjust padding for better centering */
   border-radius: 4px;
-  /* Add border radius for rounded corners */
   transition: color 0.3s ease, background-color 0.3s ease;
   border: 2px solid #007bff;
-  /* Add blue border */
   animation: fadeIn 1s ease-in-out;
 }
-
 
 .nav-actions .signin i,
 .nav-actions .signup i {
   margin-right: 5px;
-  /* Space between icon and text */
 }
 
 .nav-actions .signup {
   background-color: #f0f0f0;
-  /* Light grey background for Sign Up button */
 }
 
 .nav-actions .signin:hover,
 .nav-actions .signup:hover {
   color: #fff;
-  /* White text on hover */
 }
 
 .nav-actions .signin:hover {
   background-color: #007bff;
-  /* Blue background on hover */
 }
 
 .nav-actions .signup:hover {
   background-color: #007bff;
-  /* Blue background on hover */
 }
 
 .nav-actions .signin:active,
 .nav-actions .signup:active {
   color: #000;
-  /* Black text on active */
 }
 
 @media screen and (max-width: 768px) {
   .nav-actions {
     flex-direction: column;
-    /* Stack buttons vertically on small screens */
     margin-left: 0;
   }
 
   .nav-actions .signin,
   .nav-actions .signup {
     margin-left: 0;
-    /* Remove left margin for small screens */
     margin-bottom: 10px;
-    /* Add bottom margin for spacing */
   }
 
   .navBar {
@@ -262,7 +218,6 @@
     box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
     transition: 0.3s ease-in-out;
     display: none;
-    /* Hide navbar initially */
   }
 
   .navLists {
@@ -275,7 +230,6 @@
 
   .header.active .navBar {
     display: flex;
-    /* Show navbar when header has 'active' class */
   }
 
   .menu-toggle {
