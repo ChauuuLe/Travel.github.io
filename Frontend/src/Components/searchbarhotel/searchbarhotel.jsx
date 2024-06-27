@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './SearchBarHotel.css';
 import { FaSearch, FaCalendarCheck, FaCalendarDay } from 'react-icons/fa';
+import axios from 'axios';
 
 const SearchBar = ({ suggestions }) => {
     const [input, setInput] = useState('');
+    const [fetchedSuggestions, setFetchedSuggestions] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
     const [rooms, setRooms] = useState(1);
@@ -28,10 +30,36 @@ const SearchBar = ({ suggestions }) => {
         }
     };
 
+    const handleInputChange = async (e) => {
+        setInput(e.target.value);
+        if (e.target.value.length > 2) {
+            fetchSuggestions(e.target.value);
+        }
+    };
+
+    const fetchSuggestions = async (query) => {
+        const apiKey = 'YOUR_OPENCAGE_API_KEY';
+        const url = `https://api.opencagedata.com/geocode/v1/json?q=${query}&key=${apiKey}&limit=5`;
+
+        try {
+            const response = await axios.get(url);
+            setFetchedSuggestions(response.data.results.map(result => result.formatted));
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleSelectSuggestion = (suggestion) => {
+        setInput(suggestion);
+        setFetchedSuggestions([]);
+    };
+
     const handleSearch = () => {
         const bookingUrl = `https://www.booking.com/searchresults.html?ss=${input}&checkin_monthday=${new Date(checkInDate).getDate()}&checkin_month=${new Date(checkInDate).getMonth() + 1}&checkin_year=${new Date(checkInDate).getFullYear()}&checkout_monthday=${new Date(checkOutDate).getDate()}&checkout_month=${new Date(checkOutDate).getMonth() + 1}&checkout_year=${new Date(checkOutDate).getFullYear()}&group_adults=${adults}&group_children=${children}&no_rooms=${rooms}`;
-        window.open(bookingUrl, '_blank');
+        window.location.href = bookingUrl;
     };
+
+    const todayDate = new Date().toISOString().split('T')[0];
 
     return (
         <div className="search-bar">
@@ -41,16 +69,16 @@ const SearchBar = ({ suggestions }) => {
                     type="text"
                     placeholder="Enter a destination or property"
                     value={input}
-                    onChange={(e) => setInput(e.target.value)}
+                    onChange={handleInputChange}
                     onFocus={() => setShowSuggestions(true)}
                     onBlur={() => setShowSuggestions(false)}
                 />
                 {showSuggestions && (
                     <div className="suggestions-box">
-                        {suggestions
+                        {fetchedSuggestions
                             .filter(suggestion => suggestion.toLowerCase().includes(input.toLowerCase()))
                             .map((suggestion, index) => (
-                                <div key={index} className="suggestion-item" onMouseDown={() => setInput(suggestion)}>
+                                <div key={index} className="suggestion-item" onMouseDown={() => handleSelectSuggestion(suggestion)}>
                                     {suggestion}
                                 </div>
                             ))}
@@ -63,6 +91,7 @@ const SearchBar = ({ suggestions }) => {
                     <input
                         type="date"
                         value={checkInDate}
+                        min={todayDate} // Set the minimum date to today
                         onChange={handleCheckInChange}
                     />
                 </div>
@@ -71,6 +100,7 @@ const SearchBar = ({ suggestions }) => {
                     <input
                         type="date"
                         value={checkOutDate}
+                        min={checkInDate || todayDate} // Set the minimum date to check-in date or today
                         onChange={handleCheckOutChange}
                     />
                 </div>
