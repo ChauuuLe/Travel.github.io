@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaExchangeAlt, FaUser, FaSearch, FaPlus, FaTrash } from 'react-icons/fa';
-import './FlightSearchForm.css';
+//import './FlightSearchForm.css';
 
 const FlightSearchForm = () => {
     const [tripType, setTripType] = useState('round-trip');

@@ -5,10 +5,6 @@ const app = express();
 const path = require("path");
 const crypto = require("crypto");
 const next = require("next");
-// Next.js setup
-const dev = process.env.NODE_ENV !== 'production';
-const nextApp = next({ dev, dir: path.join(__dirname, '../service/weatherforecast') });
-const handle = nextApp.getRequestHandler();
 
 //keys just for testing
 const key1 = "248bgturng8n54gh54g94gh95gh59gh498gher9ifjdoigdsgpoasdngiphgipghighr9igheiugheriuogheruigneriugerig";
@@ -26,22 +22,16 @@ app.use(CookieSession({
   maxAge: 2 * 60 * 60 * 1000, // 2 hours
 }));
 
-
 // route
-
 require('./routes/auth.routes.js')(app);
 require('./routes/user.routes.js')(app);
-require('./routes/group.routes.js')(app);
 require('./routes/chat.routes.js')(app);
-
-
 
 // DB
 const db = require("./models/index.js");
 const Role = db.role;
 const dbConfig = require("./config/db.config.js");
 const linkToMongoDB = `mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`;
-
 
 db.mongoose.connect(linkToMongoDB, {
   //useNewUrlParser: true,
@@ -76,12 +66,10 @@ async function initial() {
   }
 }
 
-
-
   // Port
-  const PORT = process.env.PORT || 8080;
-  app.listen(PORT, () => {
-    console.log(`http://localhost:${PORT}`);
-  });
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`http://localhost:${PORT}`);
+});
 
 

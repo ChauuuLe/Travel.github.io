@@ -2,7 +2,6 @@ import React from 'react';
 import Navbar from '../navbar/navbar';
 import SearchBar from '../../Components/searchbar/SearchBarFlight';
 import Footer from '../footer/Footer';
-import videoBg from '../../../../Backend (server and db)/app/assets/images/video.mp4';
 import './flightSearchPage.css';
 
 const suggestions = [

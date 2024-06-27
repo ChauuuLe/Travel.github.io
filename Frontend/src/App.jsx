@@ -8,28 +8,12 @@ import FlightSearchPage from './pages/flightsearchpage/flightSearchPage';
 import Navbar from './pages/navbar/navbar';
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(null);
-  const location = useLocation();
-
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user) setCurrentUser(user);
-  }, []);
-
-  const handleLogin = (user) => {
-    setCurrentUser(user);
-    localStorage.setItem('user', JSON.stringify(user));
-  };
-
-  const hideNavbarPaths = ['/signin', '/signup'];
-  const showNavbar = !hideNavbarPaths.includes(location.pathname);
-
   return (
     <>
-      {showNavbar && <Navbar />}
+      <Navbar />
       <Routes>
-        <Route path="/signin" element={<SignIn setCurrentUser={handleLogin} />} />
-        <Route path="/signup" element={<SignUp setCurrentUser={handleLogin} />} />
+        <Route path="/signin" element={<SignIn/>} />
+        <Route path="/signup" element={<SignUp/>} />
         <Route path="/" element={<HomePage />} />
         <Route path="/flight" element={<FlightSearchPage />} />
         <Route path="/hotels" element={<HotelSearchPage />} />

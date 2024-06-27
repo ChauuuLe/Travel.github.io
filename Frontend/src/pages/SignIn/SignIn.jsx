@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./SignIn.css"; 
 import googleLogo from "../../assets/google.png"; 
 
-const SignIn = ({ setCurrentUser }) => {
+const SignIn = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -24,8 +24,17 @@ const SignIn = ({ setCurrentUser }) => {
         username,
         password,
       });
-      setCurrentUser(response.data);
-      navigate("/");
+      const user = {
+        id: response.data.id,
+        username: response.data.username,
+        email: response.data.email,
+        roles: response.data.roles,
+        token: response.data.token
+      };
+      window.gon = window.gon || {};
+      window.gon.currentUser = user;
+      localStorage.setItem('token', user.token); // Save token to localStorage
+      navigate("/"); 
       alert("Sign in successful");
     } catch (err) {
       setMessage("Sign in failed");

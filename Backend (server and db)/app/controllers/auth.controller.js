@@ -14,13 +14,10 @@ exports.signup = async (req, res) => {
       password: bcrypt.hashSync(req.body.password, 8),
     });
 
-    await user.save();
-
     if (req.body.roles) {
       const roles = await Role.find({
         name: { $in: req.body.roles },
       }).exec();
-
       user.roles = roles.map((role) => role._id);
     } else {
       const role = await Role.findOne({ name: "user" }).exec();
@@ -35,7 +32,6 @@ exports.signup = async (req, res) => {
 };
 
 exports.signin = async (req, res) => {
-  
   try {
     const user = await User.findOne({
       username: req.body.username,
@@ -69,6 +65,7 @@ exports.signin = async (req, res) => {
       username: user.username,
       email: user.email,
       roles: authorities,
+      token: token,  // Include token in the response
     });
     
   } catch (err) {
