@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../navbar/navbar';
 import SearchBar from '../../Components/searchbar/searchbarhotel';
 import Footer from '../footer/Footer';
-//import videoBg from '../../../../Backend (server and db)/app/assets/images/video.mp4';
+import videoBg from '../../assets/vidbg.mp4';
 import './HotelSearchPage.css';
 
 const suggestions = [
