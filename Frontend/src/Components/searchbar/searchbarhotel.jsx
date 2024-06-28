@@ -64,8 +64,18 @@ const SearchBar = ({ suggestions }) => {
     };
 
     const handleSearch = () => {
+        if (!input) {
+            alert("Please enter a destination.");
+            return;
+        }
+
+        if (!checkInDate || !checkOutDate) {
+            alert("Please select both check-in and check-out dates.");
+            return;
+        }
+
         const bookingUrl = `https://www.booking.com/searchresults.html?ss=${input}&checkin_monthday=${new Date(checkInDate).getDate()}&checkin_month=${new Date(checkInDate).getMonth() + 1}&checkin_year=${new Date(checkInDate).getFullYear()}&checkout_monthday=${new Date(checkOutDate).getDate()}&checkout_month=${new Date(checkOutDate).getMonth() + 1}&checkout_year=${new Date(checkOutDate).getFullYear()}&group_adults=${adults}&group_children=${children}&no_rooms=${rooms}`;
-        window.open(bookingUrl, '_blank'); // Open in new tab
+        window.open(bookingUrl, '_blank'); 
     };
 
     const todayDate = new Date().toISOString().split('T')[0];
