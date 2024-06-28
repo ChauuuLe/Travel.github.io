@@ -26,7 +26,6 @@ const SignUp = ({ setCurrentUser }) => {
         email,
         password,
       });
-      setCurrentUser(response.data);
       navigate("/signin");
       alert("Sign up successful");
     } catch (err) {

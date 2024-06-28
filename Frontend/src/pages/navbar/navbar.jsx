@@ -4,7 +4,7 @@ import axios from 'axios';
 import "../navbar/Navbar.css";
 
 const Navbar = () => {
-  const currentUser = window.gon ? window.gon.currentUser : null; // Ensure window.gon exists
+  const currentUser = window.gon ? window.gon.currentUser : null;
   const [scrollDirection, setScrollDirection] = useState('up');
   const [lastScrollY, setLastScrollY] = useState(0);
   const navigate = useNavigate();

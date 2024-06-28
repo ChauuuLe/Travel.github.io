@@ -17,6 +17,21 @@ const SignIn = () => {
     };
   }, []);
 
+  const getCurrentUser = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get('/api/users/current', {
+        headers: {
+          'x-access-token': token,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching current user', error);
+      throw error;
+    }
+  };
+
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
@@ -24,20 +39,15 @@ const SignIn = () => {
         username,
         password,
       });
-      const user = {
-        id: response.data.id,
-        username: response.data.username,
-        email: response.data.email,
-        roles: response.data.roles,
-        token: response.data.token
-      };
+      const user = getCurrentUser ();
       window.gon = window.gon || {};
-      window.gon.currentUser = user;
-      localStorage.setItem('token', user.token); // Save token to localStorage
+      window.gon.currentUser = user; 
+      localStorage.setItem('token', response.data.token); 
       navigate("/"); 
       alert("Sign in successful");
     } catch (err) {
-      setMessage("Sign in failed");
+      const errorMessage = err.response ? err.response.data.message : err.message;
+      setMessage(`Sign in failed: ${errorMessage}`);
     }
   };
 

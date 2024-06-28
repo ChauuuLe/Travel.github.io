@@ -3,26 +3,30 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 import List from "./components/list/List";
 import Chat from "./components/chat/Chat";
 import Detail from "./components/detail/Detail";
-import Navbar from "../navbar/navbar.jsx";
-import "./chatApp.css"
+import "./chatApp.css";
 
-const chatApp = (props) => {
-  const {
-    currentUser,
-  } = window.global;
-
-  return (
-    <>
-      {showNavbar && <Navbar />}
-      {currentUser ? (
+const chatApp = () => {
+  const currentUser = window.gon.currentUser;
+  
+  const renderChat = () => {
+    if (currentUser) {
+      return (
         <div className="container">
           <List />
           <Chat />
           <Detail />
         </div>
-        ) : (
-        <Redirect to="/login" />
-      )}
+      );
+    }
+    else {
+      <Redirect to="/login" />
+    }
+  }
+  return (
+    <>
+      {renderChat()}
     </>
   );
 };
+
+export default chatApp;

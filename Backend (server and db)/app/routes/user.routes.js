@@ -20,29 +20,3 @@ module.exports = function(app) {
     controller.getCurrentUser
   );
 };
-
-exports.getCurrentUser = async (req, res) => {
-  try {
-    const isVerified = await authJwt.verifyToken(req);
-    if (!isVerified) {
-      return res.status(401).send({ message: "Unauthorized!" });
-    }
-
-    const user = await authJwt.getUserDetails(req);
-    if (!user) {
-      return res.status(404).send({ message: "User not found" });
-    }
-
-    res.status(200).send({
-      id: user._id,
-      username: user.username,
-      email: user.email,
-      roles: user.roles.map(role => role.name),
-      avatar: user.avatar,
-      blocked: user.blocked,
-      userChats: user.userChats,
-    });
-  } catch (err) {
-    res.status(500).send({ message: err.message });
-  }
-};
