@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Corrected import
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import ThemeToggle from '../../Components/ThemeToggle/ThemeToggle'; // Import the ThemeToggle component
 import "../navbar/Navbar.css";
 
 const Navbar = () => {
-  const currentUser = window.gon ? window.gon.currentUser : null;
+  const currentUser = window.gon ? window.gon.currentUser : null; // Ensure window.gon exists
   const [scrollDirection, setScrollDirection] = useState('up');
   const [lastScrollY, setLastScrollY] = useState(0);
   const navigate = useNavigate();
+  const location = useLocation(); // Get the current route
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,7 +42,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     await signout();
-    navigate('/'); 
+    navigate('/');
   };
 
   const renderAccountAction = () => {
@@ -59,6 +61,11 @@ const Navbar = () => {
       );
     }
   };
+
+  // Hide navbar on Sign In and Sign Up pages
+  if (location.pathname === '/signin' || location.pathname === '/signup') {
+    return null;
+  }
 
   return (
     <section className={`navBarSection ${scrollDirection === 'down' ? 'hidden' : ''}`}>
@@ -79,6 +86,7 @@ const Navbar = () => {
             </ul>
           </nav>
           <div className="nav-actions">
+            <ThemeToggle /> {/* Add ThemeToggle component here */}
             {renderAccountAction()}
           </div>
         </div>

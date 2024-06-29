@@ -8,6 +8,18 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+body.day {
+  background-color: #ffffff;
+  color: #000000;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.night {
+  background-color: #000000;
+  color: #ffffff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
 .navBarSection {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.9);
@@ -18,6 +30,10 @@
   z-index: 1000;
   padding: 10px 0;
   transition: transform 0.3s ease-in-out;
+}
+
+body.night .navBarSection {
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 .navBarSection.hidden {
@@ -48,8 +64,8 @@
 
 .logo a {
   text-decoration: none;
-  color: #000;
-  transition: color 0.3s ease, background-color 0.3s ease;
+  color: inherit;
+  transition: color 0.3s ease;
 }
 
 .logo a:hover {
@@ -84,7 +100,7 @@
 
 .navLists li a {
   text-decoration: none;
-  color: #000;
+  color: inherit;
   font-size: 16px;
   display: flex;
   align-items: center;
@@ -129,12 +145,13 @@
 .nav-actions {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  flex: 1;
 }
 
 .nav-actions .signin {
   text-decoration: none;
-  color: #000;
+  color: inherit;
   font-size: 16px;
   margin-left: 20px;
   display: flex;
@@ -151,7 +168,7 @@
 
 .nav-actions .signup {
   text-decoration: none;
-  color: #000;
+  color: inherit;
   font-size: 16px;
   margin-left: 20px;
   display: flex;
@@ -193,6 +210,12 @@
   color: #000;
 }
 
+.theme-toggle {
+  margin-right: 20px;
+  margin-left: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
 @media screen and (max-width: 768px) {
   .nav-actions {
     flex-direction: column;
@@ -220,6 +243,10 @@
     display: none;
   }
 
+  body.night .navBar {
+    background-color: #333;
+  }
+
   .navLists {
     flex-direction: column;
     justify-content: center;
@@ -236,7 +263,7 @@
     display: block;
     cursor: pointer;
     font-size: 24px;
-    color: #000;
+    color: inherit;
   }
 
   .logoDiv {
