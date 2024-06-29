@@ -1,0 +1,26 @@
+.flight-search-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.flight-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.flight-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.no-results {
+    font-size: 1.5em;
+    color: red;
+}

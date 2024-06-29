@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { FaExchangeAlt, FaUser, FaSearch, FaPlus, FaTrash, FaPlaneDeparture, FaPlaneArrival, FaCalendarAlt } from 'react-icons/fa';
 import './SearchBarFlight.css';
+import { flightsData } from '../../assets/flightsData/flightsData'; // Import the flight data
 
-const FlightSearchForm = () => {
+const FlightSearchForm = ({ onSearch }) => {
     const [tripType, setTripType] = useState('round-trip');
     const [segments, setSegments] = useState([{ id: 1, from: '', to: '', date: '' }]);
     const [returnDate, setReturnDate] = useState('');
@@ -52,18 +53,16 @@ const FlightSearchForm = () => {
             return;
         }
 
-        const searchUrl = generateBookingSearchUrl({
-            fromLocation: firstSegment.from,
-            toLocation: firstSegment.to,
-            departureDate: firstSegment.date,
-            returnDate: returnDate,
-            tripType: tripType,
-            passengers: passengers,
-            classType: classType,
-            nonstop: nonstop
-        });
+        const results = flightsData.filter(flight =>
+            flight.from.toLowerCase() === firstSegment.from.toLowerCase() &&
+            flight.to.toLowerCase() === firstSegment.to.toLowerCase()
+        );
 
-        window.open(searchUrl, '_blank');
+        if (results.length === 0) {
+            onSearch('No flights found');
+        } else {
+            onSearch(results);
+        }
     };
 
     const handleSwapLocations = () => {
@@ -244,21 +243,6 @@ const FlightSearchForm = () => {
             </div>
         </div>
     );
-};
-
-const generateBookingSearchUrl = ({ fromLocation, toLocation, departureDate, returnDate = '', tripType = 'round-trip', passengers = 1, classType = 'Economy', nonstop = false }) => {
-    const baseUrl = "https://www.agoda.com/flights"; // Replace with Agoda flight search URL
-    const params = new URLSearchParams({
-        from: fromLocation,
-        to: toLocation,
-        depdate: departureDate,
-        retdate: tripType === 'round-trip' ? returnDate : '',
-        pax: passengers,
-        cabin: classType.toLowerCase(),
-        direct: nonstop ? '1' : '0'
-    });
-
-    return `${baseUrl}?${params.toString()}`;
 };
 
 export default FlightSearchForm;
