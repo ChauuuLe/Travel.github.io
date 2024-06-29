@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './FlightSearchResult.css';
 
 const FlightSearchResult = ({ results }) => {
+    const [expandedCardIndex, setExpandedCardIndex] = useState(null);
+    const cardRefs = useRef([]);
+
+    const handleCardClick = (index) => {
+        setExpandedCardIndex(index === expandedCardIndex ? null : index);
+    };
+
+    useEffect(() => {
+        if (expandedCardIndex !== null && cardRefs.current[expandedCardIndex]) {
+            cardRefs.current[expandedCardIndex].scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [expandedCardIndex]);
+
     if (results === 'No flights found') {
         return <div className="no-results">No flights found</div>;
     }
@@ -9,16 +22,64 @@ const FlightSearchResult = ({ results }) => {
     return (
         <div className="flight-search-results">
             {results.map((flight, index) => (
-                <div key={index} className="flight-card">
+                <div
+                    key={index}
+                    className={`flight-card ${expandedCardIndex === index ? 'expanded' : ''}`}
+                    onClick={() => handleCardClick(index)}
+                    ref={el => cardRefs.current[index] = el}
+                >
                     <div className="flight-info">
-                        <h3>{flight.airline}</h3>
-                        <p>{flight.from} to {flight.to}</p>
-                        <p>Departure: {flight.departureTime}</p>
-                        <p>Arrival: {flight.arrivalTime}</p>
-                        <p>Duration: {flight.duration}</p>
-                        <p>Price: {flight.price}</p>
-                        <p>Nonstop: {flight.nonstop ? 'Yes' : 'No'}</p>
+                        <div className="airline-logo-container">
+                            <img src={flight.logo} alt={flight.airline} className="airline-logo" />
+                        </div>
+                        <div className="flight-details">
+                            <h3>{flight.airline}</h3>
+                            <p className="flight-route">{flight.from} to {flight.to}</p>
+                            <span className="flight-price">Price: ${flight.price}</span>
+                        </div>
                     </div>
+                    {expandedCardIndex === index && (
+                        <div className="expanded-info">
+                            <div className="expanded-details">
+                                <div className="detail">
+                                    <span>{flight.departureTime} - {flight.arrivalTime}</span>
+                                    <span className="label">Flight Time</span>
+                                </div>
+                                <div className="detail">
+                                    <span>{flight.duration}</span>
+                                    <span className="label">Duration</span>
+                                </div>
+                                <div className="detail">
+                                    <span>5:35</span>
+                                    <span className="label">Boarding</span>
+                                </div>
+                                <div className="detail">
+                                    <span>No</span>
+                                    <span className="label">Transfer</span>
+                                </div>
+                                <div className="detail">
+                                    <span>8</span>
+                                    <span className="label">Gate</span>
+                                </div>
+                                <div className="detail">
+                                    <span>20A</span>
+                                    <span className="label">Seat</span>
+                                </div>
+                            </div>
+                            <div className="price-info">
+                                <div className="price-detail">
+                                    <span>${flight.price}</span>
+                                    <span className="label">Price</span>
+                                </div>
+                                <div className="price-detail">
+                                    <span>Economy</span>
+                                    <span className="label">Class</span>
+                                </div>
+                                <img src="https://github.com/pizza3/asset/blob/master/barcode.png?raw=true" alt="Barcode" className="barcode" />
+                            </div>
+                            <button className="pay-button">Pay</button>
+                        </div>
+                    )}
                 </div>
             ))}
         </div>

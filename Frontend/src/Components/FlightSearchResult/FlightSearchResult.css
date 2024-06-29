@@ -1,26 +1,129 @@
-.flight-search-results {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin: 20px 0;
-}
-
 .flight-card {
     background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
     padding: 20px;
-    width: 300px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-left: 5px solid #007bff;
+    position: relative;
+    cursor: pointer;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+    overflow: hidden;
+    max-height: 80px;
+    /* Height for collapsed state */
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.flight-card.expanded {
+    max-height: 500px;
+    /* Adjust height for expanded state */
+    padding: 20px;
+}
+
+.flight-info,
+.expanded-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .flight-info {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     gap: 10px;
 }
 
+.flight-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-grow: 1;
+}
+
+.flight-details h3 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.flight-details span,
+.flight-details p {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.flight-route {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.expanded-info {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.expanded-details {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 30%;
+}
+
+.detail span.label {
+    font-size: 0.8em;
+    color: #999;
+}
+
+.price-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.price-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 45%;
+}
+
+.barcode {
+    max-width: 100px;
+}
+
+.pay-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+    align-self: center;
+}
+
+.pay-button:hover {
+    background-color: #0056b3;
+}
+
 .no-results {
+    text-align: center;
     font-size: 1.5em;
     color: red;
 }

@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Navbar from '../navbar/navbar';
-import FlightSearchForm from '../SearchBarFlight/FlightSearchForm';
-import FlightSearchResult from '../FlightSearchResult/FlightSearchResult';
+import FlightSearchForm from '../../Components/searchbar/SearchBarFlight';
+import FlightSearchResult from '../../Components/FlightSearchResult/FlightSearchResult';
 import Footer from '../footer/Footer';
 import videoBg from '../../assets/video.mp4';
 import './flightSearchPage.css';
 
 const FlightSearchPage = () => {
     const [searchResults, setSearchResults] = useState([]);
+    const resultsRef = useRef(null);
 
     const handleSearchResults = (results) => {
-        setSearchResults(results);
+        setSearchResults(results.length > 0 ? results : 'No flights found');
+        resultsRef.current.scrollIntoView({ behavior: 'smooth' });
     };
 
     return (
@@ -23,7 +25,7 @@ const FlightSearchPage = () => {
                     <FlightSearchForm onSearch={handleSearchResults} />
                 </div>
             </div>
-            <div className="content-section">
+            <div className="content-section" ref={resultsRef}>
                 <h2>Search Results</h2>
                 <FlightSearchResult results={searchResults} />
             </div>

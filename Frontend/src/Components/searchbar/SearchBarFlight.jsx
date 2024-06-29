@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaExchangeAlt, FaUser, FaSearch, FaPlus, FaTrash, FaPlaneDeparture, FaPlaneArrival, FaCalendarAlt } from 'react-icons/fa';
 import './SearchBarFlight.css';
-import { flightsData } from '../../assets/flightsData/flightsData'; // Import the flight data
+import flightsData from '../../assets/flightsData/flightsData.json';
 
 const FlightSearchForm = ({ onSearch }) => {
     const [tripType, setTripType] = useState('round-trip');
@@ -53,10 +53,36 @@ const FlightSearchForm = ({ onSearch }) => {
             return;
         }
 
-        const results = flightsData.filter(flight =>
-            flight.from.toLowerCase() === firstSegment.from.toLowerCase() &&
-            flight.to.toLowerCase() === firstSegment.to.toLowerCase()
-        );
+        let results;
+        if (tripType === 'round-trip') {
+            const outboundFlights = flightsData.filter(flight =>
+                flight.from.toLowerCase() === firstSegment.from.toLowerCase() &&
+                flight.to.toLowerCase() === firstSegment.to.toLowerCase() &&
+                flight.date === firstSegment.date
+            );
+
+            const returnFlights = flightsData.filter(flight =>
+                flight.from.toLowerCase() === firstSegment.to.toLowerCase() &&
+                flight.to.toLowerCase() === firstSegment.from.toLowerCase() &&
+                flight.date === returnDate
+            );
+
+            results = outboundFlights.map(outbound => {
+                return returnFlights.map(returnFlight => {
+                    return {
+                        ...outbound,
+                        returnFlight,
+                        totalPrice: parseFloat(outbound.price.replace(/[^\d]/g, '')) + parseFloat(returnFlight.price.replace(/[^\d]/g, ''))
+                    };
+                });
+            }).flat();
+        } else {
+            results = flightsData.filter(flight =>
+                flight.from.toLowerCase() === firstSegment.from.toLowerCase() &&
+                flight.to.toLowerCase() === firstSegment.to.toLowerCase() &&
+                flight.date === firstSegment.date
+            );
+        }
 
         if (results.length === 0) {
             onSearch('No flights found');
