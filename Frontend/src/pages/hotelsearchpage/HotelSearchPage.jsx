@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../navbar/navbar';
 import SearchBar from '../../Components/searchbar/searchbarhotel';
 import Footer from '../footer/Footer';
+import videoBg from '../../assets/video.mp4';
 import './HotelSearchPage.css';
 
 const suggestions = [
@@ -16,6 +17,30 @@ const suggestions = [
 ];
 
 const HomeSearchPage = () => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.pageYOffset;
+            const target = document.querySelector('.content-section');
+
+            if (target) {
+                const targetTop = target.offsetTop;
+                const targetHeight = target.offsetHeight;
+
+                if (scrollTop > targetTop - window.innerHeight + targetHeight / 2) {
+                    setIsVisible(true);
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Kiểm tra ban đầu khi trang được tải
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     const featuredHotels = [
         {
             image: 'path_to_image/hotel1.jpg',
@@ -89,7 +114,7 @@ const HomeSearchPage = () => {
                     <SearchBar suggestions={suggestions} />
                 </div>
             </div>
-            <div className="content-section">
+            <div className={`content-section ${isVisible ? 'slide-in active' : 'slide-in'}`}>
                 <h2>Homes guests love</h2>
                 <div className="featured-hotels">
                     {featuredHotels.map((hotel, index) => (

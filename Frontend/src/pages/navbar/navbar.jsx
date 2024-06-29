@@ -86,7 +86,7 @@ const Navbar = () => {
             </ul>
           </nav>
           <div className="nav-actions">
-            <ThemeToggle /> {/* Add ThemeToggle component here */}
+            <ThemeToggle /> {}
             {renderAccountAction()}
           </div>
         </div>

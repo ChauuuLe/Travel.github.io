@@ -189,7 +189,7 @@ body.night .navBarSection {
 }
 
 .nav-actions .signup {
-  background-color: #f0f0f0;
+  background-color: transparent;
 }
 
 .nav-actions .signin:hover,
@@ -202,7 +202,7 @@ body.night .navBarSection {
 }
 
 .nav-actions .signup:hover {
-  background-color: #007bff;
+  background-color: #aa0606;
 }
 
 .nav-actions .signin:active,
