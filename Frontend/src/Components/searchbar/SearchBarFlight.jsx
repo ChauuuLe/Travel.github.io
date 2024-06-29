@@ -262,7 +262,6 @@ const FlightSearchForm = ({ onSearch }) => {
                 </div>
             </div>
             <div className="search-buttons">
-                <button className="search-button hotel-button">Flight + Hotel</button>
                 <button className="search-button" onClick={handleSearch}>
                     <FaSearch /> Search
                 </button>

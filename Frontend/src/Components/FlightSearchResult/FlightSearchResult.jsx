@@ -33,8 +33,18 @@ const FlightSearchResult = ({ results }) => {
                             <img src={flight.logo} alt={flight.airline} className="airline-logo" />
                         </div>
                         <div className="flight-details">
-                            <h3>{flight.airline}</h3>
-                            <p className="flight-route">{flight.from} to {flight.to}</p>
+                            <div className="flight-times">
+                                <span>{flight.departureTime}</span>
+                                <div className="line"></div>
+                                <span>{flight.arrivalTime}</span>
+                                <span className="duration">{flight.duration}</span>
+                            </div>
+                            <div className="flight-route">
+                                <span>{flight.from} T1</span>
+                                <span>{flight.to} T2</span>
+                            </div>
+                        </div>
+                        <div className="price-info">
                             <span className="flight-price">Price: ${flight.price}</span>
                         </div>
                     </div>
@@ -75,7 +85,6 @@ const FlightSearchResult = ({ results }) => {
                                     <span>Economy</span>
                                     <span className="label">Class</span>
                                 </div>
-                                <img src="https://github.com/pizza3/asset/blob/master/barcode.png?raw=true" alt="Barcode" className="barcode" />
                             </div>
                             <button className="pay-button">Pay</button>
                         </div>
