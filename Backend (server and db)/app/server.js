@@ -26,6 +26,7 @@ app.use(CookieSession({
 require('./routes/auth.routes.js')(app);
 require('./routes/user.routes.js')(app);
 require('./routes/chat.routes.js')(app);
+//require('./routes/userChat.routes.js')(app);
 
 // DB
 const db = require("./models/index.js");

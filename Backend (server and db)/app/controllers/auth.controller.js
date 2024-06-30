@@ -66,7 +66,9 @@ exports.signin = async (req, res) => {
       email: user.email,
       roles: authorities,
       token: token,  // Include token in the response
+      expiresIn: Date.now() + 7200000 // 2 hours in milliseconds
     });
+    
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
