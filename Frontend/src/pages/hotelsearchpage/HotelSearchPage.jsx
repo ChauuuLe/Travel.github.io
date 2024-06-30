@@ -4,6 +4,10 @@ import SearchBar from '../../Components/searchbar/searchbarhotel';
 import Footer from '../footer/Footer';
 import videoBg from '../../assets/video.mp4';
 import './HotelSearchPage.css';
+import spain from '../../assets/spain.jpg';
+import italy from '../../assets/italy.jpg';
+import france from '../../assets/france.jpg';
+import german from '../../assets/german.jpg';
 
 const suggestions = [
     'Ho Chi Minh City',
@@ -41,63 +45,29 @@ const HomeSearchPage = () => {
         };
     }, []);
 
-    const featuredHotels = [
-        {
-            image: 'path_to_image/hotel1.jpg',
-            name: 'The Hotel Apartments in the Center of Amsterdam',
-            rating: 9.1,
-            reviews: 400,
-            location: 'Amsterdam, Netherlands',
-            price: 'VND 27,026,983'
-        },
-        {
-            image: 'path_to_image/hotel2.jpg',
-            name: 'SWEETS - Overtoomse Sluis',
-            rating: 9.0,
-            reviews: 56,
-            location: 'Amsterdam, Netherlands',
-            price: 'VND 7,978,741'
-        },
-        {
-            image: 'path_to_image/hotel3.jpg',
-            name: 'Zoku Amsterdam',
-            rating: 8.9,
-            reviews: 2789,
-            location: 'Amsterdam, Netherlands',
-            price: 'VND 9,299,264'
-        },
-        {
-            image: 'path_to_image/hotel4.jpg',
-            name: 'PREMIER SUITES PLUS Amsterdam',
-            rating: 8.8,
-            reviews: 1368,
-            location: 'Amsterdam, Netherlands',
-            price: 'VND 8,588,171'
-        }
-    ];
-
     const exploreDestinations = [
         {
-            image: 'https://unsplash.com/photos/city-scale-under-blue-sky-ChSZETOal-I',
+            image: spain,
             name: 'Spain',
             rentals: 166514
         },
         {
-            image: 'path_to_image/italy.jpg',
+            image: italy,
             name: 'Italy',
             rentals: 179454
         },
         {
-            image: 'https://unsplash.com/photos/beautiful-view-of-Paris-XYZ',
+            image: france,
             name: 'France',
             rentals: 150123
         },
         {
-            image: 'https://unsplash.com/photos/landscape-view-of-germany-ABC',
+            image: german,
             name: 'Germany',
             rentals: 143256
         }
     ];
+
 
 
     return (
@@ -111,20 +81,6 @@ const HomeSearchPage = () => {
                 </div>
             </div>
             <div className={`content-section ${isVisible ? 'slide-in active' : 'slide-in'}`}>
-                <h2>Homes guests love</h2>
-                <div className="featured-hotels">
-                    {featuredHotels.map((hotel, index) => (
-                        <div className="hotel-card" key={index}>
-                            <img src={hotel.image} alt={hotel.name} />
-                            <div className="hotel-info">
-                                <h3>{hotel.name}</h3>
-                                <p>{hotel.location}</p>
-                                <p>Rating: {hotel.rating} ({hotel.reviews} reviews)</p>
-                                <p>Starting from {hotel.price}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
                 <h2>Feel at home wherever you go</h2>
                 <div className="explore-destinations">
                     {exploreDestinations.map((destination, index) => (
