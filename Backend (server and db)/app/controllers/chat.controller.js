@@ -1,41 +1,71 @@
 const db = require("../models");
 const Chat = db.chat;
+const UserChat = db.userChat;
 const User = db.user;
 
-// Create a new chat message
 exports.createChat = async (req, res) => {
+  console.log('cac tao a');
   try {
-    const chat = new Chat({
-      sender: req.userId,
-      receiver: req.body.receiverId,
-      message: req.body.message,
+    const userId = req.userId; // This should be set by the verifyToken middleware
+    const receiverId = req.body.receiverId;
+
+    // Check if a chat already exists between these users
+    const existingUserChat = await UserChat.findOne({
+      receiver: receiverId,
+      chat: { $in: (await Chat.find({})).map(chat => chat._id) }
     });
 
-    const savedChat = await chat.save();
+    if (existingUserChat) {
+      return res.status(400).send({ message: "Chat already exists" });
+    }
 
-    // Add chat reference to sender and receiver
-    await User.findByIdAndUpdate(req.userId, { $push: { chats: savedChat._id } });
-    await User.findByIdAndUpdate(req.body.receiverId, { $push: { chats: savedChat._id } });
+    // Create a new chat
+    const chat = new Chat({});
+    await chat.save();
 
-    res.status(201).send(savedChat);
+    // Create a new user chat for the sender
+    const senderUserChat = new UserChat({
+      receiver: receiverId,
+      chat: chat._id,
+    });
+    await senderUserChat.save();
+
+    // Create a new user chat for the receiver
+    const receiverUserChat = new UserChat({
+      receiver: userId,
+      chat: chat._id,
+    });
+    await receiverUserChat.save();
+
+    // Update users' chat lists
+    await User.findByIdAndUpdate(userId, { $push: { userChats: senderUserChat._id } });
+    await User.findByIdAndUpdate(receiverId, { $push: { userChats: receiverUserChat._id } });
+
+    res.status(201).send({ message: "Chat created successfully", chat: senderUserChat });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
 };
 
-// Retrieve chat messages for a user
-exports.getChats = async (req, res) => {
+exports.getChatInfo = async (req, res) => {
   try {
-    const user = await User.findById(req.userId).populate({
-      path: 'chats',
-      populate: { path: 'sender receiver', select: 'username' }
-    });
+    const chatId = req.params.chatId;
+    const chat = await Chat.findById(chatId)
+      .populate("participants", "username email avatar")
+      .populate({
+        path: "messages",
+        populate: {
+          path: "sender",
+          select: "username email avatar"
+        }
+      })
+      .exec();
 
-    if (!user) {
-      return res.status(404).send({ message: "User not found" });
+    if (!chat) {
+      return res.status(404).send({ message: "Chat not found!" });
     }
 
-    res.status(200).send(user.chats);
+    res.status(200).send(chat);
   } catch (err) {
     res.status(500).send({ message: err.message });
   }

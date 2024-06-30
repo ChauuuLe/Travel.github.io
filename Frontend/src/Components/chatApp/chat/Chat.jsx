@@ -3,27 +3,33 @@ import axios from "axios";
 import EmojiPicker from "emoji-picker-react";
 import "./chat.css";
 
-const Chat = () => {
+const Chat = ({ chatId }) => {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
+  const [chat, setChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const endRef = useRef(null);
-  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const response = await axios.get("/api/chats", {
-          headers: { Authorization: `Bearer ${currentUser.accessToken}` },
-        });
-        setMessages(response.data);
-      } catch (err) {
-        console.error("Failed to fetch messages:", err);
-      }
-    };
-
-    fetchMessages();
-  }, [currentUser]);
+    if (chatId) {
+      const fetchChat = async () => {
+        try {
+          const token = localStorage.getItem('token');
+          const response = await axios.get(`http://localhost:8080/api/chats/${chatId}`, {
+            headers: {
+              'x-access-token': token,
+            },
+          });
+          setChat(response.data);
+          setMessages(response.data.messages); // Set messages from chat data
+        } catch (err) {
+          console.error('Error fetching chat', err);
+        }
+      };
+      fetchChat();
+    }
+  }, [chatId]);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -37,54 +43,66 @@ const Chat = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const receiverId = ""; // You need to set this to the receiver's user ID
+      const token = localStorage.getItem('token');
       await axios.post(
-        "/api/chats",
-        { message: text, receiverId },
+        "/api/messages",
+        { 
+          message: text, 
+          sender: currentUser._id,
+          chatId: chatId,
+        },
         {
-          headers: { Authorization: `Bearer ${currentUser.accessToken}` },
+          headers: { 'x-access-token': token },
         }
       );
-      setMessages([...messages, { sender: currentUser, message: text, timestamp: new Date() }]);
+      setMessages([...messages, { sender: currentUser, text, createdAt: new Date() }]);
       setText("");
     } catch (err) {
       console.error("Failed to send message:", err);
     }
   };
 
+  const renderAvatar = (avatar) => {
+    return avatar || "./assets/avatar.png";
+  };
+
+  const renderMessages = (messages) => (
+    messages.map((msg, index) => (
+      <div key={index} className={`message ${msg.sender._id === currentUser._id ? "own" : ""}`}>
+        <img src={renderAvatar(msg.sender.avatar)} alt="avatar" />
+        <div className="texts">
+          <p>{msg.text}</p>
+          <span>{new Date(msg.createdAt).toLocaleTimeString()}</span>
+        </div>
+      </div>
+    ))
+  );
+
   return (
     <div className="chat">
       <div className="top">
         <div className="user">
-          <img src="./avatar.png" alt="" />
+          <img src={renderAvatar(currentUser.avatar)} alt="avatar" />
           <div className="texts">
             <span>{currentUser.username}</span>
             <p>Online</p>
           </div>
         </div>
         <div className="icons">
-          <img src="./phone.png" alt="" />
-          <img src="./video.png" alt="" />
-          <img src="./info.png" alt="" />
+          <img src="./assets/phone.png" alt="" />
+          <img src="./assets/video.png" alt="" />
+          <img src="./assets/info.png" alt="" />
         </div>
       </div>
       <div className="center">
-        {messages.map((msg, index) => (
-          <div key={index} className={`message ${msg.sender.username === currentUser.username ? "own" : ""}`}>
-            <img src="./avatar.png" alt="" />
-            <div className="texts">
-              <p>{msg.message}</p>
-              <span>{new Date(msg.timestamp).toLocaleTimeString()}</span>
-            </div>
-          </div>
-        ))}
+        {renderMessages(messages)}
         <div ref={endRef}></div>
       </div>
       <div className="bottom">
         <div className="icons">
-          <img src="./img.png" alt="" />
-          <img src="./camera.png" alt="" />
-          <img src="./mic.png" alt="" />
+          <img src="./assets/img.png" alt="" />
+          <img src="./assets/camera.png" alt="" />
+          <img src="./assets/mic.png" alt="" />
         </div>
         <input
           type="text"
@@ -93,7 +111,7 @@ const Chat = () => {
           onChange={(e) => setText(e.target.value)}
         />
         <div className="emoji">
-          <img src="./emoji.png" alt="" onClick={() => setOpen((prev) => !prev)} />
+          <img src="./assets/emoji.png" alt="" onClick={() => setOpen((prev) => !prev)} />
           <div className="picker">
             {open && <EmojiPicker onEmojiClick={handleEmoji} />}
           </div>

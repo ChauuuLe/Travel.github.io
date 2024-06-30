@@ -8,23 +8,26 @@ const Detail = () => {
     sharedPhotos: false,
     sharedFiles: false
   });
-
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const toggleSection = (section) => {
     setIsOpen(prev => ({ ...prev, [section]: !prev[section] }));
+  };
+
+  const renderAvatar = (avatar) => {
+    return avatar || "./assets/avatar.png";
   };
 
   return (
     <div className="detail">
       <div className="user">
-        <img src="./avatar.png" alt="User Avatar" />
-        <h2>Chaulee</h2>
-        <p>ditme</p>
+        <img src={renderAvatar(currentUser.avatar)} alt="User Avatar" />
+        <h2>{currentUser.username}</h2>
       </div>
       <div className="info">
         <div className="option">
           <div className="title" onClick={() => toggleSection('chatSettings')}>
             <span>Chat Settings</span>
-            <img src={isOpen.chatSettings ? "./arrowDown.png" : "./arrowUp.png"} alt="Toggle" />
+            <img src={isOpen.chatSettings ? "./assets/arrowDown.png" : "./assets/arrowUp.png"} alt="Toggle" />
           </div>
         </div>
         {isOpen.chatSettings && (
@@ -35,7 +38,7 @@ const Detail = () => {
         <div className="option">
           <div className="title" onClick={() => toggleSection('privacyHelp')}>
             <span>Privacy & help</span>
-            <img src={isOpen.privacyHelp ? "./arrowDown.png" : "./arrowUp.png"} alt="Toggle" />
+            <img src={isOpen.privacyHelp ? "./assets/arrowDown.png" : "./assets/arrowUp.png"} alt="Toggle" />
           </div>
         </div>
         {isOpen.privacyHelp && (
@@ -46,7 +49,7 @@ const Detail = () => {
         <div className="option">
           <div className="title" onClick={() => toggleSection('sharedPhotos')}>
             <span>Shared photos</span>
-            <img src={isOpen.sharedPhotos ? "./arrowDown.png" : "./arrowUp.png"} alt="Toggle" />
+            <img src={isOpen.sharedPhotos ? "./assets/arrowDown.png" : "./assets/arrowUp.png"} alt="Toggle" />
           </div>
           {isOpen.sharedPhotos && (
             <div className="photos">
@@ -57,7 +60,7 @@ const Detail = () => {
         <div className="option">
           <div className="title" onClick={() => toggleSection('sharedFiles')}>
             <span>Shared Files</span>
-            <img src={isOpen.sharedFiles ? "./arrowDown.png" : "./arrowUp.png"} alt="Toggle" />
+            <img src={isOpen.sharedFiles ? "./assets/arrowDown.png" : "./assets/arrowUp.png"} alt="Toggle" />
           </div>
         </div>
         {isOpen.sharedFiles && (
@@ -65,8 +68,6 @@ const Detail = () => {
             {/* Files display content here */}
           </div>
         )}
-        <button>Block User</button>
-        <button className="logout">Logout</button>
       </div>
     </div>
   )

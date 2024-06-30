@@ -11,12 +11,17 @@ module.exports = function(app) {
   });
 
   app.get(
-    "/api/users/search-user",
+    "/api/users/search",
     controller.searchUsers
   );
 
   app.get(
     "/api/users/current",
     controller.getCurrentUser
+  );
+  app.get(
+    "/api/users/:userId/chats", 
+    [authJwt.verifyToken], 
+    controller.getUserChats
   );
 };
