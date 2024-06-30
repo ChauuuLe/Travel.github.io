@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import ThemeToggle from '../../Components/ThemeToggle/ThemeToggle'; // Import the ThemeToggle component
 import "../navbar/Navbar.css";
 import Userinfo from '../userInfo/Userinfo';
 
 const Navbar = () => {
-  const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
   const [scrollDirection, setScrollDirection] = useState('up');
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation(); // Get the current route
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -22,7 +24,6 @@ const Navbar = () => {
         handleLogout();
       } else {
         setCurrentUser(JSON.parse(storedUser));
-        //console.log('ccc');
       }
     } else {
       handleLogout();
@@ -61,6 +62,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     await signout();
+    navigate('/');
   };
 
   const handleMouseEnter = () => {
@@ -70,6 +72,11 @@ const Navbar = () => {
   const handleMouseLeave = () => {
     setIsDropdownVisible(false);
   };
+
+  // Hide navbar on Sign In and Sign Up pages
+  if (location.pathname === '/signin' || location.pathname === '/signup') {
+    return null;
+  }
 
   return (
     <section className={`navBarSection ${scrollDirection === 'down' ? 'hidden' : ''}`}>
@@ -109,6 +116,7 @@ const Navbar = () => {
                 <Link to="/signup" className="signup"><i className="fas fa-user-plus"></i> Sign Up</Link>
               </>
             )}
+            <ThemeToggle /> 
           </div>
         </div>
       </header>

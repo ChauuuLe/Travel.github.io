@@ -1,0 +1,67 @@
+/* PaymentModal.css */
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.tabs button {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.tabs button.active {
+    border-bottom: 2px solid black;
+}
+
+.payment-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.payment-form input,
+.payment-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.expiry-cvc {
+    display: flex;
+    justify-content: space-between;
+}
+
+.expiry-cvc div {
+    width: 30%;
+}
+
+.continue-button,
+.close-button {
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.close-button {
+    background: none;
+    color: black;
+    margin-top: 10px;
+    font-size: 16px;
+    text-decoration: underline;
+}
+
+.ReactModal__Overlay {
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.75) !important;
+}

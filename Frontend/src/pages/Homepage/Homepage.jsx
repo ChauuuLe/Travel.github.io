@@ -10,7 +10,7 @@ import hagiangImage from '../../assets/Hagiang.jpg';
 
 const HomePage = () => {
   const [price, setPrice] = useState(5000);
-  const [query, setQuery] = useState(''); 
+  const [query, setQuery] = useState('');
   const destinations = [
     {
       image: danangImage,
@@ -96,7 +96,7 @@ const HomePage = () => {
               />
             ))
           ) : (
-            <p>No destinations found.</p> 
+            <p>No destinations found.</p>
           )}
         </div>
       </div>

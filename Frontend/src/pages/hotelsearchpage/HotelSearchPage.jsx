@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../navbar/navbar';
 import SearchBar from '../../Components/searchbar/searchbarhotel';
 import Footer from '../footer/Footer';
+import videoBg from '../../assets/video.mp4';
 import './HotelSearchPage.css';
+import spain from '../../assets/spain.jpg';
+import italy from '../../assets/italy.jpg';
+import france from '../../assets/france.jpg';
+import german from '../../assets/german.jpg';
 
 const suggestions = [
     'Ho Chi Minh City',
@@ -16,68 +21,54 @@ const suggestions = [
 ];
 
 const HomeSearchPage = () => {
-    const featuredHotels = [
-        {
-            image: 'path_to_image/hotel1.jpg',
-            name: 'The Hotel Apartments in the Center of Amsterdam',
-            rating: 9.1,
-            reviews: 400,
-            location: 'Amsterdam, Netherlands',
-            price: 'VND 27,026,983'
-        },
-        {
-            image: 'path_to_image/hotel2.jpg',
-            name: 'SWEETS - Overtoomse Sluis',
-            rating: 9.0,
-            reviews: 56,
-            location: 'Amsterdam, Netherlands',
-            price: 'VND 7,978,741'
-        },
-        {
-            image: 'path_to_image/hotel3.jpg',
-            name: 'Zoku Amsterdam',
-            rating: 8.9,
-            reviews: 2789,
-            location: 'Amsterdam, Netherlands',
-            price: 'VND 9,299,264'
-        },
-        {
-            image: 'path_to_image/hotel4.jpg',
-            name: 'PREMIER SUITES PLUS Amsterdam',
-            rating: 8.8,
-            reviews: 1368,
-            location: 'Amsterdam, Netherlands',
-            price: 'VND 8,588,171'
-        }
-    ];
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.pageYOffset;
+            const target = document.querySelector('.content-section');
+
+            if (target) {
+                const targetTop = target.offsetTop;
+                const targetHeight = target.offsetHeight;
+
+                if (scrollTop > targetTop - window.innerHeight + targetHeight / 2) {
+                    setIsVisible(true);
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); 
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     const exploreDestinations = [
         {
-            image: 'path_to_image/spain.jpg',
+            image: spain,
             name: 'Spain',
             rentals: 166514
         },
         {
-            image: 'path_to_image/italy.jpg',
+            image: italy,
             name: 'Italy',
             rentals: 179454
         },
         {
-            image: 'path_to_image/france.jpg',
+            image: france,
             name: 'France',
-            rentals: 181734
+            rentals: 150123
         },
         {
-            image: 'path_to_image/greece.jpg',
-            name: 'Greece',
-            rentals: 60560
-        },
-        {
-            image: 'path_to_image/switzerland.jpg',
-            name: 'Switzerland',
-            rentals: 14211
+            image: german,
+            name: 'Germany',
+            rentals: 143256
         }
     ];
+
+
 
     return (
         <div className="homepage">
@@ -89,21 +80,7 @@ const HomeSearchPage = () => {
                     <SearchBar suggestions={suggestions} />
                 </div>
             </div>
-            <div className="content-section">
-                <h2>Homes guests love</h2>
-                <div className="featured-hotels">
-                    {featuredHotels.map((hotel, index) => (
-                        <div className="hotel-card" key={index}>
-                            <img src={hotel.image} alt={hotel.name} />
-                            <div className="hotel-info">
-                                <h3>{hotel.name}</h3>
-                                <p>{hotel.location}</p>
-                                <p>Rating: {hotel.rating} ({hotel.reviews} reviews)</p>
-                                <p>Starting from {hotel.price}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+            <div className={`content-section ${isVisible ? 'slide-in active' : 'slide-in'}`}>
                 <h2>Feel at home wherever you go</h2>
                 <div className="explore-destinations">
                     {exploreDestinations.map((destination, index) => (

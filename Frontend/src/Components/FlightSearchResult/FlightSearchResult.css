@@ -1,0 +1,250 @@
+.flight-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-left: 5px solid #007bff;
+    position: relative;
+    cursor: pointer;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out, width 0.5s ease-in-out;
+    overflow: hidden;
+    max-height: 150px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+.flight-card.expanded {
+    max-height: 600px;
+    padding: 20px;
+}
+
+.flight-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 100px;
+}
+
+.airline-logo-container {
+    flex: 1;
+}
+
+.flight-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 3;
+    align-items: center;
+    text-align: center;
+}
+
+.flight-details h3 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.flight-details span,
+.flight-details p {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.flight-route {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 10px;
+    width: 100%;
+    gap: 130px;
+}
+
+.flight-route span {
+    flex: 1;
+    text-align: center;
+    white-space: nowrap;
+    margin: 0 10px;
+}
+
+.price-info {
+    font-weight: 900;
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: right;
+}
+
+.expanded-info {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.expanded-details {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 30%;
+}
+
+.detail span.label {
+    font-size: 0.8em;
+    color: #999;
+}
+
+.price-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.price-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 45%;
+}
+
+.pay-button {
+    width: 220px;
+    height: 50px;
+    font-weight: bold;
+    border: 2px solid #007bff;
+    outline: none;
+    color: #007bff;
+    background: #ffffff;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    align-self: center;
+    margin-top: 10px;
+    max-width: 100%;
+}
+
+.pay-button:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 12px);
+    height: calc(100% + 12px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.pay-button:active {
+    color: #ffffff;
+}
+
+.pay-button:active:after {
+    background: transparent;
+}
+
+.pay-button:hover:before {
+    opacity: 1;
+}
+
+.pay-button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 400% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+.no-results {
+    text-align: center;
+    font-size: 1.5em;
+    color: red;
+}
+
+.flight-times {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
+.flight-times span {
+    font-size: 1.2em;
+    color: #333;
+}
+
+.flight-times .duration {
+    font-size: 0.9em;
+    color: #999;
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.flight-times .line {
+    width: 100px;
+    height: 2px;
+    background-color: #ccc;
+    position: relative;
+}
+
+.flight-times .line::before,
+.flight-times .line::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+}
+
+.flight-times .line::before {
+    left: -10px;
+    border-right-color: #ccc;
+}
+
+.flight-times .line::after {
+    right: -10px;
+    border-left-color: #ccc;
+}
