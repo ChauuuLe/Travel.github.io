@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
+import PaymentModal from '../PaymentModal/PaymentModal';
 import './FlightSearchResult.css';
 
 const FlightSearchResult = ({ results }) => {
     const [expandedCardIndex, setExpandedCardIndex] = useState(null);
+    const [selectedFlight, setSelectedFlight] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const cardRefs = useRef([]);
 
     const handleCardClick = (index) => {
@@ -14,6 +17,15 @@ const FlightSearchResult = ({ results }) => {
             cardRefs.current[expandedCardIndex].scrollIntoView({ behavior: 'smooth' });
         }
     }, [expandedCardIndex]);
+
+    const handlePayClick = (flight) => {
+        setSelectedFlight(flight);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
 
     if (results === 'No flights found') {
         return <div className="no-results">No flights found</div>;
@@ -86,11 +98,16 @@ const FlightSearchResult = ({ results }) => {
                                     <span className="label">Class</span>
                                 </div>
                             </div>
-                            <button className="pay-button">Pay</button>
+                            <button className="pay-button" onClick={() => handlePayClick(flight)}>Pay</button>
                         </div>
                     )}
                 </div>
             ))}
+            <PaymentModal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                flight={selectedFlight}
+            />
         </div>
     );
 };

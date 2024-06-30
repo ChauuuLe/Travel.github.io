@@ -35,7 +35,7 @@ const HomeSearchPage = () => {
         };
 
         window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Kiểm tra ban đầu khi trang được tải
+        handleScroll(); 
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
@@ -78,7 +78,7 @@ const HomeSearchPage = () => {
 
     const exploreDestinations = [
         {
-            image: 'path_to_image/spain.jpg',
+            image: 'https://unsplash.com/photos/city-scale-under-blue-sky-ChSZETOal-I',
             name: 'Spain',
             rentals: 166514
         },
@@ -88,21 +88,17 @@ const HomeSearchPage = () => {
             rentals: 179454
         },
         {
-            image: 'path_to_image/france.jpg',
+            image: 'https://unsplash.com/photos/beautiful-view-of-Paris-XYZ',
             name: 'France',
-            rentals: 181734
+            rentals: 150123
         },
         {
-            image: 'path_to_image/greece.jpg',
-            name: 'Greece',
-            rentals: 60560
-        },
-        {
-            image: 'path_to_image/switzerland.jpg',
-            name: 'Switzerland',
-            rentals: 14211
+            image: 'https://unsplash.com/photos/landscape-view-of-germany-ABC',
+            name: 'Germany',
+            rentals: 143256
         }
     ];
+
 
     return (
         <div className="homepage">

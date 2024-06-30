@@ -1,0 +1,49 @@
+.payment-method-selector {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.payment-method-selector button {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.payment-method-selector button.active {
+    border: 2px solid black;
+}
+
+.card-details label,
+.card-details input {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.card-details input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.card-error {
+    color: #9e2146;
+    margin-top: 10px;
+}
+
+button[type="submit"] {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.non-card-payment {
+    text-align: center;
+    margin: 20px 0;
+}
