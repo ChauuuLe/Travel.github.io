@@ -1,52 +1,75 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./chatList.css";
-import AddUser from "./addUser/AddUser";
+import searchIcon from "../../../../assets/search.png";
+import AddUser from "./addUser/addUser.jsx";
 
-const ChatList = () => {
+const ChatList = ({ setChatId }) => {
   const [addMode, setAddMode] = useState(false);
-  const [chats, setChats] = useState([]);
+  const [userChats, setUserChats] = useState([]);
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     const fetchChats = async () => {
       try {
-        const response = await axios.get("/api/chats", {
-          headers: { Authorization: `Bearer ${currentUser.accessToken}` },
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`http://localhost:8080/api/users/${currentUser.id}/chats`, {
+          headers: {
+            'x-access-token': token,
+          },
         });
-        setChats(response.data);
+        setUserChats(response.data);
       } catch (err) {
-        console.error("Failed to fetch chats:", err);
+        console.error('Error fetching chats', err);
       }
     };
 
-    fetchChats();
+    if (currentUser) {
+      fetchChats();
+    }
   }, [currentUser]);
+
+  const renderAvatar = (avatar) => {
+    if (avatar) {
+      return avatar;
+    }
+    else {
+      return "./assets/avatar.png";
+    }
+  };
+
+  const renderUserChats = (userChats) => (
+    userChats.map((userChat) => {
+      return (
+        <div key={userChat._id} className="item" onClick={() => setChatId(userChat.chat._id)}>
+          <img src={renderAvatar(userChat.lastMessage.sender.avatar)} alt="avatar" />
+          <div className="texts">
+            <span>{userChat.lastMessage.sender}</span>
+            <p>{userChat.lastMessage ? userChat.lastMessage.text : 'No messages yet'}</p>
+          </div>
+        </div>
+      );
+    })
+  );
 
   return (
     <div className="chatList">
       <div className="search">
         <div className="searchBar">
-          <img src="/search.png" alt="" />
+          <img src={searchIcon} alt="" />
           <input type="text" placeholder="Search" />
         </div>
         <img 
-          src={addMode ? "./minus.png" : "./plus.png"} 
-          alt="" 
+          src={addMode ? "./assets/minus.png" : "./assets/plus.png"} 
+          alt="addIcon" 
           className="add" 
           onClick={() => setAddMode((prev) => !prev)} 
         />
       </div>
-      {chats.map((chat) => (
-        <div key={chat._id} className="item">
-          <img src="./avatar.png" alt="" />
-          <div className="texts">
-            <span>{chat.sender.username}</span>
-            <p>{chat.message}</p>
-          </div>
-        </div>
-      ))}
-      {addMode && <AddUser />}
+      <div>
+        {renderUserChats(userChats)}
+      </div>
+      {addMode && <AddUser/>}
     </div>
   );
 };

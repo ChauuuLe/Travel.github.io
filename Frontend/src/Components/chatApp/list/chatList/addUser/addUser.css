@@ -61,4 +61,11 @@
             cursor: pointer;
         }
     }
+    .not-found-message {
+        color: red;
+        margin-top: 10px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+    }
 }
