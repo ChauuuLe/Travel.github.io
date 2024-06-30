@@ -5,6 +5,8 @@ const app = express();
 const path = require("path");
 const crypto = require("crypto");
 const next = require("next");
+const env = require("dotenv");
+env.config();
 
 //keys just for testing
 const key1 = "248bgturng8n54gh54g94gh95gh59gh498gher9ifjdoigdsgpoasdngiphgipghighr9igheiugheriuogheruigneriugerig";
@@ -32,8 +34,8 @@ require('./routes/chat.routes.js')(app);
 const db = require("./models/index.js");
 const Role = db.role;
 const dbConfig = require("./config/db.config.js");
-const linkToMongoDB = `mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`;
-
+const linkToMongoDB = process.env.mongoUrl;
+console.log(linkToMongoDB);
 db.mongoose.connect(linkToMongoDB, {
   //useNewUrlParser: true,
   //useUnifiedTopology: true
