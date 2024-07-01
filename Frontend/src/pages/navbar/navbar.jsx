@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import ThemeToggle from '../../Components/ThemeToggle/ThemeToggle'; // Import the ThemeToggle component
+import ThemeToggle from '../../Components/ThemeToggle/ThemeToggle';
 import "../navbar/Navbar.css";
 import Userinfo from '../userInfo/Userinfo';
 
@@ -11,7 +11,7 @@ const Navbar = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation(); // Get the current route
+  const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -73,7 +73,6 @@ const Navbar = () => {
     setIsDropdownVisible(false);
   };
 
-  // Hide navbar on Sign In and Sign Up pages
   if (location.pathname === '/signin' || location.pathname === '/signup') {
     return null;
   }
@@ -87,6 +86,7 @@ const Navbar = () => {
               <h1>The Travel.</h1>
             </Link>
           </div>
+          <ThemeToggle />
           <nav className="navBar">
             <ul className='navLists flex'>
               <li><Link to="/hotels"><i className="fas fa-hotel"></i> Hotels</Link></li>
@@ -96,9 +96,9 @@ const Navbar = () => {
               <li><Link to="/tripgroup"><i className="fas fa-route"></i> Trip Groups</Link></li>
             </ul>
           </nav>
-          <div 
-            className="nav-actions" 
-            onMouseEnter={handleMouseEnter} 
+          <div
+            className="nav-actions"
+            onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
             {currentUser ? (
@@ -116,7 +116,6 @@ const Navbar = () => {
                 <Link to="/signup" className="signup"><i className="fas fa-user-plus"></i> Sign Up</Link>
               </>
             )}
-            <ThemeToggle /> 
           </div>
         </div>
       </header>
