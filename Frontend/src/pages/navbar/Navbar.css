@@ -258,7 +258,7 @@ body.night .navBarSection {
   }
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 500px) {
   .menu-toggle {
     display: none;
   }
