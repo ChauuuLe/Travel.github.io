@@ -1,45 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import ThemeToggle from '../../Components/ThemeToggle/ThemeToggle'; // Import the ThemeToggle component
 import "../navbar/Navbar.css";
-import Userinfo from '../userInfo/Userinfo';
 
 const Navbar = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const currentUser = window.gon ? window.gon.currentUser : null; // Ensure window.gon exists
   const [scrollDirection, setScrollDirection] = useState('up');
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const navigate = useNavigate();
   const location = useLocation(); // Get the current route
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const expiresIn = localStorage.getItem('expiresIn');
-    const storedUser = localStorage.getItem('currentUser');
-
-    if (token && expiresIn && storedUser) {
-      const isExpired = Date.now() > parseInt(expiresIn, 10);
-      if (isExpired) {
-        handleLogout();
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        setScrollDirection('down');
       } else {
-        setCurrentUser(JSON.parse(storedUser));
+        setScrollDirection('up');
       }
-    } else {
-      handleLogout();
-    }
-  }, []);
+      setLastScrollY(window.scrollY);
+    };
 
-  const handleScroll = () => {
-    if (window.scrollY > lastScrollY) {
-      setScrollDirection('down');
-    } else {
-      setScrollDirection('up');
-    }
-    setLastScrollY(window.scrollY);
-  };
-
-  useEffect(() => {
     window.addEventListener('scroll', handleScroll);
 
     return () => {
@@ -51,10 +32,9 @@ const Navbar = () => {
     try {
       await axios.post('http://localhost:8080/api/auth/signout');
       localStorage.removeItem('token'); // Remove token from localStorage
-      localStorage.removeItem('expiresIn'); // Remove expiration time from localStorage
-      localStorage.removeItem('currentUser'); // Remove current user from localStorage
-      setCurrentUser(null); // Clear current user state
-      navigate("/signin"); // Navigate to sign-in page
+      if (window.gon) {
+        window.gon.currentUser = null; // Clear the current user information
+      }
     } catch (err) {
       console.error('Sign out failed', err);
     }
@@ -65,12 +45,21 @@ const Navbar = () => {
     navigate('/');
   };
 
-  const handleMouseEnter = () => {
-    setIsDropdownVisible(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsDropdownVisible(false);
+  const renderAccountAction = () => {
+    if (currentUser) {
+      return (
+        <React.Fragment>
+          <button onClick={handleLogout}>Logout</button>
+        </React.Fragment>
+      );
+    } else {
+      return (
+        <React.Fragment>
+          <Link to="/signin" className="signin"><i className="fas fa-sign-in-alt"></i> Sign In</Link>
+          <Link to="/signup" className="signup"><i className="fas fa-user-plus"></i> Sign Up</Link>
+        </React.Fragment>
+      );
+    }
   };
 
   // Hide navbar on Sign In and Sign Up pages
@@ -93,30 +82,12 @@ const Navbar = () => {
               <li><Link to="/flight"><i className="fa-solid fa-plane"></i> Flight</Link></li>
               <li><Link to="/destinations"><i className="fas fa-map-marked-alt"></i> Destinations</Link></li>
               <li><a href="http://localhost:3000"><i className="fas fa-cloud-sun"></i> Weather</a></li>
-              <li><Link to="/tripgroup"><i className="fas fa-route"></i> Trip Groups</Link></li>
+              <li><Link to="/plan-your-trip"><i className="fas fa-route"></i> Plan Your Trip</Link></li>
             </ul>
           </nav>
-          <div
-            className="nav-actions"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            {currentUser ? (
-              <div className="dropdown">
-                <Userinfo />
-                {isDropdownVisible && (
-                  <div className="dropdown-content">
-                    <button onClick={handleLogout}>Logout</button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <>
-                <Link to="/signin" className="signin"><i className="fas fa-sign-in-alt"></i> Sign In</Link>
-                <Link to="/signup" className="signup"><i className="fas fa-user-plus"></i> Sign Up</Link>
-              </>
-            )}
-            <ThemeToggle />
+          <div className="nav-actions">
+            <ThemeToggle /> {}
+            {renderAccountAction()}
           </div>
         </div>
       </header>

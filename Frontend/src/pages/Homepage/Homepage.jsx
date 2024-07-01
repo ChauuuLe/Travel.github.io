@@ -39,7 +39,6 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
-      <Navbar />
       <div className="video-section">
         <div className='overlay'></div>
         <video src={video} muted autoPlay loop type="video/mp4"></video>

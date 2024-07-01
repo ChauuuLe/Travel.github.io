@@ -149,23 +149,7 @@ body.night .navBarSection {
   flex: 1;
 }
 
-.nav-actions .signin {
-  text-decoration: none;
-  color: inherit;
-  font-size: 16px;
-  margin-left: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  height: 100%;
-  padding: 10px 20px;
-  border-radius: 4px;
-  transition: color 0.3s ease, background-color 0.3s ease;
-  border: 2px solid #007bff;
-  animation: fadeIn 1s ease-in-out;
-}
-
+.nav-actions .signin,
 .nav-actions .signup {
   text-decoration: none;
   color: inherit;

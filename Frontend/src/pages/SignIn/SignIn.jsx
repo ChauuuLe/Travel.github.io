@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import "./SignIn.css"; 
-import googleLogo from "../../assets/google.png"; 
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import "./SignIn.css";
+import googleLogo from "../../assets/google.png";
 
 const SignIn = () => {
   const [username, setUsername] = useState("");
@@ -20,7 +20,7 @@ const SignIn = () => {
   const getCurrentUser = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('/api/users/current', {
+      const response = await axios.get('http://localhost:8080/api/users/current', {
         headers: {
           'x-access-token': token,
         },
@@ -39,11 +39,11 @@ const SignIn = () => {
         username,
         password,
       });
-      const user = getCurrentUser ();
-      window.gon = window.gon || {};
-      window.gon.currentUser = user; 
-      localStorage.setItem('token', response.data.token); 
-      navigate("/"); 
+      localStorage.setItem('token', response.data.token); // Save token to localStorage
+      localStorage.setItem('expiresIn', Date.now() + 7200000); // Save expiration time (2 hours)
+      const user = await getCurrentUser(); // Fetch current user after setting the token
+      localStorage.setItem('currentUser', JSON.stringify(user)); // Save user to localStorage
+      navigate("/");
       alert("Sign in successful");
     } catch (err) {
       const errorMessage = err.response ? err.response.data.message : err.message;
