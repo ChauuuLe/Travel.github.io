@@ -14,7 +14,7 @@ const AddUser = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:8080/api/users/search?username=${username}`);
+      const response = await axios.get(`https://travel-github-io.onrender.com/api/users/search?username=${username}`);
       setFoundedUser(response.data);
       setError('');
     } catch (err) {
@@ -25,7 +25,10 @@ const AddUser = () => {
   };
 
   const renderAvatar = (avatar) => {
-    return avatar || "./assets/avatar.png";
+    if (avatar) {
+      return avatar;
+    }
+    return "./assets/avatar.png";
   };
 
   const handleAddUser = async () => {
@@ -33,7 +36,7 @@ const AddUser = () => {
       try {
         const token = localStorage.getItem('token');
         console.log("chat add");
-        await axios.post("http://localhost:8080/api/chats", {
+        await axios.post("https://travel-github-io.onrender.com/api/chats", {
           receiverId: foundedUser._id,
         }, {
           headers: {

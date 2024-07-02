@@ -10,6 +10,7 @@ const Navbar = () => {
   const [scrollDirection, setScrollDirection] = useState('up');
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -17,7 +18,7 @@ const Navbar = () => {
     const token = localStorage.getItem('token');
     const expiresIn = localStorage.getItem('expiresIn');
     const storedUser = localStorage.getItem('currentUser');
-
+    
     if (token && expiresIn && storedUser) {
       const isExpired = Date.now() > parseInt(expiresIn, 10);
       if (isExpired) {
@@ -49,7 +50,7 @@ const Navbar = () => {
 
   const signout = async () => {
     try {
-      await axios.post('http://localhost:8080/api/auth/signout');
+      await axios.post('https://travel-github-io.onrender.com/api/auth/signout');
       localStorage.removeItem('token'); // Remove token from localStorage
       localStorage.removeItem('expiresIn'); // Remove expiration time from localStorage
       localStorage.removeItem('currentUser'); // Remove current user from localStorage
@@ -63,6 +64,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     await signout();
     navigate('/');
+    //window.location.reload();
   };
 
   const handleMouseEnter = () => {
@@ -76,6 +78,10 @@ const Navbar = () => {
   if (location.pathname === '/signin' || location.pathname === '/signup') {
     return null;
   }
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <section className={`navBarSection ${scrollDirection === 'down' ? 'hidden' : ''}`}>
@@ -93,7 +99,13 @@ const Navbar = () => {
               <li><Link to="/flight"><i className="fa-solid fa-plane"></i> Flight</Link></li>
               <li><Link to="/destinations"><i className="fas fa-map-marked-alt"></i> Destinations</Link></li>
               <li><a href="http://localhost:3000"><i className="fas fa-cloud-sun"></i> Weather</a></li>
-              <li><Link to="/tripgroup"><i className="fas fa-route"></i> Trip Groups</Link></li>
+              <li><button onClick={toggleDropdown}> Plan your trips</button></li>
+              {isOpen && (
+                <div>
+                  <Link to="/tripgroup"><i className="fas fa-route"></i> Your Groups</Link>
+                  <Link to="#">New group</Link>
+                </div>
+              )}
             </ul>
           </nav>
           <div
