@@ -16,7 +16,7 @@ const Chat = ({ chatId }) => {
       const fetchChat = async () => {
         try {
           const token = localStorage.getItem('token');
-          const response = await axios.get(`http://localhost:8080/api/chats/${chatId}`, {
+          const response = await axios.get(`https://travel-github-io.onrender.com/api/chats/${chatId}`, {
             headers: {
               'x-access-token': token,
             },
@@ -63,7 +63,10 @@ const Chat = ({ chatId }) => {
   };
 
   const renderAvatar = (avatar) => {
-    return avatar || "./assets/avatar.png";
+    if (avatar) {
+      return avatar;
+    }
+    return "./assets/avatar.png";
   };
 
   const renderMessages = (messages) => (

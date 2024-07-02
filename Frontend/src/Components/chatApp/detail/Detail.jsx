@@ -14,7 +14,10 @@ const Detail = () => {
   };
 
   const renderAvatar = (avatar) => {
-    return avatar || "./assets/avatar.png";
+    if (avatar) {
+      return avatar;
+    }
+    return "./assets/avatar.png";
   };
 
   return (

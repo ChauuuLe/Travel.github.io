@@ -20,7 +20,7 @@ const SignIn = () => {
   const getCurrentUser = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8080/api/users/current', {
+      const response = await axios.get('https://travel-github-io.onrender.com/api/users/current', {
         headers: {
           'x-access-token': token,
         },
@@ -35,7 +35,7 @@ const SignIn = () => {
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/api/auth/signin", {
+      const response = await axios.post("https://travel-github-io.onrender.com/api/auth/signin", {
         username,
         password,
       });
@@ -44,6 +44,7 @@ const SignIn = () => {
       const user = await getCurrentUser(); // Fetch current user after setting the token
       localStorage.setItem('currentUser', JSON.stringify(user)); // Save user to localStorage
       navigate("/");
+      //window.location.reload();
       alert("Sign in successful");
     } catch (err) {
       const errorMessage = err.response ? err.response.data.message : err.message;

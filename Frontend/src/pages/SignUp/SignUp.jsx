@@ -21,7 +21,7 @@ const SignUp = ({ setCurrentUser }) => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/api/auth/signup", {
+      const response = await axios.post("https://travel-github-io.onrender.com/api/auth/signup", {
         username,
         email,
         password,

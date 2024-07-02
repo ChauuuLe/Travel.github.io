@@ -14,10 +14,7 @@ const Userinfo = () => {
     if (avatar) {
       return avatar;
     }
-    else {
-      console.log("cac");
-      return "./assets/avatar.png";
-    }
+    return "./assets/avatar.png";
   };
 
   return (
