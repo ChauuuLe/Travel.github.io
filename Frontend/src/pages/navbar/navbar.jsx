@@ -103,7 +103,7 @@ const Navbar = () => {
               {isOpen && (
                 <div>
                   <Link to="/tripgroup"><i className="fas fa-route"></i> Your Groups</Link>
-                  <Link to="#">New group</Link>
+                  <Link to="/creategroup">New group</Link>
                 </div>
               )}
             </ul>

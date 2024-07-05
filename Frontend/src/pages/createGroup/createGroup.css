@@ -1,0 +1,36 @@
+.pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .dots {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: gray;
+  }
+  
+  .dot.active {
+    background-color: blue;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    background-color: lightgray;
+    cursor: not-allowed;
+  }
+  
