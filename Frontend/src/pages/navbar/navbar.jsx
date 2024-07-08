@@ -83,6 +83,21 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  const renderAccountAction = () => {
+    if (currentUser) {
+      return (
+        <button onClick={handleLogout}>Logout</button>
+      );
+    } else {
+      return (
+        <>
+          <Link to="/signin" className="signin"><i className="fas fa-sign-in-alt"></i> Sign In</Link>
+          <Link to="/signup" className="signup"><i className="fas fa-user-plus"></i> Sign Up</Link>
+        </>
+      );
+    }
+  };
+
   return (
     <section className={`navBarSection ${scrollDirection === 'down' ? 'hidden' : ''}`}>
       <header className="header flex">
@@ -99,13 +114,22 @@ const Navbar = () => {
               <li><Link to="/flight"><i className="fa-solid fa-plane"></i> Flight</Link></li>
               <li><Link to="/destinations"><i className="fas fa-map-marked-alt"></i> Destinations</Link></li>
               <li><a href="http://localhost:3000"><i className="fas fa-cloud-sun"></i> Weather</a></li>
-              <li><button onClick={toggleDropdown}> Plan your trips</button></li>
-              {isOpen && (
-                <div>
-                  <Link to="/tripgroup"><i className="fas fa-route"></i> Your Groups</Link>
-                  <Link to="/creategroup">New group</Link>
-                </div>
-              )}
+              <li>
+                <a 
+                  onClick={toggleDropdown} 
+                  role="button" 
+                  tabIndex="0" 
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') toggleDropdown(); }}
+                >
+                  <i className="fas fa-route"></i> Plan Your Trip
+                </a>
+                {isOpen && (
+                  <div className="dropdown-content show">
+                    <Link to="/tripgroup">Your Groups</Link>
+                    <Link to="/creategroup">New group</Link>
+                  </div>
+                )}
+              </li>
             </ul>
           </nav>
           <div
@@ -113,21 +137,7 @@ const Navbar = () => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            {currentUser ? (
-              <div className="dropdown">
-                <Userinfo />
-                {isDropdownVisible && (
-                  <div className="dropdown-content">
-                    <button onClick={handleLogout}>Logout</button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <>
-                <Link to="/signin" className="signin"><i className="fas fa-sign-in-alt"></i> Sign In</Link>
-                <Link to="/signup" className="signup"><i className="fas fa-user-plus"></i> Sign Up</Link>
-              </>
-            )}
+            {renderAccountAction()}
           </div>
         </div>
       </header>

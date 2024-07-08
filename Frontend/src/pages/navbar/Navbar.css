@@ -112,6 +112,7 @@ body.night .navBarSection {
   overflow: hidden;
   transition: color 0.3s ease;
   animation: slideIn 1s ease-in-out;
+  
 }
 
 .navLists li a i {
@@ -120,6 +121,21 @@ body.night .navBarSection {
 
 .navLists li a:hover {
   color: #007bff;
+}
+
+.navLists li a.dropdown-content {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.navLists li a.dropdown-content.show {
+  display: block;
 }
 
 .navLists li a::after {
@@ -304,38 +320,3 @@ body.night .navBarSection {
   }
 }
 
-.dropdown {
-  display: flex;
-  align-items: center;
-}
-
-.dropdown-content {
-  display: none; /* Hidden by default */
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: white;
-  min-width: 160px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown-content button {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  width: 100%;
-  border: none;
-  background: none;
-  text-align: left;
-  cursor: pointer;
-}
-
-.dropdown-content button:hover {
-  background-color: #f1f1f1;
-}
-
-.nav-actions:hover .dropdown-content {
-  display: block; /* Show the dropdown on hover */
-}

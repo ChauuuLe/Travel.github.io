@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './findUsers.css';
+import { useNavigate } from 'react-router-dom';
 
 const FindUsers = (props) => {
   const {
@@ -8,11 +9,30 @@ const FindUsers = (props) => {
     onDataChange,
   } = props;
   
+  const [currentUser, setCurrentUser] = useState(null);
   const [username, setUsername] = useState('');
   const [foundedUser, setFoundedUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [userToAdd, setUserToAdd] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const expiresIn = localStorage.getItem('expiresIn');
+    const storedUser = localStorage.getItem('currentUser');
+    
+    if (token && expiresIn && storedUser) {
+      const isExpired = Date.now() > parseInt(expiresIn, 10);
+      if (isExpired) {
+        navigate("/signin");
+      } else {
+        setCurrentUser(JSON.parse(storedUser));
+      }
+    } else {
+      navigate("/signin");
+    }
+  }, [navigate]);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -46,7 +66,7 @@ const FindUsers = (props) => {
     if (foundedUser) {
       addUser(foundedUser);
     } else {
-      console.log('no user to add');
+      console.log('No user to add');
     }
   };
 
@@ -72,7 +92,7 @@ const FindUsers = (props) => {
 
   return (
     <div>
-      <div className="addUser">
+      <div className="findUsers">
         <form onSubmit={handleSearch}>
           <input
             type="text"
@@ -87,7 +107,14 @@ const FindUsers = (props) => {
         {userToAdd}
       </div>
       <div>
-        {data.members.map(renderUser)}
+        {data.members.map((user) => (
+          <div className='user' key={user._id}>
+            <div className="detail">
+              <img src={renderAvatar(user.avatar)} alt="User Avatar" />
+              <span>{user.username}</span>
+            </div>
+        </div>
+        ))}
       </div>
     </div>
   );

@@ -56,8 +56,8 @@ const CreateGroup = () => {
   }
 
   return (
-    <div>
-      <div>
+    <div className="create-group-container">
+      <div className="content">
         {renderCurrentPages()}
       </div>
       <div className="pagination-controls">
