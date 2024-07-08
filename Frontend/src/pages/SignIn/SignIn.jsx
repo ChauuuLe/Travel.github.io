@@ -8,6 +8,7 @@ const SignIn = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,6 +35,7 @@ const SignIn = () => {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post("https://travel-github-io.onrender.com/api/auth/signin", {
         username,
@@ -50,6 +52,7 @@ const SignIn = () => {
       const errorMessage = err.response ? err.response.data.message : err.message;
       setMessage(`Sign in failed: ${errorMessage}`);
     }
+    setLoading(false);
   };
 
   return (
