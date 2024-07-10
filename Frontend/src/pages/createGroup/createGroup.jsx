@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import FindUsers from '../../Components/findUsers/findUsers.jsx';
+import Schedule from '../../Components/schedule/schedule.jsx';
 import './createGroup.css';
 
-const pages = ['findUsers'];
+const pages = ['findUsers', 'schedule'];
 
 const CreateGroup = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const currentPageIndex = pages.indexOf(location.pathname.split('/')[2] || 'findUsers');
 
   useEffect(() => {
@@ -25,7 +26,12 @@ const CreateGroup = () => {
     listOfUsers: {
       members: [],
     },
+    selectedDates: [],
   });
+
+  useEffect(() => {
+    sessionStorage.setItem('formData', JSON.stringify(formData));
+  }, [formData]);
 
   const handleNext = () => {
     const nextPageIndex = (currentPageIndex + 1) % pages.length;
@@ -50,6 +56,15 @@ const CreateGroup = () => {
         <FindUsers 
           data={formData.listOfUsers} 
           onDataChange={(data) => handleFormDataChange('listOfUsers', data)} 
+        />
+      );
+    }
+    else if (currentPageIndex === 1) {
+      return (
+        <Schedule
+          members={formData.listOfUsers.members}
+          dates={formData.selectedDates}
+          onDataChange={(data) => handleFormDataChange('selectedDates', data)}
         />
       );
     }

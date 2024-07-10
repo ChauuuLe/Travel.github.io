@@ -8,7 +8,8 @@ import FlightSearchPage from './pages/flightsearchpage/flightSearchPage';
 import Navbar from './pages/navbar/navbar';
 import TripGroup from './pages/TripGroup/TripGroup';
 import CreateGroup from './pages/createGroup/createGroup';
-import Page1 from './Components/findUsers/findUsers'
+import Page1 from './Components/findUsers/findUsers';
+import Page2 from './Components/schedule/schedule';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/creategroup" element={<CreateGroup/>}>
           <Route index element={<Page1/>}/>
           <Route path="/creategroup/findusers" element={<Page1/>}/>
+          <Route path="/creategroup/schedule" element={<Page2/>}/>
         </Route>
         <Route path="/tripgroup" element={<TripGroup />} />
         <Route path="*" element={<Navigate to="/" />} />

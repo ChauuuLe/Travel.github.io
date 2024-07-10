@@ -7,7 +7,7 @@ import AddUser from "./addUser/addUser.jsx";
 const ChatList = ({ setChatId }) => {
   const [addMode, setAddMode] = useState(false);
   const [userChats, setUserChats] = useState([]);
-  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   useEffect(() => {
     const fetchChats = async () => {
