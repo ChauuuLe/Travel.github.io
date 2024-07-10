@@ -9,7 +9,7 @@ const pages = ['findUsers', 'schedule'];
 const CreateGroup = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const currentPageIndex = pages.indexOf(location.pathname.split('/')[2] || 'findUsers');
 
   useEffect(() => {
@@ -22,7 +22,8 @@ const CreateGroup = () => {
     return null;
   }
 
-  const [formData, setFormData] = useState({
+  const savedFormData = JSON.parse(localStorage.getItem('formData'));
+  const [formData, setFormData] = useState(savedFormData || {
     listOfUsers: {
       members: [],
     },
@@ -30,7 +31,7 @@ const CreateGroup = () => {
   });
 
   useEffect(() => {
-    sessionStorage.setItem('formData', JSON.stringify(formData));
+    localStorage.setItem('formData', JSON.stringify(formData));
   }, [formData]);
 
   const handleNext = () => {
@@ -58,8 +59,7 @@ const CreateGroup = () => {
           onDataChange={(data) => handleFormDataChange('listOfUsers', data)} 
         />
       );
-    }
-    else if (currentPageIndex === 1) {
+    } else if (currentPageIndex === 1) {
       return (
         <Schedule
           members={formData.listOfUsers.members}
@@ -68,7 +68,7 @@ const CreateGroup = () => {
         />
       );
     }
-  }
+  };
 
   return (
     <div className="create-group-container">

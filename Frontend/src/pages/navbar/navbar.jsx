@@ -51,10 +51,7 @@ const Navbar = () => {
   const signout = async () => {
     try {
       await axios.post('https://travel-github-io.onrender.com/api/auth/signout');
-      localStorage.removeItem('token'); // Remove token from localStorage
-      localStorage.removeItem('expiresIn'); // Remove expiration time from localStorage
-      localStorage.removeItem('currentUser'); // Remove current user from localStorage
-      setCurrentUser(null); // Clear current user state
+      localStorage.clear();
       navigate("/signin"); // Navigate to sign-in page
     } catch (err) {
       console.error('Sign out failed', err);

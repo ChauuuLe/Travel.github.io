@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FaCalendar } from 'react-icons/fa';
@@ -10,8 +11,20 @@ const schedule = (props) => {
     dates,
     onDataChange,
   } = props;
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const [startDate, setStartDate] = useState(new Date());
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!currentUser) {
+      navigate("/signin");
+    }
+  }, [currentUser, navigate]);
+
+  if (!currentUser) {
+    return null;
+  }
 
   const handleDateChange = (memberName, date, status) => {
     const updatedDates = dates.map((member) => {

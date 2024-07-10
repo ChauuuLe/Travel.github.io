@@ -9,7 +9,7 @@ const FindUsers = (props) => {
     onDataChange,
   } = props;
   
-  const [currentUser, setCurrentUser] = useState(null);
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const [username, setUsername] = useState('');
   const [foundedUser, setFoundedUser] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -18,21 +18,14 @@ const FindUsers = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const expiresIn = localStorage.getItem('expiresIn');
-    const storedUser = localStorage.getItem('currentUser');
-    
-    if (token && expiresIn && storedUser) {
-      const isExpired = Date.now() > parseInt(expiresIn, 10);
-      if (isExpired) {
-        navigate("/signin");
-      } else {
-        setCurrentUser(JSON.parse(storedUser));
-      }
-    } else {
+    if (!currentUser) {
       navigate("/signin");
     }
-  }, [navigate]);
+  }, [currentUser, navigate]);
+
+  if (!currentUser) {
+    return null;
+  }
 
   const handleSearch = async (e) => {
     e.preventDefault();
