@@ -112,7 +112,7 @@ body.night .navBarSection {
   overflow: hidden;
   transition: color 0.3s ease;
   animation: slideIn 1s ease-in-out;
-  
+
 }
 
 .navLists li a i {
@@ -124,7 +124,8 @@ body.night .navBarSection {
 }
 
 .navLists li a.dropdown-content {
-  display: none; /* Hidden by default */
+  display: none;
+  /* Hidden by default */
   position: absolute;
   top: 100%;
   right: 0;
