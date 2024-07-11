@@ -1,12 +1,22 @@
 .create-group-container {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Full viewport height */
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 60px);
+  margin-top: 60px;
+  font-family: Arial, sans-serif;
 }
 
 .content {
   flex: 1;
-  padding: 20px; /* Adjust padding as needed */
+  padding: 20px;
+  background: #fff;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 .pagination-controls {
@@ -14,7 +24,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background: #f8f8f8; /* Adjust background as needed */
+  background: #f8f8f8;
+  border-top: 1px solid #e0e0e0;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 8px 8px;
 }
 
 .dots {
@@ -27,6 +42,7 @@
   height: 10px;
   border-radius: 50%;
   background-color: gray;
+  transition: background-color 0.3s ease;
 }
 
 .dot.active {
@@ -34,14 +50,172 @@
 }
 
 button {
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:disabled {
+  background-color: lightgray;
+  cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
+  background-color: #2980b9;
+}
+
+button:not(:disabled):active {
+  background-color: #1f6391;
+}
+
+@media (max-width: 600px) {
+  .pagination-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dots {
+    justify-content: center;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+/* Table Styles */
+.table-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 20px auto;
+  overflow-x: auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  background: #fff;
+  padding: 20px;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1em;
+  font-family: 'Arial', sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.styled-table thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+  transition: background-color 0.3s ease;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:nth-of-type(odd) {
+  background-color: #ffffff;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
+}
+
+.styled-table td.highlight {
+  color: #009879;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .table-container {
+    padding: 10px;
+  }
+
+  .styled-table th,
+  .styled-table td {
+    padding: 8px 10px;
+  }
+}
+
+/* Search Form Styles */
+.search-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.search-form {
+  width: 100%;
+}
+
+.search-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.search-form input:focus {
+  border-color: #009879;
+  outline: none;
+}
+
+.search-form button {
+  width: 100%;
   padding: 10px;
   background-color: #3498db;
   color: white;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-button:disabled {
+.search-form button:not(:disabled):hover {
+  background-color: #2980b9;
+}
+
+.search-form button:not(:disabled):active {
+  background-color: #1f6391;
+}
+
+.search-form button:disabled {
   background-color: lightgray;
   cursor: not-allowed;
 }

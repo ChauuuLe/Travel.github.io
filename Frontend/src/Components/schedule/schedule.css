@@ -1,37 +1,139 @@
+/* schedule.css */
+
 .select-dates-container {
-  margin: 20px;
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 1400px;
+  /* Tăng chiều rộng tối đa */
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.select-dates-container:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-th, td {
-  padding: 10px;
+table:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 15px;
+  /* Tăng padding để rộng hơn */
   text-align: center;
-  border: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  transition: background-color 0.3s ease;
 }
 
-select {
-  padding: 5px;
+th {
+  background-color: #3498db;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+td {
+  background-color: #f8f9fa;
+}
+
+td:first-child {
+  padding-left: 40px;
+  /* Tăng padding trái cho tên */
+  padding-right: 40px;
+  /* Tăng padding phải cho tên */
+}
+
+td select {
+  padding: 10px;
+  /* Tăng padding để rộng hơn */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #ffffff;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+td select:hover {
+  background-color: #eef;
+  border-color: #3498db;
 }
 
 .add-date-button {
   display: flex;
   align-items: center;
-  padding: 10px 20px;
+  padding: 15px 30px;
+  /* Tăng padding để rộng hơn */
   margin-bottom: 20px;
   background-color: #3498db;
   color: white;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .add-date-button:hover {
   background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .add-date-button svg {
-  margin-right: 5px;
+  margin-right: 10px;
+  /* Tăng khoảng cách để rộng hơn */
+  transition: transform 0.3s ease;
+}
+
+.add-date-button:hover svg {
+  transform: rotate(20deg);
+}
+
+.react-datepicker {
+  margin-top: 20px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .select-dates-container {
+    padding: 10px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    /* Điều chỉnh padding cho màn hình nhỏ hơn */
+  }
+
+  .add-date-button {
+    padding: 10px 20px;
+    /* Điều chỉnh padding cho màn hình nhỏ hơn */
+  }
 }

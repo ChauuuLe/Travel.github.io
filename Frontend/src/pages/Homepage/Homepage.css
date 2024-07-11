@@ -8,6 +8,12 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+html,
+body {
+    height: 100%;
+    overflow: auto;
+}
+
 .homepage {
     width: 100%;
     position: relative;
@@ -15,7 +21,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    overflow: hidden;
+    overflow: auto;
+    /* Sửa từ hidden sang auto */
     animation: fadeIn 1s ease-in-out;
 }
 
