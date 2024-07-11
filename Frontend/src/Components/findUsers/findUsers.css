@@ -1,3 +1,6 @@
+/* findUsers.css */
+
+/* General Styles */
 .findUsers {
     display: flex;
     flex-direction: column;
@@ -8,8 +11,13 @@
     border-radius: 8px;
     width: 100%;
     max-width: 1000px;
-    /* Increased width */
     margin: 20px auto;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.night .findUsers {
+    background: #333;
+    color: #fff;
 }
 
 .findUsers form {
@@ -21,22 +29,25 @@
 
 .findUsers label {
     width: 80%;
-    /* Match the width of the input */
     text-align: left;
-    /* Align the text to the left */
     margin-bottom: 10px;
-    /* Add space below the label */
+    color: inherit;
+    /* Ensure color changes in night mode */
 }
 
 .findUsers input {
     width: 80%;
     padding: 12px;
-    /* Increased padding */
     margin-bottom: 12px;
-    /* Increased margin */
     border: 1px solid #ddd;
     border-radius: 5px;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+body.night .findUsers input {
+    background: #444;
+    color: #fff;
+    border-color: #555;
 }
 
 .findUsers input:focus {
@@ -46,9 +57,7 @@
 
 .findUsers button {
     width: 80%;
-    /* Increased width */
     padding: 12px;
-    /* Increased padding */
     background-color: #3498db;
     color: white;
     border: none;
@@ -57,14 +66,26 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+body.night .findUsers button {
+    background-color: #444;
+    color: #fff;
+}
+
 .findUsers button:not(:disabled):hover {
     background-color: #2980b9;
     transform: scale(1.05);
-    /* Hover effect */
+}
+
+body.night .findUsers button:not(:disabled):hover {
+    background-color: #555;
 }
 
 .findUsers button:not(:disabled):active {
     background-color: #1f6391;
+}
+
+body.night .findUsers button:not(:disabled):active {
+    background-color: #333;
 }
 
 .findUsers button:disabled {
@@ -72,21 +93,27 @@
     cursor: not-allowed;
 }
 
+body.night .findUsers button:disabled {
+    background-color: #777;
+}
+
 .user-list-container {
     width: 100%;
     max-width: 1000px;
-    /* Increased width */
     max-height: 400px;
-    /* Increased height */
     overflow-y: auto;
-    /* Enable vertical scrolling */
     margin-top: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 10px;
-    /* Added padding */
     background-color: #fafafa;
-    /* Added background color */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body.night .user-list-container {
+    background-color: #444;
+    color: #fff;
+    border-color: #555;
 }
 
 .user {
@@ -99,11 +126,20 @@
     background: #f8f8f8;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.night .user {
+    background: #555;
+    color: #fff;
 }
 
 .user:hover {
     background-color: #e0e0e0;
+}
+
+body.night .user:hover {
+    background-color: #666;
 }
 
 .user .detail {
@@ -113,16 +149,13 @@
 
 .user img {
     width: 50px;
-    /* Increased size */
     height: 50px;
-    /* Increased size */
     border-radius: 50%;
     margin-right: 10px;
 }
 
 .user button {
     padding: 8px 12px;
-    /* Increased padding */
     background-color: #009879;
     color: white;
     border: none;
@@ -131,15 +164,32 @@
     transition: background-color 0.3s ease;
 }
 
+body.night .user button {
+    background-color: #666;
+    color: #fff;
+}
+
 .user button:not(:disabled):hover {
     background-color: #007b63;
+}
+
+body.night .user button:not(:disabled):hover {
+    background-color: #555;
 }
 
 .user button:not(:disabled):active {
     background-color: #005a45;
 }
 
+body.night .user button:not(:disabled):active {
+    background-color: #333;
+}
+
 .not-found-message {
     color: red;
     margin-top: 10px;
+}
+
+body.night .not-found-message {
+    color: #ff6666;
 }

@@ -4,15 +4,14 @@
   margin: 20px auto;
   padding: 20px;
   max-width: 1400px;
-  /* Tăng chiều rộng tối đa */
   background-color: #f8f9fa;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
 }
 
-.select-dates-container:hover {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+body.night .select-dates-container {
+  background-color: black;
 }
 
 table {
@@ -23,7 +22,12 @@ table {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+body.night table {
+  background-color: #000;
+  /* Màu nền cho chế độ ban đêm */
 }
 
 table:hover {
@@ -34,10 +38,17 @@ table:hover {
 th,
 td {
   padding: 15px;
-  /* Tăng padding để rộng hơn */
   text-align: center;
   border-bottom: 1px solid #ccc;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.night th,
+body.night td {
+  background-color: #333;
+  /* Màu nền cho ô bảng khi ở chế độ ban đêm */
+  color: #fff;
+  /* Màu chữ cho chế độ ban đêm */
 }
 
 th {
@@ -46,24 +57,38 @@ th {
   font-weight: bold;
 }
 
+body.night th {
+  background-color: #444;
+  /* Màu nền cho tiêu đề bảng khi ở chế độ ban đêm */
+}
+
 td {
   background-color: #f8f9fa;
 }
 
+body.night td {
+  background-color: #222;
+  /* Màu nền cho ô bảng khi ở chế độ ban đêm */
+}
+
 td:first-child {
   padding-left: 40px;
-  /* Tăng padding trái cho tên */
   padding-right: 40px;
-  /* Tăng padding phải cho tên */
 }
 
 td select {
   padding: 10px;
-  /* Tăng padding để rộng hơn */
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #ffffff;
   transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body.night td select {
+  background-color: #444;
+  /* Màu nền cho ô chọn khi ở chế độ ban đêm */
+  color: #fff;
+  /* Màu chữ cho chế độ ban đêm */
 }
 
 td select:hover {
@@ -71,11 +96,15 @@ td select:hover {
   border-color: #3498db;
 }
 
+body.night td select:hover {
+  background-color: #555;
+  /* Màu nền cho ô chọn khi hover ở chế độ ban đêm */
+}
+
 .add-date-button {
   display: flex;
   align-items: center;
   padding: 15px 30px;
-  /* Tăng padding để rộng hơn */
   margin-bottom: 20px;
   background-color: #3498db;
   color: white;
@@ -93,7 +122,6 @@ td select:hover {
 
 .add-date-button svg {
   margin-right: 10px;
-  /* Tăng khoảng cách để rộng hơn */
   transition: transform 0.3s ease;
 }
 
@@ -129,11 +157,9 @@ td select:hover {
   th,
   td {
     padding: 8px;
-    /* Điều chỉnh padding cho màn hình nhỏ hơn */
   }
 
   .add-date-button {
     padding: 10px 20px;
-    /* Điều chỉnh padding cho màn hình nhỏ hơn */
   }
 }
