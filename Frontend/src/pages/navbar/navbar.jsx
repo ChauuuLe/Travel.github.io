@@ -49,7 +49,7 @@ const Navbar = () => {
 
   const signout = async () => {
     try {
-      await axios.post('https://travel-github-io.onrender.com/api/auth/signout');
+      await axios.post(`${import.meta.env.backend}/api/auth/signout`);
       localStorage.clear();
       navigate("/signin"); // Navigate to sign-in page
     } catch (err) {

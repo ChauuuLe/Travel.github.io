@@ -21,7 +21,7 @@ const SignIn = () => {
   const getCurrentUser = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('https://travel-github-io.onrender.com/api/users/current', {
+      const response = await axios.get(`${import.meta.env.backend}/api/users/current`, {
         headers: {
           'x-access-token': token,
         },
@@ -37,7 +37,7 @@ const SignIn = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post("https://travel-github-io.onrender.com/api/auth/signin", {
+      const response = await axios.post(`${import.meta.env.backend}/api/auth/signin`, {
         username,
         password,
       });

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./SignUp.css"; 
-import googleLogo from "../../assets/google.png"; 
+import googleLogo from "../../assets/google.png";
 
 const SignUp = ({ setCurrentUser }) => {
   const [username, setUsername] = useState("");
@@ -21,7 +21,7 @@ const SignUp = ({ setCurrentUser }) => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://travel-github-io.onrender.com/api/auth/signup", {
+      const response = await axios.post(`${import.meta.env.backend}/api/auth/signup`, {
         username,
         email,
         password,

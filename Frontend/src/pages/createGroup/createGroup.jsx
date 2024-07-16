@@ -56,7 +56,7 @@ const CreateGroup = () => {
   const handleSubmit = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch("https://travel-github-io.onrender.com/api/chats", {
+      const response = await fetch(`${import.meta.env.backend}/api/chats`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
