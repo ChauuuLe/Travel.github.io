@@ -56,7 +56,7 @@ const CreateGroup = () => {
   const handleSubmit = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`${import.meta.env.backend}/api/chats`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND}/api/chats`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

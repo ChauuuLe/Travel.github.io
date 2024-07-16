@@ -21,7 +21,7 @@ const SignUp = ({ setCurrentUser }) => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.backend}/api/auth/signup`, {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND}/api/auth/signup`, {
         username,
         email,
         password,

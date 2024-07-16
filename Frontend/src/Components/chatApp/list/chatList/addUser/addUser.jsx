@@ -14,7 +14,7 @@ const AddUser = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.get(`${import.meta.env.backend}/api/users/search?username=${username}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND}/api/users/search?username=${username}`);
       setFoundedUser(response.data);
       setError('');
     } catch (err) {
@@ -36,7 +36,7 @@ const AddUser = () => {
       try {
         const token = localStorage.getItem('token');
         console.log("chat add");
-        await axios.post(`${import.meta.env.backend}/api/chats`, {
+        await axios.post(`${import.meta.env.VITE_BACKEND}/api/chats`, {
           receiverId: foundedUser._id,
         }, {
           headers: {
