@@ -2,10 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const CookieSession = require("cookie-session");
 const app = express();
-const path = require("path");
-const crypto = require("crypto");
-const next = require("next");
 const env = require("dotenv");
+console.log(env);
 env.config();
 
 //keys just for testing
