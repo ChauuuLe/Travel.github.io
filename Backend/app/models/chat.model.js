@@ -13,6 +13,35 @@ const Chat = mongoose.model(
         ref: "Message"
       }
     ],
+    members: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+      }
+    ],
+    updatedAt: { 
+      type: Date, 
+      default: Date.now 
+    },
+    isSeen: { 
+      type: Boolean, 
+      default: false 
+    },
+    lastMessage: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Message",
+      default: null,
+    },
+    dates: {
+      type: Map,
+      of: String,
+      default: {}
+    },
+    groupName: {
+      type: String,
+      required: true
+    }
   })
 );
 

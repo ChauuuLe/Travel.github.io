@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import FindUsers from '../../Components/findUsers/findUsers.jsx';
 import Schedule from '../../Components/schedule/schedule.jsx';
+import GroupName from '../../Components/groupName/groupName.jsx';
 import './createGroup.css';
 
-const pages = ['findUsers', 'schedule'];
+const pages = ['findusers', 'schedule', 'groupname'];
 
 const CreateGroup = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  const currentPageIndex = pages.indexOf(location.pathname.split('/')[2] || 'findUsers');
+  const currentPageIndex = pages.indexOf(location.pathname.split('/')[2] || 'findusers');
 
   useEffect(() => {
     if (!currentUser) {
@@ -28,6 +29,7 @@ const CreateGroup = () => {
       members: [],
     },
     selectedDates: [],
+    groupName: '',
   });
 
   useEffect(() => {
@@ -51,6 +53,28 @@ const CreateGroup = () => {
     });
   };
 
+  const handleSubmit = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch("https://travel-github-io.onrender.com/api/chats", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        console.log('Successful created');
+        navigate('/tripgroup');
+      } else {
+        console.error('Failed to create group');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   const renderCurrentPages = () => {
     if (currentPageIndex === 0) {
       return (
@@ -65,6 +89,14 @@ const CreateGroup = () => {
           members={formData.listOfUsers.members}
           dates={formData.selectedDates}
           onDataChange={(data) => handleFormDataChange('selectedDates', data)}
+        />
+      );
+    } else if (currentPageIndex === 2) {
+      return (
+        <GroupName
+          data={formData.groupName}
+          onDataChange={(data) => handleFormDataChange('groupName', data)}
+          onSubmit={handleSubmit}
         />
       );
     }

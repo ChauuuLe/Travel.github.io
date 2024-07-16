@@ -39,7 +39,7 @@ const ChatList = ({ setChatId }) => {
   const renderUserChats = (userChats) => (
     userChats.map((userChat) => {
       return (
-        <div key={userChat._id} className="item" onClick={() => setChatId(userChat.chat._id)}>
+        <div key={userChat._id} className="item" onClick={() => setChatId(userChat._id)}>
           <img src={renderAvatar(userChat.lastMessage.sender.avatar)} alt="avatar" />
           <div className="texts">
             <span>{userChat.lastMessage.sender}</span>

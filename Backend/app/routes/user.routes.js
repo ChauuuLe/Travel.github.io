@@ -19,9 +19,4 @@ module.exports = function(app) {
     "/api/users/current",
     controller.getCurrentUser
   );
-  app.get(
-    "/api/users/:userId/chats", 
-    [authJwt.verifyToken], 
-    controller.getUserChats
-  );
 };
