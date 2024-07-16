@@ -13,7 +13,7 @@ const ChatList = ({ setChatId }) => {
     const fetchChats = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`${import.meta.env.backend}/api/users/${currentUser.id}/chats`, {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND}/api/users/${currentUser.id}/chats`, {
           headers: {
             'x-access-token': token,
           },

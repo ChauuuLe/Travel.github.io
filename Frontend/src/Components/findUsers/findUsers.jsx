@@ -31,7 +31,7 @@ const FindUsers = (props) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.get(`${import.meta.env.backend}/api/users/search?username=${username}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND}/api/users/search?username=${username}`);
       setFoundedUser(response.data);
       setError('');
     } catch (err) {

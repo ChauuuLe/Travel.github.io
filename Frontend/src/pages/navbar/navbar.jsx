@@ -49,15 +49,16 @@ const Navbar = () => {
 
   const signout = async () => {
     try {
-      await axios.post(`${import.meta.env.backend}/api/auth/signout`);
+      await axios.post(`${import.meta.env.VITE_BACKEND}/api/auth/signout`);
       localStorage.clear();
-      navigate("/signin"); // Navigate to sign-in page
+      navigate("/signin");
     } catch (err) {
       console.error('Sign out failed', err);
     }
   };
 
   const handleLogout = async () => {
+    console.log(import.meta.env.VITE_BACKEND);
     await signout();
     navigate('/');
   };
