@@ -1,71 +1,195 @@
-.findUsers{
-    width: max-content;
-    height: max-content;
-    padding: 30px;
-    background-color: rgba(17, 25, 40, 0.5);
-    border-radius: 10px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+/* findUsers.css */
 
-    form{
-        display: flex;
-        gap: 20px;
+/* General Styles */
+.findUsers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-        input{
-            padding: 20px;
-            border-radius: 10px;
-            border: none;
-            outline: none;
-        }
+body.night .findUsers {
+    background: #333;
+    color: #fff;
+}
 
-        button{
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #1a73e8;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-    }
+.findUsers form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.findUsers label {
+    width: 80%;
+    text-align: left;
+    margin-bottom: 10px;
+    color: inherit;
+    /* Ensure color changes in night mode */
+}
 
-    .user{
-        margin-top: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+.findUsers input {
+    width: 80%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
 
+body.night .findUsers input {
+    background: #444;
+    color: #fff;
+    border-color: #555;
+}
 
-        .detail{
-            display: flex;
-            align-items: center;
-            gap: 20px;
+.findUsers input:focus {
+    border-color: #009879;
+    outline: none;
+}
 
-            img{
-                width: 50px;
-                height: 50px;border-radius: 50%;
-                object-fit: cover;
-            }
-        }
+.findUsers button {
+    width: 80%;
+    padding: 12px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
 
-        button{
-            padding: 10px;
-            border-radius: 10px;
-            background-color: #1a73e8;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-    }
-    .not-found-message {
-        color: red;
-        margin-top: 10px;
-        text-align: center;
-        font-size: 14px;
-        font-weight: bold;
-    }
+body.night .findUsers button {
+    background-color: #444;
+    color: #fff;
+}
+
+.findUsers button:not(:disabled):hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+body.night .findUsers button:not(:disabled):hover {
+    background-color: #555;
+}
+
+.findUsers button:not(:disabled):active {
+    background-color: #1f6391;
+}
+
+body.night .findUsers button:not(:disabled):active {
+    background-color: #333;
+}
+
+.findUsers button:disabled {
+    background-color: lightgray;
+    cursor: not-allowed;
+}
+
+body.night .findUsers button:disabled {
+    background-color: #777;
+}
+
+.user-list-container {
+    width: 100%;
+    max-width: 1000px;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fafafa;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body.night .user-list-container {
+    background-color: #444;
+    color: #fff;
+    border-color: #555;
+}
+
+.user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #f8f8f8;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.night .user {
+    background: #555;
+    color: #fff;
+}
+
+.user:hover {
+    background-color: #e0e0e0;
+}
+
+body.night .user:hover {
+    background-color: #666;
+}
+
+.user .detail {
+    display: flex;
+    align-items: center;
+}
+
+.user img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user button {
+    padding: 8px 12px;
+    background-color: #009879;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+body.night .user button {
+    background-color: #666;
+    color: #fff;
+}
+
+.user button:not(:disabled):hover {
+    background-color: #007b63;
+}
+
+body.night .user button:not(:disabled):hover {
+    background-color: #555;
+}
+
+.user button:not(:disabled):active {
+    background-color: #005a45;
+}
+
+body.night .user button:not(:disabled):active {
+    background-color: #333;
+}
+
+.not-found-message {
+    color: red;
+    margin-top: 10px;
+}
+
+body.night .not-found-message {
+    color: #ff6666;
 }

@@ -16,7 +16,7 @@ const User = mongoose.model(
     userChats: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "UserChat"
+        ref: "Chat"
       }
     ],
     roles: [

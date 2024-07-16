@@ -7,7 +7,7 @@ import AddUser from "./addUser/addUser.jsx";
 const ChatList = ({ setChatId }) => {
   const [addMode, setAddMode] = useState(false);
   const [userChats, setUserChats] = useState([]);
-  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   useEffect(() => {
     const fetchChats = async () => {
@@ -39,7 +39,7 @@ const ChatList = ({ setChatId }) => {
   const renderUserChats = (userChats) => (
     userChats.map((userChat) => {
       return (
-        <div key={userChat._id} className="item" onClick={() => setChatId(userChat.chat._id)}>
+        <div key={userChat._id} className="item" onClick={() => setChatId(userChat._id)}>
           <img src={renderAvatar(userChat.lastMessage.sender.avatar)} alt="avatar" />
           <div className="texts">
             <span>{userChat.lastMessage.sender}</span>

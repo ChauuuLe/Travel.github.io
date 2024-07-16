@@ -23,8 +23,7 @@ const TripGroup = () => {
   return (
     <div className="container">
       <List setChatId={setChatId} /> 
-      <Chat chatId={chatId} /> 
-      <Detail />
+      <Chat chatId={chatId} />
     </div>
   );
 };

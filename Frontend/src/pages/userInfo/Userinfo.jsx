@@ -1,7 +1,7 @@
 import "./userInfo.css";
 import { useState, useEffect } from "react";
 const Userinfo = () => {
-  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const [userAvatar, setUserAvatar] = useState("");
   const [username, setUsername] = useState("");
 

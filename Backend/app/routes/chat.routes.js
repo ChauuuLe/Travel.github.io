@@ -1,5 +1,5 @@
-const { authJwt } = require("../middlewares/index.js");
-const controller = require("../controllers/chat.controller.js");
+const { authJwt } = require("../middlewares");
+const controller = require("../controllers/chat.controller");
 
 module.exports = function(app) {
   app.use(function(req, res, next) {
@@ -10,6 +10,6 @@ module.exports = function(app) {
     next();
   });
 
-  //app.get("/api/chats/:chatId", [authJwt.verifyToken], controller.getChatInfo);
-  app.post("/api/chats", [authJwt.verifyToken], controller.createChat);
+  app.get("/api/chats/:chatId", [authJwt.verifyToken], controller.getChatInfo);
+  app.post("/api/chats", [authJwt.verifyToken], controller.createGroup);
 };

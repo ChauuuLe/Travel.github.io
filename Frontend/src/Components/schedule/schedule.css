@@ -1,0 +1,165 @@
+/* schedule.css */
+
+.select-dates-container {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 1400px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+body.night .select-dates-container {
+  background-color: black;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+body.night table {
+  background-color: #000;
+  /* Màu nền cho chế độ ban đêm */
+}
+
+table:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.night th,
+body.night td {
+  background-color: #333;
+  /* Màu nền cho ô bảng khi ở chế độ ban đêm */
+  color: #fff;
+  /* Màu chữ cho chế độ ban đêm */
+}
+
+th {
+  background-color: #3498db;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+body.night th {
+  background-color: #444;
+  /* Màu nền cho tiêu đề bảng khi ở chế độ ban đêm */
+}
+
+td {
+  background-color: #f8f9fa;
+}
+
+body.night td {
+  background-color: #222;
+  /* Màu nền cho ô bảng khi ở chế độ ban đêm */
+}
+
+td:first-child {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+td select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #ffffff;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body.night td select {
+  background-color: #444;
+  /* Màu nền cho ô chọn khi ở chế độ ban đêm */
+  color: #fff;
+  /* Màu chữ cho chế độ ban đêm */
+}
+
+td select:hover {
+  background-color: #eef;
+  border-color: #3498db;
+}
+
+body.night td select:hover {
+  background-color: #555;
+  /* Màu nền cho ô chọn khi hover ở chế độ ban đêm */
+}
+
+.add-date-button {
+  display: flex;
+  align-items: center;
+  padding: 15px 30px;
+  margin-bottom: 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-date-button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-date-button svg {
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.add-date-button:hover svg {
+  transform: rotate(20deg);
+}
+
+.react-datepicker {
+  margin-top: 20px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .select-dates-container {
+    padding: 10px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+  }
+
+  .add-date-button {
+    padding: 10px 20px;
+  }
+}
