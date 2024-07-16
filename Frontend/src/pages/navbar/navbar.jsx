@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import ThemeToggle from '../../Components/ThemeToggle/ThemeToggle';
+import ProfileMenu from '../../Components/ProfileMenu/ProfileMenu';
 import "../navbar/Navbar.css";
-import Userinfo from '../userInfo/Userinfo';
 
 const Navbar = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [scrollDirection, setScrollDirection] = useState('up');
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,7 +17,7 @@ const Navbar = () => {
     const token = localStorage.getItem('token');
     const expiresIn = localStorage.getItem('expiresIn');
     const storedUser = localStorage.getItem('currentUser');
-    
+
     if (token && expiresIn && storedUser) {
       const isExpired = Date.now() > parseInt(expiresIn, 10);
       if (isExpired) {
@@ -61,15 +60,6 @@ const Navbar = () => {
   const handleLogout = async () => {
     await signout();
     navigate('/');
-    //window.location.reload();
-  };
-
-  const handleMouseEnter = () => {
-    setIsDropdownVisible(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsDropdownVisible(false);
   };
 
   if (location.pathname === '/signin' || location.pathname === '/signup') {
@@ -80,20 +70,16 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  const renderAccountAction = () => {
-    if (currentUser) {
-      return (
-        <button onClick={handleLogout}>Logout</button>
-      );
-    } else {
-      return (
-        <>
-          <Link to="/signin" className="signin"><i className="fas fa-sign-in-alt"></i> Sign In</Link>
-          <Link to="/signup" className="signup"><i className="fas fa-user-plus"></i> Sign Up</Link>
-        </>
-      );
-    }
-  };
+  const renderAuthenticatedNavbar = () => (
+    <ProfileMenu currentUser={currentUser} handleLogout={handleLogout} />
+  );
+
+  const renderUnauthenticatedNavbar = () => (
+    <div className="auth-links">
+      <Link to="/signin" className="signin"><i className="fas fa-sign-in-alt"></i> Sign In</Link>
+      <Link to="/signup" className="signup"><i className="fas fa-user-plus"></i> Sign Up</Link>
+    </div>
+  );
 
   return (
     <section className={`navBarSection ${scrollDirection === 'down' ? 'hidden' : ''}`}>
@@ -112,10 +98,10 @@ const Navbar = () => {
               <li><Link to="/destinations"><i className="fas fa-map-marked-alt"></i> Destinations</Link></li>
               <li><a href="http://localhost:3000"><i className="fas fa-cloud-sun"></i> Weather</a></li>
               <li>
-                <a 
-                  onClick={toggleDropdown} 
-                  role="button" 
-                  tabIndex="0" 
+                <a
+                  onClick={toggleDropdown}
+                  role="button"
+                  tabIndex="0"
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') toggleDropdown(); }}
                 >
                   <i className="fas fa-route"></i> Plan Your Trip
@@ -129,12 +115,8 @@ const Navbar = () => {
               </li>
             </ul>
           </nav>
-          <div
-            className="nav-actions"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            {renderAccountAction()}
+          <div className="nav-actions">
+            {currentUser ? renderAuthenticatedNavbar() : renderUnauthenticatedNavbar()}
           </div>
         </div>
       </header>
