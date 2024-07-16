@@ -1,0 +1,76 @@
+{
+    "id": "1",
+    "name": "Paris",
+    "image": "/assets/paris.jpg",
+    "description": "A short, enticing description of Paris.",
+    "bestTimeToVisit": "Spring and Fall",
+    "weather": "Mild and pleasant",
+    "currency": "Euro",
+    "language": "French",
+    "attractions": [
+        {
+            "id": "1",
+            "name": "Eiffel Tower",
+            "image": "/assets/eiffel-tower.jpg",
+            "description": "A brief description of the Eiffel Tower."
+        },
+        {
+            "id": "2",
+            "name": "Louvre Museum",
+            "image": "/assets/louvre-museum.jpg",
+            "description": "A brief description of the Louvre Museum."
+        }
+    ],
+    "activities": {
+        "adventure": "Hot air balloon rides, Seine river cruises",
+        "cultural": "Museum visits, local tours",
+        "food": "French cuisine, cafes",
+        "shopping": "Champs-Élysées, local markets"
+    },
+    "accommodations": [
+        {
+            "id": "1",
+            "name": "Hotel Paris",
+            "image": "/assets/hotel-paris.jpg",
+            "description": "A brief description of Hotel Paris.",
+            "bookingLink": "http://example.com/booking-link1"
+        },
+        {
+            "id": "2",
+            "name": "Luxury Inn",
+            "image": "/assets/luxury-inn.jpg",
+            "description": "A brief description of Luxury Inn.",
+            "bookingLink": "http://example.com/booking-link2"
+        }
+    ],
+    "travelTips": {
+        "gettingThere": "Information on flights, trains, and buses",
+        "localTransportation": "Information on public transport, taxis, bike rentals",
+        "safety": "Important safety information",
+        "culturalEtiquette": "Tips on local customs and etiquette"
+    },
+    "userContent": {
+        "travelStories": [
+            {
+                "id": "1",
+                "content": "Amazing experience in Paris!",
+                "author": "Traveler A"
+            },
+            {
+                "id": "2",
+                "content": "Loved the food and culture!",
+                "author": "Traveler B"
+            }
+        ]
+    },
+    "deals": {
+        "activities": "Special deals on tours and attractions",
+        "dining": "Promotions at local restaurants",
+        "accommodations": "Discounted rates for hotels"
+    },
+    "contactSupport": {
+        "liveChat": "Chat with us",
+        "faq": "FAQ link",
+        "emergencyContacts": "List of emergency numbers"
+    }
+}
