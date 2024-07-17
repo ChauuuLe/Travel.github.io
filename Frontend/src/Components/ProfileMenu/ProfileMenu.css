@@ -5,25 +5,33 @@
 }
 
 .avatar {
-    width: 40px;
-    height: 40px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     cursor: pointer;
 }
 
 .profile-dropdown {
     position: absolute;
-    top: 60px;
+    top: 100%;
     right: 0;
     background-color: white;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: flex-start;
-    width: 150px;
+    width: 200px;
     border-radius: 8px;
     overflow: hidden;
+    margin-top: 10px;
+    /* Adjust margin to fine-tune the dropdown position */
+}
+
+.profile-menu:hover .profile-dropdown,
+.profile-menu:focus-within .profile-dropdown {
+    display: flex;
+    /* Show dropdown on hover or focus */
 }
 
 .profile-dropdown button {
@@ -40,4 +48,16 @@
 
 .profile-dropdown button:hover {
     background-color: #e3dede5c;
+}
+
+/* Optional: Add media queries for responsiveness */
+@media (max-width: 768px) {
+    .avatar {
+        width: 80px;
+        height: 80px;
+    }
+
+    .profile-dropdown {
+        width: 150px;
+    }
 }

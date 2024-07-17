@@ -1,13 +1,13 @@
 const db = require("../models/index.js");
 const User = db.user;
-const authJwt = require("../middlewares/authJWT.js"); 
+const authJwt = require("../middlewares/authJwt.js");
 
 exports.allAccess = (req, res) => {
   res.status(200).send("Public Content.");
 };
 
 exports.userBoard = async (req, res) => {
-  const isVerified = authJwt.verifyToken(req, res, () => {});
+  const isVerified = authJwt.verifyToken(req, res, () => { });
   if (!isVerified) {
     return res.status(401).send({ message: "Unauthorized!" });
   }
@@ -15,12 +15,12 @@ exports.userBoard = async (req, res) => {
 };
 
 exports.adminBoard = async (req, res) => {
-  const isVerified = authJwt.verifyToken(req, res, () => {});
+  const isVerified = authJwt.verifyToken(req, res, () => { });
   if (!isVerified) {
     return res.status(401).send({ message: "Unauthorized!" });
   }
 
-  const isAdmin = await authJwt.isAdmin(req, res, () => {});
+  const isAdmin = await authJwt.isAdmin(req, res, () => { });
   if (!isAdmin) {
     return res.status(403).send({ message: "Require Admin Role!" });
   }
@@ -29,12 +29,12 @@ exports.adminBoard = async (req, res) => {
 };
 
 exports.moderatorBoard = async (req, res) => {
-  const isVerified = authJwt.verifyToken(req, res, () => {});
+  const isVerified = authJwt.verifyToken(req, res, () => { });
   if (!isVerified) {
     return res.status(401).send({ message: "Unauthorized!" });
   }
 
-  const isModerator = await authJwt.isModerator(req, res, () => {});
+  const isModerator = await authJwt.isModerator(req, res, () => { });
   if (!isModerator) {
     return res.status(403).send({ message: "Require Moderator Role!" });
   }
@@ -43,7 +43,7 @@ exports.moderatorBoard = async (req, res) => {
 };
 
 exports.searchUsers = async (req, res) => {
-  const searchTerm = req.query.username; // Correctly match the query parameter
+  const searchTerm = req.query.username;
   try {
     const user = await User.findOne({ username: { $regex: searchTerm, $options: "i" } });
     if (!user) {
@@ -56,7 +56,7 @@ exports.searchUsers = async (req, res) => {
 };
 
 exports.getCurrentUser = async (req, res) => {
-  const isVerified = authJwt.verifyToken(req, res, () => {});
+  const isVerified = authJwt.verifyToken(req, res, () => { });
   if (!isVerified) {
     return res.status(401).send({ message: "Unauthorized!" });
   }
