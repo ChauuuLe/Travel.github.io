@@ -56,11 +56,6 @@ exports.searchUsers = async (req, res) => {
 };
 
 exports.getCurrentUser = async (req, res) => {
-  const isVerified = authJwt.verifyToken(req, res, () => {});
-  if (!isVerified) {
-    return res.status(401).send({ message: "Unauthorized!" });
-  }
-
   try {
     const user = await User.findById(req.userId)
       .populate("roles", "-__v")

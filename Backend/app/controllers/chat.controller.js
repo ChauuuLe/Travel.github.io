@@ -1,21 +1,33 @@
 const db = require("../models");
 const Chat = db.chat;
 const User = db.user;
+const Date = db.date;
 
 exports.createGroup = async (req, res) => {
   try {
+    console.log('asdasd');
     const { listOfUsers, selectedDates, groupName } = req.body;
+    const memberIds = listOfUsers.members.map(member => member._id);
+    const calendar = selectedDates.map((obj) => {
+      const date = Date.create({
+        username: obj.username,
+        dates: obj.dates
+      });
+      return date._id;
+    });
+    console.log('ccacccacacacasc');
+    console.log(memberIds);
+    console.log(calendar);
+    console.log(groupName);
 
     const chat = new Chat({
-      members: listOfUsers.members.map(member => member._id),
-      dates: selectedDates,
-      groupName: groupName
+      members: memberIds,
+      calendar: calendar,
+      groupName: groupName.groupName
     });
 
     await chat.save();
 
-    // Update each user's userChats array
-    const memberIds = listOfUsers.members.map(member => member._id);
     await User.updateMany(
       { _id: { $in: memberIds } },
       { $push: { userChats: chat._id } }
@@ -23,6 +35,7 @@ exports.createGroup = async (req, res) => {
 
     res.status(201).json(chat);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };

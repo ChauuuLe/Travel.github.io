@@ -26,7 +26,7 @@ const CreateGroup = () => {
   const savedFormData = JSON.parse(localStorage.getItem('formData'));
   const [formData, setFormData] = useState(savedFormData || {
     listOfUsers: {
-      members: [],
+      members: [currentUser.username],
     },
     selectedDates: [],
     groupName: '',
@@ -54,6 +54,7 @@ const CreateGroup = () => {
   };
 
   const handleSubmit = async () => {
+    console.log('hello');
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(`${import.meta.env.VITE_BACKEND}/api/chats`, {
@@ -64,14 +65,15 @@ const CreateGroup = () => {
         },
         body: JSON.stringify(formData),
       });
+      console.log('debug');
       if (response.ok) {
         console.log('Successful created');
         navigate('/tripgroup');
       } else {
-        console.error('Failed to create group');
+        console.log('Failed to create group');
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.log('Error:', error);
     }
   };
 

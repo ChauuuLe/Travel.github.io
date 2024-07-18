@@ -4,47 +4,59 @@ const db = require("../models/index.js");
 const User = db.user;
 const Role = db.role;
 
-const verifyToken = async (req) => {
+const verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"] || req.session.token;
 
   if (!token) {
-    return false;
+    return res.status(403).send({ message: "No token provided!" });
   }
 
-  try {
-    const decoded = jwt.verify(token, config.secret);
+  jwt.verify(token, config.secret, (err, decoded) => {
+    if (err) {
+      return res.status(401).send({ message: "Unauthorized!" });
+    }
     req.userId = decoded.id;
-    return true;
-  } catch (err) {
-    return false;
-  }
+    next();
+  });
 };
 
-const isAdmin = async (req) => {
+const isAdmin = async (req, res, next) => {
   try {
     const user = await User.findById(req.userId).exec();
     if (!user) {
-      return false;
+      return res.status(404).send({ message: "User not found!" });
     }
 
     const roles = await Role.find({ _id: { $in: user.roles } }).exec();
-    return roles.some(role => role.name === "admin");
+    const isAdmin = roles.some(role => role.name === "admin");
+
+    if (!isAdmin) {
+      return res.status(403).send({ message: "Require Admin Role!" });
+    }
+
+    next();
   } catch (err) {
-    return false;
+    return res.status(500).send({ message: err.message });
   }
 };
 
-const isModerator = async (req) => {
+const isModerator = async (req, res, next) => {
   try {
     const user = await User.findById(req.userId).exec();
     if (!user) {
-      return false;
+      return res.status(404).send({ message: "User not found!" });
     }
 
     const roles = await Role.find({ _id: { $in: user.roles } }).exec();
-    return roles.some(role => role.name === "moderator");
+    const isModerator = roles.some(role => role.name === "moderator");
+
+    if (!isModerator) {
+      return res.status(403).send({ message: "Require Moderator Role!" });
+    }
+
+    next();
   } catch (err) {
-    return false;
+    return res.status(500).send({ message: err.message });
   }
 };
 
