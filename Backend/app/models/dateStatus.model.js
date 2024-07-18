@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const Date = mongoose.model(
-  "Date",
+const DateStatus = mongoose.model(
+  "DateStatus",
   new mongoose.Schema({  
     username: { 
       type: String, 
@@ -15,4 +15,4 @@ const Date = mongoose.model(
   })
 );
 
-module.exports = Date;
+module.exports = DateStatus;

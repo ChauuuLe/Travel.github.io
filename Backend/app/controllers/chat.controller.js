@@ -1,24 +1,26 @@
 const db = require("../models");
 const Chat = db.chat;
 const User = db.user;
-const Date = db.date;
+const DateStatus = db.dateStatus;
 
 exports.createGroup = async (req, res) => {
   try {
-    console.log('asdasd');
     const { listOfUsers, selectedDates, groupName } = req.body;
+    console.log('Request Body:', req.body);
+
     const memberIds = listOfUsers.members.map(member => member._id);
-    const calendar = selectedDates.map((obj) => {
-      const date = Date.create({
+    console.log('Member IDs:', memberIds);
+
+    const calendar = await Promise.all(selectedDates.map(async (obj) => {
+      const dateStatus = new DateStatus({
         username: obj.username,
         dates: obj.dates
       });
-      return date._id;
-    });
-    console.log('ccacccacacacasc');
-    console.log(memberIds);
-    console.log(calendar);
-    console.log(groupName);
+      await dateStatus.save();
+      return dateStatus._id.toString();
+    }));
+
+    console.log('Calendar:', calendar);
 
     const chat = new Chat({
       members: memberIds,
@@ -27,6 +29,7 @@ exports.createGroup = async (req, res) => {
     });
 
     await chat.save();
+    console.log('Chat Saved:', chat);
 
     await User.updateMany(
       { _id: { $in: memberIds } },
@@ -35,10 +38,11 @@ exports.createGroup = async (req, res) => {
 
     res.status(201).json(chat);
   } catch (error) {
-    console.log(error);
+    console.error('Error:', error);
     res.status(500).json({ message: error.message });
   }
 };
+
 
 exports.getChatInfo = async (req, res) => {
   try {

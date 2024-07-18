@@ -37,7 +37,7 @@ const Chat = mongoose.model(
     calendar: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Date",
+        ref: "DateStatus",
       }  
     ],
     groupName: {

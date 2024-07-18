@@ -8,7 +8,7 @@ db.mongoose = mongoose;
 db.user = require("./user.model.js");
 db.role = require("./role.model.js");
 db.chat = require("./chat.model.js");
-db.date = require("./date.model.js");
+db.dateStatus = require("./dateStatus.model.js");
 db.ROLES = ["user", "admin", "moderator"];
 
 module.exports = db;
