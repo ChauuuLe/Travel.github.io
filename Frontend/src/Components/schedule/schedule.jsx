@@ -6,11 +6,16 @@ import { FaCalendar } from 'react-icons/fa';
 import './schedule.css';
 
 const Schedule = (props) => {
-  const { members, dates, onDataChange } = props;
+  const {
+    members,
+    selectedDates,
+    dates,
+    onDataChangeDates,
+    onDataChangeSelectedDates,
+  } = props;
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const [startDate, setStartDate] = useState(new Date());
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
-  const [dateKeys, setDateKeys] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,61 +24,48 @@ const Schedule = (props) => {
     }
   }, [currentUser, navigate]);
 
-  useEffect(() => {
-    if (dates && dates.length > 0) {
-      const newDateKeys = [...new Set(dates.flatMap(member => Object.keys(member.dates)))];
-      setDateKeys(newDateKeys);
-    }
-  }, [dates]);
-
   if (!currentUser) {
     return null;
   }
 
   const handleDateChange = (memberName, date, status) => {
-    const updatedDates = dates.map((member) => {
-      if (member.username === memberName) {
-        return {
-          ...member,
-          dates: {
-            ...member.dates,
-            [date]: status,
-          },
-        };
+    const updatedDates = {
+      ...selectedDates,
+      [memberName]: {
+        ...selectedDates[memberName],
+        [date]: status,
       }
-      return member;
-    });
-
-    onDataChange(updatedDates);
+    };
+    onDataChangeSelectedDates(updatedDates);
   };
 
   const addNewDate = (date) => {
     const newDateKey = date.toISOString().split('T')[0];
-    console.log("Adding new date:", newDateKey);
-    const updatedDates = members.map((member) => {
-      return {
-        ...member,
-        dates: {
-          ...member.dates,
+    onDataChangeDates([...dates, newDateKey]);
+    const updatedDates = Object.fromEntries(
+      Object.entries(selectedDates).map(([memberName, dates]) => [
+        memberName,
+        {
+          ...dates,
           [newDateKey]: 'unknown',
-        },
-      };
-    });
-
-    console.log("Updated dates:", updatedDates);
-    onDataChange(updatedDates);
+        }
+      ])
+    );
+    onDataChangeSelectedDates(updatedDates);
     setIsDatePickerOpen(false);
   };
 
-  const renderTable = () => {
-    console.log("Date keys:", dateKeys);
+  const renderStatus = (username, date) => {
+    return selectedDates[username]?.[date] || 'unknown';
+  };
 
+  const renderTable = () => {
     return (
       <table>
         <thead>
           <tr>
             <th>Name</th>
-            {dateKeys.map((date) => (
+            {dates.map((date) => (
               <th key={date}>{date}</th>
             ))}
           </tr>
@@ -82,10 +74,10 @@ const Schedule = (props) => {
           {members.map((member) => (
             <tr key={member._id}>
               <td>{member.username}</td>
-              {dateKeys.map((date) => (
+              {dates.map((date) => (
                 <td key={date}>
                   <select
-                    value={dates.find((d) => d.username === member.username)?.dates[date] || 'unknown'}
+                    value={renderStatus(member.username, date)}
                     onChange={(e) => handleDateChange(member.username, date, e.target.value)}
                   >
                     <option value="yes">✔️</option>

@@ -25,10 +25,11 @@ const CreateGroup = () => {
 
   const savedFormData = JSON.parse(localStorage.getItem('formData'));
   const [formData, setFormData] = useState(savedFormData || {
-    listOfUsers: {
-      members: [currentUser.username],
+    members: [currentUser],
+    dates: [],
+    selectedDates: {
+      [currentUser.username]: {}
     },
-    selectedDates: [],
     groupName: '',
   });
 
@@ -47,14 +48,28 @@ const CreateGroup = () => {
   };
 
   const handleFormDataChange = (page, data) => {
-    setFormData({
-      ...formData,
+    setFormData(prevFormData => ({
+      ...prevFormData,
       [page]: data,
-    });
+    }));
+  };
+
+  const getCurrentUser = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND}/api/users/current`, {
+        headers: {
+          'x-access-token': token,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching current user', error);
+      throw error;
+    }
   };
 
   const handleSubmit = async () => {
-    console.log('hello');
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(`${import.meta.env.VITE_BACKEND}/api/chats`, {
@@ -65,9 +80,10 @@ const CreateGroup = () => {
         },
         body: JSON.stringify(formData),
       });
-      console.log('debug');
       if (response.ok) {
-        console.log('Successful created');
+        localStorage.removeItem('formData');
+        const user = await getCurrentUser();
+        localStorage.setItem('currentUser', JSON.stringify(user));
         navigate('/tripgroup');
       } else {
         console.log('Failed to create group');
@@ -81,16 +97,19 @@ const CreateGroup = () => {
     if (currentPageIndex === 0) {
       return (
         <FindUsers 
-          data={formData.listOfUsers} 
-          onDataChange={(data) => handleFormDataChange('listOfUsers', data)} 
+          data={formData} 
+          onDataChangeMember={(data) => handleFormDataChange('members', data)}
+          onDataChangeSelectedDates={(data) => handleFormDataChange('selectedDates', data)}
         />
       );
     } else if (currentPageIndex === 1) {
       return (
         <Schedule
-          members={formData.listOfUsers.members}
-          dates={formData.selectedDates}
-          onDataChange={(data) => handleFormDataChange('selectedDates', data)}
+          members={formData.members}
+          selectedDates={formData.selectedDates}
+          dates={formData.dates}
+          onDataChangeDates={(data) => handleFormDataChange('dates', data)}
+          onDataChangeSelectedDates={(data) => handleFormDataChange('selectedDates', data)}
         />
       );
     } else if (currentPageIndex === 2) {

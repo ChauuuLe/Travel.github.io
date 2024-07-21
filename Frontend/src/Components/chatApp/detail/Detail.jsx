@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./detail.css";
 
 const Detail = () => {
@@ -8,7 +9,17 @@ const Detail = () => {
     sharedPhotos: false,
     sharedFiles: false
   });
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const [currentUser, setCurrentUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+    setCurrentUser(user);
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [navigate]);
+
   const toggleSection = (section) => {
     setIsOpen(prev => ({ ...prev, [section]: !prev[section] }));
   };

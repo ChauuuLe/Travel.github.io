@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { calendar } = require(".");
 
 const Chat = mongoose.model(
   "Chat",
@@ -36,8 +35,9 @@ const Chat = mongoose.model(
     },
     calendar: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "DateStatus",
+        type: Map,
+        of: String,
+        default: {}
       }  
     ],
     groupName: {
