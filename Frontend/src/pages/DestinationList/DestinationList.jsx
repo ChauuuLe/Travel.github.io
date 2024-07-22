@@ -27,7 +27,6 @@ const DestinationList = () => {
                 things_to_do: 2910,
                 region: "Europe"
             }
-            // Add more destinations as needed...
         ]
     };
 

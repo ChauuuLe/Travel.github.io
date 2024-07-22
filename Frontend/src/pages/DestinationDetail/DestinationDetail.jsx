@@ -61,7 +61,8 @@ const DestinationDetail = () => {
     }, [id]);
 
     const handleExploreMore = () => {
-        const bookingUrl = `https://www.booking.com/attractions/searchresults.html?dest_id=${encodeURIComponent(destination.name)}&dest_type=city`;
+        const destinationName = destination.name.toLowerCase().replace(/\s+/g, '-');
+        const bookingUrl = `https://www.booking.com/attractions/searchresults/${destination.region.toLowerCase().replace(/\s+/g, '-')}/${destinationName}.en-gb.html`;
         window.open(bookingUrl, '_blank');
     };
 
