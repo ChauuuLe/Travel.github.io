@@ -45,25 +45,9 @@ exports.moderatorBoard = async (req, res) => {
 exports.searchUsers = async (req, res) => {
   const searchTerm = req.query.username; // Correctly match the query parameter
   try {
-    const user = await User.findOne({ username: { $regex: searchTerm, $options: "i" } });
-    if (!user) {
-      return res.status(404).send({ message: "User not found" });
-    }
-    res.status(200).send(user);
-  } catch (err) {
-    res.status(500).send({ message: err.message });
-  }
-};
-
-exports.getCurrentUser = async (req, res) => {
-  const isVerified = authJwt.verifyToken(req, res, () => {});
-  if (!isVerified) {
-    return res.status(401).send({ message: "Unauthorized!" });
-  }
-
-  try {
-    const user = await User.findById(req.userId)
+    const user = await User.findOne({ username: { $regex: searchTerm, $options: "i" } })
       .populate("roles", "-__v")
+      .populate("userChats", "groupName lastMessage")
       .exec();
 
     if (!user) {
@@ -71,13 +55,44 @@ exports.getCurrentUser = async (req, res) => {
     }
 
     res.status(200).send({
-      id: user._id,
+      _id: user._id,
       username: user.username,
       email: user.email,
       roles: user.roles.map(role => role.name),
       avatar: user.avatar,
-      blocked: user.blocked,
-      userChats: user.userChats,
+      userChats: user.userChats.map(chat => ({
+        _id: chat._id,
+        groupName: chat.groupName,
+        lastMessage: chat.lastMessage
+      }))
+    });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+exports.getCurrentUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId)
+      .populate("roles", "-__v")
+      .populate("userChats", "groupName lastMessage")
+      .exec();
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found!" });
+    }
+
+    res.status(200).send({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      roles: user.roles.map(role => role.name),
+      avatar: user.avatar,
+      userChats: user.userChats.map(chat => ({
+        _id: chat._id,
+        groupName: chat.groupName,
+        lastMessage: chat.lastMessage
+      }))
     });
   } catch (err) {
     res.status(500).send({ message: err.message });

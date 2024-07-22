@@ -4,18 +4,23 @@ const User = db.user;
 
 exports.createGroup = async (req, res) => {
   try {
-    const { listOfUsers, selectedDates, groupName } = req.body;
+    const { members, selectedDates, groupName } = req.body;
+    console.log('Request Body:', req.body);
+
+    const memberIds = members.map(member => member._id);
+    console.log('Member IDs:', memberIds);
+
+    console.log('Calendar:', selectedDates);
 
     const chat = new Chat({
-      members: listOfUsers.members.map(member => member._id),
-      dates: selectedDates,
-      groupName: groupName
+      members: memberIds,
+      calendar: selectedDates,
+      groupName: groupName.groupName
     });
 
     await chat.save();
+    console.log('Chat Saved:', chat);
 
-    // Update each user's userChats array
-    const memberIds = listOfUsers.members.map(member => member._id);
     await User.updateMany(
       { _id: { $in: memberIds } },
       { $push: { userChats: chat._id } }
@@ -23,9 +28,11 @@ exports.createGroup = async (req, res) => {
 
     res.status(201).json(chat);
   } catch (error) {
+    console.error('Error:', error);
     res.status(500).json({ message: error.message });
   }
 };
+
 
 exports.getChatInfo = async (req, res) => {
   try {
@@ -45,8 +52,10 @@ exports.getChatInfo = async (req, res) => {
       return res.status(404).send({ message: "Chat not found!" });
     }
 
+    console.log(`chat: ${chat}`);
     res.status(200).send(chat);
   } catch (err) {
+    console.log(err);
     res.status(500).send({ message: err.message });
   }
 };

@@ -1,15 +1,27 @@
 const express = require("express");
 const cors = require("cors");
 const CookieSession = require("cookie-session");
+const http = require("http");
+const socketIo = require("socket.io");
 const app = express();
 const env = require("dotenv");
-console.log(env);
 env.config();
 
-//keys just for testing
+// Create server
+const server = http.createServer(app);
+const io = socketIo(server, {
+  cors: {
+    origin: `${process.env.frontEndDomain}`, // Replace with your frontend domain
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "x-access-token"],
+  },
+});
+
+// Keys just for testing
 const key1 = "248bgturng8n54gh54g94gh95gh59gh498gher9ifjdoigdsgpoasdngiphgipghighr9igheiugheriuogheruigneriugerig";
 const key2 = "sduoygberufnisdnfndvdfnvjisrngijnfdsigniuenrgin3498tgerhfusdgasdokfbabgodsfoisdnnosdfn";
 const key3 = "rfewsdvcnxhjkw4923e32merfdvucxinjk345345et4rvdxicnkergdsvxcngcewsdfjvcxsdzfsdfgdfgdf";
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -22,14 +34,15 @@ app.use(CookieSession({
   maxAge: 2 * 60 * 60 * 1000, // 2 hours
 }));
 
-// route
+// Routes
 require('./routes/auth.routes.js')(app);
 require('./routes/user.routes.js')(app);
 require('./routes/chat.routes.js')(app);
-//require('./routes/userChat.routes.js')(app);
+require('./routes/message.routes.js')(app);
 
 // DB
 const db = require("./models/index.js");
+const Chat = db.chat;
 const Role = db.role;
 const dbConfig = require("./config/db.config.js");
 const linkToMongoDB = process.env.mongoUrl;
@@ -46,7 +59,6 @@ db.mongoose.connect(linkToMongoDB, {
     console.error("Connection error", err);
     process.exit();
   });
-
 
 async function initial() {
   try {
@@ -67,10 +79,35 @@ async function initial() {
   }
 }
 
-  // Port
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`http://localhost:${PORT}`);
+// Socket.IO logic
+io.on('connection', (socket) => {
+  console.log('New client connected');
+
+  socket.on('joinChat', (chatId) => {
+    socket.join(chatId);
+    console.log(`Client joined chat ${chatId}`);
+  });
+
+  socket.on('sendMessage', async ({ chatId, message }) => {
+    try {
+      const chat = await Chat.findById(chatId).populate('messages');
+      chat.messages.push(message);
+      chat.lastMessage = message;
+      await chat.save();
+
+      io.to(chatId).emit('message', message);
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
 });
 
-
+// Port
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, () => {
+  console.log(`http://localhost:${PORT}`);
+});

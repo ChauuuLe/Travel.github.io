@@ -6,15 +6,15 @@ import { useNavigate } from 'react-router-dom';
 const FindUsers = (props) => {
   const {
     data,
-    onDataChange,
+    onDataChangeMember,
+    onDataChangeSelectedDates,
   } = props;
-  
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const [username, setUsername] = useState('');
   const [foundedUser, setFoundedUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [userToAdd, setUserToAdd] = useState(null);
+  const [userToAdd, setUserToAdd] = useState(null); // Initialize userToAdd here
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,24 +42,24 @@ const FindUsers = (props) => {
   };
 
   const renderAvatar = (avatar) => {
-    if (avatar) {
-      return avatar;
-    }
-    return "./assets/avatar.png";
+    return avatar ? avatar : "./assets/avatar.png";
   };
 
   const addUser = (newUser) => {
-    onDataChange({
-      ...data,
-      members: [...data.members, newUser]
+    onDataChangeMember([...data.members, newUser]);
+    const dateStatusMap = data.dates.reduce((acc, date) => {
+      acc[date] = 'unknown';
+      return acc;
+    }, {});
+    onDataChangeSelectedDates({
+      ...data.selectedDates,
+      [newUser.username]: dateStatusMap,
     });
   };
 
   const handleAddUser = () => {
     if (foundedUser) {
       addUser(foundedUser);
-    } else {
-      console.log('No user to add');
     }
   };
 
@@ -106,7 +106,7 @@ const FindUsers = (props) => {
               <img src={renderAvatar(user.avatar)} alt="User Avatar" />
               <span>{user.username}</span>
             </div>
-        </div>
+          </div>
         ))}
       </div>
     </div>

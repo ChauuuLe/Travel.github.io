@@ -1,50 +1,64 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 import "./chatList.css";
 import searchIcon from "../../../../assets/search.png";
 import AddUser from "./addUser/addUser.jsx";
 
 const ChatList = ({ setChatId }) => {
+  const navigate = useNavigate();
   const [addMode, setAddMode] = useState(false);
   const [userChats, setUserChats] = useState([]);
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    const fetchChats = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND}/api/users/${currentUser.id}/chats`, {
-          headers: {
-            'x-access-token': token,
-          },
-        });
-        setUserChats(response.data);
-      } catch (err) {
-        console.error('Error fetching chats', err);
-      }
-    };
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+    setCurrentUser(user);
+    if (!user) {
+      navigate("/signin");
+    }
+  }, [navigate]);
+  console.log(currentUser);
 
-    if (currentUser) {
-      fetchChats();
+  useEffect(() => {
+    if (currentUser && currentUser.userChats) {
+      setUserChats(currentUser.userChats);
     }
   }, [currentUser]);
 
-  const renderAvatar = (avatar) => {
-    if (avatar) {
-      return avatar;
+  const renderAvatarLastMessage = (lastMessage) => {
+    if (lastMessage) {
+      if (lastMessage.sender.avatar) {
+        return avatar;
+      }
+      return "./assets/avatar.png";
     }
     return "./assets/avatar.png";
   };
+  
+  const renderLastMessage = (lastMessage) => {
+    if (lastMessage) {
+      <div className="texts">
+          <span>{lastMessage.sender.username}</span>
+          <p>{lastMessage ? lastMessage.text : 'No messages yet'}</p>
+      </div>
+    }
+    return (
+      <div className="texts">
+          <p>{'No messages yet'}</p>
+      </div>
+    );
+  }
 
   const renderUserChats = (userChats) => (
     userChats.map((userChat) => {
       return (
         <div key={userChat._id} className="item" onClick={() => setChatId(userChat._id)}>
-          <img src={renderAvatar(userChat.lastMessage.sender.avatar)} alt="avatar" />
           <div className="texts">
-            <span>{userChat.lastMessage.sender}</span>
-            <p>{userChat.lastMessage ? userChat.lastMessage.text : 'No messages yet'}</p>
+            <p>{userChat.groupName}</p>
           </div>
+          <img src={renderAvatarLastMessage(userChat.lastMessage)} alt="avatar" />
+          {renderLastMessage(userChat.lastMessage)}
         </div>
       );
     })

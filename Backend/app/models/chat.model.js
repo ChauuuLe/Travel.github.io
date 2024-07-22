@@ -33,11 +33,13 @@ const Chat = mongoose.model(
       ref: "Message",
       default: null,
     },
-    dates: {
-      type: Map,
-      of: String,
-      default: {}
-    },
+    calendar: [
+      {
+        type: Map,
+        of: String,
+        default: {}
+      }  
+    ],
     groupName: {
       type: String,
       required: true

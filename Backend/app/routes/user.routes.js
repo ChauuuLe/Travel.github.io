@@ -17,6 +17,7 @@ module.exports = function(app) {
 
   app.get(
     "/api/users/current",
+    [authJwt.verifyToken],
     controller.getCurrentUser
   );
 };
