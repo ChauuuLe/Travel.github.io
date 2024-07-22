@@ -1,0 +1,71 @@
+    .tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .tabs button {
+        padding: 10px 20px;
+        margin: 0 10px;
+        border: none;
+        background-color: #f0f0f0;
+        cursor: pointer;
+        color: black;
+    }
+
+    .tabs button.active {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .destinations-list {
+        padding: 20px;
+        color: black;
+    }
+
+    .destinations-list input[type="text"] {
+        display: block;
+        margin: 20px auto;
+        padding: 10px;
+        width: 80%;
+        max-width: 600px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        color: black;
+    }
+
+    .destination-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .destination-card {
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+        text-align: center;
+        transition: transform 0.2s;
+        color: black;
+    }
+
+    .destination-card:hover {
+        transform: scale(1.05);
+    }
+
+    .destination-card img {
+        width: 100%;
+        height: auto;
+    }
+
+    .destination-card h3 {
+        margin: 10px 0;
+        color: black;
+    }
+
+    .destination-card p {
+        margin: 0 0 10px 0;
+        color: black;
+    }
