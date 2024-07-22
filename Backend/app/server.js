@@ -1,17 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const CookieSession = require("cookie-session");
-const app = express();
-const path = require("path");
-const crypto = require("crypto");
-const next = require("next");
 const env = require("dotenv");
+const app = express();
 env.config();
 
-//keys just for testing
+// keys just for testing
 const key1 = "248bgturng8n54gh54g94gh95gh59gh498gher9ifjdoigdsgpoasdngiphgipghighr9igheiugheriuogheruigneriugerig";
 const key2 = "sduoygberufnisdnfndvdfnvjisrngijnfdsigniuenrgin3498tgerhfusdgasdokfbabgodsfoisdnnosdfn";
 const key3 = "rfewsdvcnxhjkw4923e32merfdvucxinjk345345et4rvdxicnkergdsvxcngcewsdfjvcxsdzfsdfgdfgdf";
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -24,11 +22,11 @@ app.use(CookieSession({
   maxAge: 2 * 60 * 60 * 1000, // 2 hours
 }));
 
-// route
+// Routes
 require('./routes/auth.routes.js')(app);
 require('./routes/user.routes.js')(app);
 require('./routes/chat.routes.js')(app);
-//require('./routes/userChat.routes.js')(app);
+require('./routes/destination.routes.js')(app); // Add this line
 
 // DB
 const db = require("./models/index.js");
@@ -37,8 +35,8 @@ const dbConfig = require("./config/db.config.js");
 const linkToMongoDB = process.env.mongoUrl;
 console.log(linkToMongoDB);
 db.mongoose.connect(linkToMongoDB, {
-  //useNewUrlParser: true,
-  //useUnifiedTopology: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 })
   .then(() => {
     console.log("Successfully connect to MongoDB.");
@@ -48,7 +46,6 @@ db.mongoose.connect(linkToMongoDB, {
     console.error("Connection error", err);
     process.exit();
   });
-
 
 async function initial() {
   try {
@@ -69,10 +66,8 @@ async function initial() {
   }
 }
 
-  // Port
+// Port
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
 });
-
-

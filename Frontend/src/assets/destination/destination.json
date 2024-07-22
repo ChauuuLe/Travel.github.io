@@ -1,0 +1,44 @@
+{
+    "destinations": [
+        {
+            "id": "1",
+            "name": "Paris",
+            "description": "The capital city of France.",
+            "image": "/images/paris.jpg",
+            "region": "Europe",
+            "activities": [
+                {
+                    "id": "a1",
+                    "name": "Eiffel Tower Tour",
+                    "cost": 25
+                },
+                {
+                    "id": "a2",
+                    "name": "Louvre Museum Visit",
+                    "cost": 15
+                }
+            ],
+            "averageCost": 20
+        },
+        {
+            "id": "2",
+            "name": "New York",
+            "description": "The largest city in the USA.",
+            "image": "/images/new_york.jpg",
+            "region": "North America",
+            "activities": [
+                {
+                    "id": "a1",
+                    "name": "Statue of Liberty Tour",
+                    "cost": 18
+                },
+                {
+                    "id": "a2",
+                    "name": "Central Park Visit",
+                    "cost": 0
+                }
+            ],
+            "averageCost": 9
+        }
+    ]
+}

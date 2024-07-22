@@ -1,0 +1,68 @@
+.destination-detail {
+    padding: 20px;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+.destination-detail button {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.destination-detail button:hover {
+    background-color: #0056b3;
+}
+
+.destination-detail img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.destination-detail h1 {
+    color: #007bff;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.destination-detail h2 {
+    color: #007bff;
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.destination-detail p {
+    color: #555;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.destination-detail ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.destination-detail li {
+    color: #555;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.destination-detail li::before {
+    content: "•";
+    color: #007bff;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
