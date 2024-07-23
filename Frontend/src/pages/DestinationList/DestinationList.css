@@ -1,71 +1,180 @@
-    .tabs {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
+/* Existing CSS */
 
-    .tabs button {
-        padding: 10px 20px;
-        margin: 0 10px;
-        border: none;
-        background-color: #f0f0f0;
-        cursor: pointer;
-        color: black;
-    }
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 4em;
+    color: #007bff;
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 10px 0;
+    z-index: 1000;
+}
 
-    .tabs button.active {
-        background-color: #007bff;
-        color: white;
-    }
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
 
-    .destinations-list {
-        padding: 20px;
-        color: black;
-    }
+.tabs button {
+    padding: 12px 24px;
+    margin: 0 10px;
+    border: none;
+    background-color: #e0faf3;
+    cursor: pointer;
+    color: #0000e9;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: bold;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
 
-    .destinations-list input[type="text"] {
-        display: block;
-        margin: 20px auto;
-        padding: 10px;
-        width: 80%;
-        max-width: 600px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        color: black;
-    }
+.tabs button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: #007bff;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
 
-    .destination-cards {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-    }
+.tabs button:hover::before {
+    left: 0;
+}
 
-    .destination-card {
-        width: 200px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        overflow: hidden;
-        text-align: center;
-        transition: transform 0.2s;
-        color: black;
-    }
+.tabs button:hover {
+    color: white;
+}
 
-    .destination-card:hover {
-        transform: scale(1.05);
-    }
+.tabs button.active::before {
+    left: 0;
+    background-color: #0011ff;
+}
 
-    .destination-card img {
-        width: 100%;
-        height: auto;
-    }
+.tabs button.active {
+    color: white;
+    /* Added to make text white when active */
+}
 
-    .destination-card h3 {
-        margin: 10px 0;
-        color: black;
-    }
+.destinations-list {
+    padding: 20px;
+    color: #333;
+}
 
-    .destination-card p {
-        margin: 0 0 10px 0;
-        color: black;
-    }
+.destinations-list h1 {
+    font-size: 3em;
+    /* Increased font size */
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.destinations-list input[type="text"] {
+    display: block;
+    margin: 20px auto;
+    padding: 12px;
+    width: 80%;
+    max-width: 600px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    color: #333;
+    font-size: 16px;
+}
+
+.destination-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.destination-card {
+    width: 300px;
+    height: 300px;
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s;
+    background-color: #fff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    position: relative;
+}
+
+.destination-card:hover {
+    transform: scale(1.05);
+}
+
+.destination-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px 16px 0 0;
+}
+
+.destination-info {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border-radius: 0 0 16px 16px;
+}
+
+.destination-info h3 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.destination-info p {
+    margin: 8px 0 0;
+    font-size: 1em;
+}
+
+.create-destination-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.create-destination-form input {
+    margin: 10px 0;
+    padding: 12px;
+    width: 80%;
+    max-width: 600px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    font-size: 16px;
+}
+
+.create-destination-form button {
+    padding: 12px 24px;
+    margin-top: 20px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    border-radius: 16px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.create-destination-form button:hover {
+    background-color: #218838;
+}

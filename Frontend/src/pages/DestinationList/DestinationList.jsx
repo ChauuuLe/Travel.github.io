@@ -1,10 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import Tabs from '../../Components/Tab/Tab';
 import './DestinationList.css';
 
 const DestinationList = () => {
+    const sampleData = [
+        {
+            id: "1",
+            name: "London",
+            image: "https://upload.wikimedia.org/wikipedia/commons/c/cd/London_Montage_L.jpg",
+            region: "Europe",
+            things_to_do: 2444
+        },
+        {
+            id: "2",
+            name: "Istanbul",
+            image: "https://upload.wikimedia.org/wikipedia/commons/6/65/Istanbul_collage.jpg",
+            region: "Europe",
+            things_to_do: 1616
+        },
+        {
+            id: "3",
+            name: "Paris",
+            image: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Paris_Night.jpg",
+            region: "Europe",
+            things_to_do: 2910
+        },
+        {
+            id: "4",
+            name: "Tokyo",
+            image: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Tokyo_Tower_and_surrounding.jpg",
+            region: "Asia",
+            things_to_do: 3150
+        },
+        {
+            id: "5",
+            name: "Sydney",
+            image: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Sydney_Opera_House_Sails.jpg",
+            region: "Australia",
+            things_to_do: 2780
+        },
+        {
+            id: "6",
+            name: "New York",
+            image: "https://upload.wikimedia.org/wikipedia/commons/a/a1/NYC_skyline_and_Central_Park.jpg",
+            region: "North America",
+            things_to_do: 3890
+        }
+    ];
+
     const [destinations, setDestinations] = useState([]);
     const [formattedData, setFormattedData] = useState({});
     const [currentRegion, setCurrentRegion] = useState('');
@@ -18,31 +62,22 @@ const DestinationList = () => {
     });
 
     useEffect(() => {
-        // Fetch destinations from the backend using Axios
-        const fetchDestinations = async () => {
-            try {
-                const response = await axios.get('/api/destinations');
-                const data = response.data;
+        const formatData = () => {
+            const formatted = sampleData.reduce((acc, destination) => {
+                const region = destination.region || 'Unknown';
+                if (!acc[region]) {
+                    acc[region] = [];
+                }
+                acc[region].push(destination);
+                return acc;
+            }, {});
 
-                // Format the data as needed
-                const formatted = data.reduce((acc, destination) => {
-                    const region = destination.region || 'Unknown';
-                    if (!acc[region]) {
-                        acc[region] = [];
-                    }
-                    acc[region].push(destination);
-                    return acc;
-                }, {});
-
-                setDestinations(data);
-                setFormattedData(formatted);
-                setCurrentRegion(Object.keys(formatted)[0] || '');
-            } catch (error) {
-                console.error('Error fetching destinations:', error);
-            }
+            setDestinations(sampleData);
+            setFormattedData(formatted);
+            setCurrentRegion(Object.keys(formatted)[0] || '');
         };
 
-        fetchDestinations();
+        formatData();
     }, []);
 
     const handleSearchChange = (event) => {
@@ -61,37 +96,30 @@ const DestinationList = () => {
         }));
     };
 
-    const handleFormSubmit = async (event) => {
+    const handleFormSubmit = (event) => {
         event.preventDefault();
-        try {
-            const authorId = 'your-author-id'; // Replace with actual author ID, e.g., from logged-in user context
-            const response = await axios.post('/api/destinations', { ...newDestination, authorId });
-            const createdDestination = response.data;
+        const newId = (destinations.length + 1).toString();
+        const createdDestination = { ...newDestination, id: newId };
 
-            // Update the state with the new destination
-            setDestinations(prevDestinations => [...prevDestinations, createdDestination]);
-            setFormattedData(prevFormattedData => {
-                const region = createdDestination.region || 'Unknown';
-                if (!prevFormattedData[region]) {
-                    prevFormattedData[region] = [];
-                }
-                return {
-                    ...prevFormattedData,
-                    [region]: [...prevFormattedData[region], createdDestination]
-                };
-            });
-            setIsCreating(false);
-            setNewDestination({
-                name: '',
-                image: '',
-                region: '',
-                things_to_do: ''
-            });
-        } catch (error) {
-            console.error('Error creating destination:', error);
-        }
+        setDestinations(prevDestinations => [...prevDestinations, createdDestination]);
+        setFormattedData(prevFormattedData => {
+            const region = createdDestination.region || 'Unknown';
+            if (!prevFormattedData[region]) {
+                prevFormattedData[region] = [];
+            }
+            return {
+                ...prevFormattedData,
+                [region]: [...prevFormattedData[region], createdDestination]
+            };
+        });
+        setIsCreating(false);
+        setNewDestination({
+            name: '',
+            image: '',
+            region: '',
+            things_to_do: ''
+        });
     };
-
 
     const filteredDestinations = formattedData[currentRegion]?.filter(destination =>
         destination.name.toLowerCase().includes(searchTerm.toLowerCase())

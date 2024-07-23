@@ -9,7 +9,7 @@ const DestinationDetail = () => {
     const [activities, setActivities] = useState([]);
     const [averageCost, setAverageCost] = useState(0);
 
-    useEffect(() => {
+    useEffect(() => {   
         const sampleData = {
             destinations: [
                 {
