@@ -62,7 +62,6 @@ const DestinationList = () => {
 
   const handleCreate = async (newDestination) => {
     try {
-      await axios.post(`${import.meta.env.VITE_BACKEND}/api/destinations`, newDestination);
       await fetchDestinations();
       setIsCreating(false);
       setCurrentPage(1); // Reset to first page to show the new destination
