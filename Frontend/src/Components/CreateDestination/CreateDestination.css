@@ -1,0 +1,64 @@
+.create-destination-container {
+  margin: 20px 0;
+}
+
+.create-destination-form input,
+.create-destination-form textarea,
+.create-destination-form select {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.create-destination-form button {
+  margin-right: 10px;
+}
+
+.image-url-input {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.image-url-input input {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.image-url-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.image-url-list li {
+  margin-bottom: 5px;
+}
+
+.add-activity-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-activity-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 400px;
+}
+
+.activity-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.activity-list li {
+  margin-bottom: 5px;
+}

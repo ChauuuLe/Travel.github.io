@@ -1,0 +1,110 @@
+.destination-detail {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.destination-detail h1 {
+    font-size: 2.5em;
+    color: #007bff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.destination-detail img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.destination-detail p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.destination-detail h2 {
+    font-size: 2em;
+    color: #007bff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.destination-detail ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.destination-detail li {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.destination-detail li::before {
+    content: "•";
+    color: #007bff;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+.destination-detail button {
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.destination-detail .explore-more {
+    background-color: #28a745;
+    color: white;
+}
+
+.destination-detail .explore-more:hover {
+    background-color: #218838;
+}
+
+.destination-detail .back-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.destination-detail .back-button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 600px) {
+    .destination-detail {
+        padding: 15px;
+    }
+
+    .destination-detail h1 {
+        font-size: 2em;
+    }
+
+    .destination-detail h2 {
+        font-size: 1.5em;
+    }
+
+    .destination-detail p,
+    .destination-detail li {
+        font-size: 1em;
+    }
+}

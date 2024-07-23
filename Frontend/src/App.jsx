@@ -12,6 +12,8 @@ import Page1 from './Components/findUsers/findUsers';
 import Page2 from './Components/schedule/schedule';
 import Page3 from './Components/groupName/groupName';
 import UserProfile from '../../Frontend/src/pages/userProfile/userProfile';
+import DestinationList from './pages/DestinationList/DestinationList';
+import DestinationDetail from './Components/DestinationDetail/DestinationDetail'
 
 const App = () => {
   return (
@@ -31,6 +33,8 @@ const App = () => {
         </Route>
         <Route path="/tripgroup" element={<TripGroup />} />
         <Route path="/profile" element={<UserProfile />} /> {/* Add this route */}
+        <Route path="/destinations" element={<DestinationList />} />
+        <Route path="/destinations/:destinationId" element={<DestinationDetail />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
