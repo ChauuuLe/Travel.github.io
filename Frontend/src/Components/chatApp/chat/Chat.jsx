@@ -38,7 +38,7 @@ const Chat = ({ chatId }) => {
             },
           });
           setChat(response.data);
-          setMessages(response.data.messages); // Set messages from chat data
+          setMessages(response.data.messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))); // Set messages from chat data sorted from newest to oldest
         } catch (err) {
           console.error('Error fetching chat', err);
         }
@@ -49,7 +49,7 @@ const Chat = ({ chatId }) => {
 
   useEffect(() => {
     socket.on('message', (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
+      setMessages((prevMessages) => [message, ...prevMessages]);
     });
 
     return () => {
@@ -84,6 +84,9 @@ const Chat = ({ chatId }) => {
       const message = response.data;
       socket.emit('sendMessage', { chatId, message });
       setText("");
+      // Update the last message for the chat
+      const updatedChat = { ...chat, lastMessage: message };
+      setChat(updatedChat);
     } catch (err) {
       console.error("Failed to send message:", err);
     }

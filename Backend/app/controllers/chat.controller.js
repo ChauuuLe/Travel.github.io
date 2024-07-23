@@ -33,6 +33,30 @@ exports.createGroup = async (req, res) => {
   }
 };
 
+exports.getUserChats = async (req, res) => {
+  try {
+    const userId = req.userId; // Assuming userId is set in the middleware
+    const user = await User.findById(userId).populate({
+      path: 'userChats',
+      populate: {
+        path: 'lastMessage',
+        select: 'text createdAt sender',
+        populate: {
+          path: 'sender',
+          select: 'username avatar'
+        }
+      }
+    });
+
+    if (!user) {
+      return res.status(404).send({ message: 'User not found' });
+    }
+
+    res.status(200).send(user.userChats);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
 
 exports.getChatInfo = async (req, res) => {
   try {

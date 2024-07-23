@@ -12,4 +12,5 @@ module.exports = function(app) {
 
   app.get("/api/chats/:chatId", [authJwt.verifyToken], controller.getChatInfo);
   app.post("/api/chats", [authJwt.verifyToken], controller.createGroup);
+  app.get('/api/userChats', [authJwt.verifyToken], controller.getUserChats);
 };

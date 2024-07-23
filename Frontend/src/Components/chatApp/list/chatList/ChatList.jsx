@@ -18,37 +18,57 @@ const ChatList = ({ setChatId }) => {
       navigate("/signin");
     }
   }, [navigate]);
-  console.log(currentUser);
 
   useEffect(() => {
-    if (currentUser && currentUser.userChats) {
-      setUserChats(currentUser.userChats);
-    }
-  }, [currentUser]);
+    const fetchUserChats = async () => {
+      if (currentUser) {
+        try {
+          const token = localStorage.getItem('token');
+          const response = await axios.get(`${import.meta.env.VITE_BACKEND}/api/userChats`, {
+            headers: {
+              'x-access-token': token,
+            },
+          });
+          const chats = response.data;
+          chats.sort((a, b) => new Date(b.lastMessage?.createdAt || b.createdAt) - new Date(a.lastMessage?.createdAt || a.createdAt)); // Sort chats by last message or creation time
+          setUserChats(chats);
+          if (chats.length > 0) {
+            setChatId(chats[0]._id); // Set default chatId to the first chat in the list
+          }
+        } catch (err) {
+          console.error('Error fetching user chats', err);
+        }
+      }
+    };
+
+    fetchUserChats();
+  }, [currentUser, setChatId]);
 
   const renderAvatarLastMessage = (lastMessage) => {
     if (lastMessage) {
-      if (lastMessage.sender.avatar) {
-        return avatar;
+      if (lastMessage.sender && lastMessage.sender.avatar) {
+        return lastMessage.sender.avatar;
       }
       return "./assets/avatar.png";
     }
     return "./assets/avatar.png";
   };
-  
+
   const renderLastMessage = (lastMessage) => {
-    if (lastMessage) {
-      <div className="texts">
+    if (lastMessage && lastMessage.sender) {
+      return (
+        <div className="texts">
           <span>{lastMessage.sender.username}</span>
-          <p>{lastMessage ? lastMessage.text : 'No messages yet'}</p>
-      </div>
+          <p>{lastMessage.text}</p>
+        </div>
+      );
     }
     return (
       <div className="texts">
-          <p>{'No messages yet'}</p>
+        <p>{'No messages yet'}</p>
       </div>
     );
-  }
+  };
 
   const renderUserChats = (userChats) => (
     userChats.map((userChat) => {
@@ -81,7 +101,7 @@ const ChatList = ({ setChatId }) => {
       <div>
         {renderUserChats(userChats)}
       </div>
-      {addMode && <AddUser/>}
+      {addMode && <AddUser />}
     </div>
   );
 };
