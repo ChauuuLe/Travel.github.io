@@ -8,8 +8,6 @@ import './DestinationList.css';
 const DestinationList = () => {
   const [destinations, setDestinations] = useState([]);
   const [formattedData, setFormattedData] = useState({});
-  const [currentCountry, setCurrentCountry] = useState('');
-  const [currentCity, setCurrentCity] = useState('');
   const [searchTermCountry, setSearchTermCountry] = useState('');
   const [searchTermCity, setSearchTermCity] = useState('');
   const [isCreating, setIsCreating] = useState(false);
@@ -17,34 +15,32 @@ const DestinationList = () => {
   const destinationsPerPage = 12; // 4 cards per row * 3 rows per page
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
+  const fetchDestinations = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND}/api/destinations`);
+      const data = response.data;
+
+      const formatted = data.reduce((acc, destination) => {
+        const country = destination.country || 'Unknown';
+        const city = destination.city || 'Unknown';
+        if (!acc[country]) {
+          acc[country] = {};
+        }
+        if (!acc[country][city]) {
+          acc[country][city] = [];
+        }
+        acc[country][city].push(destination);
+        return acc;
+      }, {});
+
+      setDestinations(data);
+      setFormattedData(formatted);
+    } catch (error) {
+      console.error('Error fetching destinations:', error);
+    }
+  };
+
   useEffect(() => {
-    const fetchDestinations = async () => {
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND}/api/destinations`);
-        const data = response.data;
-
-        const formatted = data.reduce((acc, destination) => {
-          const country = destination.country || 'Unknown';
-          const city = destination.city || 'Unknown';
-          if (!acc[country]) {
-            acc[country] = {};
-          }
-          if (!acc[country][city]) {
-            acc[country][city] = [];
-          }
-          acc[country][city].push(destination);
-          return acc;
-        }, {});
-
-        setDestinations(data);
-        setFormattedData(formatted);
-        setCurrentCountry(Object.keys(formatted)[0] || '');
-        setCurrentCity(Object.keys(formatted[Object.keys(formatted)[0]] || {})[0] || '');
-      } catch (error) {
-        console.error('Error fetching destinations:', error);
-      }
-    };
-
     fetchDestinations();
   }, []);
 
@@ -64,26 +60,15 @@ const DestinationList = () => {
     }
   };
 
-  const handleCreate = (newDestination) => {
-    setDestinations(prevDestinations => [...prevDestinations, newDestination]);
-    setFormattedData(prevFormattedData => {
-      const country = newDestination.country || 'Unknown';
-      const city = newDestination.city || 'Unknown';
-      if (!prevFormattedData[country]) {
-        prevFormattedData[country] = {};
-      }
-      if (!prevFormattedData[country][city]) {
-        prevFormattedData[country][city] = [];
-      }
-      return {
-        ...prevFormattedData,
-        [country]: {
-          ...prevFormattedData[country],
-          [city]: [...prevFormattedData[country][city], newDestination]
-        }
-      };
-    });
-    setIsCreating(false);
+  const handleCreate = async (newDestination) => {
+    try {
+      await axios.post(`${import.meta.env.VITE_BACKEND}/api/destinations`, newDestination);
+      await fetchDestinations();
+      setIsCreating(false);
+      setCurrentPage(1); // Reset to first page to show the new destination
+    } catch (error) {
+      console.error('Error creating destination:', error);
+    }
   };
 
   const filteredCountries = Object.keys(formattedData).filter(country =>
@@ -96,9 +81,11 @@ const DestinationList = () => {
       )
     : [];
 
-  const filteredDestinations = filteredCountries.length > 0 && filteredCities.length > 0
-    ? formattedData[filteredCountries[0]][filteredCities[0]]
-    : [];
+  const filteredDestinations = searchTermCountry || searchTermCity
+    ? (filteredCountries.length > 0 && filteredCities.length > 0
+        ? formattedData[filteredCountries[0]][filteredCities[0]]
+        : [])
+    : destinations;
 
   // Pagination logic
   const indexOfLastDestination = currentPage * destinationsPerPage;
@@ -109,7 +96,7 @@ const DestinationList = () => {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
-  console.log(filteredDestinations);
+
   return (
     <div className="destinations-list">
       <h1>Destinations</h1>
