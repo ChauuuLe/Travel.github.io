@@ -12,7 +12,7 @@ const DestinationList = () => {
   const [searchTermCity, setSearchTermCity] = useState('');
   const [isCreating, setIsCreating] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const destinationsPerPage = 12; // 4 cards per row * 3 rows per page
+  const destinationsPerPage = 6; // 3 cards per row * 3 rows per page
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   const fetchDestinations = async () => {
@@ -76,14 +76,14 @@ const DestinationList = () => {
 
   const filteredCities = filteredCountries.length > 0
     ? Object.keys(formattedData[filteredCountries[0]]).filter(city =>
-        city.toLowerCase().includes(searchTermCity.toLowerCase())
-      )
+      city.toLowerCase().includes(searchTermCity.toLowerCase())
+    )
     : [];
 
   const filteredDestinations = searchTermCountry || searchTermCity
     ? (filteredCountries.length > 0 && filteredCities.length > 0
-        ? formattedData[filteredCountries[0]][filteredCities[0]]
-        : [])
+      ? formattedData[filteredCountries[0]][filteredCities[0]]
+      : [])
     : destinations;
 
   // Pagination logic
@@ -109,10 +109,21 @@ const DestinationList = () => {
         handleSearchChange={handleSearchChangeCity}
         placeholder="Search cities..."
       />
-      <button onClick={handleCreateButtonClick}>Create New Destination</button>
+      <button className="button-create-destination" onClick={handleCreateButtonClick}>
+        Create New Destination
+      </button>
+
+
+      {/* Modal Overlay for Creating Destination */}
       {isCreating && (
-        <CreateDestination currentUser={currentUser} onCreate={handleCreate} />
+        <div className="create-destination-modal">
+          <div className="create-destination-content">
+            <CreateDestination currentUser={currentUser} onCreate={handleCreate} />
+            <button className="close-button" onClick={() => setIsCreating(false)}>X</button>
+          </div>
+        </div>
       )}
+
       <div className="destination-cards-container">
         <div className="destination-cards">
           {currentDestinations.map(destination => (

@@ -1,22 +1,120 @@
 .destinations-list {
-  margin: 20px;
+  padding: 90px;
+  color: #333;
+  background: #f9f9f9;
+  border-radius: 16px;
+  max-width: 100%;
+  margin: 10px auto;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
 }
 
 .destinations-list h1 {
+  font-size: 2.5em;
   text-align: center;
+  margin-bottom: 30px;
+  color: #007bff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
-.destinations-list input {
+.destinations-list input[type="text"] {
   display: block;
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
+  margin: 15px auto;
+  padding: 12px;
+  width: 80%;
+  max-width: 600px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  color: #333333;
+  font-size: 1.1em;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
-.destinations-list button {
-  display: block;
-  margin: 10px auto;
-  padding: 10px 20px;
+.destinations-list input[type="text"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+  background-color: #f0f8ff;
+  outline: none;
+}
+
+.button-create-destination {
+  display: inline-block;
+  background: linear-gradient(45deg, #28a745, #218838);
+  color: white;
+  font-weight: bold;
+  padding: 12px 24px;
+  margin: 20px auto;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button-create-destination:hover {
+  background: linear-gradient(45deg, #218838, #1e7e34);
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.button-create-destination:active {
+  background: linear-gradient(45deg, #1e7e34, #155724);
+  transform: scale(1);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Modal for Create Destination */
+.create-destination-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.create-destination-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 600px;
+  max-width: 95%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Close button styling */
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #ffe9e9;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  line-height: 1;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.close-button:hover {
+  background-color: #e60000;
+  transform: scale(1.1);
 }
 
 .destination-cards-container {
@@ -27,35 +125,88 @@
 
 .destination-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  margin-bottom: 20px;
+  justify-items: center;
+  max-width: 900px;
+  margin: 20px auto;
 }
 
 .destination-card {
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  width: 280px;
+  height: 380px;
+  border: none;
+  border-radius: 16px;
   overflow: hidden;
   text-align: center;
-  padding: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background-color: #fff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  position: relative;
+}
+
+.destination-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .destination-card img {
   width: 100%;
-  height: 150px;
+  height: 180px;
   object-fit: cover;
+  border-radius: 16px 16px 0 0;
+}
+
+.destination-card h3 {
+  margin: 15px 0 5px;
+  font-size: 1.5em;
+  color: #007bff;
+  text-transform: uppercase;
+}
+
+.destination-card p {
+  margin: 8px 0;
+  font-size: 1em;
+  color: #555;
+}
+
+a {
+  text-decoration: none;
+  /* Remove underline from all links */
+  color: inherit;
+  /* Ensure link color matches parent element */
+}
+
+a:hover {
+  text-decoration: none;
+  /* Prevent underline on hover */
 }
 
 .pagination {
   display: flex;
-  gap: 5px;
+  justify-content: center;
+  margin-top: 30px;
 }
 
 .pagination button {
-  padding: 5px 10px;
+  padding: 10px 16px;
+  margin: 0 5px;
+  border: none;
+  background-color: #e0faf3;
+  cursor: pointer;
+  color: #007bff;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .pagination button.active {
   background-color: #007bff;
   color: white;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
 }

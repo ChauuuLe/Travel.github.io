@@ -19,30 +19,40 @@ const DestinationDetail = () => {
     };
     fetchDestination();
   }, [destinationId]);
-  console.log(destination);
+
   if (!destination) return null;
 
   return (
     <div className="destination-detail">
-      <h1>{destination.name}</h1>
-      <h2>{destination.country}</h2>
-      <h2>{destination.city}</h2>
-      <p>{destination.description}</p>
-      <h2>Activities</h2>
-      <ul>
-        {destination.activities.map(activity => (
-          <div key={activity._id}>
-            <li>
-              <img src={activity.image} alt={activity.name} />
-            </li>
-            <li>
-              {activity.name} - ${activity.cost}
-            </li>  
-          </div>
-        ))}
-      </ul>
-      <p>Average cost: ${destination.averageCost}</p>
-      <p>Author: {destination.author.username}</p>
+      <div className="content-section">
+        <div className="destination-info">
+          <h1>{destination.name}</h1>
+          <h2>{destination.country}</h2>
+          <h2>{destination.city}</h2>
+          <div className="line-separator"></div>
+          <p>{destination.description}</p>
+        </div>
+        <div className="divider"></div>
+        <div className="activities-section">
+          <h2>Activities</h2>
+          <ul className="activities-list">
+            {destination.activities.map(activity => (
+              <li key={activity._id} className="activity-item">
+                <div className="activity-image">
+                  <img src={activity.image} alt={activity.name} />
+                </div>
+                <div className="activity-info">
+                  <div>{activity.name}</div>
+                  <div className="price">${activity.cost}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div className="average-cost">
+        Average Cost: ${destination.averageCost}
+      </div>
       <button className="back-button" onClick={() => navigate(-1)}>Back</button>
     </div>
   );
