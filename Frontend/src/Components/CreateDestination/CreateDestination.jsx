@@ -48,7 +48,7 @@ const CreateDestination = ({ currentUser, onCreate }) => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_BACKEND}/api/countries/${countryIso}`);
       setCountryDetails(response.data);
-      setCities(response.data.cities);
+      setCities(response.data.cities || []); // Ensure cities are properly set
     } catch (error) {
       console.error('Error fetching country details:', error);
     }
@@ -112,9 +112,9 @@ const CreateDestination = ({ currentUser, onCreate }) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND}/api/destinations`, { 
-        ...newDestination, 
-        author: currentUser._id 
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND}/api/destinations`, {
+        ...newDestination,
+        author: currentUser._id
       });
 
       onCreate(response.data);
