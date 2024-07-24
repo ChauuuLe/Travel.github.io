@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const socket = io(import.meta.env.VITE_BACKEND); // Adjust the backend URL
 
-const Chat = ({ chatId }) => {
+const Chat = ({ chatId, setChatId }) => {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
   const [chat, setChat] = useState(null);
@@ -18,7 +18,6 @@ const Chat = ({ chatId }) => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("currentUser"));
-    console.log('Loaded currentUser:', user); // Debugging line
     setCurrentUser(user);
     if (!user) {
       navigate("/signin");
@@ -38,7 +37,7 @@ const Chat = ({ chatId }) => {
             },
           });
           setChat(response.data);
-          setMessages(response.data.messages); // Set messages from chat data
+          setMessages(response.data.messages);
         } catch (err) {
           console.error('Error fetching chat', err);
         }
@@ -50,6 +49,7 @@ const Chat = ({ chatId }) => {
   useEffect(() => {
     socket.on('message', (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
+      socket.emit('updateChatList');
     });
 
     return () => {
@@ -66,16 +66,17 @@ const Chat = ({ chatId }) => {
     setOpen(false);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSendMessage = async () => {
+    if (text.trim() === "") return;
+
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND}/api/messages`,
         { 
-          text: text, 
+          text, 
           sender: currentUser._id,
-          chatId: chatId,
+          chatId,
         },
         {
           headers: { 'x-access-token': token },
@@ -89,12 +90,15 @@ const Chat = ({ chatId }) => {
     }
   };
 
-  const renderAvatar = (avatar) => {
-    console.log('asdasd');
-    if (avatar) {
-      return avatar;
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSendMessage();
     }
-    return "./assets/avatar.png";
+  };
+
+  const renderAvatar = (avatar) => {
+    return avatar || "./assets/avatar.png";
   };
 
   const renderMessages = (messages) => (
@@ -113,16 +117,12 @@ const Chat = ({ chatId }) => {
     <div className="chat">
       <div className="top">
         <div className="user">
-          <img src={renderAvatar(currentUser?.avatar)} alt="avatar" />
           <div className="texts">
-            <span>{currentUser?.username}</span>
-            <p>Online</p>
+            <span>{chat?.groupName}</span>
           </div>
         </div>
         <div className="icons">
-          <img src="./assets/phone.png" alt="" />
-          <img src="./assets/video.png" alt="" />
-          <img src="./assets/info.png" alt="" />
+          <img src="./assets/calendar.png" alt="" />
         </div>
       </div>
       <div className="center">
@@ -140,6 +140,7 @@ const Chat = ({ chatId }) => {
           placeholder="Type a message..."
           value={text}
           onChange={(e) => setText(e.target.value)}
+          onKeyPress={handleKeyPress} // Handle Enter key press
         />
         <div className="emoji">
           <img src="./assets/emoji.png" alt="" onClick={() => setOpen((prev) => !prev)} />
@@ -147,7 +148,7 @@ const Chat = ({ chatId }) => {
             {open && <EmojiPicker onEmojiClick={handleEmoji} />}
           </div>
         </div>
-        <button className="sendButton" onClick={handleSubmit}>Send</button>
+        <button className="sendButton" onClick={handleSendMessage}>Send</button>
       </div>
     </div>
   );

@@ -9,7 +9,6 @@ const List = (props) => {
 
   return (
     <div className="list">
-      <Userinfo />
       <ChatList setChatId={setChatId} />
     </div>
   );

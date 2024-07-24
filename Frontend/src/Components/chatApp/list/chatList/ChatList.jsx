@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import "./chatList.css";
-import searchIcon from "../../../../assets/search.png";
 import AddUser from "./addUser/addUser.jsx";
+import io from "socket.io-client";
 
-const ChatList = ({ setChatId }) => {
+const socket = io(import.meta.env.VITE_BACKEND); // Adjust the backend URL
+
+const ChatList = ({ setChatId, chatId }) => {
   const navigate = useNavigate();
   const [addMode, setAddMode] = useState(false);
   const [userChats, setUserChats] = useState([]);
@@ -18,57 +20,78 @@ const ChatList = ({ setChatId }) => {
       navigate("/signin");
     }
   }, [navigate]);
-  console.log(currentUser);
+
+  const fetchUserChats = async () => {
+    if (currentUser) {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND}/api/userChats`, {
+          headers: {
+            'x-access-token': token,
+          },
+        });
+        const chats = response.data;
+        chats.sort((a, b) => new Date(b.lastMessage?.createdAt || b.createdAt) - new Date(a.lastMessage?.createdAt || a.createdAt)); // Sort chats by last message or creation time
+        setUserChats(chats);
+        if (chats.length > 0 && !chatId) {
+          setChatId(chats[0]._id); // Set default chatId to the first chat in the list
+        }
+      } catch (err) {
+        console.error('Error fetching user chats', err);
+      }
+    }
+  };
 
   useEffect(() => {
-    if (currentUser && currentUser.userChats) {
-      setUserChats(currentUser.userChats);
-    }
-  }, [currentUser]);
+    fetchUserChats();
+  }, [currentUser, setChatId]);
+
+  useEffect(() => {
+    socket.on('updateChatList', fetchUserChats);
+
+    return () => {
+      socket.off('updateChatList', fetchUserChats);
+    };
+  }, [fetchUserChats]);
 
   const renderAvatarLastMessage = (lastMessage) => {
-    if (lastMessage) {
-      if (lastMessage.sender.avatar) {
-        return avatar;
-      }
-      return "./assets/avatar.png";
-    }
-    return "./assets/avatar.png";
+    return lastMessage && lastMessage.sender && lastMessage.sender.avatar
+      ? lastMessage.sender.avatar
+      : "./assets/avatar.png";
   };
-  
+
   const renderLastMessage = (lastMessage) => {
-    if (lastMessage) {
-      <div className="texts">
+    if (lastMessage && lastMessage.sender) {
+      return (
+        <div className="texts">
           <span>{lastMessage.sender.username}</span>
-          <p>{lastMessage ? lastMessage.text : 'No messages yet'}</p>
-      </div>
+          <p>{lastMessage.text}</p>
+        </div>
+      );
     }
     return (
       <div className="texts">
-          <p>{'No messages yet'}</p>
+        <p>{'No messages yet'}</p>
       </div>
     );
-  }
+  };
 
   const renderUserChats = (userChats) => (
-    userChats.map((userChat) => {
-      return (
-        <div key={userChat._id} className="item" onClick={() => setChatId(userChat._id)}>
-          <div className="texts">
-            <p>{userChat.groupName}</p>
-          </div>
-          <img src={renderAvatarLastMessage(userChat.lastMessage)} alt="avatar" />
-          {renderLastMessage(userChat.lastMessage)}
+    userChats.map((userChat) => (
+      <div key={userChat._id} className="item" onClick={() => setChatId(userChat._id)}>
+        <div className="texts">
+          <p>{userChat.groupName}</p>
         </div>
-      );
-    })
+        <img src={renderAvatarLastMessage(userChat.lastMessage)} alt="avatar" />
+        {renderLastMessage(userChat.lastMessage)}
+      </div>
+    ))
   );
 
   return (
     <div className="chatList">
       <div className="search">
         <div className="searchBar">
-          <img src={searchIcon} alt="" />
           <input type="text" placeholder="Search" />
         </div>
         <img 
@@ -81,7 +104,7 @@ const ChatList = ({ setChatId }) => {
       <div>
         {renderUserChats(userChats)}
       </div>
-      {addMode && <AddUser/>}
+      {addMode && <AddUser />}
     </div>
   );
 };

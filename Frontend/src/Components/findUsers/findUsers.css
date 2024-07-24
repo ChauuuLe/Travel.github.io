@@ -1,23 +1,21 @@
-/* findUsers.css */
-
 /* General Styles */
 .findUsers {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background: #fff;
+    background: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     width: 100%;
-    max-width: 1000px;
+    max-width: 600px;
     margin: 20px auto;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body.night .findUsers {
-    background: #333;
-    color: #fff;
+    background: #333333;
+    color: #ffffff;
 }
 
 .findUsers form {
@@ -27,111 +25,98 @@ body.night .findUsers {
     align-items: center;
 }
 
-.findUsers label {
-    width: 80%;
-    text-align: left;
-    margin-bottom: 10px;
-    color: inherit;
-    /* Ensure color changes in night mode */
-}
-
 .findUsers input {
-    width: 80%;
+    width: 90%;
     padding: 12px;
     margin-bottom: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #dddddd;
     border-radius: 5px;
     transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 body.night .findUsers input {
-    background: #444;
-    color: #fff;
-    border-color: #555;
+    background: #444444;
+    color: #ffffff;
+    border-color: #555555;
 }
 
-.findUsers input:focus {
+.findUsers input:focus,
+.findUsers input:hover {
     border-color: #009879;
+    background-color: #e9f7ef;
     outline: none;
 }
 
+body.night .findUsers input:focus,
+body.night .findUsers input:hover {
+    border-color: #80b3a1;
+    background-color: #2f4f4f;
+}
+
 .findUsers button {
-    width: 80%;
+    width: 90%;
     padding: 12px;
     background-color: #3498db;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.findUsers button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    transition: transform 0.6s, opacity 0.6s;
+    z-index: 0;
+    opacity: 0;
+}
+
+.findUsers button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.findUsers button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 body.night .findUsers button {
-    background-color: #444;
-    color: #fff;
+    background-color: #444444;
+    color: #ffffff;
 }
 
-.findUsers button:not(:disabled):hover {
-    background-color: #2980b9;
-    transform: scale(1.05);
-}
-
-body.night .findUsers button:not(:disabled):hover {
-    background-color: #555;
-}
-
-.findUsers button:not(:disabled):active {
-    background-color: #1f6391;
-}
-
-body.night .findUsers button:not(:disabled):active {
-    background-color: #333;
-}
-
-.findUsers button:disabled {
-    background-color: lightgray;
-    cursor: not-allowed;
-}
-
-body.night .findUsers button:disabled {
-    background-color: #777;
-}
-
-.user-list-container {
-    width: 100%;
-    max-width: 1000px;
-    max-height: 400px;
-    overflow-y: auto;
-    margin-top: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #fafafa;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-body.night .user-list-container {
-    background-color: #444;
-    color: #fff;
-    border-color: #555;
+body.night .findUsers button:hover {
+    background-color: #555555;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
 }
 
 .user {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    width: 100%;
     padding: 10px;
     margin-top: 10px;
     background: #f8f8f8;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%;
 }
 
 body.night .user {
-    background: #555;
-    color: #fff;
+    background: #555555;
+    color: #ffffff;
 }
 
 .user:hover {
@@ -139,19 +124,42 @@ body.night .user {
 }
 
 body.night .user:hover {
-    background-color: #666;
+    background-color: #666666;
 }
 
 .user .detail {
     display: flex;
     align-items: center;
+    padding: 0 10px;
+    flex-grow: 1;
 }
 
 .user img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-right: 10px;
+    object-fit: cover;
+}
+
+.user .divider {
+    width: 1px;
+    height: 40px;
+    background-color: #ddd;
+    margin: 0 15px;
+}
+
+body.night .user .divider {
+    background-color: #888;
+}
+
+.user span {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+body.night .user span {
+    color: #fff;
 }
 
 .user button {
@@ -165,8 +173,8 @@ body.night .user:hover {
 }
 
 body.night .user button {
-    background-color: #666;
-    color: #fff;
+    background-color: #666666;
+    color: #ffffff;
 }
 
 .user button:not(:disabled):hover {
@@ -174,7 +182,7 @@ body.night .user button {
 }
 
 body.night .user button:not(:disabled):hover {
-    background-color: #555;
+    background-color: #555555;
 }
 
 .user button:not(:disabled):active {
@@ -182,7 +190,7 @@ body.night .user button:not(:disabled):hover {
 }
 
 body.night .user button:not(:disabled):active {
-    background-color: #333;
+    background-color: #333333;
 }
 
 .not-found-message {
@@ -192,4 +200,140 @@ body.night .user button:not(:disabled):active {
 
 body.night .not-found-message {
     color: #ff6666;
+}
+
+/* Heading Style */
+h1 {
+    text-align: center;
+    color: #3498db;
+    margin-bottom: 20px;
+}
+
+body.night h1 {
+    color: #ffffff;
+}
+
+/* Members List */
+.members-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+body.night .members-list {
+    background: #333333;
+}
+
+/* New Structure for User List Item */
+/* Existing CSS omitted for brevity */
+
+/* Scrollable Container for Added Users */
+.addedUsersContainer {
+    max-height: 300px;
+    /* Adjust this height as needed */
+    overflow-y: auto;
+    width: 100%;
+    padding: 10px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.night .addedUsersContainer {
+    background: #333333;
+    color: #ffffff;
+}
+
+/* General Styles for User List */
+.user {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-top: 10px;
+    background: #f8f8f8;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%;
+}
+
+body.night .user {
+    background: #555555;
+    color: #ffffff;
+}
+
+.user:hover {
+    background-color: #e0e0e0;
+}
+
+body.night .user:hover {
+    background-color: #666666;
+}
+
+.user .detail {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.user img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.user .user-object {
+    font-size: 1em;
+    color: #009879;
+}
+
+body.night .user .user-object {
+    color: #1e90ff;
+}
+
+.user .user-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+body.night .user .user-name {
+    color: #fff;
+}
+
+.user button {
+    padding: 8px 12px;
+    background-color: #009879;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+body.night .user button {
+    background-color: #666666;
+    color: #ffffff;
+}
+
+.user button:not(:disabled):hover {
+    background-color: #007b63;
+}
+
+body.night .user button:not(:disabled):hover {
+    background-color: #555555;
+}
+
+.user button:not(:disabled):active {
+    background-color: #005a45;
+}
+
+body.night .user button:not(:disabled):active {
+    background-color: #333333;
 }
