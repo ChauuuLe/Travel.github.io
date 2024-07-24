@@ -90,12 +90,17 @@ io.on('connection', (socket) => {
 
   socket.on('sendMessage', async ({ chatId, message }) => {
     try {
+      // Find the chat and update it with the new message
       const chat = await Chat.findById(chatId).populate('messages');
       chat.messages.push(message);
       chat.lastMessage = message;
       await chat.save();
 
+      // Emit the message to the chat room
       io.to(chatId).emit('message', message);
+
+      // Emit updateChatList event to notify clients to update their chat lists
+      io.emit('updateChatList');
     } catch (error) {
       console.error('Error sending message:', error);
     }
