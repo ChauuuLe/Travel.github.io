@@ -13,7 +13,6 @@
         background-color: #444444;
         border-radius: 10px;
         margin: 20px 0 10px 0;
-        /* Added margin-top to lower the search bar */
 
         .searchBar {
             flex: 1;
@@ -21,7 +20,8 @@
             align-items: center;
             background-color: rgba(17, 25, 40, 0.5);
             border-radius: 10px;
-            padding: 5px 10px;
+            padding: 10px 10px;
+            margin: 10px ;
 
             input {
                 background-color: transparent;
