@@ -61,8 +61,8 @@
 }
 
 .avatar {
-    width: 120px;
-    height: 120px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     margin-bottom: 20px;
     cursor: pointer;

@@ -14,7 +14,7 @@ const FindUsers = (props) => {
   const [foundedUser, setFoundedUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [userToAdd, setUserToAdd] = useState(null); // Initialize userToAdd here
+  const [userToAdd, setUserToAdd] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -85,6 +85,7 @@ const FindUsers = (props) => {
 
   return (
     <div>
+      <h1>Find your travel mate lah!</h1>
       <div className="findUsers">
         <form onSubmit={handleSearch}>
           <input
@@ -99,7 +100,7 @@ const FindUsers = (props) => {
         {loading && <p>Loading...</p>}
         {userToAdd}
       </div>
-      <div>
+      <div className="addedUsersContainer">
         {data.members.map((user) => (
           <div className='user' key={user._id}>
             <div className="detail">
