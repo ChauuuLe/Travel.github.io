@@ -1,72 +1,92 @@
 .chatList {
     flex: 1;
-    overflow: scroll;
+    overflow-y: auto;
+    background-color: #333333;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+
     .search {
         display: flex;
         align-items: center;
         gap: 20px;
-        padding: 20px;
+        padding: 10px 20px;
+        background-color: #444444;
+        border-radius: 10px;
+        margin: 20px 0 10px 0;
+        /* Added margin-top to lower the search bar */
 
         .searchBar {
             flex: 1;
-            background-color: rgba(17, 25, 40, 0.5);
             display: flex;
             align-items: center;
-            gap: 20px;
+            background-color: rgba(17, 25, 40, 0.5);
             border-radius: 10px;
-            padding: 10px;
+            padding: 5px 10px;
 
             input {
                 background-color: transparent;
                 border: none;
                 outline: none;
-                color: white;
+                color: #ffffff;
                 flex: 1;
+                padding-left: 10px;
+                height: 20px;
             }
 
             img {
                 width: 20px;
                 height: 20px;
+                object-fit: contain;
             }
         }
+
         .add {
             width: 36px;
             height: 36px;
             background-color: rgba(17, 25, 40, 0.5);
-            padding: 10px;
-            border-radius: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
             cursor: pointer;
         }
     }
+
     .item {
         display: flex;
         align-items: center;
-        gap: 10px; /* Reduced gap */
-        padding: 10px; /* Reduced padding */
+        gap: 10px;
+        padding: 10px;
         cursor: pointer;
-        border-bottom: 1px solid #dddddd35;
-        font-size: 0.9rem; /* Smaller font size */
+        border-bottom: 1px solid #444444;
+        font-size: 0.9rem;
+        transition: background-color 0.3s;
 
-        img{
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        img {
             width: 50px;
             height: 50px;
             border-radius: 50%;
             object-fit: cover;
         }
-        .texts{
+
+        .texts {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 5px;
+            color: #dddddd;
 
-            span{
+            span {
                 font-weight: 500;
-
             }
-            p{
-                font-size: 14;
+
+            p {
+                font-size: 0.9rem;
                 font-weight: 300;
             }
         }
-        
     }
 }

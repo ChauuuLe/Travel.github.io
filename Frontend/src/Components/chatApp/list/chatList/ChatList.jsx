@@ -88,7 +88,6 @@ const ChatList = ({ setChatId }) => {
     <div className="chatList">
       <div className="search">
         <div className="searchBar">
-          <img src={searchIcon} alt="" />
           <input type="text" placeholder="Search" />
         </div>
         <img 
