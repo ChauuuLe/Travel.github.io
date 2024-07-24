@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./Homepage.css";
 import Navbar from '../navbar/navbar';
 import DestinationCard from '../../Components/destinationcard/destinationcard';
@@ -37,45 +37,17 @@ const HomePage = () => {
     destination.description.toLowerCase().includes(query.toLowerCase())
   );
 
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page when the component is mounted
+  }, []);
+
   return (
     <div className="homepage">
       <div className="video-section">
         <div className='overlay'></div>
         <video src={video} muted autoPlay loop type="video/mp4"></video>
         <div className='homeContent'>
-          {/* Additional content can go here */}
         </div>
-      </div>
-      <div className="searchBar">
-        <div className="searchBarRow">
-          <div className="inputField">
-            <label>Search your destination:</label>
-            <input
-              type="text"
-              placeholder="Enter name here..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)} // Update search query state
-            />
-          </div>
-          <div className="inputField">
-            <label>Select your date:</label>
-            <input type="date" />
-          </div>
-          <div className="priceRange">
-            <label>Max price:</label>
-            <div className="range-container">
-              <span>${price}</span>
-              <input
-                type="range"
-                min="0"
-                max="10000"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
-            </div>
-          </div>
-        </div>
-        <button><i className="fas fa-filter"></i> More Filters</button>
       </div>
       <div className="icons">
         <a href="#"><i className="fab fa-facebook-f"></i></a>

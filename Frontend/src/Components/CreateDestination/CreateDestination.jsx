@@ -135,14 +135,25 @@ const CreateDestination = ({ currentUser, onCreate }) => {
   return (
     <div className="create-destination-container">
       <form onSubmit={handleFormSubmit} className="create-destination-form">
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={newDestination.name}
-          onChange={handleInputChange}
-          required
-        />
+        <div className="form-row">
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={newDestination.name}
+            onChange={handleInputChange}
+            required
+          />
+          <div className="image-url-input">
+            <input
+              type="text"
+              placeholder="Image URL"
+              value={newImageUrl}
+              onChange={handleImageUrlChange}
+            />
+            <button type="button" onClick={addImageUrl}>Add</button>
+          </div>
+        </div>
         <textarea
           name="description"
           placeholder="Description"
@@ -150,47 +161,24 @@ const CreateDestination = ({ currentUser, onCreate }) => {
           onChange={handleInputChange}
           required
         ></textarea>
-        <div className="image-url-input">
-          <input
-            type="text"
-            placeholder="Image URL"
-            value={newImageUrl}
-            onChange={handleImageUrlChange}
-          />
-          <button type="button" onClick={addImageUrl}>Add Image URL</button>
-        </div>
-        <div className="image-url-list">
-          <h4>Image URLs</h4>
-          <ul>
-            {newDestination.images.map((image, index) => (
-              <li key={index}>{image}</li>
+        <div className="form-row">
+          <select name="country" value={newDestination.country} onChange={handleCountryChange} required>
+            <option value="">Select Country</option>
+            {countries.map(country => (
+              <option key={country.iso2} value={country.iso2}>
+                {country.name}
+              </option>
             ))}
-          </ul>
+          </select>
+          <select name="city" value={newDestination.city} onChange={handleCityChange} required>
+            <option value="">Select City</option>
+            {cities.map(city => (
+              <option key={city.id} value={city.name}>
+                {city.name}
+              </option>
+            ))}
+          </select>
         </div>
-        <select name="country" value={newDestination.country} onChange={handleCountryChange} required>
-          <option value="">Select Country</option>
-          {countries.map(country => (
-            <option key={country.iso2} value={country.iso2}>
-              {country.name}
-            </option>
-          ))}
-        </select>
-        {countryDetails && (
-          <div className="country-details">
-            <h4>Country Details</h4>
-            <p><strong>Name:</strong> {countryDetails.name}</p>
-            <p>{countryDetails.emoji}</p>
-            <p><strong>ISO Code:</strong> {countryDetails.iso2}</p>
-          </div>
-        )}
-        <select name="city" value={newDestination.city} onChange={handleCityChange} required>
-          <option value="">Select City</option>
-          {cities.map(city => (
-            <option key={city.id} value={city.name}>
-              {city.name}
-            </option>
-          ))}
-        </select>
         <input
           type="number"
           name="averageCost"

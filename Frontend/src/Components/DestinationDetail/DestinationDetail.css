@@ -1,110 +1,166 @@
 .destination-detail {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+    padding: 40px;
+    max-width: 1200px;
+    /* Adjusted max-width for a balanced layout */
+    margin: 20px auto;
     font-family: 'Arial', sans-serif;
-    color: #333;
-    line-height: 1.6;
-    background: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #5500ff;
+    line-height: 1.8;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.destination-detail h1 {
-    font-size: 2.5em;
+.content-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.destination-info {
+    flex: 1;
+    margin-right: 30px;
+    /* Adjusted margin for proper separation */
+}
+
+.destination-info h1,
+.destination-info h2,
+.destination-info p {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.destination-info h1,
+.destination-info h2 {
     color: #007bff;
-    margin-bottom: 20px;
-    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
 }
 
-.destination-detail img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.destination-info h1 {
+    font-size: 1.8em;
+    /* Smaller size for more space */
 }
 
-.destination-detail p {
+.destination-info h2 {
+    font-size: 1.4em;
+    /* Reduced size for consistency */
+}
+
+.destination-info p {
     font-size: 1.2em;
-    margin-bottom: 20px;
     text-align: justify;
 }
 
-.destination-detail h2 {
-    font-size: 2em;
-    color: #007bff;
-    margin-bottom: 20px;
-    text-align: center;
+.line-separator {
+    border-bottom: 2px solid #ddd;
+    /* Line separator */
+    margin: 10px 0;
 }
 
-.destination-detail ul {
-    list-style-type: none;
+.divider {
+    width: 2px;
+    background-color: #ddd;
+    height: auto;
+    /* Full height of content */
+    align-self: stretch;
+    /* Ensure divider takes full height */
+    margin: 0 20px;
+}
+
+.activities-section {
+    flex: 2;
+}
+
+.activities-list {
+    list-style: none;
     padding: 0;
 }
 
-.destination-detail li {
-    background: #ffffff;
-    border: 1px solid #ddd;
-    padding: 10px;
+.activity-item {
+    display: flex;
+    align-items: center;
     margin-bottom: 10px;
-    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    /* For hover effects */
+    overflow: hidden;
+    /* For hover effects */
 }
 
-.destination-detail li::before {
-    content: "•";
-    color: #007bff;
+.activity-item:hover {
+    transform: scale(1.05);
+    /* Slightly enlarge the item */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    /* Add shadow */
+}
+
+.activity-image {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
+
+.activity-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.activity-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.activity-info .price {
     font-weight: bold;
-    display: inline-block;
-    width: 1em;
-    margin-left: -1em;
+    margin-top: 5px;
 }
 
-.destination-detail button {
+.average-cost {
+    margin-top: 20px;
+    font-size: 1.5em;
+}
+
+.back-button {
     padding: 10px 20px;
-    margin: 10px 5px;
+    background-color: #007bff;
+    color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     font-size: 1em;
-    transition: background-color 0.3s ease;
-    display: inline-block;
-    text-align: center;
+    margin-top: 20px;
+    position: relative;
+    /* For hover effect */
+    overflow: hidden;
+    /* For hover effect */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.destination-detail .explore-more {
-    background-color: #28a745;
-    color: white;
-}
-
-.destination-detail .explore-more:hover {
-    background-color: #218838;
-}
-
-.destination-detail .back-button {
-    background-color: #007bff;
-    color: white;
-}
-
-.destination-detail .back-button:hover {
+.back-button:hover {
     background-color: #0056b3;
+    transform: scale(1.1);
+    /* More pronounced scaling */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    /* Larger shadow */
 }
 
-@media (max-width: 600px) {
-    .destination-detail {
-        padding: 15px;
-    }
+.back-button:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.3s ease;
+}
 
-    .destination-detail h1 {
-        font-size: 2em;
-    }
-
-    .destination-detail h2 {
-        font-size: 1.5em;
-    }
-
-    .destination-detail p,
-    .destination-detail li {
-        font-size: 1em;
-    }
+.back-button:hover:before {
+    left: 100%;
 }
