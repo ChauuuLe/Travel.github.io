@@ -39,7 +39,7 @@ require('./routes/auth.routes.js')(app);
 require('./routes/user.routes.js')(app);
 require('./routes/chat.routes.js')(app);
 require('./routes/message.routes.js')(app);
-
+require('./routes/destination.routes.js')(app);
 // DB
 const db = require("./models/index.js");
 const Chat = db.chat;
