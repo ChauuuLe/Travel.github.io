@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./SignUp.css"; 
-import googleLogo from "../../assets/google.png";
+import "./SignUp.css";
 
 const SignUp = ({ setCurrentUser }) => {
   const [username, setUsername] = useState("");
@@ -37,6 +36,7 @@ const SignUp = ({ setCurrentUser }) => {
   return (
     <div className="auth-background">
       <div className="wrapper">
+        <h1>Welcome to the Travel!</h1> {}
         <form id="signUpForm" onSubmit={handleSignUp}>
           <h2>Sign up</h2>
           <div className="input-field">
@@ -71,10 +71,6 @@ const SignUp = ({ setCurrentUser }) => {
           </div>
           <button type="submit" className="sign-up-button">Sign up</button>
           <hr className="separator" />
-          <button type="button" className="google-sign-in-button">
-            <img src={googleLogo} alt="Google sign-in" className="google-icon" />
-            Sign up with Google
-          </button>
           <div className="register">
             <p>
               Already have an account? <a href="/signin">Sign in</a>

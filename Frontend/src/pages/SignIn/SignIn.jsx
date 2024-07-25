@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./SignIn.css";
-import googleLogo from "../../assets/google.png";
 
 const SignIn = () => {
   const [username, setUsername] = useState("");
@@ -46,7 +45,6 @@ const SignIn = () => {
       const user = await getCurrentUser(); // Fetch current user after setting the token
       localStorage.setItem('currentUser', JSON.stringify(user)); // Save user to localStorage
       navigate("/");
-      //window.location.reload();
       alert("Sign in successful");
     } catch (err) {
       const errorMessage = err.response ? err.response.data.message : err.message;
@@ -58,6 +56,7 @@ const SignIn = () => {
   return (
     <div className="auth-background">
       <div className="wrapper">
+        <h1>Good to see you Again!</h1> {/* Greeting message */}
         <form id="signInForm" onSubmit={handleSignIn}>
           <h2>Sign in</h2>
           <p>For security reasons, please log in to access the information</p>
@@ -65,7 +64,7 @@ const SignIn = () => {
             <input
               type="text"
               id="username"
-              placeholder="username"
+              placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -85,14 +84,9 @@ const SignIn = () => {
             <label>
               <input type="checkbox" /> Remember me
             </label>
-            <a href="#">Forgot Password?</a>
           </div>
           <button type="submit" className="sign-in-button">Sign in</button>
           <hr className="separator" />
-          <button type="button" className="google-sign-in-button">
-            <img src={googleLogo} alt="Google sign-in" className="google-icon" />
-            Sign in with Google
-          </button>
           <div className="register">
             <p>Create Account <a href="/signup">Register</a></p>
           </div>
