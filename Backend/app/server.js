@@ -3,29 +3,27 @@ const cors = require("cors");
 const CookieSession = require("cookie-session");
 const http = require("http");
 const socketIo = require("socket.io");
-const app = express();
 const env = require("dotenv");
 env.config();
 
-// Create server
+const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: `${process.env.frontEndDomain}`, // Replace with your frontend domain
+    origin: process.env.frontEndDomain,
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "x-access-token"],
   },
 });
 
-// Keys just for testing
-const key1 = "248bgturng8n54gh54g94gh95gh59gh498gher9ifjdoigdsgpoasdngiphgipghighr9igheiugheriuogheruigneriugerig";
-const key2 = "sduoygberufnisdnfndvdfnvjisrngijnfdsigniuenrgin3498tgerhfusdgasdokfbabgodsfoisdnnosdfn";
-const key3 = "rfewsdvcnxhjkw4923e32merfdvucxinjk345345et4rvdxicnkergdsvxcngcewsdfjvcxsdzfsdfgdfgdf";
-
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const key1 = "248bgturng8n54gh54g94gh95gh59gh498gher9ifjdoigdsgpoasdngiphgipghighr9igheiugheriuogheruigneriugerig";
+const key2 = "sduoygberufnisdnfndvdfnvjisrngijnfdsigniuenrgin3498tgerhfusdgasdokfbabgodsfoisdnnosdfn";
+const key3 = "rfewsdvcnxhjkw4923e32merfdvucxinjk345345et4rvdxicnkergdsvxcngcewsdfjvcxsdzfsdfgdfgdfgdfgdfgdf";
 
 app.use(CookieSession({
   name: 'session',
@@ -40,19 +38,20 @@ require('./routes/user.routes.js')(app);
 require('./routes/chat.routes.js')(app);
 require('./routes/message.routes.js')(app);
 require('./routes/destination.routes.js')(app);
-// DB
+require('./routes/hotels.routes.js')(app);
+
+// Database setup
 const db = require("./models/index.js");
 const Chat = db.chat;
 const Role = db.role;
-const dbConfig = require("./config/db.config.js");
 const linkToMongoDB = process.env.mongoUrl;
-console.log(linkToMongoDB);
+
 db.mongoose.connect(linkToMongoDB, {
-  //useNewUrlParser: true,
-  //useUnifiedTopology: true
+  // useNewUrlParser: true,
+  // useUnifiedTopology: true
 })
   .then(() => {
-    console.log("Successfully connect to MongoDB.");
+    console.log("Successfully connected to MongoDB.");
     initial();
   })
   .catch(err => {
@@ -66,16 +65,16 @@ async function initial() {
 
     if (count === 0) {
       await new Role({ name: "user" }).save();
-      console.log("added 'user' to roles collection");
+      console.log("Added 'user' to roles collection");
 
       await new Role({ name: "moderator" }).save();
-      console.log("added 'moderator' to roles collection");
+      console.log("Added 'moderator' to roles collection");
 
       await new Role({ name: "admin" }).save();
-      console.log("added 'admin' to roles collection");
+      console.log("Added 'admin' to roles collection");
     }
   } catch (err) {
-    console.log("error", err);
+    console.log("Error", err);
   }
 }
 
@@ -106,8 +105,42 @@ io.on('connection', (socket) => {
   });
 });
 
-// Port
+app.get('/api/hotels', async (req, res) => {
+  const { destination, checkIn, checkOut, adults } = req.query;
+  const client = new Client({
+    apiKey: process.env.SERPAPI_KEY
+  });
+
+  try {
+    const response = await client.json({
+      engine: "google_hotels",
+      q: destination,
+      check_in_date: checkIn,
+      check_out_date: checkOut,
+      adults: adults,
+      currency: "USD",
+      gl: "us",
+      hl: "en",
+      api_key: "1a61a0e1bd6860f2e449887a8a263b323b2b6db835bf96ffdd024eeb98d8ae4c"
+    });
+
+    const hotels = response.hotels_results.map(hotel => ({
+      name: hotel.title,
+      price: hotel.price,
+      rating: hotel.rating,
+      address: hotel.address,
+      url: hotel.link
+    }));
+
+    res.json(hotels);
+  } catch (error) {
+    console.error('Error fetching hotel data:', error);
+    res.status(500).json({ error: 'Error fetching hotel data' });
+  }
+});
+
+// Start server
 const PORT = process.env.PORT || 8080;
 server.listen(PORT, () => {
-  console.log(`http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });

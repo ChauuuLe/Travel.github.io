@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import Navbar from '../navbar/navbar';
-import FlightSearchForm from '../../Components/searchbar/SearchBarFlight';
+import FlightSearchForm from '../../Components/SearchBar/SearchBarFlight';
 import FlightSearchResult from '../../Components/FlightSearchResult/FlightSearchResult';
 import Footer from '../footer/Footer';
 import videoBg from '../../assets/video.mp4';
