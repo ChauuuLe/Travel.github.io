@@ -75,11 +75,12 @@ const Navbar = () => {
   );
 
   const renderUnauthenticatedNavbar = () => (
-    <div className="auth-links">
+    <div className="nav-actions">
       <Link to="/signin" className="signin"><i className="fas fa-sign-in-alt"></i> Sign In</Link>
       <Link to="/signup" className="signup"><i className="fas fa-user-plus"></i> Sign Up</Link>
     </div>
   );
+  
 
   return (
     <section className={`navBarSection ${scrollDirection === 'down' ? 'hidden' : ''}`}>
