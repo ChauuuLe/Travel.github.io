@@ -1,43 +1,42 @@
 const { getJson } = require("serpapi");
+const env = require("dotenv");
+env.config();
 
 exports.getHotels = async (req, res) => {
-    const { destination, check_in_date, check_out_date, adults } = req.query;
+  const { destination, checkIn, checkOut, adults } = req.query;
 
-    if (!destination || !check_in_date || !check_out_date || !adults) {
-        return res.status(400).json({ error: 'Missing required query parameters' });
-    }
+  // Check for missing query parameters
+  if (!destination || !checkIn || !checkOut || !adults) {
+    return res.status(400).json({ error: 'Missing required query parameters' });
+  }
 
-    try {
-        getJson({
-            engine: "google_hotels",
-            q: destination,
-            check_in_date: check_in_date,
-            check_out_date: check_out_date,
-            adults: adults,
-            currency: "USD",
-            gl: "us",
-            hl: "en",
-            api_key: process.env.SERPAPI_KEY
-        }, (json) => {
-            if (json.error) {
-                return res.status(400).json({ error: json.error });
-            }
+  const params = {
+    engine: "google_hotels",
+    q: destination,
+    vacation_rentals: "true",
+    check_in_date: checkIn,
+    check_out_date: checkOut,
+    adults: adults,
+    currency: "USD",
+    gl: "us",
+    hl: "en",
+    api_key: process.env.SERPAPI_KEY,
+  };
 
-            if (json.hotels_results && json.hotels_results.length > 0) {
-                const hotels = json.hotels_results.map(hotel => ({
-                    name: hotel.title,
-                    price: hotel.price,
-                    rating: hotel.rating,
-                    address: hotel.address,
-                    url: hotel.link
-                }));
-                res.json({ hotels });
-            } else {
-                res.status(404).json({ error: 'No hotels found' });
-            }
-        });
-    } catch (error) {
-        console.error('Error fetching hotel data:', error);
-        res.status(500).json({ error: 'Error fetching hotel data' });
-    }
+  try {
+    getJson(params, (json) => {
+      if (json.error) {
+        return res.status(400).json({ error: json.error });
+      }
+
+      if (json.properties && json.properties.length > 0) {
+        res.status(200).json({ properties: json.properties });
+      } else {
+        res.status(200).json({ not_found: 'No hotels found' });
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching hotel data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 };

@@ -105,40 +105,6 @@ io.on('connection', (socket) => {
   });
 });
 
-app.get('/api/hotels', async (req, res) => {
-  const { destination, checkIn, checkOut, adults } = req.query;
-  const client = new Client({
-    apiKey: process.env.SERPAPI_KEY
-  });
-
-  try {
-    const response = await client.json({
-      engine: "google_hotels",
-      q: destination,
-      check_in_date: checkIn,
-      check_out_date: checkOut,
-      adults: adults,
-      currency: "USD",
-      gl: "us",
-      hl: "en",
-      api_key: "1a61a0e1bd6860f2e449887a8a263b323b2b6db835bf96ffdd024eeb98d8ae4c"
-    });
-
-    const hotels = response.hotels_results.map(hotel => ({
-      name: hotel.title,
-      price: hotel.price,
-      rating: hotel.rating,
-      address: hotel.address,
-      url: hotel.link
-    }));
-
-    res.json(hotels);
-  } catch (error) {
-    console.error('Error fetching hotel data:', error);
-    res.status(500).json({ error: 'Error fetching hotel data' });
-  }
-});
-
 // Start server
 const PORT = process.env.PORT || 8080;
 server.listen(PORT, () => {
