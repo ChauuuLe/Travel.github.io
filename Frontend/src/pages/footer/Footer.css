@@ -98,3 +98,38 @@
 .footer-bottom p {
     margin: 0;
 }
+
+/* Night mode adjustments */
+body.night .footer {
+    background-color: #222; /* Darker background for night mode */
+    color: #bbb; /* Lighter text color for better readability */
+}
+
+body.night .footer-section h3 {
+    color: #fff; /* White for headings in night mode */
+}
+
+body.night .footer-section p,
+body.night .footer-section ul,
+body.night .footer-section ul li a {
+    color: #ccc; /* Slightly lighter color for text */
+}
+
+body.night .footer-section ul li a:hover {
+    color: #00bfff; /* Brighter color on hover */
+}
+
+body.night .socials a {
+    color: #ccc; /* Lighter color for social icons */
+    background: #222; /* Darker background */
+}
+
+body.night .socials a:hover {
+    color: #00bfff;
+    box-shadow: 0 0 15px #00bfff;
+}
+
+body.night .footer-bottom {
+    background-color: #111; /* Darker footer bottom */
+    color: #888; /* Lighter text color */
+}

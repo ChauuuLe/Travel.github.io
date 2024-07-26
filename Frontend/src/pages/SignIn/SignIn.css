@@ -41,6 +41,7 @@ h1 {
     background: -webkit-linear-gradient(#1900ff, #bab5ef);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+    text-decoration: none;
 }
 
 h2 {

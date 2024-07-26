@@ -58,7 +58,6 @@ const Navbar = () => {
   };
 
   const handleLogout = async () => {
-    console.log(import.meta.env.VITE_BACKEND);
     await signout();
     navigate('/');
   };
@@ -98,7 +97,7 @@ const Navbar = () => {
               <li><Link to="/flight"><i className="fa-solid fa-plane"></i> Flight</Link></li>
               <li><Link to="/destinations"><i className="fas fa-map-marked-alt"></i> Destinations</Link></li>
               <li><a href="http://localhost:3000"><i className="fas fa-cloud-sun"></i> Weather</a></li>
-              <li>
+              <li className="dropdown">
                 <a
                   onClick={toggleDropdown}
                   role="button"
@@ -108,9 +107,9 @@ const Navbar = () => {
                   <i className="fas fa-route"></i> Plan Your Trip
                 </a>
                 {isOpen && (
-                  <div className="dropdown-content show">
-                    <Link to="/tripgroup">Your Groups</Link>
-                    <Link to="/creategroup">New group</Link>
+                  <div className="dropdown-content">
+                    <Link to="/tripgroup"><i className="fas fa-users"></i> Your Groups</Link>
+                    <Link to="/creategroup"><i className="fas fa-plus-circle"></i> New Group</Link>
                   </div>
                 )}
               </li>

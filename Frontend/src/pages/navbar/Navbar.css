@@ -12,6 +12,51 @@
 
 body.night .navBarSection {
   background-color: rgba(0, 0, 0, 0.9);
+  color: #fff;
+}
+
+body.night .navbar-container {
+  color: #fff;
+}
+
+body.night .navLists li a {
+  color: #fff;
+}
+
+body.night .navLists li a:hover {
+  color: #00bfff;
+}
+
+body.night .navLists li a::after {
+  background-color: #00bfff;
+}
+
+body.night .nav-actions .signin,
+body.night .nav-actions .signup {
+  color: #fff;
+  border-color: #00bfff;
+}
+
+body.night .navLists li .dropdown-content {
+  background-color: black; /* Change to black in dark mode */
+}
+
+body.night .nav-actions .signin:hover,
+body.night .nav-actions .signup:hover {
+  background-color: #00bfff;
+}
+
+body.night .profile-dropdown {
+  background-color: #333;
+  color: #fff;
+}
+
+body.night .profile-dropdown button {
+  color: #fff;
+}
+
+body.night .profile-dropdown button:hover {
+  background-color: #555;
 }
 
 .navBarSection.hidden {
@@ -41,7 +86,7 @@ body.night .navBarSection {
 }
 
 .logo a {
-  text-decoration: none;
+  text-decoration: none; /* Ensure no underline */
   color: inherit;
   transition: color 0.3s ease;
 }
@@ -74,10 +119,11 @@ body.night .navBarSection {
 
 .navLists li {
   margin-right: 15px;
+  position: relative; /* Needed for dropdown positioning */
 }
 
 .navLists li a {
-  text-decoration: none;
+  text-decoration: none; /* Remove underline */
   color: inherit;
   font-size: 16px;
   display: flex;
@@ -99,21 +145,6 @@ body.night .navBarSection {
   color: #007bff;
 }
 
-.navLists li a.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: white;
-  min-width: 160px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.navLists li a.dropdown-content.show {
-  display: block;
-}
-
 .navLists li a::after {
   content: '';
   position: absolute;
@@ -132,6 +163,38 @@ body.night .navBarSection {
 
 .navLists li a:active {
   color: #0056b3;
+}
+
+.navLists .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+.navLists .dropdown-content a {
+  display: block;
+  padding: 10px 20px;
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.navLists .dropdown-content a:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.navLists .dropdown:hover .dropdown-content {
+  display: block;
 }
 
 .nav-actions {
