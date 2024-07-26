@@ -4,7 +4,7 @@ import HomePage from './pages/Homepage/Homepage';
 import SignIn from './pages/SignIn/SignIn';
 import SignUp from './pages/SignUp/SignUp';
 import HotelSearchPage from './pages/HotelSearchPage/HotelSearchPage';
-import FlightSearchPage from './pages/flightsearchpage/flightSearchPage';
+import FlightSearchPage from './pages/FlightSearchPage/FlightSearchPage';
 import Navbar from '../../Frontend/src/pages/navbar/navbar';
 import TripGroup from './pages/TripGroup/TripGroup';
 import CreateGroup from './pages/createGroup/createGroup';

@@ -34,14 +34,14 @@ function HotelSearchForm({ onSearch }) {
         type="date"
         value={checkIn}
         onChange={(e) => setCheckIn(e.target.value)}
-        min={today} // Prevent past dates
+        min={today}
         required
       />
       <input
         type="date"
         value={checkOut}
         onChange={(e) => setCheckOut(e.target.value)}
-        min={checkIn || today} // Ensure check-out date is not before check-in date or today
+        min={checkIn || today}
         required
       />
       <input

@@ -10,7 +10,7 @@ function HotelSearchPage() {
 
   const fetchHotels = async (searchParams) => {
     const url = `${import.meta.env.VITE_BACKEND}/api/hotels`;
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
 
     try {
       const response = await axios.get(url, { params: searchParams });
@@ -36,7 +36,7 @@ function HotelSearchPage() {
   };
 
   const handleSearch = async (searchParams) => {
-    console.log(searchParams);
+    //console.log(searchParams);
     await fetchHotels(searchParams);
   };
 
@@ -45,7 +45,7 @@ function HotelSearchPage() {
       <h1>Hotel Search</h1>
       <HotelSearchForm onSearch={handleSearch} />
       {isLoading ? (
-        <p>Loading...</p> // You can replace this with a spinner or a more sophisticated loading component
+        <p>Loading...</p>
       ) : (
         <>
           {error && <p style={{ color: 'red' }}>{error}</p>}
