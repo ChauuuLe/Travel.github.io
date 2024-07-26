@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import "./SignIn.css";
+import { SnackbarProvider, useSnackbar } from 'notistack';
+import './SignIn.css';
 
 const SignIn = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    document.body.classList.add("sign-in-page");
+    document.body.classList.add('sign-in-page');
     return () => {
-      document.body.classList.remove("sign-in-page");
+      document.body.classList.remove('sign-in-page');
     };
   }, []);
 
@@ -44,8 +46,16 @@ const SignIn = () => {
       localStorage.setItem('expiresIn', Date.now() + 7200000); // Save expiration time (2 hours)
       const user = await getCurrentUser(); // Fetch current user after setting the token
       localStorage.setItem('currentUser', JSON.stringify(user)); // Save user to localStorage
-      navigate("/");
-      alert("Sign in successful");
+
+      enqueueSnackbar('Sign in successful', {
+        variant: 'success',
+        className: 'custom-snackbar', // Apply custom snackbar class
+        action: key => (
+          <button onClick={() => navigate('/')}>
+            Go to Home
+          </button>
+        ),
+      });
     } catch (err) {
       const errorMessage = err.response ? err.response.data.message : err.message;
       setMessage(`Sign in failed: ${errorMessage}`);
@@ -97,4 +107,15 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+const HomePage = () => (
+  <div></div>
+);
+
+const App = () => (
+  <SnackbarProvider maxSnack={3}>
+    <SignIn />
+    <HomePage />
+  </SnackbarProvider>
+);
+
+export default App;
