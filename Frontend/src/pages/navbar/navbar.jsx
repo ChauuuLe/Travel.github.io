@@ -51,7 +51,8 @@ const Navbar = () => {
     try {
       await axios.post(`${import.meta.env.VITE_BACKEND}/api/auth/signout`);
       localStorage.clear();
-      navigate("/signin");
+      setCurrentUser(null); // Ensure state is updated
+      navigate(''); // Redirect to signin page
     } catch (err) {
       console.error('Sign out failed', err);
     }
@@ -59,7 +60,6 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     await signout();
-    navigate('/');
   };
 
   if (location.pathname === '/signin' || location.pathname === '/signup') {
@@ -80,7 +80,6 @@ const Navbar = () => {
       <Link to="/signup" className="signup"><i className="fas fa-user-plus"></i> Sign Up</Link>
     </div>
   );
-  
 
   return (
     <section className={`navBarSection ${scrollDirection === 'down' ? 'hidden' : ''}`}>
