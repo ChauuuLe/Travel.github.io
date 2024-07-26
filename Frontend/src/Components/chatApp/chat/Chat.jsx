@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import EmojiPicker from "emoji-picker-react";
 import io from "socket.io-client";
-import "./chat.css";
+import "./chat.css"; // Ensure this CSS file contains styles specific to the Chat component
 import { useNavigate } from "react-router-dom";
 
 const socket = io(import.meta.env.VITE_BACKEND); // Adjust the backend URL
@@ -15,6 +15,14 @@ const Chat = ({ chatId, setChatId }) => {
   const endRef = useRef(null);
   const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.classList.add("chat-page");
+    return () => {
+      document.body.classList.remove("chat-page");
+    };
+  }, []);
+
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("currentUser"));
@@ -73,8 +81,8 @@ const Chat = ({ chatId, setChatId }) => {
       const token = localStorage.getItem('token');
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND}/api/messages`,
-        { 
-          text, 
+        {
+          text,
           sender: currentUser._id,
           chatId,
         },
@@ -103,9 +111,10 @@ const Chat = ({ chatId, setChatId }) => {
 
   const renderMessages = (messages) => (
     messages.map((msg, index) => (
-      <div key={index} className={`message ${msg.sender._id === currentUser._id ? "own" : ""}`}>
+      <div key={index} className={`message ${msg.sender._id === currentUser?._id ? "own" : ""}`}>
         <img src={renderAvatar(msg.sender.avatar)} alt="avatar" />
         <div className="texts">
+          <span className="sender-name">{msg.sender.username}</span>
           <p>{msg.text}</p>
           <span>{new Date(msg.createdAt).toLocaleTimeString()}</span>
         </div>
@@ -114,15 +123,12 @@ const Chat = ({ chatId, setChatId }) => {
   );
 
   return (
-    <div className="chat">
+    <div className="chat custom-chat-background">
       <div className="top">
         <div className="user">
           <div className="texts">
             <span>{chat?.groupName}</span>
           </div>
-        </div>
-        <div className="icons">
-          <img src="./assets/calendar.png" alt="" />
         </div>
       </div>
       <div className="center">
@@ -130,17 +136,12 @@ const Chat = ({ chatId, setChatId }) => {
         <div ref={endRef}></div>
       </div>
       <div className="bottom">
-        <div className="icons">
-          <img src="./assets/img.png" alt="" />
-          <img src="./assets/camera.png" alt="" />
-          <img src="./assets/mic.png" alt="" />
-        </div>
         <input
           type="text"
           placeholder="Type a message..."
           value={text}
           onChange={(e) => setText(e.target.value)}
-          onKeyPress={handleKeyPress} // Handle Enter key press
+          onKeyPress={handleKeyPress}
         />
         <div className="emoji">
           <img src="./assets/emoji.png" alt="" onClick={() => setOpen((prev) => !prev)} />

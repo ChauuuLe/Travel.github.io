@@ -31,10 +31,10 @@ const ChatList = ({ setChatId, chatId }) => {
           },
         });
         const chats = response.data;
-        chats.sort((a, b) => new Date(b.lastMessage?.createdAt || b.createdAt) - new Date(a.lastMessage?.createdAt || a.createdAt)); // Sort chats by last message or creation time
+        chats.sort((a, b) => new Date(b.lastMessage?.createdAt || b.createdAt) - new Date(a.lastMessage?.createdAt || a.createdAt));
         setUserChats(chats);
         if (chats.length > 0 && !chatId) {
-          setChatId(chats[0]._id); // Set default chatId to the first chat in the list
+          setChatId(chats[0]._id);
         }
       } catch (err) {
         console.error('Error fetching user chats', err);
@@ -62,16 +62,17 @@ const ChatList = ({ setChatId, chatId }) => {
 
   const renderLastMessage = (lastMessage) => {
     if (lastMessage && lastMessage.sender) {
+      const truncatedText = lastMessage.text.length > 20 ? `${lastMessage.text.substring(0, 20)}...` : lastMessage.text;
       return (
         <div className="texts">
           <span>{lastMessage.sender.username}</span>
-          <p>{lastMessage.text}</p>
+          <p className="last-message">{truncatedText}</p>
         </div>
       );
     }
     return (
       <div className="texts">
-        <p>{'No messages yet'}</p>
+        <p className="last-message">{'No messages yet'}</p>
       </div>
     );
   };
@@ -94,11 +95,11 @@ const ChatList = ({ setChatId, chatId }) => {
         <div className="searchBar">
           <input type="text" placeholder="Search" />
         </div>
-        <img 
-          src={addMode ? "./assets/minus.png" : "./assets/plus.png"} 
-          alt="addIcon" 
-          className="add" 
-          onClick={() => setAddMode((prev) => !prev)} 
+        <img
+          src={addMode ? "./assets/minus.png" : "./assets/plus.png"}
+          alt="addIcon"
+          className="add"
+          onClick={() => setAddMode((prev) => !prev)}
         />
       </div>
       <div>
@@ -107,6 +108,6 @@ const ChatList = ({ setChatId, chatId }) => {
       {addMode && <AddUser />}
     </div>
   );
-};
+}
 
 export default ChatList;
