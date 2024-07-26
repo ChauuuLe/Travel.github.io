@@ -16,7 +16,7 @@ import UserProfile from '../../Frontend/src/pages/userProfile/userProfile';
 const App = () => {
   return (
     <>
-      <Navbar />
+    <Navbar/>
       <Routes>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />

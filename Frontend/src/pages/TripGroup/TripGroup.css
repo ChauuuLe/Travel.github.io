@@ -6,17 +6,6 @@
       "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   }
   
-  body {
-    background-image: url("../../bg.jpg");
-    background-size: cover;  /* Cover the entire size of the screen */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    color: white;
-  }
   
   .container {
     width: 80vw;
