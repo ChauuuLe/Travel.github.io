@@ -1,339 +1,170 @@
 /* General Styles */
-.findUsers {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    width: 100%;
-    max-width: 600px;
-    margin: 20px auto;
-    transition: background-color 0.3s ease, color 0.3s ease;
+body.create-group-page {
+background-color: #f5f5f5; /* Light background specific to CreateGroup */
+color: #333; /* Dark text color for contrast */
+margin: 0;
+padding: 0;
+font-family: Arial, sans-serif;
 }
 
-body.night .findUsers {
-    background: #333333;
-    color: #ffffff;
+.background-video {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+z-index: -1;
+filter: brightness(90%); /* Adjust brightness if needed */
+}
+
+.create-group-container {
+position: relative;
+z-index: 1;
+background-color: rgba(255, 255, 255, 0.85); /* Optional for content readability */
+border-radius: 8px;
+padding: 20px;
+max-width: 1000px;
+margin: auto;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+font-size: 2em;
+text-align: center;
+color: #333;
+}
+
+h1 {
+margin-bottom: 20px;
+}
+
+.findUsers {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 20px;
+background-color: #ffffff; /* White background */
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+border-radius: 8px;
+width: 100%;
+max-width: 600px;
+margin: 20px auto;
 }
 
 .findUsers form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
 }
 
 .findUsers input {
-    width: 90%;
-    padding: 12px;
-    margin-bottom: 12px;
-    border: 1px solid #dddddd;
-    border-radius: 5px;
-    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-}
-
-body.night .findUsers input {
-    background: #444444;
-    color: #ffffff;
-    border-color: #555555;
+width: 90%;
+padding: 12px;
+margin-bottom: 12px;
+border: 1px solid #dddddd;
+border-radius: 5px;
+background-color: #ffffff; /* White background */
+transition: border-color 0.3s ease;
 }
 
 .findUsers input:focus,
 .findUsers input:hover {
-    border-color: #009879;
-    background-color: #e9f7ef;
-    outline: none;
-}
-
-body.night .findUsers input:focus,
-body.night .findUsers input:hover {
-    border-color: #80b3a1;
-    background-color: #2f4f4f;
+border-color: #009879; /* Light green border on focus/hover */
+background-color: #e9f7ef; /* Light green background on focus/hover */
+outline: none;
 }
 
 .findUsers button {
-    width: 90%;
-    padding: 12px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.findUsers button::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 300%;
-    height: 300%;
-    background-color: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%) scale(0);
-    border-radius: 50%;
-    transition: transform 0.6s, opacity 0.6s;
-    z-index: 0;
-    opacity: 0;
-}
-
-.findUsers button:hover::before {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
+width: 90%;
+padding: 12px;
+background-color: #3498db; /* Primary blue background */
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+position: relative;
+overflow: hidden;
+transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .findUsers button:hover {
-    background-color: #2980b9;
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-body.night .findUsers button {
-    background-color: #444444;
-    color: #ffffff;
-}
-
-body.night .findUsers button:hover {
-    background-color: #555555;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+background-color: #2980b9; /* Darker blue on hover */
+transform: scale(1.05);
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .user {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    margin-top: 10px;
-    background: #f8f8f8;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, color 0.3s ease;
-    width: 100%;
-}
-
-body.night .user {
-    background: #555555;
-    color: #ffffff;
+display: flex;
+align-items: center;
+padding: 10px;
+margin-top: 10px;
+background: #ffffff; /* Changed background to white */
+border-radius: 5px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+width: 100%;
 }
 
 .user:hover {
-    background-color: #e0e0e0;
-}
-
-body.night .user:hover {
-    background-color: #666666;
+background-color: #f0f0f0; /* Light gray on hover */
 }
 
 .user .detail {
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    flex-grow: 1;
+display: flex;
+align-items: center;
+padding: 0 10px;
+flex-grow: 1;
+background-color: white;
+border-radius: 5;
+border: #000000;
 }
 
 .user img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.user .divider {
-    width: 1px;
-    height: 40px;
-    background-color: #ddd;
-    margin: 0 15px;
-}
-
-body.night .user .divider {
-    background-color: #888;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+object-fit: cover;
 }
 
 .user span {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #333;
-}
-
-body.night .user span {
-    color: #fff;
+font-size: 1.2em;
+font-weight: bold;
+color: #000000; /* Dark text color */
 }
 
 .user button {
-    padding: 8px 12px;
-    background-color: #009879;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+padding: 8px 12px;
+background-color: #009879; /* Green background */
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s ease;
 }
 
-body.night .user button {
-    background-color: #666666;
-    color: #ffffff;
-}
-
-.user button:not(:disabled):hover {
-    background-color: #007b63;
-}
-
-body.night .user button:not(:disabled):hover {
-    background-color: #555555;
-}
-
-.user button:not(:disabled):active {
-    background-color: #005a45;
-}
-
-body.night .user button:not(:disabled):active {
-    background-color: #333333;
+.user button:hover {
+background-color: #007b63; /* Darker green on hover */
 }
 
 .not-found-message {
-    color: red;
-    margin-top: 10px;
-}
-
-body.night .not-found-message {
-    color: #ff6666;
+color: red;
+margin-top: 10px;
 }
 
 /* Heading Style */
-h1 {
-    text-align: center;
-    color: #3498db;
-    margin-bottom: 20px;
+h2 {
+margin: 20px 0; /* Add margin to separate from other elements */
 }
-
-body.night h1 {
-    color: #ffffff;
-}
-
-/* Members List */
-.members-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-body.night .members-list {
-    background: #333333;
-}
-
-/* New Structure for User List Item */
-/* Existing CSS omitted for brevity */
 
 /* Scrollable Container for Added Users */
 .addedUsersContainer {
-    max-height: 300px;
-    /* Adjust this height as needed */
-    overflow-y: auto;
-    width: 100%;
-    padding: 10px;
-    background: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin-top: 20px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.night .addedUsersContainer {
-    background: #333333;
-    color: #ffffff;
-}
-
-/* General Styles for User List */
-.user {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    margin-top: 10px;
-    background: #f8f8f8;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, color 0.3s ease;
-    width: 100%;
-}
-
-body.night .user {
-    background: #555555;
-    color: #ffffff;
-}
-
-.user:hover {
-    background-color: #e0e0e0;
-}
-
-body.night .user:hover {
-    background-color: #666666;
-}
-
-.user .detail {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    justify-content: space-between;
-}
-
-.user img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-}
-
-.user .user-object {
-    font-size: 1em;
-    color: #009879;
-}
-
-body.night .user .user-object {
-    color: #1e90ff;
-}
-
-.user .user-name {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #333;
-}
-
-body.night .user .user-name {
-    color: #fff;
-}
-
-.user button {
-    padding: 8px 12px;
-    background-color: #009879;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-body.night .user button {
-    background-color: #666666;
-    color: #ffffff;
-}
-
-.user button:not(:disabled):hover {
-    background-color: #007b63;
-}
-
-body.night .user button:not(:disabled):hover {
-    background-color: #555555;
-}
-
-.user button:not(:disabled):active {
-    background-color: #005a45;
-}
-
-body.night .user button:not(:disabled):active {
-    background-color: #333333;
+max-height: 300px;
+overflow-y: auto;
+width: 100%;
+padding: 10px;
+background: #ffffff; /* White background */
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+border-radius: 8px;
+margin-top: 20px;
 }

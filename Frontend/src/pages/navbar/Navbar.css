@@ -5,8 +5,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
-  padding: 10px 0;
+  z-index: 9000;
+  padding: 5px 0;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -38,7 +38,7 @@ body.night .nav-actions .signup {
 }
 
 body.night .navLists li .dropdown-content {
-  background-color: black; /* Change to black in dark mode */
+  background-color: black;
 }
 
 body.night .nav-actions .signin:hover,
@@ -65,7 +65,7 @@ body.night .profile-dropdown button:hover {
 
 .header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 0 20px;
   width: 100%;
@@ -86,7 +86,7 @@ body.night .profile-dropdown button:hover {
 }
 
 .logo a {
-  text-decoration: none; /* Ensure no underline */
+  text-decoration: none;
   color: inherit;
   transition: color 0.3s ease;
 }
@@ -119,11 +119,11 @@ body.night .profile-dropdown button:hover {
 
 .navLists li {
   margin-right: 15px;
-  position: relative; /* Needed for dropdown positioning */
+  position: relative;
 }
 
 .navLists li a {
-  text-decoration: none; /* Remove underline */
+  text-decoration: none;
   color: inherit;
   font-size: 16px;
   display: flex;
@@ -159,10 +159,6 @@ body.night .profile-dropdown button:hover {
 .navLists li a:hover::after {
   width: 100%;
   left: 0;
-}
-
-.navLists li a:active {
-  color: #0056b3;
 }
 
 .navLists .dropdown-content {
@@ -201,48 +197,23 @@ body.night .profile-dropdown button:hover {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 20px;
   flex: 1;
 }
 
-.nav-actions .signin {
-  text-decoration: none;
-  color: inherit;
-  font-size: 16px;
-  margin-left: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  height: 100%;
-  padding: 10px 20px;
-  border-radius: 4px;
-  transition: color 0.3s ease, background-color 0.3s ease;
-  border: 2px solid #007bff;
-}
-
+.nav-actions .signin,
 .nav-actions .signup {
   text-decoration: none;
   color: inherit;
   font-size: 16px;
-  margin-left: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  height: 100%;
   padding: 10px 20px;
   border-radius: 4px;
   transition: color 0.3s ease, background-color 0.3s ease;
   border: 2px solid #007bff;
-}
-
-.nav-actions .signin i,
-.nav-actions .signup i {
-  margin-right: 5px;
-}
-
-.nav-actions .signup {
-  background-color: transparent;
 }
 
 .nav-actions .signin:hover,
@@ -258,14 +229,8 @@ body.night .profile-dropdown button:hover {
   background-color: #aa0606;
 }
 
-.nav-actions .signin:active,
-.nav-actions .signup:active {
-  color: #000;
-}
-
 .theme-toggle {
   margin-right: 20px;
-  margin-left: 20px;
 }
 
 .profile-menu {
@@ -275,10 +240,11 @@ body.night .profile-dropdown button:hover {
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   cursor: pointer;
+  display: block;
 }
 
 .profile-dropdown {
@@ -294,6 +260,7 @@ body.night .profile-dropdown button:hover {
   width: 150px;
   border-radius: 8px;
   overflow: hidden;
+  padding: 10px 0;
 }
 
 .profile-dropdown button {

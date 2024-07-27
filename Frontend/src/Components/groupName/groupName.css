@@ -1,3 +1,13 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+/* Group Name Container Styles */
 .group-name-container {
   display: flex;
   flex-direction: column;
@@ -24,6 +34,7 @@ body.night .group-name-container:hover {
   background-color: #444444;
 }
 
+/* Input Styles */
 .group-name-container input {
   width: 80%;
   padding: 10px;
@@ -55,6 +66,7 @@ body.night .group-name-container input:hover {
   background-color: #2f4f4f;
 }
 
+/* Button Styles */
 .group-name-container button {
   width: 50%;
   padding: 10px;

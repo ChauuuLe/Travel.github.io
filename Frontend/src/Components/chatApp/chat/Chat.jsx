@@ -125,7 +125,7 @@ const Chat = ({ chatId, setChatId }) => {
   return (
     <div className="chat custom-chat-background">
       <div className="top">
-        <div className="user">
+        <div className="userd">
           <div className="texts">
             <span>{chat?.groupName}</span>
           </div>

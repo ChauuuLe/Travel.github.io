@@ -85,7 +85,7 @@ const FindUsers = (props) => {
 
   return (
     <div>
-      <h1>Find your travel mate lah!</h1>
+      <h1>Find your travel mate!</h1>
       <div className="findUsers">
         <form onSubmit={handleSearch}>
           <input
@@ -100,6 +100,7 @@ const FindUsers = (props) => {
         {loading && <p>Loading...</p>}
         {userToAdd}
       </div>
+      <h2 className="current-user-heading">Current User</h2>
       <div className="addedUsersContainer">
         {data.members.map((user) => (
           <div className='user' key={user._id}>
@@ -112,6 +113,7 @@ const FindUsers = (props) => {
       </div>
     </div>
   );
+  
 };
 
 export default FindUsers;
