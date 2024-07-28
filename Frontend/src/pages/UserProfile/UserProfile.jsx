@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import './UserProfile.css';
+import './userProfile.css';
 
 const UserProfile = () => {
   const { userId } = useParams();
@@ -82,7 +82,7 @@ const UserProfile = () => {
       {user && (
         <div className="profile-content">
           <div className="avatar-section" onClick={handleAvatarClick}>
-            <img src={user.avatar || "./assets/avatar.png"} alt="User Avatar" className="avatar" />
+            <img src={user.avatar || "./assets/avatar.png"} alt="User Avatar" className="avatard" />
           </div>
           {showAvatarForm && (
             <div className="avatar-form">
