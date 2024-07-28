@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import ThemeToggle from '../../Components/ThemeToggle/ThemeToggle';
 import ProfileMenu from '../../Components/ProfileMenu/ProfileMenu';
 import "../navbar/Navbar.css";
 
@@ -94,7 +93,6 @@ const Navbar = () => {
               <h1>The Travel.</h1>
             </Link>
           </div>
-          <ThemeToggle />
           <nav className="navBar">
             <ul className='navLists flex'>
               <li><Link to="/hotels"><i className="fas fa-hotel"></i> Hotels</Link></li>

@@ -51,7 +51,12 @@ const SignIn = () => {
         variant: 'success',
         className: 'custom-snackbar', // Apply custom snackbar class
         action: key => (
-          <button onClick={() => navigate('/')}>
+          <button onClick={() => {
+            navigate('/'); // Navigate to home page
+            setTimeout(() => {
+              window.location.reload(); // Reload the page
+            }, 100); // Adjust delay as needed
+          }}>
             Go to Home
           </button>
         ),
@@ -95,7 +100,9 @@ const SignIn = () => {
               <input type="checkbox" /> Remember me
             </label>
           </div>
-          <button type="submit" className="sign-in-button">Sign in</button>
+          <button type="submit" className="sign-in-button" disabled={loading}>
+            Sign in
+          </button>
           <hr className="separator" />
           <div className="register">
             <p>Create Account <a href="/signup">Register</a></p>
@@ -108,7 +115,8 @@ const SignIn = () => {
 };
 
 const HomePage = () => (
-  <div></div>
+  <div>
+  </div>
 );
 
 const App = () => (
