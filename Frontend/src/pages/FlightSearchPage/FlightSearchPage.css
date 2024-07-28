@@ -65,4 +65,7 @@
     color: #777;
     margin-top: 10px;
   }
-  
+
+  .loading {
+    text-align: center;
+  }

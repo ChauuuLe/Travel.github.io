@@ -1,0 +1,141 @@
+/* Center the User Profile Page */
+.user-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Added padding for better spacing */
+    background-color: #f4f4f4; /* Light background color for contrast */
+  }
+  
+  /* Container for the Profile Content */
+  .profile-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 800px; /* Adjusted width for consistency */
+    max-width: 100%; /* Ensures responsiveness */
+    color: black;
+    text-align: center; /* Center-align text for profile info */
+  }
+  
+  .profile-content h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-content p {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  /* Section for Profile Information */
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .profile-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 15px 0;
+  }
+  
+  .profile-label {
+    font-weight: bold;
+    flex: 1;
+    text-align: right; /* Align labels to the right */
+    padding-right: 10px; /* Space between label and value */
+  }
+  
+  .profile-value {
+    flex-grow: 2;
+    margin-left: 10px;
+    color: black;
+    text-align: left; /* Align values to the left */
+  }
+  
+  .profile-edit {
+    margin-left: 20px;
+  }
+  
+  /* Avatar Styling */
+  .avatar-section {
+    position: relative;
+  }
+  
+  .avatar {
+    width: 100px; /* Increased size for better visibility */
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border: 2px solid #007bff;
+  }
+  
+  /* Button Styles */
+  .edit-button,
+  .cancel-button,
+  .save-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .avatar-section {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #007bff;
+    margin-bottom: 20px;
+  }
+  
+  .avatar-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .avatar-form input {
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 250px;
+  }
+  
+  .avatar-form button {
+    padding: 8px 16px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .avatar-form button:first-of-type {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .avatar-form button:last-of-type {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .avatar-form button:hover {
+    opacity: 0.9;
+  }
+  
+  

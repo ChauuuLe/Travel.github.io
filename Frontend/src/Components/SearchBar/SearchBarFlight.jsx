@@ -53,7 +53,7 @@ const FlightSearchForm = ({ onSearch }) => {
             <FaPlaneDeparture className="input-icon" />
             <input
               type="text"
-              placeholder="Airport Name"
+              placeholder="Airport ID (Ex: PEK)"
               value={departure}
               onChange={(e) => setDeparture(e.target.value)}
               required
@@ -65,7 +65,7 @@ const FlightSearchForm = ({ onSearch }) => {
             <FaPlaneArrival className="input-icon" />
             <input
               type="text"
-              placeholder="Airport Name"
+              placeholder="Airport ID (Ex: AUS)"
               value={arrival}
               onChange={(e) => setArrival(e.target.value)}
               required

@@ -6,7 +6,7 @@ const FlightSearchResult = ({ results }) => {
   return (
     <div className="FlightSearchResult">
       {results.length === 0 ? (
-        <p>Try to find your flights</p>
+        <p className="no-results-message">Try to find your flights</p>
       ) : (
         results.map((result, index) => (
           <div key={index} className="flight-card">
@@ -15,7 +15,7 @@ const FlightSearchResult = ({ results }) => {
               <div className="flight-info">
                 <div className="flight-date">
                   <span>{new Date(result.flights[0].departure_airport.time).toDateString()}</span>
-                  <span>{result.total_duration} min total</span>
+                  <span>{result.total_duration} mins <strong>Total</strong> </span>
                 </div>
                 <div className="flight-carbon">
                   <span>{(result.carbon_emissions.this_flight / 1000).toFixed(2)} kg CO₂</span>
@@ -37,10 +37,16 @@ const FlightSearchResult = ({ results }) => {
                   </div>
                   <div className="flight-route">
                     <div className="flight-departure">
-                      <strong>{flight.departure_airport.name} ({flight.departure_airport.id})</strong>
+                      <strong> {flight.departure_airport.name} ({flight.departure_airport.id})</strong>
                     </div>
+                    <div className="flight-go">
+                      <div className="go-start"></div>
+                      <div className="go-dots"></div>
+                      <div className="go-end"></div>
+                    </div>
+                    
                     <div className="flight-arrival">
-                      <strong>{flight.arrival_airport.name} ({flight.arrival_airport.id})</strong>
+                      <strong> {flight.arrival_airport.name} ({flight.arrival_airport.id})</strong>
                     </div>
                   </div>
                   <div className="flight-details">

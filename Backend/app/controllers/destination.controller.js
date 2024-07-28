@@ -82,3 +82,13 @@ exports.getCountryDetails = (req, res) => {
     }
   });
 };
+
+exports.getDestinationsByAuthor = async (req, res) => {
+  try {
+    const destinations = await Destination.find({ author: req.params.userId }).populate('author', 'username email');
+    res.json(destinations);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+

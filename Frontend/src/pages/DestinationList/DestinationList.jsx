@@ -133,7 +133,12 @@ const DestinationList = () => {
                 <h3>{destination.name}</h3>
                 <p>Country: {destination.emoji} {destination.country}</p>
                 <p>City: {destination.city}</p>
-                <p>Author: {destination.author.username}</p>
+                <Link
+                  to={`/profile/${author._id}`}
+                  target="_blank"
+                >
+                  <p>Author: {destination.author.username}</p>
+                </Link>
                 <p>Avg Cost: ${destination.averageCost}</p>
               </div>
             </Link>

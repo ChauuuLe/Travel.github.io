@@ -40,6 +40,7 @@
   color: #555;
   display: flex;
   flex-direction: column;
+  margin-right: 20px;
 }
 
 .flight-price {
@@ -91,6 +92,7 @@
 .overnight {
   color: #d9534f;
   font-weight: bold;
+  margin-left: 20px;
 }
 
 .layover-info {
@@ -102,3 +104,37 @@
   left: 0;
   width: 100%;
 }
+
+.no-results-message {
+  font-size: 1.5em; /* Adjust the font size as needed */
+  font-weight: bold; /* Make the text bold */
+  color: #333; /* Set the text color */
+  margin-top: 50px;
+  text-align: center;
+}
+
+.flight-go {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; /* Stacks elements vertically */
+  margin-left: -20px;
+}
+
+.go-start,
+.go-end {
+  width: 10px; /* Adjust size as needed */
+  height: 10px; /* Adjust size as needed */
+  background-color: #ddd; /* Color of the circles */
+  border-radius: 50%; /* Makes the div a circle */
+}
+
+.go-dots {
+  width: 2px;
+  height: 50px; /* Adjust length as needed */
+  background-image: linear-gradient(to bottom, #ddd 20%, rgba(255, 255, 255, 0) 0%);
+  background-size: 2px 15px; /* Adjust the spacing between dots */
+  background-repeat: repeat-y;
+  margin: 1px 0;
+}
+

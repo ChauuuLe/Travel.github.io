@@ -44,7 +44,7 @@ const FlightSearchPage = () => {
     <div className="FlightSearchPage">
       <FlightSearchForm onSearch={handleSearch} />
       {isLoading ? (
-        <p>Loading...</p> // Replace with a spinner or other loading indicator as needed
+        <p className="loading">Loading...</p> 
       ) : (
         <>
           {error && <p style={{ color: 'red' }}>{error}</p>}

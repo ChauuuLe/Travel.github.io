@@ -7,6 +7,7 @@ const DestinationDetail = () => {
   const { destinationId } = useParams();
   const navigate = useNavigate();
   const [destination, setDestination] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const fetchDestination = async () => {
@@ -22,6 +23,18 @@ const DestinationDetail = () => {
 
   if (!destination) return null;
 
+  const handlePreviousClick = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? destination.images.length - 1 : prevIndex - 1));
+  };
+
+  const handleNextClick = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex === destination.images.length - 1 ? 0 : prevIndex + 1));
+  };
+
+  const handleDotClick = (index) => {
+    setCurrentImageIndex(index);
+  };
+
   return (
     <div className="destination-detail">
       <div className="content-section">
@@ -31,6 +44,22 @@ const DestinationDetail = () => {
           <h2>{destination.city}</h2>
           <div className="line-separator"></div>
           <p>{destination.description}</p>
+        </div>
+        <div className="image-carousel">
+          <button className="carousel-button left" onClick={handlePreviousClick}>&lt;</button>
+          <div className="image-container">
+            <img src={destination.images[currentImageIndex]} alt={`Image ${currentImageIndex + 1}`} />
+          </div>
+          <button className="carousel-button right" onClick={handleNextClick}>&gt;</button>
+          <div className="carousel-dots">
+            {destination.images.map((_, index) => (
+              <span
+                key={index}
+                className={`dot ${index === currentImageIndex ? 'active' : ''}`}
+                onClick={() => handleDotClick(index)}
+              />
+            ))}
+          </div>
         </div>
         <div className="divider"></div>
         <div className="activities-section">
@@ -53,7 +82,6 @@ const DestinationDetail = () => {
       <div className="average-cost">
         Average Cost: ${destination.averageCost}
       </div>
-      <button className="back-button" onClick={() => navigate(-1)}>Back</button>
     </div>
   );
 };
