@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import './DestinationDetail.css';
 
 const DestinationDetail = () => {
@@ -58,12 +58,19 @@ const DestinationDetail = () => {
 
         <div className="destination-info">
           <h1>{destination.name}</h1>
-          <h2>{destination.country}</h2>
-          <h2>{destination.city}</h2>
-          <h2>{destination.emoji}</h2>
+          <div className="location-info">
+            <h2>{destination.emoji} {destination.country} - {destination.city}</h2>
+          </div>
           <div className="line-separator"></div>
+          <div className="author-info">
+            <span>Author: </span>
+            <Link to={`/profile/${destination.author._id}`} target="_blank">
+              {destination.author.username}
+            </Link>
+          </div>
           <p>{destination.description}</p>
         </div>
+
       </div>
 
       <div className="divider"></div>

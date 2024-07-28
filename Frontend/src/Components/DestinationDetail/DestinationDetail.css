@@ -11,17 +11,20 @@
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     position: relative;
+    font-family: Arial, sans-serif;
 }
 
 .content-section {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    font-family: Arial, sans-serif;
 }
 
 .destination-info {
     flex: 1;
     margin-right: 30px;
+    font-family: Arial, sans-serif;
 }
 
 .destination-info h1,
@@ -29,6 +32,7 @@
 .destination-info p {
     margin: 0;
     margin-bottom: 10px;
+    font-family: Arial, sans-serif;
 }
 
 .destination-info h1,
@@ -36,6 +40,7 @@
     color: #007bff;
     text-transform: uppercase;
     letter-spacing: 1.5px;
+    font-family: Arial, sans-serif;
 }
 
 .destination-info h1 {
@@ -66,11 +71,13 @@
 
 .activities-section {
     flex: 2;
+    font-family: Arial, sans-serif;
 }
 
 .activities-list {
     list-style: none;
     padding: 0;
+    font-family: Arial, sans-serif;
 }
 
 .activity-item {
@@ -103,6 +110,7 @@
 .activity-info {
     display: flex;
     flex-direction: column;
+    font-family: Arial, sans-serif;
 }
 
 .activity-info .price {
@@ -204,4 +212,42 @@
 
 .dot.active {
     background-color: white;
+}
+
+.author-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    /* Space below the author info */
+}
+
+.author-info span {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.author-info a {
+    color: #5500ff;
+    text-decoration: none;
+}
+
+.author-info a:hover {
+    text-decoration: underline;
+}
+
+.location-info {
+    display: flex;
+    gap: 10px;
+    /* Adjust gap as needed */
+    align-items: baseline;
+    /* Align text to the baseline for consistency */
+}
+
+.location-info h2 {
+    margin: 0;
+    color: #007bff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 1.4em;
+    /* Adjust font size as needed */
 }

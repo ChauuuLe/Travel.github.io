@@ -9,15 +9,17 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 1;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .destinations-list h1 {
   font-size: 2.5em;
   text-align: center;
   margin-bottom: 30px;
-  color: #007bff;
+  color: #000000;
   text-transform: uppercase;
   letter-spacing: 1.5px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .destinations-list input[type="text"] {
@@ -32,6 +34,7 @@
   font-size: 1.1em;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .destinations-list input[type="text"]:focus {
@@ -39,6 +42,7 @@
   box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
   background-color: #f0f8ff;
   outline: none;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Center the Create Destination button */
@@ -47,6 +51,7 @@
   justify-content: center;
   align-items: center;
   margin: 20px 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .button-create-destination {
@@ -60,6 +65,7 @@
   text-align: center;
   text-decoration: none;
   transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: Arial, sans-serif;
 }
 
 .button-create-destination:hover {
@@ -86,6 +92,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  font-family: Arial, sans-serif;
 }
 
 .create-destination-content {
@@ -96,6 +103,7 @@
   max-width: 95%;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   position: relative;
+  font-family: Arial, sans-serif;
 }
 
 /* Close button styling */
@@ -132,6 +140,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: Arial, sans-serif;
 }
 
 .destination-cards {
@@ -155,6 +164,7 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   position: relative;
+  font-family: Arial, sans-serif;
 }
 
 .destination-card:hover {
@@ -174,12 +184,14 @@
   font-size: 1.5em;
   color: #007bff;
   text-transform: uppercase;
+  font-family: Arial, sans-serif;
 }
 
 .destination-card p {
   margin: 8px 0;
   font-size: 1em;
   color: #555;
+  font-family: Arial, sans-serif;
 }
 
 /* Highlighting the Author */
@@ -187,6 +199,7 @@
   font-weight: bold;
   color: #007bff;
   cursor: pointer;
+  font-family: Arial, sans-serif;
 }
 
 .destination-card .author:hover {
@@ -207,6 +220,7 @@ a:hover {
   display: flex;
   justify-content: center;
   margin-top: 30px;
+  font-family: Arial, sans-serif;
 }
 
 .pagination button {
