@@ -45,6 +45,7 @@ require('./routes/flights.routes.js')(app);
 const db = require("./models/index.js");
 const Chat = db.chat;
 const Role = db.role;
+const User = db.user;
 const linkToMongoDB = process.env.mongoUrl;
 
 db.mongoose.connect(linkToMongoDB, {
@@ -90,16 +91,27 @@ io.on('connection', (socket) => {
 
   socket.on('sendMessage', async ({ chatId, message }) => {
     try {
-      // Find the chat and update it with the new message
-      const chat = await Chat.findById(chatId).populate('messages');
-      chat.messages.push(message);
-      chat.lastMessage = message;
+      // Fetch full user details
+      const user = await User.findById(message.sender);
+  
+      // Populate sender details in the message
+      const fullMessage = {
+        ...message,
+        sender: {
+          _id: user._id,
+          username: user.username,
+          avatar: user.avatar,
+        }
+      };
+  
+      // Save the message to the database
+      const chat = await Chat.findById(chatId);
+      chat.messages.push(fullMessage);
+      chat.lastMessage = fullMessage;
       await chat.save();
-
-      // Emit the message to the chat room
-      io.to(chatId).emit('message', message);
-
-      // Emit updateChatList event to notify clients to update their chat lists
+  
+      // Emit the full message object to the clients
+      io.to(chatId).emit('message', fullMessage);
       io.emit('updateChatList');
     } catch (error) {
       console.error('Error sending message:', error);
