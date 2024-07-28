@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import './userProfile.css';
+import './UserProfile.css';
 
 const UserProfile = () => {
   const { userId } = useParams();
