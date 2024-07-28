@@ -51,8 +51,8 @@ const Navbar = () => {
     try {
       await axios.post(`${import.meta.env.VITE_BACKEND}/api/auth/signout`);
       localStorage.clear();
-      setCurrentUser(null); // Ensure state is updated
-      navigate(''); // Redirect to signin page
+      setCurrentUser(null);
+      navigate('/signin');
     } catch (err) {
       console.error('Sign out failed', err);
     }
@@ -76,8 +76,12 @@ const Navbar = () => {
 
   const renderUnauthenticatedNavbar = () => (
     <div className="nav-actions">
-      <Link to="/signin" className="signin"><i className="fas fa-sign-in-alt"></i> Sign In</Link>
-      <Link to="/signup" className="signup"><i className="fas fa-user-plus"></i> Sign Up</Link>
+      <Link to="/signin" className="signin">
+        <i className="fas fa-sign-in-alt"></i> Sign In
+      </Link>
+      <Link to="/signup" className="signup">
+        <i className="fas fa-user-plus"></i> Sign Up
+      </Link>
     </div>
   );
 
@@ -94,7 +98,7 @@ const Navbar = () => {
           <nav className="navBar">
             <ul className='navLists flex'>
               <li><Link to="/hotels"><i className="fas fa-hotel"></i> Hotels</Link></li>
-              <li><Link to="/flight"><i className="fa-solid fa-plane"></i> Flight</Link></li>
+              <li><Link to="/flight"><i className="fas fa-plane"></i> Flight</Link></li>
               <li><Link to="/destinations"><i className="fas fa-map-marked-alt"></i> Destinations</Link></li>
               <li><a href="http://localhost:3000"><i className="fas fa-cloud-sun"></i> Weather</a></li>
               <li className="dropdown">
