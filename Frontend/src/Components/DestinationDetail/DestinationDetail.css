@@ -210,9 +210,6 @@
     cursor: pointer;
 }
 
-.dot.active {
-    background-color: white;
-}
 
 .author-info {
     display: flex;

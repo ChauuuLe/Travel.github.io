@@ -6,11 +6,10 @@
   align-items: center;
   padding: 20px;
   background-color: #f4f4f4;
-  min-height: 120vh;
+  min-height: 130vh;
   font-family: Arial, sans-serif;
 }
 
-/* Container for the Profile Content */
 .profile-content {
   background: white;
   padding: 30px;
@@ -26,7 +25,7 @@
 .profile-content h1 {
   font-size: 24px;
   margin-bottom: 10px;
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 .profile-content p {
@@ -80,9 +79,9 @@
   position: relative;
 }
 
-.avatar {
-  width: 80px;
-  height: 80px;
+.avatard {
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   margin-bottom: 20px;
   border: 2px solid #007bff;

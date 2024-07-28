@@ -8,7 +8,7 @@ const UserProfile = () => {
   const [user, setUser] = useState(null);
   const [destinations, setDestinations] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const destinationsPerPage = 6;  // Number of destinations per page
+  const destinationsPerPage = 6;
   const [newAvatarUrl, setNewAvatarUrl] = useState('');
   const [showAvatarForm, setShowAvatarForm] = useState(false);
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -49,14 +49,14 @@ const UserProfile = () => {
   };
 
   const handleAvatarUpdate = async () => {
-    const token = localStorage.getItem('token'); // Retrieve token from localStorage
+    const token = localStorage.getItem('token');
     try {
       await axios.put(
         `${import.meta.env.VITE_BACKEND}/api/users/${userId}/avatar`,
         { avatar: newAvatarUrl },
         {
           headers: {
-            'x-access-token': token, // Use x-access-token as the header
+            'x-access-token': token,
           },
         }
       );
@@ -66,7 +66,6 @@ const UserProfile = () => {
       console.error('Error updating avatar:', error);
     }
   };
-  
 
   const indexOfLastDestination = currentPage * destinationsPerPage;
   const indexOfFirstDestination = indexOfLastDestination - destinationsPerPage;
@@ -83,6 +82,9 @@ const UserProfile = () => {
         <div className="profile-content">
           <div className="avatar-section" onClick={handleAvatarClick}>
             <img src={user.avatar || "./assets/avatar.png"} alt="User Avatar" className="avatard" />
+            {currentUser && currentUser._id === userId && !showAvatarForm && (
+              <p className="click-to-change">Click to change avatar</p>
+            )}
           </div>
           {showAvatarForm && (
             <div className="avatar-form">
