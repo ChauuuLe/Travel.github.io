@@ -1,5 +1,7 @@
 /* Center the User Profile Page */
 .user-profile {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
@@ -63,6 +65,9 @@
 
 /* Avatar Styling */
 .avatar-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
 }
 
@@ -116,7 +121,6 @@
 /* User Destinations Section */
 .user-destinations {
   margin-top: 20px;
-  /* Reduced margin to decrease spacing */
 }
 
 .destination-cards-container {
