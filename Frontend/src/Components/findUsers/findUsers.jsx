@@ -111,9 +111,9 @@ const FindUsers = (props) => {
           </div>
         ))}
       </div>
+
     </div>
   );
-  
 };
 
 export default FindUsers;

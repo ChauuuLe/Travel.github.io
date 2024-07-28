@@ -1,170 +1,193 @@
 /* General Styles */
 body.create-group-page {
-background-color: #f5f5f5; /* Light background specific to CreateGroup */
-color: #333; /* Dark text color for contrast */
-margin: 0;
-padding: 0;
-font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
 }
 
 .background-video {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-object-fit: cover;
-z-index: -1;
-filter: brightness(90%); /* Adjust brightness if needed */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(90%);
 }
 
 .create-group-container {
-position: relative;
-z-index: 1;
-background-color: rgba(255, 255, 255, 0.85); /* Optional for content readability */
-border-radius: 8px;
-padding: 20px;
-max-width: 1000px;
-margin: auto;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 1000px;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h1, h2 {
-font-size: 2em;
-text-align: center;
-color: #333;
+h1,
+h2 {
+    font-size: 2em;
+    text-align: center;
+    color: #333;
+    margin-top: 50px;
 }
 
 h1 {
-margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .findUsers {
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 20px;
-background-color: #ffffff; /* White background */
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-border-radius: 8px;
-width: 100%;
-max-width: 600px;
-margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
 }
 
 .findUsers form {
-width: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .findUsers input {
-width: 90%;
-padding: 12px;
-margin-bottom: 12px;
-border: 1px solid #dddddd;
-border-radius: 5px;
-background-color: #ffffff; /* White background */
-transition: border-color 0.3s ease;
+    width: 90%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    background-color: #ffffff;
+    transition: border-color 0.3s ease;
 }
 
 .findUsers input:focus,
 .findUsers input:hover {
-border-color: #009879; /* Light green border on focus/hover */
-background-color: #e9f7ef; /* Light green background on focus/hover */
-outline: none;
+    border-color: #009879;
+    background-color: #e9f7ef;
+    outline: none;
 }
 
 .findUsers button {
-width: 90%;
-padding: 12px;
-background-color: #3498db; /* Primary blue background */
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-position: relative;
-overflow: hidden;
-transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    width: 90%;
+    padding: 12px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .findUsers button:hover {
-background-color: #2980b9; /* Darker blue on hover */
-transform: scale(1.05);
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #2980b9;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .user {
-display: flex;
-align-items: center;
-padding: 10px;
-margin-top: 10px;
-background: #ffffff; /* Changed background to white */
-border-radius: 5px;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-top: 10px;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
 .user:hover {
-background-color: #f0f0f0; /* Light gray on hover */
+    background-color: #f0f0f0;
 }
 
 .user .detail {
-display: flex;
-align-items: center;
-padding: 0 10px;
-flex-grow: 1;
-background-color: white;
-border-radius: 5;
-border: #000000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 10px;
+    flex-grow: 2;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.user {
+    display: flex;
+    /* Use flexbox for layout */
+    align-items: center;
+    /* Vertically align items */
+    padding: 10px;
+    margin-top: 10px;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
 .user img {
-width: 50px;
-height: 50px;
-border-radius: 50%;
-object-fit: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    /* Space between image and text */
+    flex-shrink: 0;
+    /* Prevents the image from shrinking */
 }
 
 .user span {
-font-size: 1.2em;
-font-weight: bold;
-color: #000000; /* Dark text color */
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000000;
+    display: inline-block;
+    /* Keeps the text inline with the image */
+    vertical-align: middle;
+    /* Aligns text vertically with image */
 }
 
+
 .user button {
-padding: 8px 12px;
-background-color: #009879; /* Green background */
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-transition: background-color 0.3s ease;
+    padding: 8px 12px;
+    background-color: #009879;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .user button:hover {
-background-color: #007b63; /* Darker green on hover */
+    background-color: #007b63;
 }
 
 .not-found-message {
-color: red;
-margin-top: 10px;
+    color: red;
+    margin-top: 10px;
 }
 
 /* Heading Style */
 h2 {
-margin: 20px 0; /* Add margin to separate from other elements */
+    margin: 20px 0;
 }
 
 /* Scrollable Container for Added Users */
 .addedUsersContainer {
-max-height: 300px;
-overflow-y: auto;
-width: 100%;
-padding: 10px;
-background: #ffffff; /* White background */
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-border-radius: 8px;
-margin-top: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    width: 100%;
+    padding: 10px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 20px;
 }

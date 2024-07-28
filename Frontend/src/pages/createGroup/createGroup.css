@@ -3,7 +3,6 @@ body.create-group-page {
   background-color: #f5f5f5;
   color: #333;
   margin: 0;
-  height: 1000px;
   padding: 0;
   font-family: Arial, sans-serif;
 }
@@ -22,12 +21,13 @@ body.create-group-page {
 .create-group-container {
   position: relative;
   z-index: 1;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(192, 172, 172, 0.85);
   border-radius: 8px;
   padding: 20px;
   max-width: 1000px;
   margin: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
 }
 
 .current-user-heading {
@@ -90,16 +90,22 @@ body.create-group-page {
   color: #333;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, color 0.3s ease;
-  margin-top: 10px;
+  margin-top: 20px;
+  /* Increase this value for more space above the container */
 }
 
 .content {
   width: 100%;
+  min-height: 1-0px;
   background: #ffffff;
+  margin-top: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   transition: background-color 0.3s ease, color 0.3s ease;
+  justify-content: center;
+  padding: 10px;
 }
+
 
 .pagination-controls {
   display: flex;
