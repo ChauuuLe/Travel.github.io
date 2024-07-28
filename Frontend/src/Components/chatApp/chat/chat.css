@@ -2,7 +2,7 @@
 .navbar {
     position: relative;
     z-index: 1000;
-    background-color: rgba(17, 25, 40, 0.75); 
+    background-color: rgba(17, 25, 40, 0.75);
     color: white;
     width: 100%;
     top: 0;
@@ -11,7 +11,7 @@
 
 /* Chat page styling */
 .chat-page {
-    margin-top: 60px; 
+    margin-top: 60px;
     padding: 0;
     width: 100%;
     height: 100%;
@@ -29,10 +29,10 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: rgba(17, 25, 40, 0.75); 
-    border-radius: 15px; 
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin: 0px;
 }
 
@@ -42,9 +42,9 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    background-color: rgba(17, 25, 40, 0.75); 
-    border-top-left-radius: 15px; 
-    border-top-right-radius: 15px; 
+    background-color: rgba(17, 25, 40, 0.75);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 .chat .top .user {
@@ -71,13 +71,14 @@
 .chat .top .user .texts span {
     font-size: 18px;
     font-weight: bold;
-    color: #f2f1ff; 
+    color: #f2f1ff;
 }
 
 .chat .top .user .texts p {
     font-size: 14px;
     font-weight: 300;
-    color: #ddd; /* Lighter grey for readability */
+    color: #ddd;
+    /* Lighter grey for readability */
 }
 
 .chat .top .icons {
@@ -99,7 +100,8 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    background-color: rgba(17, 25, 40, 0.75); /* Consistent translucent grey-blue */
+    background-color: rgba(17, 25, 40, 0.75);
+    /* Consistent translucent grey-blue */
 }
 
 .chat .center .message {
@@ -107,11 +109,15 @@
     display: flex;
     gap: 15px;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.1); /* Lighter background for contrast */
-    border-radius: 15px; /* Rounded corners */
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Lighter background for contrast */
+    border-radius: 15px;
+    /* Rounded corners */
     padding: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
-    word-break: break-word; /* Ensure text wraps correctly */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Subtle border */
+    word-break: break-word;
+    /* Ensure text wraps correctly */
 }
 
 .chat .center .message.own {
@@ -137,7 +143,8 @@
 
 .chat .center .message .texts p {
     margin: 0;
-    color: #fff; /* White text for readability */
+    color: #fff;
+    /* White text for readability */
     font-size: 14px;
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -146,8 +153,10 @@
 
 .chat .center .message .texts span {
     font-size: 12px;
-    color: #ddd; /* Lighter grey for timestamp */
-    align-self: flex-start; /* Align timestamp to start */
+    color: #ddd;
+    /* Lighter grey for timestamp */
+    align-self: flex-start;
+    /* Align timestamp to start */
     margin-top: 2px;
 }
 
@@ -158,9 +167,12 @@
     justify-content: space-between;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
     gap: 15px;
-    background-color: rgba(17, 25, 40, 0.75); /* Consistent color */
-    border-bottom-left-radius: 15px; /* Rounded corners */
-    border-bottom-right-radius: 15px; /* Rounded corners */
+    background-color: rgba(17, 25, 40, 0.75);
+    /* Consistent color */
+    border-bottom-left-radius: 15px;
+    /* Rounded corners */
+    border-bottom-right-radius: 15px;
+    /* Rounded corners */
 }
 
 .chat .bottom .icons {
@@ -177,12 +189,14 @@
 
 .chat .bottom input {
     flex: 1;
-    background-color: rgba(34, 45, 60, 0.75); /* Slightly darker for input field */
+    background-color: rgba(34, 45, 60, 0.75);
+    /* Slightly darker for input field */
     border: 1px solid #aaa;
     outline: none;
     color: #fff;
     padding: 10px 15px;
-    border-radius: 15px; /* Increased border radius */
+    border-radius: 15px;
+    /* Increased border radius */
     font-size: 14px;
 }
 
@@ -197,10 +211,149 @@
 }
 
 .chat .bottom .sendButton {
-    background-color: rgba(34, 45, 60, 0.75); /* Slightly darker for send button */
+    background-color: rgba(34, 45, 60, 0.75);
+    /* Slightly darker for send button */
     color: #fff;
     padding: 10px 20px;
     border: none;
-    border-radius: 15px; /* Increased border radius */
+    border-radius: 15px;
+    /* Increased border radius */
     cursor: pointer;
 }
+
+/* chat.css */
+
+/* Modal Styling */
+.schedule-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+}
+
+.schedule-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.schedule-content h2 {
+    margin-bottom: 20px;
+}
+
+.schedule-content .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.schedule-content button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+.expense-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure the modal is on top */
+  }
+  
+  /* Styling for the modal content box */
+  .expense-content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow-y: auto; /* Allows content to scroll if it exceeds the modal height */
+    max-height: 80%; /* Limits the height of the modal */
+  }
+  
+  /* Close button style */
+  .expense-content .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #aaa;
+  }
+  
+  .expense-content .close-button:hover {
+    color: #333;
+  }
+  
+  /* Modal title style */
+  .expense-content h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Table styling within the modal */
+  .expense-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .expense-content table th,
+  .expense-content table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .expense-content table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+  
+  /* Button styling within the modal */
+  .expense-content button {
+    margin: 5px 0;
+    padding: 8px 12px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+  }
+  
+  .expense-content button:hover {
+    background-color: #0056b3;
+  }
+  
+  .expense-content .archive-button {
+    background-color: #dc3545;
+  }
+  
+  .expense-content .archive-button:hover {
+    background-color: #c82333;
+  }

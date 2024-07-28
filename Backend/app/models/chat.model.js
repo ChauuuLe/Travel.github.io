@@ -1,12 +1,29 @@
 const mongoose = require("mongoose");
 
+const expense = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  cost: {
+    type: Number,
+    required: true
+  },
+  payStatus: {
+    type: Map,
+    of: String,
+    default: {}
+  },
+  day: {
+    type: Date,
+    default: Date.now()
+  }
+});
+
+// Define the Chat model
 const Chat = mongoose.model(
   "Chat",
   new mongoose.Schema({
-    createdAt: { 
-      type: Date, 
-      default: Date.now 
-    },
     messages: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -20,14 +37,6 @@ const Chat = mongoose.model(
         required: true
       }
     ],
-    updatedAt: { 
-      type: Date, 
-      default: Date.now 
-    },
-    isSeen: { 
-      type: Boolean, 
-      default: false 
-    },
     lastMessage: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Message",
@@ -38,12 +47,13 @@ const Chat = mongoose.model(
         type: Map,
         of: String,
         default: {}
-      }  
+      }
     ],
     groupName: {
       type: String,
       required: true
-    }
+    },
+    expenseTracking: [expense]
   })
 );
 

@@ -19,7 +19,6 @@ exports.createGroup = async (req, res) => {
     });
 
     await chat.save();
-    console.log('Chat Saved:', chat);
 
     await User.updateMany(
       { _id: { $in: memberIds } },
@@ -75,11 +74,57 @@ exports.getChatInfo = async (req, res) => {
     if (!chat) {
       return res.status(404).send({ message: "Chat not found!" });
     }
-
-    console.log(`chat: ${chat}`);
     res.status(200).send(chat);
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: err.message });
+  }
+};
+
+exports.updateChatSchedule = async (req, res) => {
+  const { chatId } = req.params;
+  const { calendar } = req.body;
+  try {
+    const updatedChat = await Chat.findByIdAndUpdate(
+      chatId,
+      {
+        calendar: [calendar],
+      },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedChat) {
+      return res.status(404).json({ message: 'Chat not found' });
+    }
+
+    res.status(200).json(updatedChat);
+  } catch (error) {
+    console.error('Error updating chat calendar:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+exports.updateChatExpenseTracking = async (req, res) => {
+  const { chatId } = req.params;
+  const { expenseTracking } = req.body;
+  console.log(chatId);
+  console.log(expenseTracking);
+  try {
+    const updatedChat = await Chat.findByIdAndUpdate(
+      chatId,
+      {
+        expenseTracking,
+      },
+      { new: true }
+    );
+
+    if (!updatedChat) {
+      return res.status(404).json({ message: 'Chat not found' });
+    }
+
+    res.status(200).json(updatedChat);
+  } catch (error) {
+    console.error('Error updating chat expense:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 };

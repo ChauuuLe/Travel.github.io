@@ -1,19 +1,29 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import EmojiPicker from "emoji-picker-react";
 import io from "socket.io-client";
-import "./chat.css"; // Ensure this CSS file contains styles specific to the Chat component
+import "./chat.css";
 import { useNavigate } from "react-router-dom";
+import Schedule from "../../schedule/schedule";
+import ExpenseTracking from "../../ExpenseTracking/ExpenseTracking";
 
-const socket = io(import.meta.env.VITE_BACKEND); // Adjust the backend URL
+const socket = io(import.meta.env.VITE_BACKEND);
 
 const Chat = ({ chatId, setChatId }) => {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
   const [chat, setChat] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [members, setMembers] = useState([]);
+  const [selectedDates, setSelectedDates] = useState({});
+  const [dates, setDates] = useState([]);
   const endRef = useRef(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [scheduleOpen, setScheduleOpen] = useState(false);
+  const [initialSelectedDates, setInitialSelectedDates] = useState({});
+  const [expenseTracking, setExpenseTracking] = useState([]);
+  const [expenseTrackingOpen, setExpenseTrackingOpen] = useState(false);
+  const [initialExpenseTracking, setInitialExpenseTracking] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,7 +32,6 @@ const Chat = ({ chatId, setChatId }) => {
       document.body.classList.remove("chat-page");
     };
   }, []);
-
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("currentUser"));
@@ -35,21 +44,6 @@ const Chat = ({ chatId, setChatId }) => {
   useEffect(() => {
     if (chatId) {
       socket.emit('joinChat', chatId);
-
-      const fetchChat = async () => {
-        try {
-          const token = localStorage.getItem('token');
-          const response = await axios.get(`${import.meta.env.VITE_BACKEND}/api/chats/${chatId}`, {
-            headers: {
-              'x-access-token': token,
-            },
-          });
-          setChat(response.data);
-          setMessages(response.data.messages);
-        } catch (err) {
-          console.error('Error fetching chat', err);
-        }
-      };
       fetchChat();
     }
   }, [chatId]);
@@ -68,6 +62,34 @@ const Chat = ({ chatId, setChatId }) => {
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  const fetchChat = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND}/api/chats/${chatId}`, {
+        headers: {
+          'x-access-token': token,
+        },
+      });
+      setChat(response.data);
+      setMessages(response.data.messages);
+      setMembers(response.data.members);
+
+      const calendar = response.data.calendar[0] || {};
+      setSelectedDates(calendar);
+      setInitialSelectedDates(calendar);
+  
+      const newDates = Array.from(new Set(
+        Object.values(calendar).flatMap(dates => Object.keys(dates))
+      ));
+      setDates(newDates);
+      
+      setExpenseTracking(response.data.expenseTracking);
+      setInitialExpenseTracking(response.data.expenseTracking);
+    } catch (err) {
+      console.error('Error fetching chat', err);
+    }
+  };
 
   const handleEmoji = (e) => {
     setText((prev) => prev + e.emoji);
@@ -122,12 +144,63 @@ const Chat = ({ chatId, setChatId }) => {
     ))
   );
 
+  const handleScheduleUpdate = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      await axios.put(
+        `${import.meta.env.VITE_BACKEND}/api/chats/${chatId}/schedule`,
+        { calendar: selectedDates },
+        {
+          headers: { 'x-access-token': token },
+        }
+      );
+      setScheduleOpen(false);
+      fetchChat();
+    } catch (err) {
+      console.error("Failed to update schedule:", err);
+    }
+  };
+
+  const handleExpenseTrackingUpdate = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      await axios.put(
+        `${import.meta.env.VITE_BACKEND}/api/chats/${chatId}/expenseTracking`,
+        { expenseTracking },
+        {
+          headers: { 'x-access-token': token },
+        }
+      );
+      setExpenseTrackingOpen(false);
+      fetchChat();
+    } catch (err) {
+      console.error("Failed to update expense tracking:", err);
+    }
+  };
+
+  const onDataChangeDates = (newDates) => {
+    setDates(newDates);
+  };
+
+  const onDataChangeSelectedDates = (updatedDates) => {
+    setSelectedDates(updatedDates);
+  };
+
+  const onDataChangeExpenseTracking = (updatedExpenses) => {
+    setExpenseTracking(updatedExpenses);
+  };
+
+  const hasChangesSchedule = JSON.stringify(selectedDates) !== JSON.stringify(initialSelectedDates);
+  const hasChangesExpenseTracking = JSON.stringify(expenseTracking) !== JSON.stringify(initialExpenseTracking);
+
   return (
     <div className="chat custom-chat-background">
       <div className="top">
         <div className="user">
           <div className="texts">
             <span>{chat?.groupName}</span>
+            <button onClick={() => setScheduleOpen(true)}>Schedule</button>
+            <button onClick={() => setExpenseTrackingOpen(true)}>Expenses</button>
           </div>
         </div>
       </div>
@@ -151,6 +224,37 @@ const Chat = ({ chatId, setChatId }) => {
         </div>
         <button className="sendButton" onClick={handleSendMessage}>Send</button>
       </div>
+
+      {scheduleOpen && (
+        <div className="schedule-modal">
+          <div className="schedule-content">
+            <h2>Schedule</h2>
+            <button className="close-button" onClick={() => setScheduleOpen(false)}>×</button>
+            <Schedule
+              members={members}
+              selectedDates={selectedDates}
+              dates={dates}
+              onDataChangeDates={onDataChangeDates}
+              onDataChangeSelectedDates={onDataChangeSelectedDates}
+            />
+            <button onClick={handleScheduleUpdate} disabled={!hasChangesSchedule}>Confirm</button>
+          </div>
+        </div>
+      )}
+
+      {expenseTrackingOpen && (
+        <div className="expense-modal">
+          <div className="expense-content">
+            <ExpenseTracking
+              expenseTracking={expenseTracking}
+              members={members}
+              onDataChangeExpenseTracking={onDataChangeExpenseTracking}
+            />
+            <button onClick={handleExpenseTrackingUpdate} disabled={!hasChangesExpenseTracking}>Confirm</button>
+            <button onClick={() => setExpenseTrackingOpen(false)}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
