@@ -6,7 +6,7 @@ const User = mongoose.model(
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    avatar: { type: String },
+    avatar: { type: String, default: 'https://www.gravatar.com/avatar/?d=identicon' },
     blocked: [
       {
         type: mongoose.Schema.Types.ObjectId,

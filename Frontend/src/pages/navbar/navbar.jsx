@@ -51,7 +51,7 @@ const Navbar = () => {
       await axios.post(`${import.meta.env.VITE_BACKEND}/api/auth/signout`);
       localStorage.clear();
       setCurrentUser(null);
-      navigate('/signin');
+      navigate('/');
     } catch (err) {
       console.error('Sign out failed', err);
     }
