@@ -3,8 +3,10 @@
     border-radius: 12px;
     padding: 30px;
     max-width: 900px;
-    margin: 20px auto;
+    margin: 80px auto 20px auto; /* Add top margin for separation from the navbar */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1; /* Ensure the form is above other elements */
 }
 
 .flight-search-form h1 {
@@ -14,56 +16,40 @@
     color: #333;
 }
 
-.trip-type {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 25px;
-    gap: 20px;
-}
-
-.trip-type label {
-    font-weight: bold;
-    color: #007bff;
-    cursor: pointer;
-}
-
-.trip-type input[type="radio"] {
-    margin-right: 5px;
-}
-
-.trip-type .nonstop {
-    margin-left: auto;
-    color: #333;
-}
-
-.trip-type .nonstop input {
-    margin-right: 5px;
-}
-
 .search-fields {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start; /* Align labels and inputs to the top */
     gap: 15px;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
 .search-fields .input-group {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    flex: 1; /* Equal width for all input groups */
     position: relative;
+}
+
+.search-fields .input-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #007bff;
 }
 
 .search-fields .input-group .input-icon {
     position: absolute;
+    top: 35px; /* Adjust for vertical alignment with input */
     left: 10px;
-    font-size: 18px;
+    font-size: 20px;
     color: #007bff;
 }
 
 .search-fields input[type="text"],
-.search-fields input[type="date"],
-.passenger-class select {
-    padding: 12px 15px 12px 35px;
+.search-fields input[type="date"] {
+    padding: 10px 10px 10px 40px; /* Space for the icon */
     border: none;
     border-radius: 5px;
     font-size: 14px;
@@ -71,86 +57,25 @@
     background: #f1f1f1;
 }
 
-.search-fields input[type="text"]::placeholder,
-.search-fields input[type="date"]::placeholder,
-.passenger-class select::placeholder {
-    color: #999;
-}
-
 .single-segment {
     display: flex;
+    align-items: flex-start;
     gap: 15px;
-    align-items: center;
-}
-
-.segment {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    position: relative;
-}
-
-.segment-number {
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 5px;
-    padding: 12px 20px;
-    font-weight: bold;
-}
-
-.segment-fields {
-    display: flex;
-    flex: 1;
-    gap: 15px;
+    width: 100%;
 }
 
 .exchange-icon {
     align-self: center;
-    font-size: 80px;
+    font-size: 40px; /* Size of the exchange icon */
     color: #007bff;
     cursor: pointer;
-}
-
-.add-segment {
-    background: none;
-    border: none;
-    color: #007bff;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 14px;
-}
-
-.add-segment:hover {
-    text-decoration: underline;
-}
-
-.remove-segment {
-    background: none;
-    border: none;
-    color: #dc3545;
-    cursor: pointer;
-    font-size: 18px;
-    padding: 10px;
-    position: absolute;
-    right: -35px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.passenger-class {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-top: 15px;
+    margin: 0 10px; /* Space around the icon */
 }
 
 .search-buttons {
     display: flex;
     justify-content: center;
     margin-top: 30px;
-    gap: 15px;
 }
 
 .search-button {
@@ -179,4 +104,23 @@
 
 .search-button.hotel-button:hover {
     background-color: #e2e6ea;
+}
+
+/* Navbar adjustments */
+.navBarSection {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+}
+
+body.night .navBarSection {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.navBarSection.hidden {
+    transform: translateY(-100%);
 }

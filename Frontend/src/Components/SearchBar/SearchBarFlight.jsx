@@ -40,6 +40,7 @@ const FlightSearchForm = ({ onSearch }) => {
       <div className="search-fields">
         <div className="single-segment">
           <div className="input-group">
+            <label>Departure name</label>
             <FaPlaneDeparture className="input-icon" />
             <input
               type="text"
@@ -51,6 +52,7 @@ const FlightSearchForm = ({ onSearch }) => {
           </div>
           <FaExchangeAlt className="exchange-icon" onClick={handleSwapLocations} />
           <div className="input-group">
+            <label>Flying to</label>
             <FaPlaneArrival className="input-icon" />
             <input
               type="text"
@@ -61,6 +63,7 @@ const FlightSearchForm = ({ onSearch }) => {
             />
           </div>
           <div className="input-group">
+            <label>Departure</label>
             <FaCalendarAlt className="input-icon" />
             <input
               type="date"
@@ -71,6 +74,7 @@ const FlightSearchForm = ({ onSearch }) => {
             />
           </div>
           <div className="input-group">
+            <label>Return</label>
             <FaCalendarAlt className="input-icon" />
             <input
               type="date"
