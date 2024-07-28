@@ -1,5 +1,6 @@
 import React from 'react';
-import './FlightSearchResult.css'; // CSS file for styling
+import NewLogo from '../../assets/Capture.png'; 
+import './FlightSearchResult.css';
 
 const FlightSearchResult = ({ results }) => {
   return (
@@ -10,7 +11,7 @@ const FlightSearchResult = ({ results }) => {
         results.map((result, index) => (
           <div key={index} className="flight-card">
             <div className="flight-header">
-              <img src={result.airline_logo} alt="Airline Logo" className="airline-logo" />
+              <img src={NewLogo} alt="Flight Logo" className="airline-logo" /> 
               <div className="flight-info">
                 <div className="flight-date">
                   <span>{new Date(result.flights[0].departure_airport.time).toDateString()}</span>
@@ -26,20 +27,17 @@ const FlightSearchResult = ({ results }) => {
               </div>
             </div>
             <div className="flight-segments">
-              {console.log('asddddddd')}
               {result.flights.map((flight, index) => (
                 <div key={index} className="flight-segment">
                   <img src={flight.airline_logo} alt="Airline Logo" className="airline-logo" />
                   <div className="flight-time">
                     <span>{new Date(flight.departure_airport.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                    <span className="time-between">Travel time: {Math.floor(flight.duration / 60)} hr {flight.duration % 60} min</span>
                     <span>{new Date(flight.arrival_airport.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                   </div>
                   <div className="flight-route">
                     <div className="flight-departure">
                       <strong>{flight.departure_airport.name} ({flight.departure_airport.id})</strong>
-                    </div>
-                    <div className="flight-duration">
-                      <span>Duration: {Math.floor(flight.duration / 60)} hr {flight.duration % 60} min</span>
                     </div>
                     <div className="flight-arrival">
                       <strong>{flight.arrival_airport.name} ({flight.arrival_airport.id})</strong>

@@ -72,6 +72,11 @@ const HotelResults = ({ hotels }) => {
                 </div>
               )}
             </div>
+            {hotel.price && (
+              <div className="hotel-price">
+                <p><strong>Price:</strong> ${hotel.price}</p>
+              </div>
+            )}
           </div>
         ))
       )}

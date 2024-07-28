@@ -12,10 +12,19 @@ const FlightSearchForm = ({ onSearch }) => {
 
   const handleStartDateChange = (value) => {
     setStartDate(value);
+    if (returnDate && new Date(value) > new Date(returnDate)) {
+      setReturnDate(''); // Reset return date if it is before the departure date
+    }
   };
 
   const handleReturnDateChange = (value) => {
-    setReturnDate(value);
+    if (new Date(value) < new Date(startDate)) {
+      setError('Return date must be after the departure date.');
+      setReturnDate(''); // Clear the return date to avoid confusion
+    } else {
+      setError('');
+      setReturnDate(value);
+    }
   };
 
   const handleSwapLocations = () => {
@@ -25,8 +34,8 @@ const FlightSearchForm = ({ onSearch }) => {
   };
 
   const handleSearch = () => {
-    if (new Date(departure) > new Date(arrival)) {
-      setError('Arrival date must be after departure date.');
+    if (!arrival || !departure || !startDate || !returnDate) {
+      setError('Please fill in all fields.');
       return;
     }
 
@@ -56,7 +65,7 @@ const FlightSearchForm = ({ onSearch }) => {
             <FaPlaneArrival className="input-icon" />
             <input
               type="text"
-              placeholder="AirportName"
+              placeholder="Airport Name"
               value={arrival}
               onChange={(e) => setArrival(e.target.value)}
               required
@@ -79,7 +88,7 @@ const FlightSearchForm = ({ onSearch }) => {
             <input
               type="date"
               value={returnDate}
-              min={today || startDate}
+              min={startDate || today}
               onChange={(e) => handleReturnDateChange(e.target.value)}
               required
             />

@@ -1,68 +1,104 @@
 .FlightSearchResult {
-    margin: 20px;
-  }
-  
-  .flight-card {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    margin-bottom: 20px;
-  }
-  
-  .flight-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .airline-logo {
-    height: 50px;
-  }
-  
-  .flight-info {
-    flex-grow: 1;
-    padding: 0 10px;
-  }
-  
-  .flight-date,
-  .flight-carbon {
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .flight-price {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .flight-segments {
-    margin-top: 15px;
-  }
-  
-  .flight-segment {
-    padding: 10px 0;
-    border-top: 1px solid #eee;
-  }
-  
-  .flight-time,
-  .flight-route,
-  .flight-details {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .flight-details {
-    font-size: 14px;
-    color: #777;
-  }
-  
-  .overnight {
-    color: #d9534f;
-  }
-  
-  .layover-info {
-    font-size: 14px;
-    color: #777;
-    margin-top: 10px;
-  }
-  
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.flight-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.flight-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.airline-logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.flight-info {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.flight-date,
+.flight-carbon {
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  flex-direction: column;
+}
+
+.flight-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.flight-segments {
+  margin-top: 15px;
+}
+
+.flight-segment {
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+}
+
+.flight-time,
+.flight-route,
+.flight-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.flight-time span,
+.flight-route span,
+.flight-details span {
+  display: block;
+}
+
+.flight-time .time-between {
+  font-size: 12px;
+  color: #777;
+}
+
+.flight-details {
+  font-size: 14px;
+  color: #777;
+  text-align: left;
+}
+
+.overnight {
+  color: #d9534f;
+  font-weight: bold;
+}
+
+.layover-info {
+  font-size: 14px;
+  color: #d9534f; /* Red color for layover info */
+  margin-top: 10px;
+  text-align: left;
+  top: 100%; /* Position below the segment */
+  left: 0;
+  width: 100%;
+}
