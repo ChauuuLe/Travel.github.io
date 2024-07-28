@@ -27,18 +27,15 @@ body.create-group-page {
     max-width: 1000px;
     margin: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    /* Center align the text */
 }
 
 h1,
 h2 {
     font-size: 2em;
-    text-align: center;
     color: #333;
-    margin-top: 50px;
-}
-
-h1 {
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 .findUsers {
@@ -46,7 +43,7 @@ h1 {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     width: 100%;
@@ -65,10 +62,10 @@ h1 {
     width: 90%;
     padding: 12px;
     margin-bottom: 12px;
-    border: 1px solid #dddddd;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #ffffff;
-    transition: border-color 0.3s ease;
+    background-color: #fff;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .findUsers input:focus,
@@ -86,8 +83,6 @@ h1 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -100,9 +95,10 @@ h1 {
 .user {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 10px;
     margin-top: 10px;
-    background: #ffffff;
+    background: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
@@ -116,45 +112,25 @@ h1 {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 0 10px;
-    flex-grow: 2;
-    background-color: white;
-    border-radius: 5px;
-}
-
-.user {
-    display: flex;
-    /* Use flexbox for layout */
-    align-items: center;
-    /* Vertically align items */
-    padding: 10px;
-    margin-top: 10px;
-    background: #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    flex-grow: 1;
 }
 
 .user img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-right: 10px;
-    /* Space between image and text */
     flex-shrink: 0;
-    /* Prevents the image from shrinking */
+    align-items: center;
 }
 
 .user span {
     font-size: 1.2em;
     font-weight: bold;
-    color: #000000;
-    display: inline-block;
-    /* Keeps the text inline with the image */
-    vertical-align: middle;
-    /* Aligns text vertically with image */
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-
 
 .user button {
     padding: 8px 12px;
@@ -175,19 +151,17 @@ h1 {
     margin-top: 10px;
 }
 
-/* Heading Style */
-h2 {
-    margin: 20px 0;
-}
-
-/* Scrollable Container for Added Users */
-.addedUsersContainer {
+.addedUsersContainer,
+.currentUserContainer {
     max-height: 300px;
     overflow-y: auto;
-    width: 100%;
+    width: 40x;
     padding: 10px;
-    background: #ffffff;
+    background: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     margin-top: 20px;
+    text-align: center;
+    align-items: center;
+
 }
