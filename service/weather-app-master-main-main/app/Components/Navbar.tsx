@@ -7,6 +7,7 @@ import ThemeDropdown from "./ThemeDropdown/ThemeDropdown";
 import SearchDialog from "./SearchDialog/SearchDialog";
 import { useGlobalContext } from "../context/globalContext";
 
+console.log(process.env.OPENWEATHERMAP_FRONT_END);
 function Navbar() {
   const router = useRouter();
   const { state } = useGlobalContext();
@@ -23,7 +24,7 @@ function Navbar() {
           <Button
             className="source-code-btn flex items-center gap-2"
             onClick={() => {
-              router.push("https//github.com");
+              router.push(`http://localhost:5173/`);
             }}
           >
             {github} Back

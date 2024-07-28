@@ -22,7 +22,7 @@ const ProfileMenu = ({ currentUser, handleLogout }) => {
       onMouseLeave={() => setIsDropdownVisible(false)}
     >
       <img
-        src={currentUser.avatarUrl || 'default-avatar.png'}
+        src={currentUser.avatar || './assets/avatar.png'}
         alt="Profile"
         className="avatar"
         onClick={toggleDropdown}
