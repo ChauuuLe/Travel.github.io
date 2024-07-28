@@ -7,6 +7,7 @@
   padding: 20px;
   background-color: #f4f4f4;
   min-height: 120vh;
+  font-family: Arial, sans-serif;
 }
 
 /* Container for the Profile Content */
@@ -19,16 +20,19 @@
   width: 100%;
   text-align: center;
   margin: 0 auto;
+  font-family: Arial, sans-serif;
 }
 
 .profile-content h1 {
   font-size: 24px;
   margin-bottom: 10px;
+    font-family: Arial, sans-serif;
 }
 
 .profile-content p {
   font-size: 14px;
   margin-bottom: 20px;
+  font-family: Arial, sans-serif;
 }
 
 /* Section for Profile Information */
@@ -36,6 +40,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: Arial, sans-serif;
 }
 
 .profile-row {
@@ -43,6 +48,7 @@
   justify-content: space-between;
   width: 100%;
   margin: 15px 0;
+  font-family: Arial, sans-serif;
 }
 
 .profile-label {
@@ -50,6 +56,7 @@
   flex: 1;
   text-align: right;
   padding-right: 10px;
+  font-family: Arial, sans-serif;
 }
 
 .profile-value {
@@ -57,10 +64,12 @@
   margin-left: 10px;
   color: black;
   text-align: left;
+  font-family: Arial, sans-serif;
 }
 
 .profile-edit {
   margin-left: 20px;
+  font-family: Arial, sans-serif;
 }
 
 /* Avatar Styling */
@@ -85,6 +94,7 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
+  font-family: Arial, sans-serif;
 }
 
 .avatar-form input {
@@ -121,12 +131,14 @@
 /* User Destinations Section */
 .user-destinations {
   margin-top: 20px;
+  font-family: Arial, sans-serif;
 }
 
 .destination-cards-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: Arial, sans-serif;
 }
 
 .destination-cards {
@@ -150,6 +162,7 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   position: relative;
+  font-family: Arial, sans-serif;
 }
 
 .destination-card:hover {
