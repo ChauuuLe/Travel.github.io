@@ -126,20 +126,20 @@ const DestinationList = () => {
       <div className="destination-cards-container">
         <div className="destination-cards">
           {currentDestinations.map(destination => (
-            <Link to={`/destinations/${destination._id}`} key={destination._id}>
-              <div className="destination-card">
+            <div className="destination-card" key={destination._id}>
+              <Link to={`/destinations/${destination._id}`}>
                 <img src={destination.images && destination.images[0]} alt={destination.name || "Destination"} />
                 <h3>{destination.name}</h3>
                 <p>Country: {destination.emoji} {destination.country}</p>
                 <p>City: {destination.city}</p>
-                {destination.author && (
-                  <Link to={`/profile/${destination.author._id}`} target="_blank">
-                    <p>Author: {destination.author.username}</p>
-                  </Link>
-                )}
-                <p>Avg Cost: ${destination.averageCost}</p>
-              </div>
-            </Link>
+              </Link>
+              {destination.author && (
+                <Link to={`/profile/${destination.author._id}`} target="_blank" className="author">
+                  <p>Author: {destination.author.username}</p>
+                </Link>
+              )}
+              <p>Avg Cost: ${destination.averageCost}</p>
+            </div>
           ))}
         </div>
         <div className="pagination">

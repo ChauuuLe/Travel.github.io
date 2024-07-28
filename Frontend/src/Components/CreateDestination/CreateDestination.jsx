@@ -139,7 +139,7 @@ const CreateDestination = ({ currentUser, onCreate }) => {
           <input
             type="text"
             name="name"
-            placeholder="Name"
+            placeholder="Title"
             value={newDestination.name}
             onChange={handleInputChange}
             required
