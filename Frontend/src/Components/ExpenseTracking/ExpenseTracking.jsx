@@ -32,7 +32,7 @@ const ExpenseTracking = (props) => {
 
   const archiveExpense = () => {
     if (!selectedExpense) return;
-
+    
     const updatedExpenses = expenseTracking.filter(expense => expense.title !== selectedExpense.title);
     onDataChangeExpenseTracking(updatedExpenses);
     setSelectedExpense(null);
