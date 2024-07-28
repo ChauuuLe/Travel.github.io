@@ -262,8 +262,10 @@
                 members={members}
                 onDataChangeExpenseTracking={onDataChangeExpenseTracking}
               />
-              <button onClick={handleExpenseTrackingUpdate} disabled={!hasChangesExpenseTracking}>Confirm</button>
-              <button onClick={() => setExpenseTrackingOpen(false)}>Close</button>
+              <div className="button-container">
+                <button className="confirm-button" onClick={handleExpenseTrackingUpdate} disabled={!hasChangesExpenseTracking}>Confirm</button>
+                <button className="cancel-button" onClick={() => setExpenseTrackingOpen(false)}>Close</button>
+              </div>
             </div>
           </div>
         )}

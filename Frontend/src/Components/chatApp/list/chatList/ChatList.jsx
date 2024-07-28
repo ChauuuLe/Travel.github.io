@@ -12,6 +12,7 @@ const ChatList = ({ setChatId, chatId }) => {
   const [addMode, setAddMode] = useState(false);
   const [userChats, setUserChats] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const [searchQuery, setSearchQuery] = useState(''); // State for the search query
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("currentUser"));
@@ -77,8 +78,15 @@ const ChatList = ({ setChatId, chatId }) => {
     );
   };
 
-  const renderUserChats = (userChats) => (
-    userChats.map((userChat) => (
+  // Function to filter userChats based on search query
+  const getFilteredChats = () => {
+    return userChats.filter(userChat =>
+      userChat.groupName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  };
+
+  const renderUserChats = () => (
+    getFilteredChats().map((userChat) => (
       <div key={userChat._id} className="item" onClick={() => setChatId(userChat._id)}>
         <div className="texts">
           <p>{userChat.groupName}</p>
@@ -93,19 +101,17 @@ const ChatList = ({ setChatId, chatId }) => {
     <div className="chatList">
       <div className="search">
         <div className="searchBar">
-          <input type="text" placeholder="Search" />
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery state on input change
+          />
         </div>
-        <img
-          src={addMode ? "./assets/minus.png" : "./assets/plus.png"}
-          alt="addIcon"
-          className="add"
-          onClick={() => setAddMode((prev) => !prev)}
-        />
       </div>
       <div>
-        {renderUserChats(userChats)}
+        {renderUserChats()}
       </div>
-      {addMode && <AddUser />}
     </div>
   );
 }

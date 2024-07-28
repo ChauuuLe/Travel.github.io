@@ -11,7 +11,7 @@ const expense = new mongoose.Schema({
   },
   payStatus: {
     type: Map,
-    of: String,
+    of: Boolean,
     default: {}
   },
   day: {

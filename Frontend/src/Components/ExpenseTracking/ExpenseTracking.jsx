@@ -7,15 +7,17 @@ const ExpenseTracking = (props) => {
     members,
     onDataChangeExpenseTracking,
   } = props;
+
+  console.log(expenseTracking);
   const [selectedExpense, setSelectedExpense] = useState(null);
   const [newExpenseTitle, setNewExpenseTitle] = useState('');
   const [newExpenseCost, setNewExpenseCost] = useState('');
 
   const togglePayStatus = (member) => {
     if (!selectedExpense) return;
-
+    console.log(selectedExpense);
     const updatedExpenses = expenseTracking.map(expense => {
-      if (expense.title === selectedExpense.title) {
+      if (expense.day === selectedExpense.day) {
         const updatedPayStatus = {
           ...expense.payStatus,
           [member]: !expense.payStatus[member]
@@ -33,19 +35,18 @@ const ExpenseTracking = (props) => {
   const archiveExpense = () => {
     if (!selectedExpense) return;
     
-    const updatedExpenses = expenseTracking.filter(expense => expense.title !== selectedExpense.title);
+    const updatedExpenses = expenseTracking.filter(expense => expense.day !== selectedExpense.day);
     onDataChangeExpenseTracking(updatedExpenses);
     setSelectedExpense(null);
   };
 
   const addExpense = () => {
-    const todayDate = new Date().toISOString().split('T')[0];
     const newPayStatus = members.reduce((acc, member) => {
       acc[member.username] = false; // Assuming member object has a username property
       return acc;
     }, {});
     const newExpense = {
-      day: todayDate,
+      day: Date.now(), // Using Date.now() for a unique identifier
       title: newExpenseTitle,
       cost: parseFloat(newExpenseCost),
       payStatus: newPayStatus,
@@ -55,9 +56,24 @@ const ExpenseTracking = (props) => {
     setNewExpenseCost('');
   };
 
+  const displayDay = (day) => {
+    if (!day) return '';
+    const date = new Date(day);
+    const options = {
+      timeZone: 'Asia/Singapore', // UTC+8
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    };
+    const formattedDate = date.toLocaleDateString('en-CA', options);
+    return formattedDate;
+  };
+  
+
   return (
     <div className="expense-tracking">
       <h2>Expense Tracking</h2>
+      <h6>Click each title for details</h6>
       <table>
         <thead>
           <tr>
@@ -71,7 +87,7 @@ const ExpenseTracking = (props) => {
             <tr key={index} onClick={() => setSelectedExpense(expense)}>
               <td>{expense.title}</td>
               <td>{expense.cost.toFixed(2)}$</td>
-              <td>{expense.day}</td>
+              <td>{displayDay(expense.day)}</td>
             </tr>
           ))}
         </tbody>
@@ -79,6 +95,7 @@ const ExpenseTracking = (props) => {
 
       {selectedExpense && (
         <div className="expense-details">
+          {console.log(selectedExpense)}
           <h3>{selectedExpense.title} - Details</h3>
           <table>
             <thead>
