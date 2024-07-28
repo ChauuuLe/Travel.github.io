@@ -1,5 +1,4 @@
-/* schedule.css */
-
+/* Schedule CSS */
 .select-dates-container {
   margin: 20px auto;
   padding: 20px;
@@ -8,10 +7,8 @@
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
-}
-
-body.night .select-dates-container {
-  background-color: black;
+  max-height: 500px; /* Set a max height */
+  overflow-y: auto; /* Enable vertical scroll */
 }
 
 table {
@@ -25,16 +22,6 @@ table {
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
-body.night table {
-  background-color: #000;
-  /* Màu nền cho chế độ ban đêm */
-}
-
-table:hover {
-  transform: scale(1.01);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
 th,
 td {
   padding: 15px;
@@ -43,37 +30,14 @@ td {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body.night th,
-body.night td {
-  background-color: #333;
-  /* Màu nền cho ô bảng khi ở chế độ ban đêm */
-  color: #fff;
-  /* Màu chữ cho chế độ ban đêm */
-}
-
 th {
   background-color: #3498db;
   color: #ffffff;
   font-weight: bold;
 }
 
-body.night th {
-  background-color: #444;
-  /* Màu nền cho tiêu đề bảng khi ở chế độ ban đêm */
-}
-
 td {
   background-color: #f8f9fa;
-}
-
-body.night td {
-  background-color: #222;
-  /* Màu nền cho ô bảng khi ở chế độ ban đêm */
-}
-
-td:first-child {
-  padding-left: 40px;
-  padding-right: 40px;
 }
 
 td select {
@@ -84,21 +48,9 @@ td select {
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-body.night td select {
-  background-color: #444;
-  /* Màu nền cho ô chọn khi ở chế độ ban đêm */
-  color: #fff;
-  /* Màu chữ cho chế độ ban đêm */
-}
-
 td select:hover {
   background-color: #eef;
   border-color: #3498db;
-}
-
-body.night td select:hover {
-  background-color: #555;
-  /* Màu nền cho ô chọn khi hover ở chế độ ban đêm */
 }
 
 .add-date-button {
@@ -142,7 +94,6 @@ body.night td select:hover {
     opacity: 0;
     transform: translateY(-20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -152,6 +103,7 @@ body.night td select:hover {
 @media screen and (max-width: 768px) {
   .select-dates-container {
     padding: 10px;
+    max-height: 300px; /* Reduce height for smaller screens */
   }
 
   th,

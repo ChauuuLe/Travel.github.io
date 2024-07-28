@@ -5,9 +5,8 @@
 }
 
 .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
 }
 
@@ -15,8 +14,7 @@
     position: absolute;
     top: 60px;
     right: 0;
-    background-color: white;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #f9f9f9;
     z-index: 1000;
     display: flex;
     flex-direction: column;
@@ -28,16 +26,27 @@
 
 .profile-dropdown button {
     padding: 10px 20px;
-    text-decoration: none;
     color: #333;
     width: 100%;
     text-align: left;
     border: none;
     background: none;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     transition: background-color 0.3s;
 }
 
+.profile-dropdown button i {
+    color: #007bff; 
+}
+
 .profile-dropdown button:hover {
-    background-color: #e3dede5c;
+    background-color: #007bff;
+    color: white;
+}
+
+.profile-dropdown button:hover i {
+    color: white;
 }

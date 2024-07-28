@@ -16,54 +16,6 @@
 
 
 
-/* Navigation Links */
-.nav-links {
-    display: flex;
-    justify-content: center;
-    flex: 1;
-}
-
-.nav-links ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #333;
-    font-size: 16px;
-    font-weight: 600;
-    transition: color 0.3s, transform 0.3s;
-}
-
-.nav-links a:hover {
-    color: #0073e6;
-    transform: translateY(-2px);
-}
-
-/* Navigation Actions */
-.nav-actions {
-    display: flex;
-    align-items: center;
-}
-
-.nav-actions a {
-    text-decoration: none;
-    color: #333;
-    margin-left: 10px;
-    padding: 8px 16px;
-    font-size: 16px;
-    font-weight: 600;
-    border: 1px solid #0073e6;
-    border-radius: 3px;
-    transition: background-color 0.3s, color 0.3s, transform 0.3s;
-}
-
-
 
 /* Main Content Styling */
 .main-content {

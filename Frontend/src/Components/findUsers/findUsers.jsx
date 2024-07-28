@@ -64,12 +64,12 @@ const FindUsers = (props) => {
   };
 
   const renderUser = (user) => (
-    <div className='user' key={user._id}>
-      <div className="detail">
-        <img src={renderAvatar(user.avatar)} alt="User Avatar" />
+    <div className="user" key={user._id}>
+      <img src={renderAvatar(user.avatar)} alt="User Avatar" />
+      <div className="texts">
         <span>{user.username}</span>
       </div>
-      <button onClick={handleAddUser}>Add User</button>
+      <button className="add-user-button" onClick={handleAddUser}>Add User</button>
     </div>
   );
 
@@ -85,7 +85,7 @@ const FindUsers = (props) => {
 
   return (
     <div>
-      <h1>Find your travel mate lah!</h1>
+      <h1>Find your travel mate!</h1>
       <div className="findUsers">
         <form onSubmit={handleSearch}>
           <input
@@ -100,12 +100,13 @@ const FindUsers = (props) => {
         {loading && <p>Loading...</p>}
         {userToAdd}
       </div>
+      <h2 className="current-user-heading">Current User</h2>
       <div className="addedUsersContainer">
         {data.members.map((user) => (
-          <div className='user' key={user._id}>
-            <div className="detail">
-              <img src={renderAvatar(user.avatar)} alt="User Avatar" />
-              <span>{user.username}</span>
+          <div className="user" key={user._id}>
+            <img src={renderAvatar(user.avatar)} alt="User Avatar" />
+            <div className="texts">
+              <span className="username">{user.username}</span>
             </div>
           </div>
         ))}

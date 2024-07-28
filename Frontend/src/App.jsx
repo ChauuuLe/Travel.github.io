@@ -18,7 +18,7 @@ import DestinationDetail from './Components/DestinationDetail/DestinationDetail'
 const App = () => {
   return (
     <>
-      <Navbar />
+    <Navbar/>
       <Routes>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />

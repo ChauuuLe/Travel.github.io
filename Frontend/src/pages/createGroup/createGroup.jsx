@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import FindUsers from '../../Components/findUsers/findUsers.jsx';
 import Schedule from '../../Components/schedule/schedule.jsx';
 import GroupName from '../../Components/groupName/groupName.jsx';
 import './createGroup.css';
+import backgroundVideo from '../../assets/background/video.mp4'; 
 
 const pages = ['findusers', 'schedule', 'groupname'];
 
@@ -12,6 +14,13 @@ const CreateGroup = () => {
   const location = useLocation();
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const currentPageIndex = pages.indexOf(location.pathname.split('/')[2] || 'findusers');
+
+  useEffect(() => {
+    document.body.classList.add('create-group-page');
+    return () => {
+      document.body.classList.remove('create-group-page');
+    };
+  }, []);
 
   useEffect(() => {
     if (!currentUser) {
@@ -94,37 +103,45 @@ const CreateGroup = () => {
   };
 
   const renderCurrentPages = () => {
-    if (currentPageIndex === 0) {
-      return (
-        <FindUsers 
-          data={formData} 
-          onDataChangeMember={(data) => handleFormDataChange('members', data)}
-          onDataChangeSelectedDates={(data) => handleFormDataChange('selectedDates', data)}
-        />
-      );
-    } else if (currentPageIndex === 1) {
-      return (
-        <Schedule
-          members={formData.members}
-          selectedDates={formData.selectedDates}
-          dates={formData.dates}
-          onDataChangeDates={(data) => handleFormDataChange('dates', data)}
-          onDataChangeSelectedDates={(data) => handleFormDataChange('selectedDates', data)}
-        />
-      );
-    } else if (currentPageIndex === 2) {
-      return (
-        <GroupName
-          data={formData.groupName}
-          onDataChange={(data) => handleFormDataChange('groupName', data)}
-          onSubmit={handleSubmit}
-        />
-      );
+    switch (currentPageIndex) {
+      case 0:
+        return (
+          <>
+            <FindUsers 
+              data={formData} 
+              onDataChangeMember={(data) => handleFormDataChange('members', data)}
+              onDataChangeSelectedDates={(data) => handleFormDataChange('selectedDates', data)}
+            />
+          </>
+        );
+      case 1:
+        return (
+          <Schedule
+            members={formData.members}
+            selectedDates={formData.selectedDates}
+            dates={formData.dates}
+            onDataChangeDates={(data) => handleFormDataChange('dates', data)}
+            onDataChangeSelectedDates={(data) => handleFormDataChange('selectedDates', data)}
+          />
+        );
+      case 2:
+        return (
+          <GroupName
+            data={formData.groupName}
+            onDataChange={(data) => handleFormDataChange('groupName', data)}
+            onSubmit={handleSubmit}
+          />
+        );
+      default:
+        return null;
     }
   };
 
   return (
     <div className="create-group-container">
+      <video className="background-video" autoPlay loop muted>
+        <source src={backgroundVideo} type="video/mp4" />
+      </video>
       <div className="content">
         {renderCurrentPages()}
       </div>

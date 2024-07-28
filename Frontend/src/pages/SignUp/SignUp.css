@@ -1,68 +1,62 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-}
-
-body,
-html {
-    height: 100%;
-    margin: 0;
-}
 
 body.sign-in-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('path-to-your-background-image.jpg') no-repeat center center fixed;
-    /* Replace with your background image path */
+    background: url('../../assets/signinbackground.jpg') no-repeat center center fixed;
     background-size: cover;
-}
-
-.auth-background {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
 }
 
 .wrapper {
     background: rgba(255, 255, 255, 0.9);
     padding: 40px;
     border-radius: 10px;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 1s ease-in-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wrapper:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 form {
     display: flex;
     flex-direction: column;
-    animation: fadeIn 1s ease-in-out;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 700;
+    background: -webkit-linear-gradient(#1900ff, #bab5ef);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin-bottom: 20px;
+    text-decoration: none;
 }
 
 h2 {
     margin-bottom: 10px;
     font-size: 24px;
-    animation: slideIn 1s ease-in-out;
+    font-weight: 600;
+    color: rgb(86, 92, 247);
 }
 
 p {
     margin-bottom: 20px;
     font-size: 14px;
     color: #666;
-    animation: slideIn 1s ease-in-out;
 }
 
 .input-field {
     position: relative;
     margin-bottom: 15px;
-    animation: fadeIn 1s ease-in-out;
 }
 
 .input-field input {
@@ -71,151 +65,139 @@ p {
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-field input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+    outline: none;
 }
 
 .actions {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
     font-size: 12px;
-    animation: fadeIn 1s ease-in-out;
 }
 
 .actions label {
     display: flex;
     align-items: center;
+    color: black;
+    margin-left: 8px;
+}
+
+.actions input[type="checkbox"] {
+    margin-right: 8px;
 }
 
 .actions a {
     color: #007bff;
     text-decoration: none;
+    margin-left: auto;
 }
 
 .actions a:hover {
     text-decoration: underline;
 }
 
+.sign-in-button,
 .sign-up-button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background: linear-gradient(45deg, #007bff, #00bfff);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 20px;
-    animation: fadeIn 1s ease-in-out;
+    font-size: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-size: 200% 200%;
 }
 
+.sign-in-button:hover,
 .sign-up-button:hover {
-    background-color: #0056b3;
+    background-color: orange;
+    background-position: right center;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sign-in-button::before,
+.sign-up-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: left 0.4s ease-in-out;
+    z-index: 0;
+}
+
+.sign-in-button:hover::before,
+.sign-up-button:hover::before {
+    left: 100%;
+}
+
+.sign-in-button span,
+.sign-up-button span {
+    position: relative;
+    z-index: 1;
 }
 
 .separator {
     border: none;
     border-top: 1px solid #ccc;
     margin: 20px 0;
-    /* Adds space around the separator */
     text-align: center;
     position: relative;
-    animation: fadeIn 1s ease-in-out;
 }
 
 .separator::before {
-    content: 'or sign up with';
+    content: "OR";
     display: inline-block;
     padding: 0 10px;
     color: #666;
     background: rgba(255, 255, 255, 0.9);
-    /* Add background to the text */
     position: absolute;
     top: -10px;
-    /* Adjust this value as needed to align the text */
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
-    /* Prevents the text from wrapping */
-}
-
-.google-sign-in-button {
-    width: 100%;
-    padding: 10px;
-    background-color: white;
-    color: #4285F4;
-    /* Google's blue color */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    animation: fadeIn 1s ease-in-out;
-}
-
-.google-sign-in-button img.google-icon {
-    margin-right: 8px;
-    width: 20px;
-    height: 20px;
-    /* Adjust size as needed */
-}
-
-.google-sign-in-button:hover {
-    background-color: #f0f0f0;
-    /* Slightly lighter background on hover */
 }
 
 .register p {
     text-align: center;
     font-size: 12px;
     color: #666;
-    animation: fadeIn 1s ease-in-out;
 }
 
 .register a {
     font-weight: bold;
-    /* Make the Register link bold */
-    color: #007bff;
-    /* Blue color for the link */
+    color: rgb(47, 0, 255);
     text-decoration: none;
-    /* Remove underline */
 }
 
 .register a:hover {
     text-decoration: underline;
-    /* Underline on hover for better user interaction */
 }
 
-#signUpMessage {
+#signInMessage {
     color: red;
     margin-top: 10px;
     text-align: center;
     font-size: 14px;
     font-weight: bold;
-    animation: fadeIn 1s ease-in-out;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
+.error-message {
+    color: black;
+  }
+  

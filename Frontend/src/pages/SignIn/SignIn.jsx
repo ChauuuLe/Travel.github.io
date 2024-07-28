@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import "./SignIn.css";
-import googleLogo from "../../assets/google.png";
+import { SnackbarProvider, useSnackbar } from 'notistack';
+import './SignIn.css';
 
 const SignIn = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    document.body.classList.add("sign-in-page");
+    document.body.classList.add('sign-in-page');
     return () => {
-      document.body.classList.remove("sign-in-page");
+      document.body.classList.remove('sign-in-page');
     };
   }, []);
 
@@ -45,9 +46,21 @@ const SignIn = () => {
       localStorage.setItem('expiresIn', Date.now() + 7200000); // Save expiration time (2 hours)
       const user = await getCurrentUser(); // Fetch current user after setting the token
       localStorage.setItem('currentUser', JSON.stringify(user)); // Save user to localStorage
-      navigate("/");
-      //window.location.reload();
-      alert("Sign in successful");
+
+      enqueueSnackbar('Sign in successful', {
+        variant: 'success',
+        className: 'custom-snackbar', // Apply custom snackbar class
+        action: key => (
+          <button onClick={() => {
+            navigate('/'); // Navigate to home page
+            setTimeout(() => {
+              window.location.reload(); // Reload the page
+            }, 100); // Adjust delay as needed
+          }}>
+            Go to Home
+          </button>
+        ),
+      });
     } catch (err) {
       const errorMessage = err.response ? err.response.data.message : err.message;
       setMessage(`Sign in failed: ${errorMessage}`);
@@ -58,6 +71,7 @@ const SignIn = () => {
   return (
     <div className="auth-background">
       <div className="wrapper">
+        <h1>Good to see you Again!</h1> {/* Greeting message */}
         <form id="signInForm" onSubmit={handleSignIn}>
           <h2>Sign in</h2>
           <p>For security reasons, please log in to access the information</p>
@@ -65,7 +79,7 @@ const SignIn = () => {
             <input
               type="text"
               id="username"
-              placeholder="username"
+              placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -85,14 +99,11 @@ const SignIn = () => {
             <label>
               <input type="checkbox" /> Remember me
             </label>
-            <a href="#">Forgot Password?</a>
           </div>
-          <button type="submit" className="sign-in-button">Sign in</button>
-          <hr className="separator" />
-          <button type="button" className="google-sign-in-button">
-            <img src={googleLogo} alt="Google sign-in" className="google-icon" />
-            Sign in with Google
+          <button type="submit" className="sign-in-button" disabled={loading}>
+            Sign in
           </button>
+          <hr className="separator" />
           <div className="register">
             <p>Create Account <a href="/signup">Register</a></p>
           </div>
@@ -103,4 +114,16 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+const HomePage = () => (
+  <div>
+  </div>
+);
+
+const App = () => (
+  <SnackbarProvider maxSnack={3}>
+    <SignIn />
+    <HomePage />
+  </SnackbarProvider>
+);
+
+export default App;

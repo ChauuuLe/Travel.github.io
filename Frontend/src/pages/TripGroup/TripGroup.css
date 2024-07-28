@@ -5,8 +5,10 @@
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
       "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   }
+  
+  
   .container {
-    width: 80vw;
+    width: 90vw;
     height: 85vh;
     background-color: rgba(17, 25, 40, 0.75);
     backdrop-filter: blur(19px) saturate(180%);

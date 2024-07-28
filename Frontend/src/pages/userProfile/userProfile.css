@@ -1,0 +1,146 @@
+.user-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.profile-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 1000px;
+    color: black;
+}
+
+.profile-content h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.profile-content p {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+}
+
+.profile-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 15px 0;
+    color: gray;
+}
+
+.profile-label {
+    font-weight: bold;
+    flex: 1;
+}
+
+.profile-value {
+    flex-grow: 2;
+    margin-left: 30px;
+    color: black;
+}
+
+.profile-edit {
+    margin-left: 20px;
+}
+
+.avatar-section {
+    position: relative;
+}
+
+.avatar {
+    margin-top: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border: 2px solid #007bff;
+}
+
+.edit-button,
+.cancel-button,
+.save-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    /* Increased padding */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-button:hover,
+.cancel-button:hover,
+.save-button:hover {
+    background: #0056b3;
+}
+
+.cancel-button {
+    background: #dc3545;
+    margin-right: 5px;
+}
+
+.cancel-button:hover {
+    background: #c82333;
+}
+
+.save-button {
+    background: #28a745;
+}
+
+.save-button:hover {
+    background: #218838;
+}
+
+.phone-input-wrapper,
+.dob-input-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.country-code-select,
+.phone-input,
+.dob-input {
+    margin-right: 10px;
+    padding: 5px;
+    /* Added padding */
+    border-radius: 5px;
+    /* Added border-radius */
+    border: 1px solid #ced4da;
+    /* Added border */
+}
+
+.dob-input-wrapper select,
+.dob-input-wrapper input {
+    margin-right: 10px;
+    padding: 5px;
+    /* Added padding */
+    border-radius: 5px;
+    /* Added border-radius */
+    border: 1px solid #ced4da;
+    /* Added border */
+}
+
+.dob-input-wrapper select {
+    width: 150px;
+    /* Set width for select */
+}
+
+.dob-input-wrapper input {
+    width: 80px;
+    /* Set width for input */
+}

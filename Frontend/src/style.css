@@ -1,0 +1,11 @@
+.navBarSection {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9000;
+    padding: 5px 0;
+    transition: transform 0.3s ease-in-out;
+  }

@@ -67,7 +67,6 @@ const Detail = () => {
           </div>
           {isOpen.sharedPhotos && (
             <div className="photos">
-              {/* Photos display here */}
             </div>
           )}
         </div>

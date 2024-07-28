@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./SignUp.css"; 
-import googleLogo from "../../assets/google.png";
+import { SnackbarProvider, useSnackbar } from 'notistack';
+import "./SignUp.css";
 
 const SignUp = ({ setCurrentUser }) => {
   const [username, setUsername] = useState("");
@@ -10,6 +10,7 @@ const SignUp = ({ setCurrentUser }) => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     document.body.classList.add("sign-in-page");
@@ -26,17 +27,21 @@ const SignUp = ({ setCurrentUser }) => {
         email,
         password,
       });
-      navigate("/signin");
-      alert("Sign up successful");
+      enqueueSnackbar("Sign up successful", { variant: 'success' });
+      setTimeout(() => {
+        navigate("/signin");
+      }, 2000);
     } catch (err) {
       console.error(err);
       setMessage(err.response?.data?.message || "Sign up failed");
+      enqueueSnackbar("Sign up failed", { variant: 'error' });
     }
   };
 
   return (
     <div className="auth-background">
       <div className="wrapper">
+        <h1>Welcome to the Travel!</h1>
         <form id="signUpForm" onSubmit={handleSignUp}>
           <h2>Sign up</h2>
           <div className="input-field">
@@ -71,20 +76,22 @@ const SignUp = ({ setCurrentUser }) => {
           </div>
           <button type="submit" className="sign-up-button">Sign up</button>
           <hr className="separator" />
-          <button type="button" className="google-sign-in-button">
-            <img src={googleLogo} alt="Google sign-in" className="google-icon" />
-            Sign up with Google
-          </button>
           <div className="register">
             <p>
               Already have an account? <a href="/signin">Sign in</a>
             </p>
           </div>
-          <div id="signUpMessage">{message}</div>
+          <div id="signUpMessage" className="error-message">{message}</div>
         </form>
       </div>
     </div>
   );
 };
 
-export default SignUp;
+const App = () => (
+  <SnackbarProvider maxSnack={3}>
+    <SignUp />
+  </SnackbarProvider>
+);
+
+export default App;
