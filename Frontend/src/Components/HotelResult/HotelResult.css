@@ -4,7 +4,6 @@
   gap: 20px;
   padding: 20px;
   box-sizing: border-box;
-  background-color: #f9f9f9;
 }
 
 .hotel-card {
@@ -105,4 +104,15 @@
 .hotel-link:hover {
   background-color: #0056b3;
   color: white;
+}
+
+.no-results-message {
+  font-size: 1.5em;
+  /* Adjust the font size as needed */
+  font-weight: bold;
+  /* Make the text bold */
+  color: #333;
+  /* Set the text color */
+  margin-top: 50px;
+  text-align: center;
 }

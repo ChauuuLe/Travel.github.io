@@ -60,6 +60,7 @@ const DestinationDetail = () => {
           <h1>{destination.name}</h1>
           <h2>{destination.country}</h2>
           <h2>{destination.city}</h2>
+          <h2>{destination.emoji}</h2>
           <div className="line-separator"></div>
           <p>{destination.description}</p>
         </div>

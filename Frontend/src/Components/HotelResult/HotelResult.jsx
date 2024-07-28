@@ -1,18 +1,18 @@
 import React from 'react';
-import './HotelResult.css'; // Assuming you have a CSS file for styling
+import './HotelResult.css';
 
 const HotelResults = ({ hotels }) => {
   return (
     <div className="HotelResults">
       {hotels.length === 0 ? (
-        <p>Find hotel for your trip</p>
+        <p className="no-results-message">Find the perfect hotel for your trip</p>
       ) : (
         hotels.map((hotel, index) => (
           <div key={index} className="hotel-card">
-            <img 
-              src={hotel.images?.[0]?.thumbnail || 'default-image-url.jpg'} 
-              alt={hotel.name || 'Hotel Image'} 
-              className="hotel-image" 
+            <img
+              src={hotel.images?.[0]?.thumbnail || 'default-image-url.jpg'}
+              alt={hotel.name || 'Hotel Image'}
+              className="hotel-image"
             />
             <div className="hotel-info">
               <h2>{hotel.name}</h2>

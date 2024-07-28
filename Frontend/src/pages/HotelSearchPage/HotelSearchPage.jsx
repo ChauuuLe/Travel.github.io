@@ -42,7 +42,6 @@ function HotelSearchPage() {
 
   return (
     <div className="HotelSearchPage">
-      <h1>Hotel Search</h1>
       <HotelSearchForm onSearch={handleSearch} />
       {isLoading ? (
         <p>Loading...</p>
