@@ -20,4 +20,11 @@ module.exports = function(app) {
     [authJwt.verifyToken],
     controller.getCurrentUser
   );
+
+  app.get(
+    "/api/users/:userId",
+    controller.getUserById
+  );
+
+  app.put('/api/users/:userId/avatar', [authJwt.verifyToken], controller.updateAvatar);
 };

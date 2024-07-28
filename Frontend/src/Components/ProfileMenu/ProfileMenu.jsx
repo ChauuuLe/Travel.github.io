@@ -7,7 +7,8 @@ const ProfileMenu = ({ currentUser, handleLogout }) => {
   const navigate = useNavigate();
 
   const handleProfileClick = () => {
-    navigate('/profile');
+    console.log(currentUser._id);
+    navigate(`/profile/${currentUser._id}`);
   };
 
   const toggleDropdown = () => {
@@ -32,12 +33,8 @@ const ProfileMenu = ({ currentUser, handleLogout }) => {
           onMouseEnter={() => setIsDropdownVisible(true)}
           onMouseLeave={() => setIsDropdownVisible(false)}
         >
-          <button onClick={handleProfileClick}>
-            <i className="fas fa-user"></i> Profile
-          </button>
-          <button onClick={handleLogout}>
-            <i className="fas fa-sign-out-alt"></i> Logout
-          </button>
+          <button onClick={handleProfileClick}>Profile</button>
+          <button onClick={handleLogout}>Logout</button>
         </div>
       )}
     </div>
