@@ -5,13 +5,58 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
-  padding: 10px 0;
+  z-index: 9000;
+  padding: 5px 0;
   transition: transform 0.3s ease-in-out;
 }
 
 body.night .navBarSection {
   background-color: rgba(0, 0, 0, 0.9);
+  color: #fff;
+}
+
+body.night .navbar-container {
+  color: #fff;
+}
+
+body.night .navLists li a {
+  color: #fff;
+}
+
+body.night .navLists li a:hover {
+  color: #00bfff;
+}
+
+body.night .navLists li a::after {
+  background-color: #00bfff;
+}
+
+body.night .nav-actions .signin,
+body.night .nav-actions .signup {
+  color: #fff;
+  border-color: #00bfff;
+}
+
+body.night .navLists li .dropdown-content {
+  background-color: black;
+}
+
+body.night .nav-actions .signin:hover,
+body.night .nav-actions .signup:hover {
+  background-color: #00bfff;
+}
+
+body.night .profile-dropdown {
+  background-color: #333;
+  color: #fff;
+}
+
+body.night .profile-dropdown button {
+  color: #fff;
+}
+
+body.night .profile-dropdown button:hover {
+  background-color: #555;
 }
 
 .navBarSection.hidden {
@@ -20,7 +65,7 @@ body.night .navBarSection {
 
 .header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 0 20px;
   width: 100%;
@@ -74,6 +119,7 @@ body.night .navBarSection {
 
 .navLists li {
   margin-right: 15px;
+  position: relative;
 }
 
 .navLists li a {
@@ -99,21 +145,6 @@ body.night .navBarSection {
   color: #007bff;
 }
 
-.navLists li a.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: white;
-  min-width: 160px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.navLists li a.dropdown-content.show {
-  display: block;
-}
-
 .navLists li a::after {
   content: '';
   position: absolute;
@@ -130,56 +161,59 @@ body.night .navBarSection {
   left: 0;
 }
 
-.navLists li a:active {
-  color: #0056b3;
+.navLists .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+.navLists .dropdown-content a {
+  display: block;
+  padding: 10px 20px;
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.navLists .dropdown-content a:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.navLists .dropdown:hover .dropdown-content {
+  display: block;
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 20px;
   flex: 1;
 }
 
-.nav-actions .signin {
-  text-decoration: none;
-  color: inherit;
-  font-size: 16px;
-  margin-left: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  height: 100%;
-  padding: 10px 20px;
-  border-radius: 4px;
-  transition: color 0.3s ease, background-color 0.3s ease;
-  border: 2px solid #007bff;
-}
-
+.nav-actions .signin,
 .nav-actions .signup {
   text-decoration: none;
   color: inherit;
   font-size: 16px;
-  margin-left: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  height: 100%;
   padding: 10px 20px;
   border-radius: 4px;
   transition: color 0.3s ease, background-color 0.3s ease;
   border: 2px solid #007bff;
-}
-
-.nav-actions .signin i,
-.nav-actions .signup i {
-  margin-right: 5px;
-}
-
-.nav-actions .signup {
-  background-color: transparent;
 }
 
 .nav-actions .signin:hover,
@@ -195,14 +229,8 @@ body.night .navBarSection {
   background-color: #aa0606;
 }
 
-.nav-actions .signin:active,
-.nav-actions .signup:active {
-  color: #000;
-}
-
 .theme-toggle {
   margin-right: 20px;
-  margin-left: 20px;
 }
 
 .profile-menu {
@@ -212,10 +240,11 @@ body.night .navBarSection {
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   cursor: pointer;
+  display: block;
 }
 
 .profile-dropdown {
@@ -231,6 +260,7 @@ body.night .navBarSection {
   width: 150px;
   border-radius: 8px;
   overflow: hidden;
+  padding: 10px 0;
 }
 
 .profile-dropdown button {
