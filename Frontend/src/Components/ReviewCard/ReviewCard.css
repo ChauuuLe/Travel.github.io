@@ -1,0 +1,37 @@
+/* ReviewCard.css */
+.review-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .review-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .hotel-name {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .location {
+    color: #888;
+    margin-bottom: 15px;
+  }
+  
+  .review-text {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  
+  .reviewer {
+    font-size: 0.9em;
+    color: #999;
+  }
+  
