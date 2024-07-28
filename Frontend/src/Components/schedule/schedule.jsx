@@ -7,9 +7,9 @@ import './schedule.css';
 
 const Schedule = (props) => {
   const {
-    members,
-    selectedDates,
-    dates,
+    members = [],
+    selectedDates = {},
+    dates = [],
     onDataChangeDates,
     onDataChangeSelectedDates,
   } = props;
@@ -41,17 +41,19 @@ const Schedule = (props) => {
 
   const addNewDate = (date) => {
     const newDateKey = date.toISOString().split('T')[0];
-    onDataChangeDates([...dates, newDateKey]);
-    const updatedDates = Object.fromEntries(
-      Object.entries(selectedDates).map(([memberName, dates]) => [
-        memberName,
-        {
-          ...dates,
-          [newDateKey]: 'unknown',
-        }
-      ])
-    );
-    onDataChangeSelectedDates(updatedDates);
+    if (!dates.includes(newDateKey)) {
+      onDataChangeDates([...dates, newDateKey]);
+      const updatedDates = Object.fromEntries(
+        Object.entries(selectedDates).map(([memberName, memberDates]) => [
+          memberName,
+          {
+            ...memberDates,
+            [newDateKey]: 'unknown',
+          }
+        ])
+      );
+      onDataChangeSelectedDates(updatedDates);
+    }
     setIsDatePickerOpen(false);
   };
 

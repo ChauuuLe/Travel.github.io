@@ -11,22 +11,29 @@ const ExpenseTracking = (props) => {
   const [newExpenseTitle, setNewExpenseTitle] = useState('');
   const [newExpenseCost, setNewExpenseCost] = useState('');
 
-  const togglePayStatus = (curExpense, member) => {
+  const togglePayStatus = (member) => {
+    if (!selectedExpense) return;
+
     const updatedExpenses = expenseTracking.map(expense => {
-      if (expense.title === curExpense.title) {
+      if (expense.title === selectedExpense.title) {
         const updatedPayStatus = {
           ...expense.payStatus,
           [member]: !expense.payStatus[member]
         };
-        return { ...expense, payStatus: updatedPayStatus };
+        const updatedExpense = { ...expense, payStatus: updatedPayStatus };
+        setSelectedExpense(updatedExpense); // Update local state for immediate UI update
+        return updatedExpense;
       }
       return expense;
     });
+
     onDataChangeExpenseTracking(updatedExpenses);
   };
 
-  const archiveExpense = (curExpense) => {
-    const updatedExpenses = expenseTracking.filter(expense => expense.title !== curExpense.title);
+  const archiveExpense = () => {
+    if (!selectedExpense) return;
+
+    const updatedExpenses = expenseTracking.filter(expense => expense.title !== selectedExpense.title);
     onDataChangeExpenseTracking(updatedExpenses);
     setSelectedExpense(null);
   };
@@ -88,7 +95,7 @@ const ExpenseTracking = (props) => {
                     <input
                       type="checkbox"
                       checked={selectedExpense.payStatus[member.username]}
-                      onChange={() => togglePayStatus(selectedExpense, member.username)}
+                      onChange={() => togglePayStatus(member.username)}
                     />
                   </td>
                 </tr>
@@ -96,7 +103,7 @@ const ExpenseTracking = (props) => {
             </tbody>
           </table>
           {Object.values(selectedExpense.payStatus).every(paid => paid) && (
-            <button className="archive-button" onClick={() => archiveExpense(selectedExpense)}>Archive</button>
+            <button className="archive-button" onClick={archiveExpense}>Archive</button>
           )}
           <button onClick={() => setSelectedExpense(null)}>Close</button>
         </div>
