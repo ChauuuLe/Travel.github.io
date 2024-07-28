@@ -40,11 +40,11 @@ const FlightSearchForm = ({ onSearch }) => {
       <div className="search-fields">
         <div className="single-segment">
           <div className="input-group">
-            <label>Departure name</label>
+            <label>Flying From</label>
             <FaPlaneDeparture className="input-icon" />
             <input
               type="text"
-              placeholder="Leaving from"
+              placeholder="Airport Name"
               value={departure}
               onChange={(e) => setDeparture(e.target.value)}
               required
@@ -56,7 +56,7 @@ const FlightSearchForm = ({ onSearch }) => {
             <FaPlaneArrival className="input-icon" />
             <input
               type="text"
-              placeholder="Going to"
+              placeholder="AirportName"
               value={arrival}
               onChange={(e) => setArrival(e.target.value)}
               required
