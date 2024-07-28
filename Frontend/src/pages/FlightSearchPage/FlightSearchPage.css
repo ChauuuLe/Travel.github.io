@@ -1,0 +1,71 @@
+.FlightSearchResult {
+    margin: 20px;
+  }
+  
+  .flight-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .flight-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .airline-logo {
+    height: 50px;
+  }
+  
+  .flight-info {
+    flex-grow: 1;
+    padding: 0 10px;
+  }
+  
+  .flight-date,
+  .flight-carbon {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .flight-price {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .flight-segments {
+    margin-top: 15px;
+  }
+  
+  .flight-segment {
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+  }
+  
+  .flight-time,
+  .flight-route,
+  .flight-details {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .flight-details {
+    font-size: 14px;
+    color: #777;
+  }
+  
+  .overnight {
+    color: #d9534f;
+  }
+  
+  .layover-info {
+    font-size: 14px;
+    color: #777;
+    margin-top: 10px;
+  }
+
+  .loading {
+    text-align: center;
+  }

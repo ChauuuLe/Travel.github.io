@@ -1,0 +1,126 @@
+.flight-search-form {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 900px;
+    margin: 80px auto 20px auto; /* Add top margin for separation from the navbar */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1; /* Ensure the form is above other elements */
+}
+
+.flight-search-form h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.search-fields {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align labels and inputs to the top */
+    gap: 15px;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.search-fields .input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    flex: 1; /* Equal width for all input groups */
+    position: relative;
+}
+
+.search-fields .input-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.search-fields .input-group .input-icon {
+    position: absolute;
+    top: 35px; /* Adjust for vertical alignment with input */
+    left: 10px;
+    font-size: 20px;
+    color: #007bff;
+}
+
+.search-fields input[type="text"],
+.search-fields input[type="date"] {
+    padding: 10px 10px 10px 40px; /* Space for the icon */
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+    background: #f1f1f1;
+}
+
+.single-segment {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    width: 100%;
+}
+
+.exchange-icon {
+    align-self: center;
+    font-size: 40px; /* Size of the exchange icon */
+    color: #007bff;
+    cursor: pointer;
+    margin: 0 10px; /* Space around the icon */
+}
+
+.search-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.search-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+.search-button.hotel-button {
+    background-color: #f8f9fa;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+
+.search-button.hotel-button:hover {
+    background-color: #e2e6ea;
+}
+
+/* Navbar adjustments */
+.navBarSection {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+}
+
+body.night .navBarSection {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.navBarSection.hidden {
+    transform: translateY(-100%);
+}

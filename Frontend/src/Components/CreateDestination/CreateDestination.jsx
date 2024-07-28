@@ -48,7 +48,7 @@ const CreateDestination = ({ currentUser, onCreate }) => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_BACKEND}/api/countries/${countryIso}`);
       setCountryDetails(response.data);
-      setCities(response.data.cities);
+      setCities(response.data.cities || []); // Ensure cities are properly set
     } catch (error) {
       console.error('Error fetching country details:', error);
     }
@@ -139,7 +139,7 @@ const CreateDestination = ({ currentUser, onCreate }) => {
           <input
             type="text"
             name="name"
-            placeholder="Name"
+            placeholder="Title"
             value={newDestination.name}
             onChange={handleInputChange}
             required

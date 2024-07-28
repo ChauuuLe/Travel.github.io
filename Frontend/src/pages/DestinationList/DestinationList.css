@@ -4,19 +4,22 @@
   background: #f9f9f9;
   border-radius: 16px;
   max-width: 100%;
+  max-height: 100%;
   margin: 10px auto;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 1;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .destinations-list h1 {
   font-size: 2.5em;
   text-align: center;
   margin-bottom: 30px;
-  color: #007bff;
+  color: #000000;
   text-transform: uppercase;
   letter-spacing: 1.5px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .destinations-list input[type="text"] {
@@ -27,10 +30,11 @@
   max-width: 600px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  color: #333333;
+  color: #333;
   font-size: 1.1em;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .destinations-list input[type="text"]:focus {
@@ -38,21 +42,30 @@
   box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
   background-color: #f0f8ff;
   outline: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Center the Create Destination button */
+.button-create-destination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .button-create-destination {
-  display: inline-block;
   background: linear-gradient(45deg, #28a745, #218838);
   color: white;
   font-weight: bold;
   padding: 12px 24px;
-  margin: 20px auto;
   border: none;
   border-radius: 16px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: Arial, sans-serif;
 }
 
 .button-create-destination:hover {
@@ -79,6 +92,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  font-family: Arial, sans-serif;
 }
 
 .create-destination-content {
@@ -89,6 +103,7 @@
   max-width: 95%;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   position: relative;
+  font-family: Arial, sans-serif;
 }
 
 /* Close button styling */
@@ -97,7 +112,7 @@
   top: 15px;
   right: 15px;
   background: #ffe9e9;
-  color: rgb(0, 0, 0);
+  color: #000;
   border: none;
   border-radius: 50%;
   width: 35px;
@@ -109,7 +124,6 @@
   font-size: 1.5em;
   line-height: 1;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  text-decoration: none;
 }
 
 .close-button:hover {
@@ -117,10 +131,16 @@
   transform: scale(1.1);
 }
 
+.close-button:active {
+  background-color: #cc0000;
+  transform: scale(1);
+}
+
 .destination-cards-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: Arial, sans-serif;
 }
 
 .destination-cards {
@@ -144,6 +164,7 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   position: relative;
+  font-family: Arial, sans-serif;
 }
 
 .destination-card:hover {
@@ -163,30 +184,43 @@
   font-size: 1.5em;
   color: #007bff;
   text-transform: uppercase;
+  font-family: Arial, sans-serif;
 }
 
 .destination-card p {
   margin: 8px 0;
   font-size: 1em;
   color: #555;
+  font-family: Arial, sans-serif;
+}
+
+/* Highlighting the Author */
+.destination-card .author {
+  font-weight: bold;
+  color: #007bff;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+}
+
+.destination-card .author:hover {
+  color: #0056b3;
+  text-decoration: underline;
 }
 
 a {
   text-decoration: none;
-  /* Remove underline from all links */
   color: inherit;
-  /* Ensure link color matches parent element */
 }
 
 a:hover {
   text-decoration: none;
-  /* Prevent underline on hover */
 }
 
 .pagination {
   display: flex;
   justify-content: center;
   margin-top: 30px;
+  font-family: Arial, sans-serif;
 }
 
 .pagination button {

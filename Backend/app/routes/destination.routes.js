@@ -1,10 +1,4 @@
-const {
-  getDestinations,
-  getDestinationById,
-  createDestination,
-  getCountries,
-  getCountryDetails
-} = require('../controllers/destination.controller');
+const controller = require('../controllers/destination.controller');
 const { authJwt } = require("../middlewares/index.js");
 
 module.exports = (app) => {
@@ -16,9 +10,10 @@ module.exports = (app) => {
     next();
   });
 
-  app.get('/api/destinations', getDestinations);
-  app.get('/api/destinations/:destinationId', getDestinationById);
-  app.post('/api/destinations', createDestination);
-  app.get('/api/countries', getCountries);
-  app.get('/api/countries/:countryIso', getCountryDetails);
+  app.get('/api/destinations', controller.getDestinations);
+  app.get('/api/destinations/:destinationId', controller.getDestinationById);
+  app.post('/api/destinations', controller.createDestination);
+  app.get('/api/countries', controller.getCountries);
+  app.get('/api/countries/:countryIso', controller.getCountryDetails);
+  app.get('/api/users/:userId/destinations', controller.getDestinationsByAuthor);
 };

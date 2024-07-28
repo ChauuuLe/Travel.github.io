@@ -98,3 +98,54 @@ exports.getCurrentUser = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
+
+exports.getUserById = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const user = await User.findById(userId)
+      .populate("roles", "-__v")
+      .exec();
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found!" });
+    }
+
+    res.status(200).send({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      roles: user.roles.map(role => role.name),
+      avatar: user.avatar,
+      userChats: user.userChats.map(chat => ({
+        _id: chat._id,
+        groupName: chat.groupName,
+        lastMessage: chat.lastMessage
+      }))
+    });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+exports.updateAvatar = async (req, res) => {
+  
+  try {
+    const userId = req.params.userId;
+    const { avatar } = req.body;
+    console.log(req.body);
+    const updatedUser = await User.findByIdAndUpdate(userId, { avatar }, { new: true });
+
+    if (!updatedUser) {
+      return res.status(404).send({ message: "User not found!" });
+    }
+
+    res.status(200).send({
+      _id: updatedUser._id,
+      username: updatedUser.username,
+      email: updatedUser.email,
+      avatar: updatedUser.avatar,
+    });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};

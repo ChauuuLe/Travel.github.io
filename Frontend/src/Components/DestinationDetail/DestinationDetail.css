@@ -1,7 +1,8 @@
+
 .destination-detail {
     padding: 40px;
     max-width: 1200px;
-    /* Adjusted max-width for a balanced layout */
+    min-height: fit-content;
     margin: 20px auto;
     font-family: 'Arial', sans-serif;
     color: #5500ff;
@@ -9,21 +10,21 @@
     background: #ffffff;
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    position: relative;
+    font-family: Arial, sans-serif;
 }
 
 .content-section {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    font-family: Arial, sans-serif;
 }
 
 .destination-info {
     flex: 1;
     margin-right: 30px;
-    /* Adjusted margin for proper separation */
+    font-family: Arial, sans-serif;
 }
 
 .destination-info h1,
@@ -31,6 +32,7 @@
 .destination-info p {
     margin: 0;
     margin-bottom: 10px;
+    font-family: Arial, sans-serif;
 }
 
 .destination-info h1,
@@ -38,16 +40,15 @@
     color: #007bff;
     text-transform: uppercase;
     letter-spacing: 1.5px;
+    font-family: Arial, sans-serif;
 }
 
 .destination-info h1 {
     font-size: 1.8em;
-    /* Smaller size for more space */
 }
 
 .destination-info h2 {
     font-size: 1.4em;
-    /* Reduced size for consistency */
 }
 
 .destination-info p {
@@ -57,7 +58,6 @@
 
 .line-separator {
     border-bottom: 2px solid #ddd;
-    /* Line separator */
     margin: 10px 0;
 }
 
@@ -65,19 +65,19 @@
     width: 2px;
     background-color: #ddd;
     height: auto;
-    /* Full height of content */
     align-self: stretch;
-    /* Ensure divider takes full height */
     margin: 0 20px;
 }
 
 .activities-section {
     flex: 2;
+    font-family: Arial, sans-serif;
 }
 
 .activities-list {
     list-style: none;
     padding: 0;
+    font-family: Arial, sans-serif;
 }
 
 .activity-item {
@@ -86,16 +86,12 @@
     margin-bottom: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
-    /* For hover effects */
     overflow: hidden;
-    /* For hover effects */
 }
 
 .activity-item:hover {
     transform: scale(1.05);
-    /* Slightly enlarge the item */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    /* Add shadow */
 }
 
 .activity-image {
@@ -114,6 +110,7 @@
 .activity-info {
     display: flex;
     flex-direction: column;
+    font-family: Arial, sans-serif;
 }
 
 .activity-info .price {
@@ -126,41 +123,131 @@
     font-size: 1.5em;
 }
 
-.back-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1em;
-    margin-top: 20px;
-    position: relative;
-    /* For hover effect */
-    overflow: hidden;
-    /* For hover effect */
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.back-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.1);
-    /* More pronounced scaling */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    /* Larger shadow */
-}
-
-.back-button:before {
-    content: "";
+.close-button {
     position: absolute;
-    top: 0;
-    left: -100%;
+    top: 15px;
+    right: 15px;
+    background: #ffe9e9;
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    line-height: 1;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.close-button:hover {
+    background-color: #e60000;
+    transform: scale(1.1);
+}
+
+.close-button:active {
+    background-color: #cc0000;
+    transform: scale(1);
+}
+
+.image-carousel {
+    flex: 2;
+    position: relative;
+    margin-right: 30px;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+}
+
+.image-container img {
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.2);
-    transition: left 0.3s ease;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.5s ease-in-out;
+    border-radius: 10px;
+}
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
 }
 
-.back-button:hover:before {
-    left: 100%;
+.carousel-button.left {
+    left: 10px;
+}
+
+.carousel-button.right {
+    right: 10px;
+}
+
+.carousel-dots {
+    text-align: center;
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: white;
+}
+
+.author-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    /* Space below the author info */
+}
+
+.author-info span {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.author-info a {
+    color: #5500ff;
+    text-decoration: none;
+}
+
+.author-info a:hover {
+    text-decoration: underline;
+}
+
+.location-info {
+    display: flex;
+    gap: 10px;
+    /* Adjust gap as needed */
+    align-items: baseline;
+    /* Align text to the baseline for consistency */
+}
+
+.location-info h2 {
+    margin: 0;
+    color: #007bff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 1.4em;
+    /* Adjust font size as needed */
 }

@@ -14,7 +14,9 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 800px;
+  font-family: Arial, sans-serif;
 }
+
 
 /* Form Styles */
 .create-destination-form .form-row {
@@ -153,11 +155,13 @@ body {
   z-index: 1001;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  font-family: Arial, sans-serif;
 }
 
 .add-activity-content h3 {
   margin-top: 0;
   color: #333;
+  font-family: Arial, sans-serif;
 }
 
 .add-activity-content input {
@@ -167,6 +171,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
 .add-activity-content button {
@@ -182,6 +187,7 @@ body {
 .add-activity-content .btn-add {
   background-color: #007bff;
   color: white;
+  font-family: Arial, sans-serif;
 }
 
 .add-activity-content .btn-add:hover {
@@ -191,6 +197,7 @@ body {
 .add-activity-content .btn-cancel {
   background-color: #ccc;
   color: #333;
+  font-family: Arial, sans-serif;
 }
 
 .add-activity-content .btn-cancel:hover {
@@ -202,6 +209,7 @@ body {
   list-style-type: none;
   padding: 0;
   margin: 10px 0;
+  font-family: Arial, sans-serif;
 }
 
 .activity-list li {
