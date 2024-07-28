@@ -1,7 +1,8 @@
+
 .destination-detail {
     padding: 40px;
     max-width: 1200px;
-    /* Adjusted max-width for a balanced layout */
+    min-height: fit-content;
     margin: 20px auto;
     font-family: 'Arial', sans-serif;
     color: #5500ff;
@@ -9,9 +10,7 @@
     background: #ffffff;
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    position: relative;
 }
 
 .content-section {
@@ -23,7 +22,6 @@
 .destination-info {
     flex: 1;
     margin-right: 30px;
-    /* Adjusted margin for proper separation */
 }
 
 .destination-info h1,
@@ -42,12 +40,10 @@
 
 .destination-info h1 {
     font-size: 1.8em;
-    /* Smaller size for more space */
 }
 
 .destination-info h2 {
     font-size: 1.4em;
-    /* Reduced size for consistency */
 }
 
 .destination-info p {
@@ -57,7 +53,6 @@
 
 .line-separator {
     border-bottom: 2px solid #ddd;
-    /* Line separator */
     margin: 10px 0;
 }
 
@@ -65,9 +60,7 @@
     width: 2px;
     background-color: #ddd;
     height: auto;
-    /* Full height of content */
     align-self: stretch;
-    /* Ensure divider takes full height */
     margin: 0 20px;
 }
 
@@ -86,16 +79,12 @@
     margin-bottom: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
-    /* For hover effects */
     overflow: hidden;
-    /* For hover effects */
 }
 
 .activity-item:hover {
     transform: scale(1.05);
-    /* Slightly enlarge the item */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    /* Add shadow */
 }
 
 .activity-image {
@@ -126,68 +115,56 @@
     font-size: 1.5em;
 }
 
-.back-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1em;
-    margin-top: 20px;
-    position: relative;
-    /* For hover effect */
-    overflow: hidden;
-    /* For hover effect */
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.back-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.1);
-    /* More pronounced scaling */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    /* Larger shadow */
-}
-
-.back-button:before {
-    content: "";
+.close-button {
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.2);
-    transition: left 0.3s ease;
+    top: 15px;
+    right: 15px;
+    background: #ffe9e9;
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    line-height: 1;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.back-button:hover:before {
-    left: 100%;
+.close-button:hover {
+    background-color: #e60000;
+    transform: scale(1.1);
+}
+
+.close-button:active {
+    background-color: #cc0000;
+    transform: scale(1);
 }
 
 .image-carousel {
+    flex: 2;
     position: relative;
-    width: 100%;
-    max-width: 800px;
-    margin: 20px auto;
-    overflow: hidden;
-  }
-  
-  .image-container {
+    margin-right: 30px;
+}
+
+.image-container {
     position: relative;
     width: 100%;
     height: 400px;
-  }
-  
-  .image-container img {
+}
+
+.image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
     transition: opacity 0.5s ease-in-out;
-  }
-  
-  .carousel-button {
+}
+
+.carousel-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -197,25 +174,25 @@
     padding: 10px;
     cursor: pointer;
     z-index: 10;
-  }
-  
-  .carousel-button.left {
+}
+
+.carousel-button.left {
     left: 10px;
-  }
-  
-  .carousel-button.right {
+}
+
+.carousel-button.right {
     right: 10px;
-  }
-  
-  .carousel-dots {
+}
+
+.carousel-dots {
     text-align: center;
     position: absolute;
     bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
-  }
-  
-  .dot {
+}
+
+.dot {
     height: 15px;
     width: 15px;
     margin: 0 5px;
@@ -223,8 +200,8 @@
     border-radius: 50%;
     display: inline-block;
     cursor: pointer;
-  }
-  
-  .dot.active {
+}
+
+.dot.active {
     background-color: white;
-  }
+}

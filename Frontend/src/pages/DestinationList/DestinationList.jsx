@@ -12,7 +12,7 @@ const DestinationList = () => {
   const [searchTermCity, setSearchTermCity] = useState('');
   const [isCreating, setIsCreating] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const destinationsPerPage = 6; // 3 cards per row * 3 rows per page
+  const destinationsPerPage = 6;
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   const fetchDestinations = async () => {
@@ -64,7 +64,7 @@ const DestinationList = () => {
     try {
       await fetchDestinations();
       setIsCreating(false);
-      setCurrentPage(1); // Reset to first page to show the new destination
+      setCurrentPage(1);
     } catch (error) {
       console.error('Error creating destination:', error);
     }
@@ -86,7 +86,6 @@ const DestinationList = () => {
       : [])
     : destinations;
 
-  // Pagination logic
   const indexOfLastDestination = currentPage * destinationsPerPage;
   const indexOfFirstDestination = indexOfLastDestination - destinationsPerPage;
   const currentDestinations = filteredDestinations.slice(indexOfFirstDestination, indexOfLastDestination);
@@ -109,12 +108,12 @@ const DestinationList = () => {
         handleSearchChange={handleSearchChangeCity}
         placeholder="Search cities..."
       />
-      <button className="button-create-destination" onClick={handleCreateButtonClick}>
-        Create New Destination
-      </button>
+      <div className="button-create-destination-container">
+        <button className="button-create-destination" onClick={handleCreateButtonClick}>
+          Create New Destination
+        </button>
+      </div>
 
-
-      {/* Modal Overlay for Creating Destination */}
       {isCreating && (
         <div className="create-destination-modal">
           <div className="create-destination-content">
@@ -129,16 +128,15 @@ const DestinationList = () => {
           {currentDestinations.map(destination => (
             <Link to={`/destinations/${destination._id}`} key={destination._id}>
               <div className="destination-card">
-                <img src={destination.images[0]} alt={destination.name} />
+                <img src={destination.images && destination.images[0]} alt={destination.name || "Destination"} />
                 <h3>{destination.name}</h3>
                 <p>Country: {destination.emoji} {destination.country}</p>
                 <p>City: {destination.city}</p>
-                <Link
-                  to={`/profile/${author._id}`}
-                  target="_blank"
-                >
-                  <p>Author: {destination.author.username}</p>
-                </Link>
+                {destination.author && (
+                  <Link to={`/profile/${destination.author._id}`} target="_blank">
+                    <p>Author: {destination.author.username}</p>
+                  </Link>
+                )}
                 <p>Avg Cost: ${destination.averageCost}</p>
               </div>
             </Link>

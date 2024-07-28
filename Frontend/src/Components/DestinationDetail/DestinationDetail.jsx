@@ -37,14 +37,8 @@ const DestinationDetail = () => {
 
   return (
     <div className="destination-detail">
+      <button className="close-button" onClick={() => navigate(-1)}>X</button>
       <div className="content-section">
-        <div className="destination-info">
-          <h1>{destination.name}</h1>
-          <h2>{destination.country}</h2>
-          <h2>{destination.city}</h2>
-          <div className="line-separator"></div>
-          <p>{destination.description}</p>
-        </div>
         <div className="image-carousel">
           <button className="carousel-button left" onClick={handlePreviousClick}>&lt;</button>
           <div className="image-container">
@@ -61,24 +55,35 @@ const DestinationDetail = () => {
             ))}
           </div>
         </div>
-        <div className="divider"></div>
-        <div className="activities-section">
-          <h2>Activities</h2>
-          <ul className="activities-list">
-            {destination.activities.map(activity => (
-              <li key={activity._id} className="activity-item">
-                <div className="activity-image">
-                  <img src={activity.image} alt={activity.name} />
-                </div>
-                <div className="activity-info">
-                  <div>{activity.name}</div>
-                  <div className="price">${activity.cost}</div>
-                </div>
-              </li>
-            ))}
-          </ul>
+
+        <div className="destination-info">
+          <h1>{destination.name}</h1>
+          <h2>{destination.country}</h2>
+          <h2>{destination.city}</h2>
+          <div className="line-separator"></div>
+          <p>{destination.description}</p>
         </div>
       </div>
+
+      <div className="divider"></div>
+
+      <div className="activities-section">
+        <h2>Activities</h2>
+        <ul className="activities-list">
+          {destination.activities.map(activity => (
+            <li key={activity._id} className="activity-item">
+              <div className="activity-image">
+                <img src={activity.image} alt={activity.name} />
+              </div>
+              <div className="activity-info">
+                <div>{activity.name}</div>
+                <div className="price">${activity.cost}</div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <div className="average-cost">
         Average Cost: ${destination.averageCost}
       </div>

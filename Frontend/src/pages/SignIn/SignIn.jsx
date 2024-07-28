@@ -56,7 +56,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="auth-background">
+    <div className="auth-background">x
       <div className="wrapper">
         <form id="signInForm" onSubmit={handleSignIn}>
           <h2>Sign in</h2>

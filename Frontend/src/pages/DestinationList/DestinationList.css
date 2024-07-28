@@ -4,6 +4,7 @@
   background: #f9f9f9;
   border-radius: 16px;
   max-width: 100%;
+  max-height: 100%;
   margin: 10px auto;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -27,7 +28,7 @@
   max-width: 600px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  color: #333333;
+  color: #333;
   font-size: 1.1em;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
@@ -40,13 +41,20 @@
   outline: none;
 }
 
+/* Center the Create Destination button */
+.button-create-destination-container {
+  display: flex;
+  justify-content: center;
+  /* Center the button horizontally */
+  margin: 20px 0;
+  /* Margin for spacing around the button */
+}
+
 .button-create-destination {
-  display: inline-block;
   background: linear-gradient(45deg, #28a745, #218838);
   color: white;
   font-weight: bold;
   padding: 12px 24px;
-  margin: 20px auto;
   border: none;
   border-radius: 16px;
   cursor: pointer;
@@ -97,7 +105,7 @@
   top: 15px;
   right: 15px;
   background: #ffe9e9;
-  color: rgb(0, 0, 0);
+  color: #000;
   border: none;
   border-radius: 50%;
   width: 35px;
@@ -109,12 +117,16 @@
   font-size: 1.5em;
   line-height: 1;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  text-decoration: none;
 }
 
 .close-button:hover {
   background-color: #e60000;
   transform: scale(1.1);
+}
+
+.close-button:active {
+  background-color: #cc0000;
+  transform: scale(1);
 }
 
 .destination-cards-container {
@@ -173,14 +185,11 @@
 
 a {
   text-decoration: none;
-  /* Remove underline from all links */
   color: inherit;
-  /* Ensure link color matches parent element */
 }
 
 a:hover {
   text-decoration: none;
-  /* Prevent underline on hover */
 }
 
 .pagination {
