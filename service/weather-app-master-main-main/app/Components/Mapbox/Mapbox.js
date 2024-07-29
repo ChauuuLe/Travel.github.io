@@ -1,8 +1,13 @@
 "use client";
 import React, { useEffect } from "react";
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+//import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useGlobalContext } from "@/app/context/globalContext";
+import dynamic from 'next/dynamic';
+
+const { MapContainer, TileLayer, useMap } = dynamic(() => import('react-leaflet'), { 
+  ssr: false 
+});
 
 function FlyToActiveCity({ activeCityCords }) {
   const map = useMap();

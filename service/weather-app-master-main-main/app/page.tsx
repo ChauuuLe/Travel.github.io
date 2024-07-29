@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { useEffect, useState, useRef } from "react";
 import AirPollution from "./Components/AirPollution/AirPollution";
 import DailyForecast from "./Components/DailyForecast/DailyForecast";
 import FeelsLike from "./Components/FeelsLike/FeelsLike";
@@ -22,11 +23,6 @@ export default function Home() {
 
   const getClickedCityCords = (lat: number, lon: number) => {
     setActiveCityCoords([lat, lon]);
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
   };
 
   return (
