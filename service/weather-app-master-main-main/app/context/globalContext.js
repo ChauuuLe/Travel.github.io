@@ -7,7 +7,7 @@ import { debounce } from "lodash";
 
 const GlobalContext = createContext();
 const GlobalContextUpdate = createContext();
-const BACKEND_URL = 'https://travel-github-io.onrender.com';
+const BACKEND_URL = 'http://localhost:8080';
 
 export const GlobalContextProvider = ({ children }) => {
   const [forecast, setForecast] = useState({});
@@ -36,6 +36,7 @@ export const GlobalContextProvider = ({ children }) => {
   const fetchAirQuality = async (lat, lon) => {
     try {
       const res = await axios.get(`${BACKEND_URL}/api/pollution?lat=${lat}&lon=${lon}`);
+      console.log(res);
       setAirQuality(res.data);
     } catch (error) {
       console.log("Error fetching air quality data: ", error.message);
@@ -46,7 +47,7 @@ export const GlobalContextProvider = ({ children }) => {
   const fetchFiveDayForecast = async (lat, lon) => {
     try {
       const res = await axios.get(`${BACKEND_URL}/api/fiveday?lat=${lat}&lon=${lon}`);
-
+      console.log('55555');
       setFiveDayForecast(res.data);
     } catch (error) {
       console.log("Error fetching five day forecast data: ", error.message);
@@ -57,7 +58,7 @@ export const GlobalContextProvider = ({ children }) => {
   const fetchGeoCodedList = async (search) => {
     try {
       const res = await axios.get(`${BACKEND_URL}/api/geocoded?search=${search}`);
-
+      console.log('geogeogeo');
       setGeoCodedList(res.data);
     } catch (error) {
       console.log("Error fetching geocoded list: ", error.message);
@@ -68,7 +69,7 @@ export const GlobalContextProvider = ({ children }) => {
   const fetchUvIndex = async (lat, lon) => {
     try {
       const res = await axios.get(`${BACKEND_URL}/api/uv?lat=${lat}&lon=${lon}`);
-
+      
       seUvIndex(res.data);
     } catch (error) {
       console.error("Error fetching the forecast:", error);
