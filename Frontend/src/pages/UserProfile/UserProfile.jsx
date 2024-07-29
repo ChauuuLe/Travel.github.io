@@ -61,6 +61,7 @@ const UserProfile = () => {
         }
       );
       setUser({ ...user, avatar: newAvatarUrl });
+      currentUser.avatar = newAvatarUrl;
       setShowAvatarForm(false);
     } catch (error) {
       console.error('Error updating avatar:', error);
