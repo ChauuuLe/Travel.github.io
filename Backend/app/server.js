@@ -21,9 +21,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const key1 = "248bgturng8n54gh54g94gh95gh59gh498gher9ifjdoigdsgpoasdngiphgipghighr9igheiugheriuogheruigneriugerig";
-const key2 = "sduoygberufnisdnfndvdfnvjisrngijnfdsigniuenrgin3498tgerhfusdgasdokfbabgodsfoisdnnosdfn";
-const key3 = "rfewsdvcnxhjkw4923e32merfdvucxinjk345345et4rvdxicnkergdsvxcngcewsdfjvcxsdzfsdfgdfgdfgdfgdfgdf";
+const key1 = process.env.KEY1;
+const key2 = process.env.KEY2;
+const key3 = process.env.KEY3;
 
 app.use(CookieSession({
   name: 'session',

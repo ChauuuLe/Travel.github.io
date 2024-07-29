@@ -1,99 +1,107 @@
+const axios = require('axios');
+const env = require('dotenv');
+env.config();
+
 exports.pollution = async (req, res) => {
   try {
-    const searchParams = req.query;
-    const lat = searchParams.lat;
-    const lon = searchParams.lon;
-    console.log('polu');
-    console.log(lat);
-    console.log(lon);
+    const { lat, lon } = req.query;
     const apiKey = process.env.OPENWEATHERMAP_API_KEY;
-
     const url = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
-    const result = await fetch(url);
-    console.log('polu');
-    res.status(200).send(result.data);
+    const response = await axios.get(url);
+
+    if (response.status !== 200) {
+      console.error(`Unexpected status code: ${response.status}`);
+      return res.status(response.status).json({ error: "Failed to fetch pollution data" });
+    }
+
+    res.status(200).json(response.data);
   } catch (error) {
-    console.error("Error in getting pollusion data ", error);
-    return res.status(500).send("Error");
+    console.error("Error in getting pollution data", error);
+    res.status(500).json({ error: "Error fetching pollution data" });
   }
 };
 
 exports.uv = async (req, res) => {
   try {
-    const searchParams = req.query;
-    const lat = searchParams.lat;
-    const lon = searchParams.lon;
-
+    const { lat, lon } = req.query;
     const apiKey = process.env.OPENWEATHERMAP_API_KEY;
-
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=uv_index_max,uv_index_clear_sky_max&timezone=auto&forecast_days=1`;
 
-    const result = await (fetch(url, {
-      next: { revalidate: 900 },
-    }));
-    console.log('uv');
-    res.status(200).send(result.json());
+    const response = await axios.get(url);
+
+    if (response.status !== 200) {
+      console.error(`Unexpected status code: ${response.status}`);
+      return res.status(response.status).json({ error: "Failed to fetch UV data" });
+    }
+
+    res.status(200).json(response.data);
   } catch (error) {
-    console.error("Error in getting uv data ", error);
-    return res.status(500).send("Error");
+    console.error("Error in getting UV data", error);
+    res.status(500).json({ error: "Error fetching UV data" });
   }
 };
 
 exports.fiveDay = async (req, res) => {
   try {
-    const searchParams = req.query;
-    const lat = searchParams.lat;
-    const lon = searchParams.lon;
-
+    const { lat, lon } = req.query;
     const apiKey = process.env.OPENWEATHERMAP_API_KEY;
+    const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
-    const dailyUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-    const dailyRes = await fetch(dailyUrl, {
-      next: { revalidate: 3600 },
-    });
-    console.log('55');
-    const dailyData = await dailyRes.json();
-    res.status(200).send(dailyData);
+    const response = await axios.get(url);
+
+    if (response.status !== 200) {
+      console.error(`Unexpected status code: ${response.status}`);
+      return res.status(response.status).json({ error: "Failed to fetch 5-day forecast" });
+    }
+
+    res.status(200).json(response.data);
   } catch (error) {
-    console.error("Error in getting weather 5-day data ", error);
-    return res.status(500).send("Error");
+    console.error("Error in getting 5-day forecast", error);
+    res.status(500).json({ error: "Error fetching 5-day forecast" });
   }
 };
 
 exports.geocoded = async (req, res) => {
   try {
-    const searchParams = req.query;
-    const city = searchParams.search;
-
+    const { search: city } = req.query;
     const apiKey = process.env.OPENWEATHERMAP_API_KEY;
-
     const url = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
 
-    const result = await fetch(url);
-    console.log('geo');
-    res.status(200).send(result.data);
+    const response = await axios.get(url);
+
+    if (response.status !== 200) {
+      console.error(`Unexpected status code: ${response.status}`);
+      return res.status(response.status).json({ error: "Failed to fetch geocoded data" });
+    }
+
+    res.status(200).json(response.data);
   } catch (error) {
-    console.error("Error in getting weather geocoded data ", error);
-    return res.status(500).send("Error");
+    console.error("Error in getting geocoded data", error);
+    res.status(500).json({ error: "Error fetching geocoded data" });
   }
 };
 
 exports.weather = async (req, res) => {
   try {
-    const searchParams = req.query;
-    const lat = searchParams.lat;
-    const lon = searchParams.lon;
-
+    const { lat, lon } = req.query;
     const apiKey = process.env.OPENWEATHERMAP_API_KEY;
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    if (!lat || !lon) {
+      return res.status(400).json({ error: 'Latitude and longitude are required' });
+    }
 
-    const result = await fetch(url);
-    console.log('we');
-    res.status(200).send(result.data);
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    const response = await axios.get(url);
+
+    if (response.status !== 200) {
+      console.error(`Unexpected status code: ${response.status}`);
+      return res.status(response.status).json({ error: `Error fetching weather data: ${response.statusText}` });
+    }
+    
+    res.status(200).json(response.data);
   } catch (error) {
-    console.error("Error in getting weather weather data ", error);
-    return res.status(500).send("Error");
+    console.error("Error fetching weather data", error);
+    res.status(500).json({ error: "Error fetching weather data" });
   }
 };

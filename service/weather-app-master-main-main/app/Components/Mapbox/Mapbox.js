@@ -1,29 +1,29 @@
 "use client";
 import React, { useEffect } from "react";
-//import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { useGlobalContext } from "@/app/context/globalContext";
 import dynamic from 'next/dynamic';
+import { useGlobalContext } from "@/app/context/globalContext";
 
-const { MapContainer, TileLayer, useMap } = dynamic(() => import('react-leaflet'), { 
-  ssr: false 
-});
+// Dynamically import the MapContainer, TileLayer, and useMap components without SSR
+const MapContainer = dynamic(() => import('react-leaflet').then(mod => mod.MapContainer), { ssr: false });
+const TileLayer = dynamic(() => import('react-leaflet').then(mod => mod.TileLayer), { ssr: false });
+const useMap = dynamic(() => import('react-leaflet').then(mod => mod.useMap), { ssr: false });
 
 function FlyToActiveCity({ activeCityCords }) {
   const map = useMap();
 
   useEffect(() => {
-    if (activeCityCords) {
+    if (map && activeCityCords) {
       const zoomLev = 13;
       const flyToOptions = {
         duration: 1.5,
       };
 
-      map.flyTo(
-        [activeCityCords.lat, activeCityCords.lon],
-        zoomLev,
-        flyToOptions
-      );
+      if (typeof map.flyTo === 'function') {
+        map.flyTo([activeCityCords.lat, activeCityCords.lon], zoomLev, flyToOptions);
+      } else {
+        console.error("flyTo method is not available on the map instance");
+      }
     }
   }, [activeCityCords, map]);
 
@@ -56,7 +56,6 @@ function Mapbox() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-
         <FlyToActiveCity activeCityCords={activeCityCords} />
       </MapContainer>
     </div>
