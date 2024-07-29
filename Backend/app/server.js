@@ -40,6 +40,7 @@ require('./routes/message.routes.js')(app);
 require('./routes/destination.routes.js')(app);
 require('./routes/hotels.routes.js')(app);
 require('./routes/flights.routes.js')(app);
+require('./routes/service.routes.js')(app);
 
 // Database setup
 const db = require("./models/index.js");

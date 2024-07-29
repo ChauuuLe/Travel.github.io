@@ -7,6 +7,7 @@ import { debounce } from "lodash";
 
 const GlobalContext = createContext();
 const GlobalContextUpdate = createContext();
+const BACKEND_URL = 'http://localhost:8080';
 
 export const GlobalContextProvider = ({ children }) => {
   const [forecast, setForecast] = useState({});
@@ -34,7 +35,7 @@ export const GlobalContextProvider = ({ children }) => {
   // Air Quality
   const fetchAirQuality = async (lat, lon) => {
     try {
-      const res = await axios.get(`api/pollution?lat=${lat}&lon=${lon}`);
+      const res = await axios.get(`${BACKEND_URL}/api/pollution?lat=${lat}&lon=${lon}`);
       setAirQuality(res.data);
     } catch (error) {
       console.log("Error fetching air quality data: ", error.message);
@@ -66,7 +67,7 @@ export const GlobalContextProvider = ({ children }) => {
   //fetch uv data
   const fetchUvIndex = async (lat, lon) => {
     try {
-      const res = await axios.get(`/api/uv?lat=${lat}&lon=${lon}`);
+      const res = await axios.get(`${BACKEND_URL}/api/uv?lat=${lat}&lon=${lon}`);
 
       seUvIndex(res.data);
     } catch (error) {
