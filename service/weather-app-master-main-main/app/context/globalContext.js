@@ -7,7 +7,7 @@ import { debounce } from "lodash";
 
 const GlobalContext = createContext();
 const GlobalContextUpdate = createContext();
-const BACKEND_URL = 'http://localhost:8080';
+const BACKEND_URL = 'https://travel-github-io.onrender.com';
 
 export const GlobalContextProvider = ({ children }) => {
   const [forecast, setForecast] = useState({});
