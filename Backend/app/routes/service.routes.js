@@ -12,4 +12,7 @@ module.exports = function(app) {
 
   app.get("/api/pollution", controller.pollution);
   app.get("/api/uv", controller.uv);
+  app.get("/api/fiveday", controller.uv);
+  app.get("/api/geocoded", controller.geocoded);
+  app.get("/api/weather", controller.weather);
 };
