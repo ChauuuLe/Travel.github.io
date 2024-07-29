@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import List from "../../Components/chatApp/list/List.jsx";
-import Chat from "../../Components/chatApp/chat/Chat.jsx";
-import Detail from "../../Components/chatApp/detail/Detail.jsx";
+import List from "../../Components/ChatApp/List/List.jsx";
+import Chat from "../../Components/ChatApp/Chat/Chat.jsx";
+import Detail from "../../Components/ChatApp/Detail/Detail.jsx";
 import "./TripGroup.css";
 
 const TripGroup = () => {

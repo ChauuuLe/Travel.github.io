@@ -7,10 +7,10 @@ import HotelSearchPage from './pages/HotelSearchPage/HotelSearchPage';
 import FlightSearchPage from './pages/FlightSearchPage/FlightSearchPage';
 import Navbar from '../../Frontend/src/pages/navbar/navbar';
 import TripGroup from './pages/TripGroup/TripGroup';
-import CreateGroup from './pages/createGroup/createGroup';
-import Page1 from './Components/findUsers/findUsers';
-import Page2 from './Components/schedule/schedule';
-import Page3 from './Components/groupName/groupName';
+import CreateGroup from './pages/CreateGroup/CreateGroup';
+import Page1 from './Components/FindUsers/FindUsers';
+import Page2 from './Components/Schedule/Schedule';
+import Page3 from './Components/GroupName/GroupName';
 import UserProfile from './pages/UserProfile/UserProfile';
 import DestinationList from './pages/DestinationList/DestinationList';
 import DestinationDetail from './Components/DestinationDetail/DestinationDetail'

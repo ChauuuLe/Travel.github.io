@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import FindUsers from '../../Components/findUsers/findUsers.jsx';
-import Schedule from '../../Components/schedule/schedule.jsx';
-import GroupName from '../../Components/groupName/groupName.jsx';
-import './createGroup.css';
+import FindUsers from '../../Components/FindUsers/FindUsers.jsx';
+import Schedule from '../../Components/Schedule/Schedule.jsx';
+import GroupName from '../../Components/GroupName/GroupName.jsx';
+import './CreateGroup.css';
 import backgroundVideo from '../../assets/background/video.mp4'; 
 
 const pages = ['findusers', 'schedule', 'groupname'];

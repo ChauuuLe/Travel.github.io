@@ -1,6 +1,6 @@
-import ChatList from "./chatList/ChatList"
+import ChatList from "./ChatList/ChatList"
 import "./list.css"
-import Userinfo from "../../../pages/userInfo/Userinfo"
+import Userinfo from "../../../pages/UserInfo/Userinfo"
 
 const List = (props) => {
   const {

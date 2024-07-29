@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Footer from '../footer/Footer';
+import Footer from '../Footer/Footer';
 import ReviewCard from '../../Components/ReviewCard/ReviewCard';
 import Modal from '../../Components/Modal/Modal'; // Import Modal component
 import './Homepage.css';

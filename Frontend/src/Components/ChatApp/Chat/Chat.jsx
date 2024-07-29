@@ -3,7 +3,7 @@ import axios from "axios";
 import EmojiPicker from "emoji-picker-react";
 import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
-import Schedule from "../../schedule/schedule";
+import Schedule from "../../Schedule/Schedule";
 import ExpenseTracking from "../../ExpenseTracking/ExpenseTracking";
 import { FaCalendar, FaMoneyBillAlt } from 'react-icons/fa';
 import "./chat.css";

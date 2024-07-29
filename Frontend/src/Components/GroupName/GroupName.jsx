@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import './groupName.css';
+import './GroupName.css';
 
 const GroupName = (props) => {
   const {
