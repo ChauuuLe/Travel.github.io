@@ -24,7 +24,7 @@ function Navbar() {
           <Button
             className="source-code-btn flex items-center gap-2"
             onClick={() => {
-              router.push(`http://localhost:5173/`);
+              router.push(`https://travel-github-io-1.onrender.com/`);
             }}
           >
             {github} Back
