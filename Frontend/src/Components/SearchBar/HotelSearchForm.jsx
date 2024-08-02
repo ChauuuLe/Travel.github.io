@@ -47,7 +47,7 @@ const HotelSearchForm = ({ onSearch }) => {
             <FaHotel className="input-icon" />
             <input
               type="text"
-              placeholder="Enter destination"
+              placeholder="Enter city"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
               required
