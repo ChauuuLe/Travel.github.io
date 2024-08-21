@@ -101,11 +101,6 @@ const Navbar = () => {
               <li><Link to="/hotels"><i className="fas fa-hotel"></i> Hotels</Link></li>
               <li><Link to="/flight"><i className="fas fa-plane"></i> Flight</Link></li>
               <li><Link to="/destinations"><i className="fas fa-map-marked-alt"></i> Destinations</Link></li>
-              <li>
-                <Link to={`${import.meta.env.VITE_WEATHER}`} target="_blank">
-                  <i className="fas fa-cloud-sun"></i> Weather
-                </Link>
-              </li>
               <li className="dropdown">
                 <a
                   onClick={toggleDropdown}
