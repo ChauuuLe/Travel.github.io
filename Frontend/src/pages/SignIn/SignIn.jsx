@@ -47,20 +47,10 @@ const SignIn = () => {
       const user = await getCurrentUser(); // Fetch current user after setting the token
       localStorage.setItem('currentUser', JSON.stringify(user)); // Save user to localStorage
 
-      enqueueSnackbar('Sign in successful', {
-        variant: 'success',
-        className: 'custom-snackbar', // Apply custom snackbar class
-        action: key => (
-          <button onClick={() => {
-            navigate('/'); // Navigate to home page
-            setTimeout(() => {
-              window.location.reload(); // Reload the page
-            }, 100); // Adjust delay as needed
-          }}>
-            Go to Home
-          </button>
-        ),
-      });
+      navigate('/'); // Navigate to home page
+      setTimeout(() => {
+        window.location.reload(); // Reload the page
+      }, 100);
     } catch (err) {
       const errorMessage = err.response ? err.response.data.message : err.message;
       setMessage(`Sign in failed: ${errorMessage}`);

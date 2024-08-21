@@ -89,6 +89,9 @@ const Navbar = () => {
       <header className="header flex">
         <div className="navbar-container">
           <div className='logoDiv'>
+            <a href='/'>
+              <img src="/logo2.png"/>
+            </a>
             <Link to='/' className='logo flex'>
               <h1>The Travel.</h1>
             </Link>
